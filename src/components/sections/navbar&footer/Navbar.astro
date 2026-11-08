@@ -1,0 +1,168 @@
+---
+import ThemeIcon from '@components/ThemeIcon.astro';
+import NavLink from '@components/ui/links/NavLink.astro';
+import BrandLogo from '@components/BrandLogo.astro';
+import NavbarToggle from '@components/ui/buttons/NavbarToggle.astro';
+import Icon from '@components/ui/icons/Icon.astro';
+import { navLinks, socialLinks } from '@data/navigation';
+import { localePath } from '@utils/locale';
+
+const { locale, copy: t } = Astro.locals;
+---
+
+<header class="sticky inset-x-0 top-4 z-50 w-full px-4 text-sm sm:px-6 lg:px-8">
+  <nav
+    class="relative mx-auto w-full max-w-(--breakpoint-2xl) rounded-[36px] border border-white/70 bg-white/75 px-5 py-3 shadow-[0_8px_30px_-12px_rgba(13,26,39,0.25)] backdrop-blur-md lg:flex lg:h-16 lg:items-center lg:justify-between lg:px-8 lg:py-0 dark:border-neutral-700/60 dark:bg-neutral-900/80"
+    aria-label="Global"
+  >
+    <div class="flex items-center justify-between">
+      <a
+        class="flex-none rounded-lg ring-zinc-500 outline-hidden focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden"
+        href={localePath(locale)}
+        aria-label="CosmicWatch home"
+      >
+        <BrandLogo class="h-8 w-auto" />
+      </a>
+      <NavbarToggle target="navbar-collapse-with-animation" />
+      <span class="inline-block lg:hidden">
+        <ThemeIcon />
+      </span>
+    </div>
+    <div
+      id="navbar-collapse-with-animation"
+      class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 lg:block"
+    >
+      <div class="mt-5 flex flex-col gap-x-0 gap-y-4 pb-2 lg:mt-0 lg:flex-row lg:items-center lg:justify-end lg:gap-x-6 lg:gap-y-0 lg:pb-0 lg:ps-7 xl:gap-x-7">
+        {navLinks.map(link => (
+          <NavLink
+            url={localePath(locale, link.path)}
+            name={t.nav.labels[link.id]}
+          />
+        ))}
+        <a
+          href={socialLinks.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-x-2 rounded-lg text-base font-medium text-neutral-600 ring-zinc-500 outline-hidden hover:text-neutral-500 focus-visible:ring-3 lg:text-sm 2xl:text-base dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-neutral-500"
+        >
+          <Icon name="githubMark" class="h-4 w-4 shrink-0" />
+          <span class="lg:sr-only">GitHub</span>
+        </a>
+        <span class="hidden lg:inline-block">
+          <ThemeIcon />
+        </span>
+        <a
+          href={localePath(locale, '/shop')}
+          data-astro-prefetch
+          class="inline-flex w-fit items-center justify-center gap-x-2 rounded-full border border-transparent bg-orange-400 px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-orange-500 dark:bg-yellow-400 dark:text-neutral-950 dark:hover:bg-yellow-300"
+        >
+          {t.nav.buy}
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+<script is:inline>
+  const HSThemeAppearance = {
+    init() {
+      const defaultTheme = 'default';
+      let theme = localStorage.getItem('hs_theme') || defaultTheme;
+
+      if (document.querySelector('html').classList.contains('dark')) return;
+      this.setAppearance(theme);
+    },
+    _resetStylesOnLoad() {
+      const $resetStyles = document.createElement('style');
+      $resetStyles.innerText = `*{transition: unset !important;}`;
+      $resetStyles.setAttribute('data-hs-appearance-onload-styles', '');
+      document.head.appendChild($resetStyles);
+      return $resetStyles;
+    },
+    setAppearance(theme, saveInStore = true, dispatchEvent = true) {
+      const $resetStylesEl = this._resetStylesOnLoad();
+
+      if (saveInStore) {
+        localStorage.setItem('hs_theme', theme);
+      }
+
+      if (theme === 'auto') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'default';
+      }
+
+      document.querySelector('html').classList.remove('dark');
+      document.querySelector('html').classList.remove('default');
+      document.querySelector('html').classList.remove('auto');
+
+      document
+        .querySelector('html')
+        .classList.add(this.getOriginalAppearance());
+
+      setTimeout(() => {
+        $resetStylesEl.remove();
+      });
+
+      if (dispatchEvent) {
+        window.dispatchEvent(
+          new CustomEvent('on-hs-appearance-change', { detail: theme })
+        );
+      }
+    },
+    getAppearance() {
+      let theme = this.getOriginalAppearance();
+      if (theme === 'auto') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'default';
+      }
+      return theme;
+    },
+    getOriginalAppearance() {
+      const defaultTheme = 'default';
+      return localStorage.getItem('hs_theme') || defaultTheme;
+    },
+  };
+  HSThemeAppearance.init();
+
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', () => {
+      if (HSThemeAppearance.getOriginalAppearance() === 'auto') {
+        HSThemeAppearance.setAppearance('auto', false);
+      }
+    });
+
+  window.addEventListener('load', () => {
+    const $clickableThemes = document.querySelectorAll(
+      '[data-hs-theme-click-value]'
+    );
+    const $switchableThemes = document.querySelectorAll(
+      '[data-hs-theme-switch]'
+    );
+
+    $clickableThemes.forEach($item => {
+      $item.addEventListener('click', () =>
+        HSThemeAppearance.setAppearance(
+          $item.getAttribute('data-hs-theme-click-value'),
+          true,
+          $item
+        )
+      );
+    });
+
+    $switchableThemes.forEach($item => {
+      $item.addEventListener('change', e => {
+        HSThemeAppearance.setAppearance(e.target.checked ? 'dark' : 'default');
+      });
+
+      $item.checked = HSThemeAppearance.getAppearance() === 'dark';
+    });
+
+    window.addEventListener('on-hs-appearance-change', e => {
+      $switchableThemes.forEach($item => {
+        $item.checked = e.detail === 'dark';
+      });
+    });
+  });
+</script>

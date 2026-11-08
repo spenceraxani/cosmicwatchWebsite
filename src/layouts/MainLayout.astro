@@ -1,0 +1,84 @@
+---
+import Meta from '@components/Meta.astro';
+import Navbar from '@components/sections/navbar&footer/Navbar.astro';
+import FooterSection from '@components/sections/navbar&footer/FooterSection.astro';
+import { buildPageMetadata, type PageKind } from '@utils/metadata';
+import '@styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  /** Site section for the OG title, e.g. `copy.blog.ogSection`. */
+  section?: string;
+  kind?: PageKind;
+  hideFooter?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogTitle,
+  section,
+  kind,
+  hideFooter = false,
+} = Astro.props;
+const { locale, copy: t } = Astro.locals;
+
+const metadata = buildPageMetadata({
+  locale,
+  pathname: Astro.url.pathname,
+  title,
+  description,
+  ogTitle,
+  section,
+  kind,
+});
+---
+
+<html
+  lang={metadata.lang}
+  class="scroll-pt-28"
+>
+  <head>
+    <Meta metadata={metadata} />
+    <script is:inline>
+      if (
+        localStorage.getItem('hs_theme') === 'dark' ||
+        (!('hs_theme' in localStorage) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  </head>
+  <body class="flex min-h-screen flex-col bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:bg-yellow-400 focus:px-4 focus:py-2 focus:text-neutral-800"
+    >
+      {t.layout.skipToContent}
+    </a>
+    <Navbar />
+    <div class="mx-auto w-full max-w-(--breakpoint-2xl) grow px-4 sm:px-6 lg:px-8">
+      <main id="main-content">
+        <slot />
+      </main>
+    </div>
+    {!hideFooter && <FooterSection />}
+    <script>
+      import 'preline';
+      import { Observer } from 'tailwindcss-intersect/observer';
+      Observer.start();
+      const init = () =>
+        (
+          window as Window & { HSStaticMethods?: { autoInit?: () => void } }
+        ).HSStaticMethods?.autoInit?.();
+      if (document.readyState === 'loading')
+        document.addEventListener('DOMContentLoaded', init);
+      else init();
+    </script>
+  </body>
+</html>

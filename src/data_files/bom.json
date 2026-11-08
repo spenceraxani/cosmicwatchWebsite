@@ -1,0 +1,1202 @@
+[
+  {
+    "item": 1,
+    "name": "1K resistor",
+    "qty": "8",
+    "refs": "R12,R24,R22,R19,R17,R30,R21,R25",
+    "unit": 0.1,
+    "unit10": 0.12,
+    "total": 0.8,
+    "desc": "RES SMD 1K OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "311-1.00KCRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-071KL/727444",
+      "partNumber": "311-1.00KCRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 2,
+    "name": "1.3K resistor",
+    "qty": "1",
+    "refs": "R27",
+    "unit": 0.1,
+    "unit10": 0.25,
+    "total": 0.1,
+    "desc": "RES SMD 1.3K OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "RMCF0805FT1K30DKR-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/stackpole-electronics-inc/RMCF0805FT1K30/1760146",
+      "partNumber": "RMCF0805FT1K30CT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 3,
+    "name": "2k resistor",
+    "qty": "1",
+    "refs": "R31",
+    "unit": 0.1,
+    "unit10": 0.14,
+    "total": 0.1,
+    "desc": "RES SMD 2K OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "311-2.00KCRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/result?keywords=311-2.00KCRCT-ND",
+      "partNumber": "311-2.00KCRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 4,
+    "name": "100 Ohm resistor",
+    "qty": "7",
+    "refs": "R9,R29,R28,R8,R18,R13",
+    "unit": 0.1,
+    "unit10": 0.25,
+    "total": 0.7,
+    "desc": "RES SMD 100 OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "RMCF0805FT100RCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/stackpole-electronics-inc/RMCF0805FT100R/1760711",
+      "partNumber": "RMCF0805FT100RCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 5,
+    "name": "0 Ohm resistor",
+    "qty": "1",
+    "refs": "R4",
+    "unit": 0.1,
+    "unit10": 0.27,
+    "total": 0.1,
+    "desc": "RES SMD 0 OHM",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "4463-TFA0805WJUMPF-T5TR-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/thin-film-technology-corp/D1TFA0805WJUMPF-T5/23598486",
+      "partNumber": "4463-TFA0805WJUMPF-T5CT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 6,
+    "name": "10k Ohm resistor",
+    "qty": "1",
+    "refs": "R23",
+    "unit": 0.1,
+    "unit10": 0.27,
+    "total": 0.1,
+    "desc": "RES SMD 10k OHM",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "RNCP0805FTD10K0DKR",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/stackpole-electronics-inc/RNCP0805FTD10K0/2240262",
+      "partNumber": "RNCP0805FTD10K0CT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 7,
+    "name": "154k resistor",
+    "qty": "1",
+    "refs": "R2",
+    "unit": 0.14,
+    "unit10": 1.08,
+    "total": 0.14,
+    "desc": "RES SMD 154k OHM 0.1% 1/8W 0603",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "YAG1534CT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD07154KL/1072259",
+      "partNumber": "YAG1534CT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 8,
+    "name": "6.65k resistor",
+    "qty": "1",
+    "refs": "R1",
+    "unit": 0.1,
+    "unit10": 0.61,
+    "total": 0.1,
+    "desc": "RES SMD 6.65k OHM 0.1% 1/8W 0603",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "P6.65KDBCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/panasonic-electronic-components/ERA-3AEB6651V/2026823",
+      "partNumber": "P6.65KDBCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 9,
+    "name": "100k resistor",
+    "qty": "3",
+    "refs": "R10,R26,R14",
+    "unit": 0.1,
+    "unit10": 0.14,
+    "total": 0.3,
+    "desc": "RES SMD 100k OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "311-100KCRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-07100KL/727544",
+      "partNumber": "311-100KCRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 10,
+    "name": "49.9 Ohm resistor",
+    "qty": "1",
+    "refs": "R3",
+    "unit": 0.1,
+    "unit10": 0.12,
+    "total": 0.1,
+    "desc": "RES SMD 49.9 OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "311-49.9CRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0749R9L/727984",
+      "partNumber": "311-49.9CRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 11,
+    "name": "620 Ohm resistor",
+    "qty": "1",
+    "refs": "R5",
+    "unit": 0.1,
+    "unit10": 0.12,
+    "total": 0.1,
+    "desc": "RES SMD 620 OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "311-620CRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-07620RL/728083",
+      "partNumber": "311-620CRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 12,
+    "name": "22.1k resistor",
+    "qty": "1",
+    "refs": "R7",
+    "unit": 0.13,
+    "unit10": 0.16,
+    "total": 0.13,
+    "desc": "RES SMD 22.1k OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "311-22.1KCRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0722K1L/727738",
+      "partNumber": "311-22.1KCRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 13,
+    "name": "10 Ohm resistor",
+    "qty": "1",
+    "refs": "R11",
+    "unit": 0.11,
+    "unit10": 0.35,
+    "total": 0.11,
+    "desc": "RES SMD 10 OHM 1% 1/8W 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "311-10.0CRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0710RL/727534",
+      "partNumber": "311-10.0CRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 14,
+    "name": "4.7 uF capacitor",
+    "qty": "5",
+    "refs": "C3,C2,C19,C17,C20",
+    "unit": 0.19,
+    "unit10": 1.08,
+    "total": 0.95,
+    "desc": "CAP CER 4.7UF 50V X7R 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "490-10751-1-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/murata-electronics/GRM21BR61H475KE51L/4905540",
+      "partNumber": "490-10751-1-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 15,
+    "name": "1 uF capacitor",
+    "qty": "7",
+    "refs": "C1,C14,C11,C21,C22,C18,C6",
+    "unit": 0.11,
+    "unit10": 0.63,
+    "total": 0.77,
+    "desc": "CAP CER 1UF 50V Y5V 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "1276-2928-1-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B105KBFNFNE/3891014",
+      "partNumber": "1276-2928-1-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 16,
+    "name": "0.1 uF capacitor",
+    "qty": "6",
+    "refs": "C4,C8,C12,C25,C16,C24",
+    "unit": 0.08,
+    "unit10": 0.08,
+    "total": 0.48,
+    "desc": "CAP CER 0.1UF 50V X7R 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "1276-1003-1-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B104KBCNNNC/3886661",
+      "partNumber": "1276-1003-1-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 17,
+    "name": "200pF capacitor",
+    "qty": "2",
+    "refs": "C13,C5",
+    "unit": 0.1,
+    "unit10": 0.49,
+    "total": 0.2,
+    "desc": "CAP CER 200pF 50V Y5V 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "399-C0805C201K5HACTUTR-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/kemet/C0805C201K5HACTU/7948822",
+      "partNumber": "399-C0805C201K5HACTUCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 18,
+    "name": "10pF capacitor",
+    "qty": "2",
+    "refs": "C10,C23",
+    "unit": 0.11,
+    "unit10": 0.61,
+    "total": 0.22,
+    "desc": "CAP CER 10PF 50V C0G/NP0 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "13-CC0805KRNPO9BN100CT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/CC0805KRNPO9BN100/11491833",
+      "partNumber": "13-CC0805KRNPO9BN100CT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 19,
+    "name": "10nF capacitor",
+    "qty": "2",
+    "refs": "C9,C15",
+    "unit": 0.08,
+    "unit10": 0.11,
+    "total": 0.16,
+    "desc": "CAP CER 10000PF 50V X7R 0805",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "1276-1015-1-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B103KBANNNC/3886673",
+      "partNumber": "1276-1015-1-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 20,
+    "name": "Ferrite Bead",
+    "qty": "1",
+    "refs": "FB1",
+    "unit": 0.1,
+    "unit10": 0.22,
+    "total": 0.1,
+    "desc": "FB ULTRA 0805 31 OHM 6A .015DC",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "4713-FBU201209T-310Y-SCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/cal-chip-electronics-inc/FBU201209T-310Y-S/22479480",
+      "partNumber": "4713-FBU201209T-310Y-SCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 21,
+    "name": "LM4040 2.5V",
+    "qty": "1",
+    "refs": "U7",
+    "unit": 1.04,
+    "unit10": 6.31,
+    "total": 1.04,
+    "desc": "IC VREF SHUNT 0.5% SOT23",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "LM4040C25FTA",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/diodes-incorporated/LM4040C25FTA/1557717",
+      "partNumber": "LM4040C25FCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 22,
+    "name": "RP Pico",
+    "qty": "1",
+    "refs": "U4",
+    "unit": 4.0,
+    "unit10": 40.0,
+    "total": 4.0,
+    "desc": "RASPBERRY PI PICO RP2040",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "2648-SC0915TR-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/raspberry-pi/SC0915/13624793",
+      "partNumber": "2648-SC0915CT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 23,
+    "name": "47uH inductor",
+    "qty": "1",
+    "refs": "L1",
+    "unit": 0.15,
+    "unit10": 1.22,
+    "total": 0.15,
+    "desc": "FIXED IND 47UH 190MA 4.86OHM SMD",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "587-2456-1-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/taiyo-yuden/CB2012T470K/2230241",
+      "partNumber": "587-2456-1-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 24,
+    "name": "2N7002 transistor",
+    "qty": "1",
+    "refs": "Q2",
+    "unit": 0.1,
+    "unit10": 0.54,
+    "total": 0.1,
+    "desc": "MOSFET SOT23 N 60V 5OHM 150C",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "5399-2N7002CT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/shenzhen-slkormicro-semicon-co-ltd/2N7002/21853067",
+      "partNumber": "5399-2N7002CT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 25,
+    "name": "TPH2502 Op amp",
+    "qty": "2",
+    "refs": "U2,U5",
+    "unit": 1.92,
+    "unit10": 11.92,
+    "total": 3.84,
+    "desc": "IC OPAMP 2 CIRCUIT",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "5503-TPH2502-SRCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/3peak/TPH2502-SR/22228733",
+      "partNumber": "5503-TPH2502-SRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 26,
+    "name": "MAX5026 DC-DC booster",
+    "qty": "1",
+    "refs": "U1",
+    "unit": 1.67,
+    "unit10": 12.26,
+    "total": 1.67,
+    "desc": "DC-DC Booster, IC REG BOOST ADJ 260MA SOT6",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "MAX5026EUT+TCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/analog-devices-inc-maxim-integrated/MAX5026EUT-T/1516355",
+      "partNumber": "MAX5026EUT+TCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 27,
+    "name": "BAT54WS Schottky diode",
+    "qty": "1",
+    "refs": "D3",
+    "unit": 0.13,
+    "unit10": 0.8,
+    "total": 0.13,
+    "desc": "DIODE SCHOTTKY 30V 200MA SOD323",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "5272-BAT54WSCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/evvo/BAT54WS/21407178",
+      "partNumber": "5272-BAT54WSCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 28,
+    "name": "2.54mm 2x3 pin 6-pin connector",
+    "qty": "1",
+    "refs": "P1",
+    "unit": 0.89,
+    "unit10": 7.55,
+    "total": 0.89,
+    "desc": "CONN SOCKET 6POS 0.1 GOLD PCB",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "1212-1229-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/preci-dip/803-87-006-10-001101/3757479",
+      "partNumber": "1212-1229-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 29,
+    "name": "BAT54S Schottky diode",
+    "qty": "2",
+    "refs": "D1,D4",
+    "unit": 0.13,
+    "unit10": 0.73,
+    "total": 0.26,
+    "desc": "DIODE ARR SCHOT 30V 200MA SOT233",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "4878-BAT54SCT-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/diotec-semiconductor/BAT54S/13164121",
+      "partNumber": "4878-BAT54SCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 30,
+    "name": "BNC header + Nut",
+    "qty": "1",
+    "refs": "P2",
+    "unit": 2.48,
+    "unit10": 21.07,
+    "total": 2.48,
+    "desc": "CONN BNC JACK R/A 50 OHM PCB",
+    "supplier": "Digi-Key",
+    "url": "",
+    "part": "WM5514-ND",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/adam-tech/RF1-01K-D-00-50-BK-HDW/9830586",
+      "partNumber": "WM5514-ND"
+    },
+    "links": [
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/3256808135373041.html"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 31,
+    "name": "Reset Button",
+    "qty": "1",
+    "refs": "SW1",
+    "unit": 0.33,
+    "unit10": 2.82,
+    "total": 0.33,
+    "desc": "SWITCH TACTILE SPST-NO 6x6x9mm",
+    "supplier": "Digi-Key",
+    "url": "https://www.digikey.com/en/products/detail/c-k/PTS645VH83-2-LFS/1146776?s=N4IgTCBcDaIAoBUDKA2ALAVgGoAkAcAzALRgAEAMgGJIgC6AvkA",
+    "part": "",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/c-k/PTS645VH83-2-LFS/1146776",
+      "partNumber": "CKN9121-ND"
+    },
+    "links": [
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/2255800088886713.html"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 32,
+    "name": "6 pin SMT (on SiPM board) 2x3 pins",
+    "qty": "1",
+    "refs": "P7",
+    "unit": 0.53,
+    "unit10": 4.51,
+    "total": 0.53,
+    "desc": "CONN HEADER SMD 6POS 2.54MM",
+    "supplier": "Digi-Key",
+    "url": "https://www.digikey.com/en/products/detail/molex/0015910060/614773?s=N4IgTCBcDaIOoFkCMB2ALAVhQWgHIBEQBdAXyA",
+    "part": "",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/molex/0015910060/614773",
+      "partNumber": "WM17457-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 33,
+    "name": "SiPM",
+    "qty": "1",
+    "refs": "U3 (pin 1 (anode) indicated by outer line)",
+    "unit": 28.41,
+    "unit10": 251.47,
+    "total": 28.41,
+    "desc": "MICROFC-60035-SMT-TR",
+    "supplier": "Digi-Key",
+    "url": "https://www.digikey.com/en/products/detail/onsemi/MICROFC-60035-SMT-TR/9742618",
+    "part": "",
+    "optional": false,
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/onsemi/MICROFC-60035-SMT-TR/9742618",
+      "partNumber": "5556-MICROFC-60035-SMT-TRCT-ND"
+    },
+    "links": [],
+    "digikeySearch": null
+  },
+  {
+    "item": 34,
+    "name": "RJ45 Coincidence connector",
+    "qty": "1",
+    "refs": "J1",
+    "unit": 0.45,
+    "unit10": 3.83,
+    "total": 0.45,
+    "desc": "RJ45, 8p8c right angle",
+    "supplier": "AliExpress",
+    "url": "https://www.aliexpress.us/item/2255800047081475.html?spm=a2g0o.productlist.main.5.75041f08oHxKQj&algo_pvid=f5a390b0-14d5-48aa-8d78-c397a6a95e25&algo_exp_id=f5a390b0-14d5-48aa-8d78-c397a6a95e25-2&pdp_npi=4@dis!USD!1.86!1.86!!!1.86!1.86!@2103080e17246694755947771e7eb6!10000000946738865!sea!US!6040781666!X&curPageLogUid=AuMGfRufyP3g&utparam-url=scene:search%7Cquery_from:",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/2255800047081475.html"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=RJ45%208P8C%20right%20angle%20THT%20jack"
+  },
+  {
+    "item": 35,
+    "name": "Buzzer",
+    "qty": "1",
+    "refs": "BZ1",
+    "unit": 0.69,
+    "unit10": 6.89,
+    "total": 0.69,
+    "desc": "BUZZER MAGNETIC",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Cylewet-Electronic-Magnetic-Continuous-Arduino/dp/B01N7NHSY6/ref=sr_1_3?crid=1MNYVMDNFEG3E&dib=eyJ2IjoiMSJ9.OyPyJJ4xtWru7f8xcsfDi8e4qjY9GGAhTKncBv3i2HdX6MDcc_WhKZdq7ahgIYUhKmLfsGVyf3I-vsAssihzpUcWaJiIX5gbA4AItcrNK7LowPi3mg4oIsQaiWEhRinMSsN5eMUNHLtiiEgH6x5uT_KSIfgea3YTN3SxXZy1nukWkFEV_bmoknKGc1dfM3E8rM0jEiIJZ2aqGXCxnRtBUBjffVhiofeTTyZutbFfT1A.dkBYlqof22OIS1K7N3muU6fY-olB7VYYAUiOiKpEmuk&dib_tag=se&keywords=arduino+buzzer&qid=1746097136&sprefix=arduino+buzze%2Caps%2C98&sr=8-3",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B01N7NHSY6"
+      },
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/3256806114046837.html"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=magnetic%20buzzer%205V%20THT"
+  },
+  {
+    "item": 36,
+    "name": "Temp/Pressure sensor",
+    "qty": "1",
+    "refs": "J4 (shared with Accelerometer)",
+    "unit": 1.48,
+    "unit10": 14.78,
+    "total": 1.48,
+    "desc": "BMP280-3.3V",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/HiLetgo-Precision-BMP280-3-3-Atmospheric-Pressure/dp/B07VNDZ6N4/ref=sr_1_1_sspa?crid=2WA8RRS5GLFWX&dib=eyJ2IjoiMSJ9.PQHrDGGwwh2cgTLuXX4nF870sAt6XAz8U4CIdF9DeBC-pZwJTkwLVYbG8BdzLpK5zaqfsrpGI2wCy9JOiFchuh7r5tl0vOwMbviwKmGzx8L0TcxGB9_IqqF4padTynuO8OPTuwr6SL-1H4MVOmpxrOkB_Tpxd29W9FvHxMmEem6-JngjtrfqaU4N1Gu7UtFGtMBhAB1_HoO2W1lhA_XMdSmut5iOsYaf2o_jmvpvxhf0onzMkvQEjZDfLrtyfCp5Tc4RxoXtnE7xHGKVku-39glbg5G-T_m9pZHHUdvePfI.5lhtVtIPaCO5bfaS23RDG1KnPseKv40k5e5wTOpRGok&dib_tag=se&keywords=bmp280&qid=1746097268&s=industrial&sprefix=bmp280%2Cindustrial%2C69&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B07VNDZ6N4"
+      },
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/3256803501753106.html"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 37,
+    "name": "Accelerometer",
+    "qty": "1",
+    "refs": "J4 (shared with Temp/Pressure)",
+    "unit": 6.99,
+    "unit10": 36.63,
+    "total": 6.99,
+    "desc": "3-axis Gyrometer-Accelerometer",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/HiLetgo-MPU-6050-Accelerometer-Gyroscope-Converter/dp/B00LP25V1A?th=1",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B00LP25V1A"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 38,
+    "name": "LED 3mm",
+    "qty": "1",
+    "refs": "D2",
+    "unit": 0.07,
+    "unit10": 0.7,
+    "total": 0.07,
+    "desc": "3mm LED",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Transparent-Lighting-Electronics-Components-Emitting/dp/B01BTYHOJ0/ref=sr_1_4?crid=3QS9US5QPXKBJ&dib=eyJ2IjoiMSJ9.4StSeUKQqoOTODhHN7I_YmebuQenDuJWzUGOGyI_pZCMSlQij3zJzNFaB2MGHScow6YliSkuO_h2OgmkEGcC1s2NCS3erw7o3WCRR9NROsB6DofeTy9N9ZN8kFqvlNPVDLoRvcPb0eRhx8prtfuVxZvojiZ_rMheShekL-Tb36IaZhlPuQwlXMkSzjfRqi7AfGru_rUPmlTBApS3pnA52dFAn_DApLf5p5x-kGdvjmc.IvKbsFNHslNR_f0vy3jiMwue0E7fAEUFP-8EmJJ8rtY&dib_tag=se&keywords=blue%2B3mm%2Bled&qid=1735827386&sprefix=blue%2Bmm%2Bled%2Caps%2C181&sr=8-4&th=1",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B01BTYHOJ0"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=3mm%20LED%20blue%20THT"
+  },
+  {
+    "item": 39,
+    "name": "LED 5mm",
+    "qty": "1",
+    "refs": "D5",
+    "unit": 0.07,
+    "unit10": 0.7,
+    "total": 0.07,
+    "desc": "5mm LED",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Transparent-Intensity-Lighting-Electronics-Components/dp/B01AUI4VQU/ref=sr_1_3_pp?crid=3BWLD8K6RYN1J&dib=eyJ2IjoiMSJ9.DEoDH6fGAts6Er9N_7YOdQy3nyqyc32kjRyI-wnBA8WwzpxQGk38ThGkKKhFlgVBrDljy5PwZUESkA6HFTvAJP8wx8OpvZg0-F9vKaCV7XAgmuBc2m2zFYOHqO6ulBdxyrdJ6NkGjCKhw3Hau1fg4JTX58VS-PVtmlw_AtMd-14V-KDrP23-qf9c1bkYzRwiwkfTLfN9Sof3PNZ9IoGmo-nHbHNhcelKst5pddWsAp8.U0G1R5x2jG1QDWp4l903Jg2U8u08ZmS90QFt2UA2x6c&dib_tag=se&keywords=white%2B5mm%2Bled&qid=1735827351&sprefix=white%2B5mm%2Bled%2Caps%2C155&sr=8-3&th=1",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B01AUI4VQU"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=5mm%20LED%20white%20THT"
+  },
+  {
+    "item": 40,
+    "name": "OLED screen",
+    "qty": "1",
+    "refs": "U9 (NOTE: GND must be outemost pin)",
+    "unit": 5.0,
+    "unit10": 28.0,
+    "total": 5.0,
+    "desc": "128x64 Yellow Blue OLED, GND must be one of the edge pins",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/GeeekPi-Display-Two-Color-Compatible-Raspberry/dp/B0B7RPCZ4Z/ref=sr_1_18?crid=XRA8IL6EI5EX&dib=eyJ2IjoiMSJ9.IJoxWF1pbbgjuFzVxunatoOj69kwe-DLyV8RxRBubCIOyg8NoRW19EsUHPnubJuNByIxnRIXSU58iXO7XET-q0lwTKKQn_QR2fOiQ7eSaqiMg3db--H1dYqBcaCKRjXR3be-3d-lHDwHQVH8NFO4wWZ2wzTbmznxD5QRPywuAl2yuj8GkpC_emhogNafr1-pMeRndhPBhnwm7UfD_rMAlI1CIW5yGFoMmmR_e8EPoMY.sQvrvhDpgw4G22yg5OljLWP-HkBicaurYq3Bo0dMwhA&dib_tag=se&keywords=0.96+oled&qid=1746097898&sprefix=0.96+ole%2Caps%2C85&sr=8-18",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B0B7RPCZ4Z"
+      },
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/3256806675422820.html"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 41,
+    "name": "SD Card socket",
+    "qty": "1",
+    "refs": "U8",
+    "unit": 1.22,
+    "unit10": 12.15,
+    "total": 1.22,
+    "desc": "Micro SD Memory Card Slot Holder Sockets",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Uxcell-a14061000ux0287-Memory-Holder-Sockets/dp/B01AHYS7K8/ref=sr_1_1_pp?crid=34LACP2N6RNQ0&dib=eyJ2IjoiMSJ9.x94X55AoBN6klXn13s3gEECU9ngxp9Ixa2sv3I0jVd9jVKK0daLL3m8UxZZm0uib_nk2QVt-_-ru0DXMNAbQ7o8ie-czXoS7Nzo8uin0mAIK2RrKT9NXrP1a2himsmyLJirFsddpnKYkSSt2CJz4Wx6oW8zbAXKwSlyX3JLh2vG4Fhs0XVSWv5f1uR_eT_9l2t-rgzL5HwmWdIGttYB4qsuIr55OWLlwu5zI0XEUQgk.PNXZFjxyGdP6hBnsgMJqRs5KqZwOkqvaAJax7Vg7Who&dib_tag=se&keywords=sd+card+socket&qid=1746097997&sprefix=sd+card+socket%2Caps%2C101&sr=8-1",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B01AHYS7K8"
+      },
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/3256805131369565.html"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=microSD%20card%20socket"
+  },
+  {
+    "item": 42,
+    "name": "Standard Tin Foil or aluminum foil",
+    "qty": "1",
+    "refs": "",
+    "unit": 0.01,
+    "unit10": 0.1,
+    "total": 0.01,
+    "desc": "15cm x 15cm of standard Aluminium foil for wrapping the Plastic scintilaltor",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Amazon-Basics-Heavy-Aluminum-Square/dp/B093X4M4QF/ref=sr_1_1_ffob_sspa?dib=eyJ2IjoiMSJ9.DsoYdJe6i4W1BdLtIZQZuCueYK0X1Wxg7vZAcD_SoQ-9uvtF1A_RVWiCYzFqpacHY5ZO0qMqvdLgf1nIT6Opa2lHakDFCTHMZSs8lH3n-SjWt9mPQFDQOVwFzcDfVnLP_imEyENqg7GAB--Y",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B093X4M4QF"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 43,
+    "name": "Black electrical tape",
+    "qty": "1",
+    "refs": "Maybe a meter of tape.",
+    "unit": 1.69,
+    "unit10": 16.92,
+    "total": 1.69,
+    "desc": "Black electrical tape for making the Plastic scintillator light-tight",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Lichamp-Electrical-Waterproof-Industrial-Electric/dp/B07VNTC9LH/ref=sr_1_2_pp?crid=3LCB146OV0WJI&dib=eyJ2IjoiMSJ9.Gcl4RNv8zp225gq0DAHkVi4EDCIq6D5AzeEl8wUS-2kTHgABCYWdM0lrkBwrC6UxC8Ef4YyRNKwF7vNuBw-aTVGNhJIg_WzYaUcfJ4GlJWXieTI7fwRWBMVYsPK0xuZKg5fsyXEOvMxt6ctoMXw_qb-oTLRsmL1Y21WXFEQTszCN59tWRd8Yyh7NFhDmEUPrL5lsuSnftzG0bXoeHHLLyT8TeHSw4fh-0OjyDDp-0Ik.9VYv_LrRUWx0K5tPN1byAXXHpDxFfnFxWOSeu-zEIr4&dib_tag=se&keywords=black+electrical+tape&qid=1736882194&sprefix=black+electrical+tape%2Caps%2C144&sr=8-2",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B07VNTC9LH"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 44,
+    "name": "microSD Card",
+    "qty": "1",
+    "refs": "Suggest >= 4GB",
+    "unit": 2.6,
+    "unit10": 26.0,
+    "total": 2.6,
+    "desc": "ExFAT formatted, something >4GB is good. 1GB = 1 full month of data.",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/EASTBULL-4GB-Full-Video-Surveillance/dp/B0C39YHGC3/ref=sr_1_1?dib=eyJ2IjoiMSJ9.sAlKXbutqga0Xw4SHbAQgGXLJG5i50U81J1SxIQZNecmani74K4CvBbp0WngBmFY_6dUY1gUl_W1JU7sWcRUt-zecg60PF4NSP9VfwxJmzTpQWSXJlSEVMLiy1JSTMgYUc9vKmlFgNJQ8LddKmTUdOenLYc79HxAm_h_bhBE3GV9UdWy6QoM4P4AJryAJIZWH1Wy3iQPekqIyuoZGTDlSg8Pavk2Q8lRxGiefbLOWeA.ZK9EJLA31WcUoI9JS50-7N9OogisIeDaybxDi_lFb1c&dib_tag=se&keywords=4gb%2Bmicro%2Bsd%2Bcard&qid=1749637941&sr=8-1&th=1",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B0C39YHGC3"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=microSD%20card%204GB"
+  },
+  {
+    "item": 45,
+    "name": "Coincidence Cable (CAT5/6)",
+    "qty": "1",
+    "refs": "",
+    "unit": 1.48,
+    "unit10": 8.89,
+    "total": 1.48,
+    "desc": "0.5 ft (or longer) CAT6 Cable (STRAIGHT-Thru ONLY)",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Metbxton-Ethernet-Network-Connectors-Internet/dp/B0CMQFHNPM/ref=sr_1_19?crid=1LMFDFTAID37I&dib=eyJ2IjoiMSJ9.3Mt4pznVsYP82NNpq5NqRh28I32ZeNm4aVolluCbc5lQMxBhwPRv9dM7PtnrRoKogLdzPNWKwyHaANuUZl5DO2LMtpPVrJYrsW24KKfzpRJVzq0NDBcgIfIdYXxA",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B0CMQFHNPM"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=CAT6%20patch%20cable%200.5%20ft"
+  },
+  {
+    "item": 46,
+    "name": "BNC cable for testing",
+    "qty": "1",
+    "refs": "",
+    "unit": 6.54,
+    "unit10": 65.4,
+    "total": 6.54,
+    "desc": ">1ft BNC cable",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/Monoprice-Viper-HD-SDI-RG6-Cable/dp/B01LYOSYOA/ref=sr_1_8?crid=D0YP3QV8Y59W&dib=eyJ2IjoiMSJ9.ouVMlXtW52xcQCNVfWhdMHtWze7aPQGA57QfMcnibn2Fp_zEIPZbB-CYSkktuk-58ZNGVwM9jBUV3PdTJJ19jSjF9Yq3ZNLEqDZG5mCFOACkVjpLGSLZSNOKofcjhKaH1AXli7hhgHccFD7xq5wm5UznqXsbSxDvQpfcv3GTCW8N29P5q4sDC-wUFiokqC92v4rTFOcjse6sWY-rexljwke2k3gowVvTNrtCrLhqTbI.cBa7HpzQ2Q4vtAqxxz0G3ohUmivEOZNBlIvOpHOaRy0&dib_tag=se&keywords=bnc+cable&qid=1746125810&sprefix=bnc+cabl%2Caps%2C128&sr=8-8",
+    "part": "",
+    "optional": true,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B01LYOSYOA"
+      }
+    ],
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=BNC%20cable%20male%20male%201%20ft"
+  },
+  {
+    "item": 47,
+    "name": "Standoff",
+    "qty": "2",
+    "refs": "SiPM to Mainboard Standoff",
+    "unit": 0.7,
+    "unit10": 5.9,
+    "total": 1.4,
+    "desc": "1/8\" Hex Size, 7/16\"\" Length, 0-80 Thread Size",
+    "supplier": "McMaster-Carr",
+    "url": "https://www.mcmaster.com/91780A029/",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "McMaster-Carr",
+        "url": "https://www.mcmaster.com/91780A029/"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 48,
+    "name": "Standoff mounting screw",
+    "qty": "4",
+    "refs": "",
+    "unit": 0.07,
+    "unit10": 0.68,
+    "total": 0.27,
+    "desc": "0-80 Thread Size, 1/4\" Long",
+    "supplier": "McMaster-Carr",
+    "url": "https://www.mcmaster.com/91771A055/",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "McMaster-Carr",
+        "url": "https://www.mcmaster.com/91771A055/"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 49,
+    "name": "#2 screw for SiPM PCB/scintillator",
+    "qty": "4",
+    "refs": "Mounts SiPM PCB to Scintillator",
+    "unit": 0.03,
+    "unit10": 0.27,
+    "total": 0.11,
+    "desc": "18-8 Stainless Steel, Number 2 Size, 3/8\" Long",
+    "supplier": "McMaster-Carr",
+    "url": "https://www.mcmaster.com/90065A079/",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "McMaster-Carr",
+        "url": "https://www.mcmaster.com/90065A079/"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 50,
+    "name": "Plastic Scintillator",
+    "qty": "1",
+    "refs": "",
+    "unit": 19.0,
+    "unit10": 190.0,
+    "total": 19.0,
+    "desc": "50x50x10mm, drill holes for #2 screws using #48 bit",
+    "supplier": "eBay",
+    "url": "https://www.ebay.com/itm/264903211281?_skw=scintilltor+5cm&epid=2044114641&itmmeta=01JT5SE9ZXMKJ35AZDZFF65KMX&hash=item3dad763911:g:zn0AAOSwvChfi0QP&itmprp=enc%3AAQAKAAAA8FkggFvd1GGDu0w3yXCmi1eZzmBdGYiXVxtW3EDl4Yni4rbeKxzk9MaV1JtqSjeP8Wj%2BBm6wyxkU1TGfduqguPCx7H%2Bj%2BrQHD8cWvhwSgUYrb0CDLiLwycbKhDfXkptK--VAwaKPaHzuPFLKA1T5tqnSUmuJvLg%2BFTrp%2F3kr1YYf12sAV2qpAHnPqum33f97gUT0eEoxik2pfjSe4HMFVc66%2B2P32mgKEkiYVVNnnryHUKlBMGynXy71O2kKfXgE6CKYejsuBdbL2U9myKdT5fKYjBopf0ZZI8B2DPAdS1V7E1x3I9DmYd0gwQtJEOkfdw%3D%3D%7Ctkp%3ABk9SR_igubnRZQ",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "eBay",
+        "url": "https://www.ebay.com/itm/264903211281"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 51,
+    "name": "Optical Gel",
+    "qty": "1",
+    "refs": "0.3mm silicone pad works too.",
+    "unit": 0.99,
+    "unit10": 9.95,
+    "total": 0.99,
+    "desc": "Small (<1mL) amount of optical gel. Vaseline might work.",
+    "supplier": "eBay",
+    "url": "https://www.ebay.com/itm/Silicone-Optical-Coupling-Compound-for-PMT-Photomultiplier-Scintillator-Detector-/261918290249",
+    "part": "",
+    "optional": false,
+    "digikey": null,
+    "links": [
+      {
+        "label": "eBay",
+        "url": "https://www.ebay.com/itm/261918290249"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 52,
+    "name": "Rubber feet",
+    "qty": "4",
+    "refs": "",
+    "unit": 0.04,
+    "unit10": 3.99,
+    "total": 0.16,
+    "desc": "8x4 mm rubber bumpers 50pcs",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/LLRY-Adhesive-Dampening-Furniture-Diameter/dp/B07G8926LH/ref=sxin_16_pa_sp_search_thematic_sspa?content-id=amzn1.sym.87b1f643-33a9-49d2-948f-44f2ccfe0508%3Aamzn1.sym.87b1f643-33a9-49d2-948f-44f2ccfe0508&crid=25CWKIPTA3XXG&cv_ct_cx=rubber%2Bbumpers%2Bblack&keywords=rubber%2Bbumpers%2Bblack&pd_rd_i=B07G8926LH&pd_rd_r=d93086ad-8ef0-42b0-ae01-51c3499207cc&pd_rd_w=Xv5PW&pd_rd_wg=RtzDG&pf_rd_p=87b1f643-33a9-49d2-948f-44f2ccfe0508&pf_rd_r=809YWTE9AKC7EQYD6Q40&qid=1746125586&sbo=RZvfv%2F%2FHxDF%2BO5021pAnSA%3D%3D&sprefix=rubber%2Bbumpers%2Bblack%2Caps%2C170&sr=1-1-6024b2a3-78e4-4fed-8fed-e1613be3bcce-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9zZWFyY2hfdGhlbWF0aWM&th=1",
+    "part": "",
+    "optional": true,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B07G8926LH"
+      },
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/3256801658571146.html"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 53,
+    "name": "Electronics Case",
+    "qty": "1",
+    "refs": "",
+    "unit": 9.0,
+    "unit10": 90.0,
+    "total": 9.0,
+    "desc": "Aluminium split body case: 2506-2.9\"",
+    "supplier": "Other",
+    "url": "http://www.enclosuresandcasesinc.com/",
+    "part": "",
+    "optional": true,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Enclosures & Cases Inc.",
+        "url": "https://www.enclosuresandcasesinc.com/"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 54,
+    "name": "Face plates for case",
+    "qty": "1",
+    "refs": "",
+    "unit": 1.0,
+    "unit10": 5.0,
+    "total": 1.0,
+    "desc": "10cm x 15cm x 2.5mm acrylic end plates.",
+    "supplier": "Elecrow",
+    "url": "https://www.elecrow.com/acrylic-cutting.html",
+    "part": "",
+    "optional": true,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Elecrow",
+        "url": "https://www.elecrow.com/acrylic-cutting.html"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 55,
+    "name": "5mm LED holder",
+    "qty": "1",
+    "refs": "",
+    "unit": 0.3,
+    "unit10": 3.04,
+    "total": 0.3,
+    "desc": "5mm Plastic E",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/uxcell-Holder-Plastic-Light-emitting-Lighting/dp/B07CPY23TC/ref=sr_1_7_sspa?crid=3O4JENX22K2BB&dib=eyJ2IjoiMSJ9.aEEBuzAdmZAO38q7GhaWPwAbEeu0N_kiJ77K4y2ZEima5E9luIgODwq5-eJo78OiGiMgYSddVSscSZdrVKNcNKkZ7_yb7Z7EI5GNYMOaTjirCSxHMPC_S-kA4NXSyrHsPmrS2dDF0uhbTW0-eGgk8NPP48veHRPB3lYdgrvg69ZjwxRb43NaJ4rd2RF5IbsxSi5Y5D9CUOMJp-sCLXu3-XI9-c8XZBez421InP8WB73ob8BXVf8AmjCag3v8XuZ6PTwcwr0GBl74cmZX5jtPdz3qRA-UwSZcRx5L6Oam8_U.ewokDUvZ2wojYHYpbxZ-hOg7uZNlEq2wlaEE758LoAo&dib_tag=se&keywords=LED+holder+5mm&qid=1746125654&s=home-garden&sprefix=led+holder+5mm%2Cgarden%2C116&sr=1-7-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&psc=1",
+    "part": "",
+    "optional": true,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B07CPY23TC"
+      },
+      {
+        "label": "AliExpress",
+        "url": "https://www.aliexpress.us/item/3256803199423599.html"
+      }
+    ],
+    "digikeySearch": null
+  },
+  {
+    "item": 56,
+    "name": "3mm LED holder",
+    "qty": "1",
+    "refs": "",
+    "unit": 0.11,
+    "unit10": 1.14,
+    "total": 0.11,
+    "desc": "3mm Plastic E",
+    "supplier": "Amazon",
+    "url": "https://www.amazon.com/uxcell-100pcs-Holder-Light-emitting-Lighting/dp/B07CPY6P7N/ref=sr_1_16?crid=2JZHORQ9Q0JEV&dib=eyJ2IjoiMSJ9.LFHA5ZTzbAlKNW81ssOUFbHZQEhLg4VvasBTAXEX664JnYlcwMmpLo3Xpqq-rqZVCOof7aKCfmjv-uDoH8_PftbtFdEL_TCsfE_N34__9VgqOF1urRjXgM6Q1wD9SMaF19fMEWhZ3LIKpaLjo7rZOmYCOK_npeLbSkTPvwVOg5TrvlVpHWgQ5HRBIpnEAhqRDF0BTj2bUbS0_mLxjou2iOvbNA-nHAoTRYemW8J5evesrSvoLiy3PT0JjVT2qoU70CKDZ0TJreHg2sFvPwLRUYFAO4V1LlaSPpjEQVwWce6ABD8AdKRd8wRZpuNHARsb6Blnp5aHhju6KBOG36Ym5aaRrHJ5KJd5bSv687pwEz7alNPVZJk2VCYpGHKuEj5-Im4VKc0HCEorm-p2qSHPCUZPD96U0LwXo_SHHc0PtYW_Waf0kp6C6xs-isaYebEL.FJM-DSaPQl9Iof-H3tXRiPNPio4ahyBt4TXQg7I-kiE&dib_tag=se&keywords=3mm+led+holder&qid=1736882105&sprefix=3mm+led+holde%2Caps%2C95&sr=8-16",
+    "part": "",
+    "optional": true,
+    "digikey": null,
+    "links": [
+      {
+        "label": "Amazon",
+        "url": "https://www.amazon.com/dp/B07CPY6P7N"
+      }
+    ],
+    "digikeySearch": null
+  }
+]

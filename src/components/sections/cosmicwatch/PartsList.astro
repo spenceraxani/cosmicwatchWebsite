@@ -1,0 +1,230 @@
+---
+import { reveal, revealImage, delay } from '@utils/motion';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro';
+import StatsSmall from '@components/ui/blocks/StatsSmall.astro';
+import bom from '@data/bom.json';
+import { REPO_URL } from '@data/navigation';
+
+type Part = (typeof bom)[number];
+const required = bom.filter((p: Part) => !p.optional);
+const optional = bom.filter((p: Part) => p.optional);
+const onDigikey = bom.filter((p: Part) => p.digikey);
+const sum = (rows: Part[]) => rows.reduce((s, p) => s + (p.total ?? 0), 0);
+const money = (n: number | null) => (n == null ? '–' : `$${n.toFixed(2)}`);
+const qty = (p: Part) => parseInt(String(p.qty), 10) || 1;
+
+// what goes into the Digi-Key list: required parts only, optional ones are opt-in
+const dkLines = onDigikey.map((p: Part) => ({
+  pn: p.digikey!.partNumber,
+  qty: qty(p),
+  name: p.name,
+  optional: p.optional,
+}));
+const dkTotal = onDigikey.filter((p) => !p.optional).reduce((s, p) => s + (p.total ?? 0), 0);
+
+const files = [
+  { label: 'Purchasing list (.xlsx)', href: `${REPO_URL}/raw/main/Purchasing_List_v3X_sa.xlsx` },
+  { label: 'PCB Gerbers v28 (.zip)', href: `${REPO_URL}/raw/main/PCB/PCB_Gerber_Files_v28.zip` },
+  { label: 'Component placement sheet', href: `${REPO_URL}/raw/main/Component_Placement_Sheet.xlsx` },
+  { label: 'Enclosure faceplates', href: `${REPO_URL}/tree/main/Enclosure` },
+];
+const th = 'px-4 py-3 text-sm font-semibold text-neutral-700 dark:text-neutral-300';
+const td = 'px-4 py-3 align-top text-sm text-neutral-700 dark:text-neutral-300';
+const link =
+  'font-medium text-orange-400 underline-offset-2 decoration-2 hover:underline dark:text-orange-300';
+---
+
+<section id="parts" class="mx-auto max-w-[85rem] scroll-mt-28 px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+  <div class="max-w-3xl">
+    <h2 class="text-2xl font-bold text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">
+      Parts list
+    </h2>
+    <p class="mt-3 text-pretty text-neutral-600 dark:text-neutral-400">
+      Everything on the v3X purchasing list. Each part links to Digi-Key with its part number where Digi-Key stocks it,
+      and to the other stores on the sheet. Prices are from the lab's list and will drift; some parts only come in bulk.
+    </p>
+  </div>
+
+  <div class="mt-8 grid items-center gap-6 sm:grid-cols-3">
+    <StatsSmall title={money(sum(required))} subTitle="Required parts per detector, single-unit prices" />
+    <StatsSmall title={`${onDigikey.length} of ${bom.length}`} subTitle="Parts you can order from Digi-Key in one cart" />
+    <StatsSmall title={money(sum(optional))} subTitle="Optional case, faceplates, feet and test cable" />
+  </div>
+
+  <div class="mt-8 flex flex-wrap gap-3">
+    {files.map((f) => <SecondaryCTA title={f.label} url={f.href} />)}
+  </div>
+
+  <div class:list={['mt-10 surface p-6 md:p-8', reveal]}>
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div>
+        <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">Order the electronics from Digi-Key</h3>
+        <p class="mt-2 text-pretty text-neutral-600 dark:text-neutral-400">
+          Copy the list, open Digi-Key's cart, and paste it into <strong>Quick Add</strong>: one line per part,
+          quantity then Digi-Key part number. It covers {onDigikey.filter((p) => !p.optional).length} required
+          parts, about {money(dkTotal)} per detector before Digi-Key's minimums and shipping.
+        </p>
+        <p class="mt-3 text-sm text-pretty text-neutral-600 dark:text-neutral-400">
+          Not on Digi-Key: the plastic scintillator, optical gel, OLED, BMP280 and accelerometer modules, buzzer, LEDs, SD
+          socket and card, cables, standoffs and screws, tape and foil, and the case. Their stores are in the table.
+        </p>
+      </div>
+      <form id="dk-form" class="space-y-4" onsubmit="return false">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="dk-count" class="mb-2 block text-sm text-neutral-700 dark:text-neutral-300">Detectors</label>
+            <input
+              id="dk-count"
+              type="number"
+              min="1"
+              max="200"
+              value="1"
+              class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1"
+            />
+          </div>
+          <div class="flex items-end">
+            <label class="flex items-center gap-x-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <input id="dk-optional" type="checkbox" class="size-4 rounded border-neutral-300 text-orange-400 focus:ring-orange-400" />
+              Include optional parts
+            </label>
+          </div>
+        </div>
+        <textarea
+          id="dk-list"
+          rows="6"
+          readonly
+          aria-label="Digi-Key quick-add list"
+          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 font-mono text-xs text-neutral-700 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300"
+        ></textarea>
+        <div class="flex flex-wrap gap-3">
+          <PrimaryCTA title="Copy Digi-Key list" id="dk-copy" type="button" />
+          <SecondaryCTA title="Download CSV" id="dk-csv" type="button" />
+          <SecondaryCTA title="Open Digi-Key cart" url="https://www.digikey.com/ordering/shoppingcart" target="_blank" rel="noopener noreferrer" />
+        </div>
+        <p id="dk-status" class="text-sm text-neutral-600 dark:text-neutral-400" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  {
+    [
+      { title: 'Required', rows: required },
+      { title: 'Optional', rows: optional },
+    ].map((group) => (
+      <div class="mt-12">
+        <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+          {group.title} <span class="font-normal text-neutral-500">({group.rows.length} items)</span>
+        </h3>
+        <div class:list={['mt-4 overflow-x-auto surface', reveal]}>
+          <table class="min-w-full divide-y divide-neutral-300 text-left dark:divide-neutral-700">
+            <thead>
+              <tr>
+                <th class={th}>Part</th>
+                <th class={th}>Qty</th>
+                <th class={th}>Unit</th>
+                <th class={th}>Line</th>
+                <th class={th}>Digi-Key</th>
+                <th class={th}>Other stores</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-700">
+              {group.rows.map((p: Part) => (
+                <tr>
+                  <td class={td}>
+                    <span class="font-semibold text-neutral-800 dark:text-neutral-200">{p.name}</span>
+                    {p.desc && <span class="block text-xs text-neutral-500 dark:text-neutral-400">{p.desc}</span>}
+                    {p.refs && <span class="block text-xs text-neutral-500 dark:text-neutral-400">Ref: {p.refs}</span>}
+                  </td>
+                  <td class={`${td} tabular-nums`}>{p.qty}</td>
+                  <td class={`${td} tabular-nums`}>{money(p.unit)}</td>
+                  <td class={`${td} tabular-nums`}>{money(p.total)}</td>
+                  <td class={td}>
+                    {p.digikey ? (
+                      <a class={link} href={p.digikey.url} target="_blank" rel="noopener noreferrer">
+                        <span class="font-mono text-xs">{p.digikey.partNumber}</span>
+                      </a>
+                    ) : p.digikeySearch ? (
+                      <a class={`${link} text-xs`} href={p.digikeySearch} target="_blank" rel="noopener noreferrer">
+                        Search Digi-Key
+                      </a>
+                    ) : (
+                      <span class="text-neutral-400">–</span>
+                    )}
+                  </td>
+                  <td class={td}>
+                    {p.links.length ? (
+                      <span class="flex flex-wrap gap-x-3 gap-y-1">
+                        {p.links.map((l) => (
+                          <a class={link} href={l.url} target="_blank" rel="noopener noreferrer">
+                            {l.label}
+                          </a>
+                        ))}
+                      </span>
+                    ) : (
+                      <span class="text-neutral-400">–</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<script is:inline type="application/json" id="dk-data" set:html={JSON.stringify(dkLines)} />
+
+<script>
+  type Line = { pn: string; qty: number; name: string; optional: boolean };
+
+  function init() {
+    const dataEl = document.getElementById('dk-data');
+    const count = document.getElementById('dk-count') as HTMLInputElement | null;
+    const withOptional = document.getElementById('dk-optional') as HTMLInputElement | null;
+    const list = document.getElementById('dk-list') as HTMLTextAreaElement | null;
+    const status = document.getElementById('dk-status');
+    if (!dataEl || !count || !list || !withOptional || list.dataset.ready) return;
+    list.dataset.ready = '1';
+    const lines: Line[] = JSON.parse(dataEl.textContent || '[]');
+
+    const rows = () => {
+      const n = Math.max(1, Math.min(200, parseInt(count.value, 10) || 1));
+      return lines.filter((l) => withOptional.checked || !l.optional).map((l) => ({ ...l, qty: l.qty * n }));
+    };
+    const render = () => {
+      list.value = rows()
+        .map((l) => `${l.qty}, ${l.pn}`)
+        .join('\n');
+    };
+    count.addEventListener('input', render);
+    withOptional.addEventListener('change', render);
+    render();
+
+    document.getElementById('dk-copy')?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(list.value);
+        if (status) status.textContent = `Copied ${rows().length} lines. Paste them into Quick Add in the Digi-Key cart.`;
+      } catch {
+        list.select();
+        if (status) status.textContent = 'Select the list and copy it (Ctrl/Cmd + C).';
+      }
+    });
+    document.getElementById('dk-csv')?.addEventListener('click', () => {
+      const csv = ['Quantity,Digi-Key Part Number,Description']
+        .concat(rows().map((l) => `${l.qty},${l.pn},"${l.name.replace(/"/g, '""')}"`))
+        .join('\n');
+      const a = Object.assign(document.createElement('a'), {
+        href: URL.createObjectURL(new Blob([csv], { type: 'text/csv' })),
+        download: `cosmicwatch-v3x-digikey-x${count.value || 1}.csv`,
+      });
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    });
+  }
+
+  document.addEventListener('astro:page-load', init);
+  init();
+</script>

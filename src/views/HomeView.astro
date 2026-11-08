@@ -1,0 +1,125 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import HeroSection from '@components/sections/landing/HeroSection.astro';
+import HeroSectionAlt from '@components/sections/landing/HeroSectionAlt.astro';
+import ClientsSection from '@components/sections/landing/ClientsSection.astro';
+import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
+import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
+import FeaturesStats from '@components/sections/features/FeaturesStats.astro';
+import MeasurementsSection from '@components/sections/cosmicwatch/MeasurementsSection.astro';
+import CardBlog from '@components/ui/cards/CardBlog.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import MuonPipeline from '@components/sections/cosmicwatch/MuonPipeline.astro';
+import RealRun from '@components/sections/cosmicwatch/RealRun.astro';
+import FAQ from '@components/sections/misc/FAQ.astro';
+import heroImage from '@images/cw/detector-array.jpg';
+import featureImage from '@images/cw/exploded-labeled.jpg';
+import pcbImage from '@images/cw/render-main-pcb.png';
+import guiImage from '@images/cw/gui-screenshot.jpg';
+import pairImage from '@images/cw/photo-coincidence.jpg';
+import { partnersData } from '@data/constants';
+import { featuredMeasurements } from '@data/measurements';
+import { REPO_URL } from '@data/navigation';
+import { entriesFor } from '@utils/content';
+import { getCopy } from '@/copy';
+import { localePath, type MarketingLocale } from '@utils/locale';
+
+interface Props {
+  locale: MarketingLocale;
+}
+
+const { locale } = Astro.props;
+const t = getCopy(locale);
+const copy = t.home;
+const latestNews = (await entriesFor('blog', locale)).slice(0, 2);
+---
+
+<MainLayout>
+  <HeroSection
+    title={copy.hero.title}
+    subTitle={copy.hero.subTitle}
+    primaryBtn={copy.hero.primaryBtn}
+    primaryBtnURL={localePath(locale, '/docs/build/')}
+    secondaryBtn={copy.hero.secondaryBtn}
+    secondaryBtnURL={localePath(locale, '/shop')}
+    src={heroImage}
+    alt={copy.hero.imageAlt}
+    fit="contain"
+  />
+
+  <ClientsSection
+    title={copy.clients.title}
+    subTitle={copy.clients.subTitle}
+    partners={partnersData}
+  />
+
+  <FeaturesGeneral
+    title={copy.featuresGeneral.title}
+    subTitle={copy.featuresGeneral.subTitle}
+    src={featureImage}
+    alt={copy.featuresGeneral.imageAlt}
+    features={t.data.features}
+  />
+
+  <MuonPipeline title={copy.pipeline.title} subTitle={copy.pipeline.subTitle} steps={copy.pipeline.steps} />
+
+  <FeaturesNavs
+    title={copy.featuresNavs.title}
+    tabs={[
+      { ...copy.featuresNavs.tabs.sd, svg: 'dashboard', src: pcbImage, first: true, second: true },
+      { ...copy.featuresNavs.tabs.gui, svg: 'frame', src: guiImage, second: true },
+      { ...copy.featuresNavs.tabs.coincidence, svg: 'groups', src: pairImage, second: true },
+    ]}
+  />
+
+  <FeaturesStats
+    title={copy.stats.title}
+    subTitle={copy.stats.subTitle}
+    mainStatTitle={copy.stats.mainStatTitle}
+    mainStatSubTitle={copy.stats.mainStatSubTitle}
+    stats={copy.stats.stats}
+  />
+
+  <RealRun
+    title={copy.realRun.title}
+    body={copy.realRun.body}
+    pressureLabel={copy.realRun.pressureLabel}
+    rateLabel={copy.realRun.rateLabel}
+    timeLabel={copy.realRun.timeLabel}
+    source={copy.realRun.source}
+    finding={copy.realRun.finding}
+    findingNote={copy.realRun.findingNote}
+    cta={copy.realRun.cta}
+    ctaUrl="/measure#sample"
+  />
+
+  <MeasurementsSection
+    title={copy.measurements.title}
+    subTitle={copy.measurements.subTitle}
+    measurements={featuredMeasurements}
+    allTitle={copy.measurements.all}
+    allUrl="/docs/measurements/"
+  />
+
+  {latestNews.length > 0 && (
+    <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+      <div class="mb-10 flex items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200">
+          {copy.news.title}
+        </h2>
+        <PrimaryCTA title={copy.news.all} url={localePath(locale, '/news')} variant="yellow" />
+      </div>
+      <div class="grid gap-6 lg:grid-cols-2">
+        {latestNews.map(entry => <CardBlog blogEntry={entry} />)}
+      </div>
+    </section>
+  )}
+
+  <FAQ title={copy.faqTitle} faqs={t.data.faqs} />
+
+  <HeroSectionAlt
+    title={copy.heroAlt.title}
+    subTitle={copy.heroAlt.subTitle}
+    url={REPO_URL}
+  />
+</MainLayout>

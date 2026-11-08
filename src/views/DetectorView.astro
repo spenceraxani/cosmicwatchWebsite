@@ -1,0 +1,121 @@
+---
+import { reveal, revealImage, delay } from '@utils/motion';
+import { Image } from 'astro:assets';
+import MainLayout from '@/layouts/MainLayout.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro';
+import heroImg from '@images/cw/cutout-stack.png';
+import boardImg from '@images/cw/pcb-annotated.jpg';
+import g1 from '@images/cw/render-yellow-front.png';
+import g2 from '@images/cw/render-pair.png';
+import g3 from '@images/cw/render-bare-iso.png';
+import g4 from '@images/cw/render-exploded.png';
+import g5 from '@images/cw/pcb-top.png';
+import g6 from '@images/cw/faceplates.jpg';
+import { specs, parts } from '@data/detector';
+import { getCopy } from '@/copy';
+import { localePath, type MarketingLocale } from '@utils/locale';
+
+interface Props {
+  locale: MarketingLocale;
+}
+
+const { locale } = Astro.props;
+const copy = getCopy(locale).detector;
+
+const gallery = [
+  { src: g1, alt: 'Front of a v3X in a yellow case: OLED screen, reset button and two LEDs' },
+  { src: g2, alt: 'Two v3X detectors stacked for coincidence measurements' },
+  { src: g3, alt: 'v3X boards without the case, showing the Pico and the scintillator housing' },
+  { src: g4, alt: 'Exploded side view of the v3X assembly' },
+  { src: g5, alt: 'Main board and SiPM board, top side' },
+  { src: g6, alt: 'Front and back faceplate designs' },
+];
+---
+
+<MainLayout
+  title={copy.title}
+  description={copy.metaDescription}
+  ogTitle={copy.ogTitle}
+  kind={{ type: 'Product' }}
+>
+  <section class="mx-auto grid max-w-[85rem] gap-8 px-4 py-14 sm:px-6 md:grid-cols-2 md:items-center lg:px-8 2xl:max-w-full">
+    <div>
+      <h1 class:list={['text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl lg:text-5xl dark:text-neutral-200', reveal]}>
+        {copy.heading}
+      </h1>
+      <p class="mt-4 text-lg text-pretty text-neutral-600 dark:text-neutral-400">
+        {copy.subTitle}
+      </p>
+      <div class="mt-7 grid w-full gap-3 sm:inline-flex">
+        <PrimaryCTA title={copy.buildBtn} url={localePath(locale, '/docs/build/')} />
+        <SecondaryCTA title={copy.buyBtn} url={localePath(locale, '/shop')} />
+      </div>
+    </div>
+    <Image src={heroImg} alt="Two v3X detectors, one in a yellow case and one in a blue case, stacked" width={900} class="mx-auto w-full max-w-md rounded-xl" loading="eager" />
+  </section>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+    <h2 class:list={['text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200', reveal]}>
+      {copy.specsTitle}
+    </h2>
+    <p class="mt-2 max-w-2xl text-neutral-600 dark:text-neutral-400">
+      {copy.specsSubTitle}
+    </p>
+    <div class="mt-8 overflow-x-auto rounded-xl border border-neutral-300 dark:border-neutral-700">
+      <table class="min-w-full divide-y divide-neutral-300 text-left text-sm dark:divide-neutral-700">
+        <thead class="bg-neutral-300/60 dark:bg-neutral-700/50">
+          <tr>
+            {copy.specsHead.map(h => (
+              <th scope="col" class="px-4 py-3 font-bold text-neutral-800 dark:text-neutral-200">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
+          {specs.map(([name, v2, v3]) => (
+            <tr class="bg-neutral-100 dark:bg-neutral-800">
+              <th scope="row" class="px-4 py-3 font-medium text-neutral-700 dark:text-neutral-300">{name}</th>
+              <td class="px-4 py-3 text-neutral-500 dark:text-neutral-400">{v2}</td>
+              <td class="px-4 py-3 font-medium text-neutral-800 dark:text-neutral-200">{v3}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-[85rem] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-14 2xl:max-w-full">
+    <Image src={boardImg} alt="Annotated v3X main board" width={1100} class="w-full rounded-xl bg-white" loading="lazy" />
+    <div>
+      <h2 class:list={['text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200', reveal]}>
+        {copy.insideTitle}
+      </h2>
+      <dl class="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+        {parts.map(p => (
+          <div>
+            <dt class="font-bold text-neutral-800 dark:text-neutral-200">{p.name}</dt>
+            <dd class="text-sm text-neutral-600 dark:text-neutral-400">{p.detail}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="mt-6 text-sm text-neutral-500 dark:text-neutral-400">
+        <a class="underline underline-offset-2" href={localePath(locale, '/docs/how-it-works/')}>How the detector works</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+    <h2 class:list={['text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200', reveal]}>
+      {copy.galleryTitle}
+    </h2>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {gallery.map(g => (
+        <figure class:list={['overflow-hidden rounded-xl bg-white', revealImage]}>
+          <Image src={g.src} alt={g.alt} width={800} class="aspect-[4/3] w-full object-contain p-2" loading="lazy" />
+          <figcaption class="bg-neutral-100 px-4 py-3 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">{g.alt}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="mt-8 max-w-3xl text-sm text-neutral-500 dark:text-neutral-400">{copy.licenseNote}</p>
+  </section>
+</MainLayout>

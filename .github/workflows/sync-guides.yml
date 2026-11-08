@@ -1,0 +1,78 @@
+# Keeps /docs/guides/ in step with the PDF manuals in the v3X repository.
+#
+# Runs every day, on demand, and when the v3X repository sends a
+# `v3x-updated` repository_dispatch event (see README, "Guide sync").
+# If any PDF changed, it regenerates the guide pages with
+# scripts/sync-guides.py and commits them. The normal deploy then
+# publishes the new pages.
+name: Sync guides from the v3X repository
+
+on:
+  schedule:
+    - cron: '17 9 * * *' # daily, 09:17 UTC
+  workflow_dispatch:
+  repository_dispatch:
+    types: [v3x-updated]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-guides
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the website
+        uses: actions/checkout@v4
+
+      - name: Check out the PDFs from the v3X repository
+        uses: actions/checkout@v4
+        with:
+          repository: spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X
+          path: .upstream
+          fetch-depth: 0
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*.pdf
+
+      - name: Compare PDF versions with the last sync
+        id: diff
+        run: |
+          changed=0
+          for path in $(jq -r '.guides[].file | @base64' src/data_files/guides.json); do
+            file=$(echo "$path" | base64 -d)
+            synced=$(jq -r --arg f "$file" '.guides[] | select(.file==$f) | .blobSha' src/data_files/guides.json)
+            current=$(git -C .upstream rev-parse "HEAD:$file" 2>/dev/null || echo missing)
+            echo "$file: synced $synced, current $current"
+            if [ "$synced" != "$current" ]; then changed=1; fi
+          done
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-python@v5
+        if: steps.diff.outputs.changed == '1' || github.event_name == 'workflow_dispatch'
+        with:
+          python-version: '3.12'
+
+      - name: Regenerate the guide pages
+        if: steps.diff.outputs.changed == '1' || github.event_name == 'workflow_dispatch'
+        run: |
+          pip install pymupdf pillow
+          python scripts/sync-guides.py --repo .upstream
+
+      - name: Commit the new pages
+        if: steps.diff.outputs.changed == '1' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "cosmicwatch-guide-sync"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/content/docs/docs/guides public/guides src/data_files/guides.json
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          upstream=$(git -C .upstream rev-parse --short HEAD)
+          git commit -m "Sync guides with the v3X repository ($upstream)"
+          git push

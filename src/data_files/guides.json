@@ -1,0 +1,582 @@
+{
+  "repo": "spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X",
+  "branch": "main",
+  "syncedCommit": "ade742d77e8be6e7f53b5547c4778736e3eef4cc",
+  "syncedCommitDate": "2026-07-20T15:42:37-04:00",
+  "guides": [
+    {
+      "slug": "instruction-manual",
+      "file": "The Instruction Manual.pdf",
+      "title": "Instruction Manual",
+      "blurb": "How the v3X works, how to build one, and how the electronics and firmware are designed.",
+      "blobSha": "f98d4c0fba27e6e1df2b85d1fea5a52414d5a664",
+      "commit": "f6aa8d0d8e13b1fe18dfab6bb49b638f23b008fd",
+      "commitDate": "2025-08-20T16:43:03-04:00",
+      "bytes": 5936367,
+      "pdfUrl": "https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Instruction%20Manual.pdf",
+      "pageCount": 31,
+      "figures": 14,
+      "chapters": [
+        {
+          "title": "Document Overview",
+          "pages": [
+            4,
+            5
+          ],
+          "url": "/docs/guides/instruction-manual/document-overview/",
+          "sections": []
+        },
+        {
+          "title": "The CosmicWatch Desktop Muon Detector (v3X)",
+          "pages": [
+            6,
+            14
+          ],
+          "url": "/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/",
+          "sections": [
+            {
+              "title": "Introduction to the Detector",
+              "level": 2,
+              "id": "introduction-to-the-detector"
+            },
+            {
+              "title": "Setting detectors in coincidence mode",
+              "level": 2,
+              "id": "setting-detectors-in-coincidence-mode"
+            },
+            {
+              "title": "Recording data options",
+              "level": 2,
+              "id": "recording-data-options"
+            }
+          ]
+        },
+        {
+          "title": "How to build a CosmicWatch detector v3X",
+          "pages": [
+            15,
+            21
+          ],
+          "url": "/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/",
+          "sections": [
+            {
+              "title": "Overview",
+              "level": 2,
+              "id": "overview"
+            },
+            {
+              "title": "(1) Purchasing the components",
+              "level": 3,
+              "id": "1-purchasing-the-components"
+            },
+            {
+              "title": "(2) Populating the PCBs",
+              "level": 3,
+              "id": "2-populating-the-pcbs"
+            }
+          ]
+        },
+        {
+          "title": "Conclusion",
+          "pages": [
+            22,
+            22
+          ],
+          "url": "/docs/guides/instruction-manual/conclusion/",
+          "sections": []
+        },
+        {
+          "title": "Detailed description of the electronics",
+          "pages": [
+            23,
+            27
+          ],
+          "url": "/docs/guides/instruction-manual/detailed-description-of-the-electronics/",
+          "sections": [
+            {
+              "title": "The analog circuit",
+              "level": 2,
+              "id": "the-analog-circuit"
+            },
+            {
+              "title": "The amplifier",
+              "level": 3,
+              "id": "the-amplifier"
+            },
+            {
+              "title": "The peak detector",
+              "level": 3,
+              "id": "the-peak-detector"
+            },
+            {
+              "title": "The comparator",
+              "level": 3,
+              "id": "the-comparator"
+            },
+            {
+              "title": "Digital circuit",
+              "level": 2,
+              "id": "digital-circuit"
+            },
+            {
+              "title": "Raspberry Pi Pico",
+              "level": 3,
+              "id": "raspberry-pi-pico"
+            },
+            {
+              "title": "SD card writer",
+              "level": 3,
+              "id": "sd-card-writer"
+            },
+            {
+              "title": "Temperature and pressure sensor",
+              "level": 3,
+              "id": "temperature-and-pressure-sensor"
+            }
+          ]
+        },
+        {
+          "title": "The Firmware",
+          "pages": [
+            28,
+            31
+          ],
+          "url": "/docs/guides/instruction-manual/the-firmware/",
+          "sections": [
+            {
+              "title": "Bibliography",
+              "level": 3,
+              "id": "bibliography"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "example-measurements",
+      "file": "The Example Measurements.pdf",
+      "title": "Example Measurements",
+      "blurb": "Measurements made with CosmicWatch detectors, plus ideas that have not been tried yet.",
+      "blobSha": "f643047747bd56962428f35a5a5e83166c7e0c29",
+      "commit": "f6aa8d0d8e13b1fe18dfab6bb49b638f23b008fd",
+      "commitDate": "2025-08-20T16:43:03-04:00",
+      "bytes": 5972997,
+      "pdfUrl": "https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Example%20Measurements.pdf",
+      "pageCount": 40,
+      "figures": 37,
+      "chapters": [
+        {
+          "title": "Document Overview",
+          "pages": [
+            4,
+            6
+          ],
+          "url": "/docs/guides/example-measurements/document-overview/",
+          "sections": []
+        },
+        {
+          "title": "Tested Measurements",
+          "pages": [
+            7,
+            31
+          ],
+          "url": "/docs/guides/example-measurements/tested-measurements/",
+          "children": [
+            {
+              "title": "A full-sky cosmic-ray muon measurement",
+              "url": "/docs/guides/example-measurements/tested-measurements/a-full-sky-cosmic-ray-muon-measurement/",
+              "pages": [
+                8,
+                10
+              ],
+              "sections": []
+            },
+            {
+              "title": "Cosmic-ray muon angular dependence",
+              "url": "/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-angular-dependence/",
+              "pages": [
+                10,
+                11
+              ],
+              "sections": []
+            },
+            {
+              "title": "Muon rate measurement while flying to the South Pole",
+              "url": "/docs/guides/example-measurements/tested-measurements/muon-rate-measurement-while-flying-to-the-south-pole/",
+              "pages": [
+                11,
+                13
+              ],
+              "sections": []
+            },
+            {
+              "title": "Latitude correction to the cosmic-ray muons",
+              "url": "/docs/guides/example-measurements/tested-measurements/latitude-correction-to-the-cosmic-ray-muons/",
+              "pages": [
+                13,
+                14
+              ],
+              "sections": []
+            },
+            {
+              "title": "High-altitude balloon flight",
+              "url": "/docs/guides/example-measurements/tested-measurements/high-altitude-balloon-flight/",
+              "pages": [
+                14,
+                15
+              ],
+              "sections": []
+            },
+            {
+              "title": "Cosmic-ray muon velocity",
+              "url": "/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-velocity/",
+              "pages": [
+                15,
+                16
+              ],
+              "sections": []
+            },
+            {
+              "title": "Cosmic-ray muon attenuation in a Subway station",
+              "url": "/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-attenuation-in-a-subway-station/",
+              "pages": [
+                16,
+                17
+              ],
+              "sections": []
+            },
+            {
+              "title": "Electromagnetic component of cosmic-ray showers",
+              "url": "/docs/guides/example-measurements/tested-measurements/electromagnetic-component-of-cosmic-ray-showers/",
+              "pages": [
+                17,
+                19
+              ],
+              "sections": []
+            },
+            {
+              "title": "Reducing radioactive backgrounds",
+              "url": "/docs/guides/example-measurements/tested-measurements/reducing-radioactive-backgrounds/",
+              "pages": [
+                19,
+                20
+              ],
+              "sections": []
+            },
+            {
+              "title": "Correlation between the cosmic-ray muon rate and atmospheric pressure",
+              "url": "/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/",
+              "pages": [
+                20,
+                22
+              ],
+              "sections": []
+            },
+            {
+              "title": "A true random number generator?",
+              "url": "/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/",
+              "pages": [
+                22,
+                25
+              ],
+              "sections": []
+            },
+            {
+              "title": "Gamma-ray spectroscopy",
+              "url": "/docs/guides/example-measurements/tested-measurements/gamma-ray-spectroscopy/",
+              "pages": [
+                25,
+                26
+              ],
+              "sections": []
+            },
+            {
+              "title": "Measuring the cosmic-ray muon rate in an airplane at 33,000 ft",
+              "url": "/docs/guides/example-measurements/tested-measurements/measuring-the-cosmic-ray-muon-rate-in-an-airplane-at-33000-ft/",
+              "pages": [
+                26,
+                27
+              ],
+              "sections": []
+            },
+            {
+              "title": "High altitude balloon measurement at 107,000 ft",
+              "url": "/docs/guides/example-measurements/tested-measurements/high-altitude-balloon-measurement-at-107000-ft/",
+              "pages": [
+                27,
+                29
+              ],
+              "sections": []
+            },
+            {
+              "title": "Rate measurement 1 km underground at Super-Kamiokande",
+              "url": "/docs/guides/example-measurements/tested-measurements/rate-measurement-1-km-underground-at-super-kamiokande/",
+              "pages": [
+                29,
+                31
+              ],
+              "sections": []
+            },
+            {
+              "title": "Portable trigger system for an accelerator beamline",
+              "url": "/docs/guides/example-measurements/tested-measurements/portable-trigger-system-for-an-accelerator-beamline/",
+              "pages": [
+                31,
+                31
+              ],
+              "sections": []
+            }
+          ],
+          "sections": []
+        },
+        {
+          "title": "Untested measurements for the adventurous",
+          "pages": [
+            32,
+            37
+          ],
+          "url": "/docs/guides/example-measurements/untested-measurements-for-the-adventurous/",
+          "sections": [
+            {
+              "title": "Muon Rate Underwater",
+              "level": 2,
+              "id": "muon-rate-underwater"
+            },
+            {
+              "title": "Muon lifetime",
+              "level": 2,
+              "id": "muon-lifetime"
+            },
+            {
+              "title": "Solar flares and the Forbush decrease",
+              "level": 2,
+              "id": "solar-flares-and-the-forbush-decrease"
+            },
+            {
+              "title": "Measuring the air shower size",
+              "level": 2,
+              "id": "measuring-the-air-shower-size"
+            }
+          ]
+        },
+        {
+          "title": "Conclusion",
+          "pages": [
+            38,
+            40
+          ],
+          "url": "/docs/guides/example-measurements/conclusion/",
+          "sections": [
+            {
+              "title": "Bibliography",
+              "level": 3,
+              "id": "bibliography"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "physics",
+      "file": "The Physics Document.pdf",
+      "title": "Physics Document",
+      "blurb": "Cosmic rays, radioactive backgrounds, how particles lose energy, and how the detector sees them.",
+      "blobSha": "a5606505507489e0e04af167c9aac60a4ed97985",
+      "commit": "f6aa8d0d8e13b1fe18dfab6bb49b638f23b008fd",
+      "commitDate": "2025-08-20T16:43:03-04:00",
+      "bytes": 2118564,
+      "pdfUrl": "https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Physics%20Document.pdf",
+      "pageCount": 33,
+      "figures": 18,
+      "chapters": [
+        {
+          "title": "Document Overview",
+          "pages": [
+            4,
+            5
+          ],
+          "url": "/docs/guides/physics/document-overview/",
+          "sections": []
+        },
+        {
+          "title": "Sources of ionizing radiation",
+          "pages": [
+            6,
+            13
+          ],
+          "url": "/docs/guides/physics/sources-of-ionizing-radiation/",
+          "sections": [
+            {
+              "title": "Cosmic radiation",
+              "level": 2,
+              "id": "cosmic-radiation"
+            },
+            {
+              "title": "Flux variations due to solar system properties",
+              "level": 3,
+              "id": "flux-variations-due-to-solar-system-properties"
+            },
+            {
+              "title": "Flux variations due to atmospheric properties",
+              "level": 3,
+              "id": "flux-variations-due-to-atmospheric-properties"
+            },
+            {
+              "title": "Radioactive backgrounds",
+              "level": 2,
+              "id": "radioactive-backgrounds"
+            }
+          ]
+        },
+        {
+          "title": "Particle interactions with matter",
+          "pages": [
+            14,
+            20
+          ],
+          "url": "/docs/guides/physics/particle-interactions-with-matter/",
+          "sections": [
+            {
+              "title": "High energy heavy charged particles",
+              "level": 2,
+              "id": "high-energy-heavy-charged-particles"
+            },
+            {
+              "title": "High energy electrons/positrons and photons",
+              "level": 2,
+              "id": "high-energy-electronspositrons-and-photons"
+            },
+            {
+              "title": "Low energy electrons/positrons",
+              "level": 2,
+              "id": "low-energy-electronspositrons"
+            },
+            {
+              "title": "Low energy gamma rays",
+              "level": 2,
+              "id": "low-energy-gamma-rays"
+            },
+            {
+              "title": "Neutrons",
+              "level": 2,
+              "id": "neutrons"
+            }
+          ]
+        },
+        {
+          "title": "Detection methods",
+          "pages": [
+            21,
+            25
+          ],
+          "url": "/docs/guides/physics/detection-methods/",
+          "sections": [
+            {
+              "title": "Single Photon Detection: Photomultipliers",
+              "level": 2,
+              "id": "single-photon-detection-photomultipliers"
+            },
+            {
+              "title": "Scintillators",
+              "level": 2,
+              "id": "scintillators"
+            }
+          ]
+        },
+        {
+          "title": "Additional things you should know",
+          "pages": [
+            26,
+            28
+          ],
+          "url": "/docs/guides/physics/additional-things-you-should-know/",
+          "sections": [
+            {
+              "title": "Accidental coincident events",
+              "level": 2,
+              "id": "accidental-coincident-events"
+            },
+            {
+              "title": "Are coincidence events pure muons?",
+              "level": 2,
+              "id": "are-coincidence-events-pure-muons"
+            },
+            {
+              "title": "The muons are coming straight downwards, no?",
+              "level": 2,
+              "id": "the-muons-are-coming-straight-downwards-no"
+            },
+            {
+              "title": "What is dead time?",
+              "level": 2,
+              "id": "what-is-dead-time"
+            }
+          ]
+        },
+        {
+          "title": "Conclusion",
+          "pages": [
+            29,
+            33
+          ],
+          "url": "/docs/guides/physics/conclusion/",
+          "sections": [
+            {
+              "title": "Bibliography",
+              "level": 3,
+              "id": "bibliography"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "troubleshooting",
+      "file": "The Troubleshooting Document.pdf",
+      "title": "Troubleshooting Document",
+      "blurb": "Common problems when building and running a detector, and how to fix them.",
+      "blobSha": "b8bbd6f37955d78850c23c197920dd4ac15a3197",
+      "commit": "f6aa8d0d8e13b1fe18dfab6bb49b638f23b008fd",
+      "commitDate": "2025-08-20T16:43:03-04:00",
+      "bytes": 799456,
+      "pdfUrl": "https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Troubleshooting%20Document.pdf",
+      "pageCount": 8,
+      "figures": 1,
+      "chapters": [
+        {
+          "title": "Document Overview",
+          "pages": [
+            4,
+            4
+          ],
+          "url": "/docs/guides/troubleshooting/document-overview/",
+          "sections": []
+        },
+        {
+          "title": "Troubleshooting",
+          "pages": [
+            5,
+            6
+          ],
+          "url": "/docs/guides/troubleshooting/troubleshooting/",
+          "sections": []
+        },
+        {
+          "title": "Conclusion",
+          "pages": [
+            7,
+            8
+          ],
+          "url": "/docs/guides/troubleshooting/conclusion/",
+          "sections": [
+            {
+              "title": "Bibliography",
+              "level": 3,
+              "id": "bibliography"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

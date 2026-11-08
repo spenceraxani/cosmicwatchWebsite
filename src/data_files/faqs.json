@@ -1,0 +1,37 @@
+{
+  "subTitle": "Quick answers about building, running and buying a CosmicWatch detector. Still stuck? Email us.",
+  "faqs": [
+    {
+      "question": "How long does it take to build one?",
+      "answer": "A first-time builder usually needs about four hours. Your second detector goes much faster, closer to an hour. The circuit boards take about two weeks to arrive if you order them from a board house."
+    },
+    {
+      "question": "Do I need to know how to solder small parts?",
+      "answer": "No. Almost every part is an 0805 surface-mount component, which is a good size to learn on. The Instruction Manual walks through the technique and the order to place parts, with tests along the way so you catch mistakes early."
+    },
+    {
+      "question": "What does the detector actually detect?",
+      "answer": "Anything that leaves enough energy in the plastic scintillator: cosmic-ray muons, plus gamma rays and electrons from natural radioactivity. A single detector at sea level triggers roughly three times a second, mostly from background. Put two detectors in coincidence mode and you get a fairly clean sample of muons."
+    },
+    {
+      "question": "Is it safe?",
+      "answer": "Yes. The detector only measures radiation that is already around you. It contains no radioactive source and runs on about half a watt from a USB port."
+    },
+    {
+      "question": "What do I need to run it?",
+      "answer": "Any USB power source: a computer, a phone charger or a power bank. Add a microSD card (formatted exFAT, 4 GB or more) to log every event, or plug it into a computer and use the CosmicWatch GUI."
+    },
+    {
+      "question": "Can I buy one instead of building it?",
+      "answer": "Yes, see the Buy a detector page. Teachers can also ask QuarkNet, which has a limited number of detectors available."
+    },
+    {
+      "question": "Can I sell detectors I build?",
+      "answer": "The designs are licensed CC BY-NC 4.0, so you can build and modify them for personal and educational use. Selling detectors or using the design commercially needs written permission from Prof. Axani."
+    },
+    {
+      "question": "Where are the older versions?",
+      "answer": "The v2 design, files and papers are still on GitHub. New builds should use the v3X, which is cheaper to maintain and much better on noise, dead time and features."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+---
+title: CosmicWatch docs
+description: How the v3X detector works, how to build one, how to record data, and twenty measurements to make with it.
+sidebar:
+  order: 0
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+These pages cover the **CosmicWatch Desktop Muon Detector v3X**. They are a web version of the four manuals in the [GitHub repository](https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X), which stay the complete reference.
+
+<CardGrid>
+  <LinkCard title="How the detector works" description="Scintillator, SiPM, and what happens to each pulse." href="/docs/how-it-works/" />
+  <LinkCard title="Build a detector" description="Order parts, populate the boards, mount the SiPM, flash the firmware." href="/docs/build/" />
+  <LinkCard title="Recording data" description="OLED, microSD, the GUI and Python scripts, and what each column means." href="/docs/recording-data/" />
+  <LinkCard title="Measurements" description="Twenty measurements, from your desk to the stratosphere." href="/docs/measurements/" />
+  <LinkCard title="Full guides" description="All four PDF manuals as web pages, split by chapter and checked against GitHub." href="/docs/guides/" />
+</CardGrid>
+
+## The manuals
+
+The four manuals are also on this site in full, one page per chapter. Each page checks GitHub when you open it and tells you if the PDF has changed since.
+
+| Manual | What it covers | Web version | PDF |
+| --- | --- | --- | --- |
+| The Instruction Manual | The detector, coincidence mode, recording data, the full build, electronics and firmware | [Read](/docs/guides/instruction-manual/document-overview/) | [Download](https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Instruction%20Manual.pdf) |
+| The Physics Document | Cosmic rays, radioactivity, and how particles interact with the detector | [Read](/docs/guides/physics/document-overview/) | [Download](https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Physics%20Document.pdf) |
+| The Example Measurements | Sixteen tested measurements and four open ideas | [Read](/docs/guides/example-measurements/tested-measurements/) | [Download](https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Example%20Measurements.pdf) |
+| The Troubleshooting Document | What to check when a board does not work | [Read](/docs/guides/troubleshooting/troubleshooting/) | [Download](https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Troubleshooting%20Document.pdf) |

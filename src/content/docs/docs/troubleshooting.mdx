@@ -1,0 +1,49 @@
+---
+title: Troubleshooting
+description: What to check when a v3X board does not power up, does not pulse, or does not trigger.
+sidebar:
+  order: 0
+---
+
+If a check fails while you build, the cause is nearly always a missing or poor solder joint. Reflow the joints in that part of the board before anything else. These are the common cases from *The Troubleshooting Document*.
+
+:::danger[Smoke from the MAX5026 boost converter]
+Unplug immediately. The part is almost certainly on backwards. Remove it and check that pin 1 lines up with pad 1.
+:::
+
+## No +30 V at the SiPM connector
+
+The problem is in the DC-DC booster area.
+
+- Check the orientation of the MAX5026.
+- Check for more than 3 V across C2. That is the supply from the Pico.
+- R1 and R2 set the high-voltage output. Make sure both are soldered.
+
+## +30 V is there, but no pulses at the BNC
+
+Set the oscilloscope to 10 mV/div and 200 ns/div, trigger at 10 mV on the right channel, in Normal mode. You should see pulses of about 10 mV and 100 ns a few times a second.
+
+If you still see nothing, the problem is on the SiPM board:
+
+- **Light leaks.** Lots of noise on the scope means light is getting in. Add tape and check the corners.
+- **SiPM orientation or joints.** Check for about 0.5 V across the anode and cathode in diode mode.
+
+## Pulses at the BNC, but the detector does not trigger
+
+Trigger the scope on the BNC and probe the test points with a second channel:
+
+- **TP1** should show about 50× the BNC pulse, **TP3** about 250×. If not, the problem is in that amplifier stage.
+- **TP4**, the high-gain peak detector, should show pulses about 250× larger than the BNC that decay over hundreds of microseconds. **TP2**, the low-gain peak detector, about 50×.
+- If those look right, check that you loaded the correct firmware.
+
+## Power draw above 0.7 W
+
+Something is shorted, misplaced or backwards. Unplug and go over the board again. The most common mistake is the op amp mounted backwards. Gently touch around the board: nothing should be hot, and a hot part usually points to the problem.
+
+Still stuck? [Contact us](/contact/) with a photo of both sides of the board.
+
+{/* full-guide-link: generated, safe to re-run */}
+
+:::note[Full text]
+The complete text, with every figure, is in the Troubleshooting Document: [Troubleshooting](/docs/guides/troubleshooting/troubleshooting/).
+:::

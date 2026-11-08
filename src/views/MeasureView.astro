@@ -1,0 +1,217 @@
+---
+import { reveal, revealImage, delay } from '@utils/motion';
+import MainLayout from '@/layouts/MainLayout.astro';
+import CwIcon from '@components/ui/icons/CwIcon.astro';
+
+const tabs = [
+  { id: 'rate', label: 'Count rate', doc: '/docs/measurements/full-sky-rate/', blurb: 'Events per second over the run. Fluctuations should be about the square root of the count in each bin; anything bigger is a real change.' },
+  { id: 'spectrum', label: 'Pulse height', doc: '/docs/measurements/radioactive-backgrounds/', blurb: 'How big each pulse was. Radioactivity in the room piles up at small pulse heights; muons crossing the full centimeter of plastic make the broad bump above it. Coincident events keep mostly the muons.' },
+  { id: 'pressure', label: 'Air pressure', doc: '/docs/measurements/pressure-correlation/', blurb: 'Rate against air pressure. More air overhead means fewer muons reach the ground, so the slope should come out negative, around a tenth of a percent per hPa for coincident muons.' },
+  { id: 'temperature', label: 'Temperature', doc: '/docs/measurements/pressure-correlation/', blurb: 'Rate against the temperature inside the case. A strong trend here usually means the SiPM gain is drifting, not that the sky changed.' },
+  { id: 'intervals', label: 'Time between events', doc: '/docs/measurements/random-numbers/', blurb: 'Gaps between consecutive events. If the arrivals are random the bars follow the exponential curve, which is what makes the detector usable as a random number source.' },
+  { id: 'tilt', label: 'Tilt angle', doc: '/docs/measurements/angular-dependence/', blurb: 'Rate at each angle from vertical, read from the built-in accelerometer. Tip the detector over during a run and the muon rate should fall off roughly as cos²θ.' },
+];
+// the template's card, SecondaryCTA, PrimaryCTA and TextInput styles
+const box = 'surface';
+const inner = 'md:border-l md:border-neutral-300 md:pl-6 md:first:border-l-0 md:first:pl-0 dark:md:border-neutral-700';
+const btn =
+  'inline-flex items-center justify-center gap-x-2 rounded-lg border border-neutral-200 bg-neutral-300 px-4 py-2.5 text-center text-sm font-medium text-neutral-600 shadow-xs ring-zinc-500 outline-hidden transition duration-300 hover:bg-neutral-400/50 hover:text-neutral-600 focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-zinc-700 dark:text-neutral-300 dark:ring-zinc-200 dark:hover:bg-zinc-600';
+const primary =
+  'inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-orange-400 px-4 py-2.5 text-sm font-bold text-neutral-50 ring-zinc-500 outline-hidden transition duration-300 hover:bg-orange-500 focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 dark:ring-zinc-200';
+const field =
+  'mt-2 rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2.5 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:placeholder:text-neutral-400 dark:focus:ring-1';
+---
+
+<MainLayout
+  title="Measure"
+  description="Connect a CosmicWatch detector over USB or open a data file, then plot count rate, pulse height, pressure and temperature correlations, event timing and tilt. Send live summaries to a webhook."
+  ogTitle="Measure | CosmicWatch"
+>
+  <section class="mx-auto max-w-[85rem] px-4 pt-10 pb-6 sm:px-6 lg:px-8 lg:pt-14 2xl:max-w-full">
+    <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200', reveal]}>Measure</h1>
+    <p class="mt-3 max-w-2xl text-lg text-pretty text-neutral-700 dark:text-neutral-400">
+      Plug in a detector or open a file it recorded, then pick a measurement. Everything runs in your browser; your data is not uploaded anywhere unless you set up a webhook below.
+    </p>
+  </section>
+
+  <div id="measure" class="mx-auto max-w-[85rem] space-y-6 px-4 pb-20 sm:px-6 lg:px-8 2xl:max-w-full">
+    <section class:list={[box, 'p-5 sm:p-6', reveal]} aria-labelledby="src-title">
+      <h2 id="src-title" class="text-xl font-bold text-neutral-800 dark:text-neutral-200">Data source</h2>
+      <div class="mt-4 grid gap-6 md:grid-cols-3">
+        <div class={inner}>
+          <CwIcon name="usb" class="size-8 text-orange-400 dark:text-orange-300" />
+          <h3 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">Connect a detector</h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Over USB, in Chrome or Edge on a computer. Events appear as they happen.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <button type="button" id="m-connect" class={primary}>Connect</button>
+            <button type="button" id="m-disconnect" class={btn} hidden>Disconnect</button>
+            <button type="button" id="m-save" class={btn} hidden>Save data (.txt)</button>
+          </div>
+          <p id="m-noserial" class="mt-3 hidden text-sm text-neutral-600 dark:text-neutral-400">This browser cannot open USB serial ports. Use Chrome or Edge on a computer, or open a file instead.</p>
+        </div>
+        <div id="m-drop" class:list={[inner, 'rounded-lg ring-orange-400 ring-offset-4 ring-offset-neutral-100 transition-shadow dark:ring-offset-neutral-800']}>
+          <CwIcon name="datafile" class="size-8 text-orange-400 dark:text-orange-300" />
+          <h3 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">Open a data file</h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">A .txt file from the microSD card or from import_data.py. You can also drop it on this box.</p>
+          <label class:list={[btn, 'mt-4 cursor-pointer']}>
+            Choose file
+            <input id="m-file" type="file" accept=".txt,.csv,.gz,text/plain" class="sr-only" />
+          </label>
+        </div>
+        <div class={inner}>
+          <CwIcon name="coincidence" class="size-8 text-orange-400 dark:text-orange-300" />
+          <h3 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">Use the sample run</h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">The first 12 hours of a real coincidence run from the Axani lab, about 131,000 events.</p>
+          <div class="mt-4 flex flex-wrap items-center gap-3">
+            <button type="button" id="m-sample" class={btn}>Load sample</button>
+            <a id="m-sample-file" href="/data/axlab-sample-12h.txt.gz" class="text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300">Download it (2.8 MB)</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-neutral-200 pt-4 text-sm dark:border-neutral-700">
+        <span id="m-led" class="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600" aria-hidden="true"></span>
+        <p id="m-status" class="text-neutral-600 dark:text-neutral-400" aria-live="polite">No data yet.</p>
+        <progress id="m-progress" class="hidden h-1.5 w-40 accent-orange-400" max="1" value="0"></progress>
+      </div>
+    </section>
+
+    <dl id="m-summary" class="surface grid grid-cols-2 gap-y-2 py-2 sm:grid-cols-3 lg:grid-cols-6 lg:divide-x lg:divide-neutral-300 dark:lg:divide-neutral-700">
+      {[
+        ['duration', 'Run length'],
+        ['events', 'Events'],
+        ['rate', 'Rate'],
+        ['coinc', 'Coincident rate'],
+        ['temp', 'Temperature'],
+        ['press', 'Pressure'],
+      ].map(([id, label]) => (
+        <div class="flex flex-col-reverse px-5 py-3">
+          <dt class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{label}</dt>
+          <dd id={`s-${id}`} class="text-2xl font-bold text-orange-400 tabular-nums dark:text-orange-300">–</dd>
+        </div>
+      ))}
+    </dl>
+
+    <section class:list={[box, 'overflow-hidden', reveal]} aria-label="Measurements">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200 px-4 py-3 sm:px-6 dark:border-neutral-700">
+        <nav role="tablist" aria-label="Measurement" class="flex gap-1 overflow-x-auto">
+          {tabs.map((t, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`tab-${t.id}`}
+              data-tab={t.id}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-controls="m-panel"
+              class="shrink-0 rounded-lg px-4 py-2.5 text-sm font-bold whitespace-nowrap text-neutral-600 outline-hidden ring-zinc-500 transition duration-300 hover:bg-neutral-200 focus-visible:ring-3 aria-selected:bg-neutral-200 aria-selected:text-orange-400 dark:text-neutral-400 dark:ring-zinc-200 dark:hover:bg-neutral-700 dark:aria-selected:bg-neutral-700 dark:aria-selected:text-orange-300"
+            >
+              {t.label}
+            </button>
+          ))}
+        </nav>
+        <fieldset class="flex items-center gap-1 rounded-lg bg-neutral-200 p-1 text-sm dark:bg-neutral-700">
+          <legend class="sr-only">Which events</legend>
+          <label class="cursor-pointer rounded-md px-3 py-1.5 font-medium text-neutral-600 has-[:checked]:bg-neutral-50 has-[:checked]:text-orange-400 has-[:checked]:shadow-xs dark:text-neutral-300 dark:has-[:checked]:bg-neutral-800 dark:has-[:checked]:text-orange-300">
+            <input type="radio" name="m-sel" value="all" class="sr-only" checked /> All events
+          </label>
+          <label class="cursor-pointer rounded-md px-3 py-1.5 font-medium text-neutral-600 has-[:checked]:bg-neutral-50 has-[:checked]:text-orange-400 has-[:checked]:shadow-xs dark:text-neutral-300 dark:has-[:checked]:bg-neutral-800 dark:has-[:checked]:text-orange-300">
+            <input type="radio" name="m-sel" value="coinc" class="sr-only" /> Coincident only
+          </label>
+        </fieldset>
+      </div>
+
+      <div id="m-panel" role="tabpanel" aria-labelledby="tab-rate" class="p-4 sm:p-6">
+        {tabs.map((t, i) => (
+          <div data-blurb={t.id} hidden={i !== 0}>
+            <p class="max-w-3xl text-sm text-pretty text-neutral-600 dark:text-neutral-400">
+              {t.blurb} <a class="font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href={t.doc}>How to run this measurement</a>
+            </p>
+          </div>
+        ))}
+        <div class="mt-4 flex flex-wrap items-end gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+          <label data-ctl="bin" class="block">Bin size
+            <select id="m-bin" class:list={[field, 'block']}>
+              <option value="auto">Automatic</option>
+              <option value="10">10 seconds</option>
+              <option value="60">1 minute</option>
+              <option value="600">10 minutes</option>
+              <option value="3600">1 hour</option>
+            </select>
+          </label>
+          <label data-ctl="log" class="flex items-center gap-2 pb-2" hidden>
+            <input id="m-log" type="checkbox" class="size-4 rounded border-neutral-300 text-orange-400 focus:ring-orange-400" checked /> Log scale
+          </label>
+          <label data-ctl="step" class="block" hidden>Angle step
+            <select id="m-step" class:list={[field, 'block']}>
+              <option value="5">5°</option>
+              <option value="10" selected>10°</option>
+              <option value="15">15°</option>
+            </select>
+          </label>
+          <div class="ms-auto flex gap-2">
+            <button type="button" id="m-csv" class={btn} disabled>Download CSV</button>
+            <button type="button" id="m-copy" class={btn} disabled>Copy CSV</button>
+          </div>
+        </div>
+        <div class="relative mt-4 h-80 sm:h-96">
+          <canvas id="m-chart" aria-label="Measurement chart" role="img"></canvas>
+          <p id="m-empty" class="absolute inset-0 flex items-center justify-center rounded-lg bg-neutral-50 px-6 text-center text-sm text-neutral-500 dark:bg-white/[.04] dark:text-neutral-400">
+            Connect a detector, open a file or load the sample run to see this measurement.
+          </p>
+        </div>
+        <p id="m-result" class="mt-4 min-h-6 font-bold text-neutral-800 dark:text-neutral-200" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class:list={[box, 'p-5 sm:p-6', reveal]} aria-labelledby="wh-title">
+      <div class="flex items-start gap-4">
+        <CwIcon name="globe" class="mt-1 size-8 shrink-0 text-orange-400 dark:text-orange-300" />
+        <div>
+          <h2 id="wh-title" class="text-xl font-bold text-neutral-800 dark:text-neutral-200">Webhooks</h2>
+          <p class="mt-1 max-w-3xl text-sm text-pretty text-neutral-600 dark:text-neutral-400">
+            While a detector is connected, send a summary every few minutes to a web address: your own server, a Google Apps Script that writes to a sheet, a Discord channel or a Slack channel. Only the summary leaves this page, never the raw events.
+          </p>
+        </div>
+      </div>
+      <form id="wh-form" class="mt-5 grid gap-4 lg:grid-cols-[2fr_1fr_1fr_auto] lg:items-end">
+        <label class="block text-sm text-neutral-700 dark:text-neutral-300">Webhook URL
+          <input id="wh-url" type="url" inputmode="url" placeholder="https://" class:list={[field, 'w-full']} />
+        </label>
+        <label class="block text-sm text-neutral-700 dark:text-neutral-300">Format
+          <select id="wh-format" class:list={[field, 'w-full']}>
+            <option value="json">JSON (servers, Apps Script)</option>
+            <option value="discord">Discord</option>
+            <option value="slack">Slack</option>
+          </select>
+        </label>
+        <label class="block text-sm text-neutral-700 dark:text-neutral-300">Send every
+          <select id="wh-every" class:list={[field, 'w-full']}>
+            <option value="10">10 seconds</option>
+            <option value="60" selected>1 minute</option>
+            <option value="300">5 minutes</option>
+            <option value="900">15 minutes</option>
+            <option value="3600">1 hour</option>
+          </select>
+        </label>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" id="wh-test" class={btn}>Send now</button>
+          <button type="button" id="wh-toggle" aria-pressed="false" class:list={[btn, 'aria-pressed:border-transparent aria-pressed:bg-orange-400 aria-pressed:font-bold aria-pressed:text-neutral-50 dark:aria-pressed:bg-orange-400 dark:aria-pressed:text-neutral-50']}>Send while connected</button>
+        </div>
+      </form>
+      <details class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+        <summary class="cursor-pointer font-bold text-neutral-800 hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400">What gets sent</summary>
+        <pre id="wh-preview" class="mt-2 overflow-x-auto rounded-lg bg-night p-3 font-mono text-xs leading-relaxed text-neutral-200"></pre>
+      </details>
+      <ol id="wh-log" class="mt-4 space-y-1 text-sm text-neutral-600 dark:text-neutral-400" aria-live="polite"></ol>
+    </section>
+
+    <details class:list={[box, 'p-5 sm:p-6', reveal]}>
+      <summary class="cursor-pointer text-lg font-bold text-neutral-800 hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400">Raw lines from the detector</summary>
+      <pre id="m-raw" class="mt-3 h-48 overflow-auto rounded-lg bg-night p-3 font-mono text-xs leading-relaxed text-neutral-300">Lines show up here exactly as the detector sends them.</pre>
+    </details>
+  </div>
+</MainLayout>
+
+<script>
+  import { initMeasure } from '../scripts/measure/main';
+  initMeasure();
+</script>

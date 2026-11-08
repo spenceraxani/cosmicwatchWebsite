@@ -1,0 +1,79 @@
+---
+import { reveal, revealImage, delay } from '@utils/motion';
+import ContactIconBlock from '@components/ui/blocks/ContactIconBlock.astro';
+import TextInput from '@components/ui/forms/input/TextInput.astro';
+import EmailContactInput from '@components/ui/forms/input/EmailContactInput.astro';
+import TextAreaInput from '@components/ui/forms/input/TextAreaInput.astro';
+import AuthBtn from '@components/ui/buttons/AuthBtn.astro';
+import CwIcon from '@components/ui/icons/CwIcon.astro';
+import { CONTACT_EMAIL } from '@data/navigation';
+
+// Static site: the form opens the visitor's email app instead of posting anywhere.
+const copy = Astro.locals.copy.contact;
+const blockIconClass =
+  'mt-1.5 h-6 w-6 shrink-0 text-neutral-600 dark:text-neutral-400';
+---
+
+<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+  <div class="mx-auto max-w-2xl lg:max-w-5xl">
+    <div class="text-center">
+      <h1 class:list={['text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200', reveal]}>
+        {copy.heading}
+      </h1>
+      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
+        {copy.subTitle}
+      </p>
+    </div>
+
+    <div class="mt-12 grid items-center gap-6 lg:grid-cols-2 lg:gap-16">
+      <div class="flex flex-col rounded-xl p-4 sm:p-6 lg:p-8">
+        <h2 class:list={['mb-8 text-xl font-bold text-neutral-700 dark:text-neutral-300', reveal]}>
+          {copy.formTitle}
+        </h2>
+        <form id="contact-form" data-to={CONTACT_EMAIL}>
+          <div class="grid gap-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <TextInput id="contact-first" label={copy.firstName} name="first" />
+              <TextInput id="contact-last" label={copy.lastName} name="last" />
+            </div>
+            <EmailContactInput id="contact-email" />
+            <TextAreaInput id="contact-message" label={copy.details} name="message" />
+          </div>
+          <div class="mt-4 grid">
+            <AuthBtn title={copy.send} />
+          </div>
+          <p class="mt-3 text-center text-sm text-neutral-600 dark:text-neutral-400">
+            {copy.formSubTitle}
+          </p>
+        </form>
+      </div>
+
+      <div class="divide-y divide-neutral-300 dark:divide-neutral-700">
+        <ContactIconBlock heading={copy.docsHeading} content={copy.docsContent} isLinkVisible={true} linkTitle={copy.docsLink} linkURL="/docs/" isArrowVisible={true}>
+          <CwIcon name="docs" class={blockIconClass} />
+        </ContactIconBlock>
+        <ContactIconBlock heading={copy.troubleshootHeading} content={copy.troubleshootContent} isLinkVisible={true} linkTitle={copy.troubleshootLink} linkURL="/docs/troubleshooting/" isArrowVisible={true}>
+          <CwIcon name="wrench" class={blockIconClass} />
+        </ContactIconBlock>
+        <ContactIconBlock heading={copy.officeHeading} content={copy.officeContent} isAddressVisible={true} addressContent={copy.officeAddress}>
+          <CwIcon name="pin" class={blockIconClass} />
+        </ContactIconBlock>
+        <ContactIconBlock heading={copy.emailHeading} content={copy.emailContent} isLinkVisible={true} linkTitle={CONTACT_EMAIL} linkURL={`mailto:${CONTACT_EMAIL}`}>
+          <CwIcon name="mail" class={blockIconClass} />
+        </ContactIconBlock>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = `${data.get('first') ?? ''} ${data.get('last') ?? ''}`.trim();
+    const body = `${data.get('message') ?? ''}\n\n${name}`;
+    const subject = `CosmicWatch question${name ? ` from ${name}` : ''}`;
+    window.location.href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

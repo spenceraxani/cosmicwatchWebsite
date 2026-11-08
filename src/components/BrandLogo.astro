@@ -1,0 +1,24 @@
+---
+// Dark-blue logo in light mode, light-blue in dark mode (files in /public/brand).
+interface Props {
+  class?: string;
+}
+const { class: className = 'h-9 w-auto' } = Astro.props;
+---
+
+<span class="inline-flex items-center">
+  <img
+    src="/brand/logo-darkblue.png"
+    alt="CosmicWatch"
+    width="1400"
+    height="528"
+    class:list={[className, 'block dark:hidden']}
+  />
+  <img
+    src="/brand/logo-lightblue.png"
+    alt="CosmicWatch"
+    width="1400"
+    height="528"
+    class:list={[className, 'hidden dark:block']}
+  />
+</span>

@@ -1,0 +1,28 @@
+---
+// Renders an <a> when given a url, otherwise a <button>; other attributes pass through.
+interface Props {
+  title?: string;
+  url?: string;
+  variant?: 'orange' | 'yellow';
+  [attribute: string]: unknown;
+}
+
+const { title, url, variant = 'orange', ...rest } = Astro.props;
+
+const variants = {
+  orange: 'text-neutral-50 bg-orange-400 hover:bg-orange-500 active:bg-orange-500',
+  yellow: 'text-neutral-800 bg-yellow-400 hover:bg-yellow-500',
+};
+
+const classes = [
+  'inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent px-4 py-3 text-sm font-bold outline-hidden ring-zinc-500 transition-colors duration-200 focus-visible:ring-3 active:translate-y-px',
+  variants[variant],
+  'disabled:pointer-events-none disabled:opacity-50 2xl:text-base dark:ring-zinc-200',
+].join(' ');
+
+const Element = url ? 'a' : 'button';
+---
+
+<Element class={classes} href={url} {...rest}>
+  {title}<slot />
+</Element>

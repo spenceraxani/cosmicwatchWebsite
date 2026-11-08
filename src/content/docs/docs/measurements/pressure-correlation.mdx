@@ -1,0 +1,31 @@
+---
+title: "Muon rate and atmospheric pressure"
+description: "Higher pressure means more air overhead and fewer muons."
+sidebar:
+  order: 10
+---
+
+**Higher pressure means more air overhead and fewer muons.**
+
+## What you need
+
+- Several detector pairs, or a long run with one pair
+- Pressure data (the v3X logs its own)
+
+## How it was done
+
+When air pressure goes up there is more atmosphere above you, and fewer muons survive to the ground. The relation is usually written as ΔI / I = β ΔP, where β is the barometric coefficient.
+
+Five coincidence pairs logged for 24.8 days in Madison, Wisconsin, in late 2018. The fit gave β = −0.141 ± 0.007 % per hPa, in line with published values. The v3X has a pressure sensor built in, so you no longer need outside weather data.
+
+One detector pair works too, it just takes longer. A meteorology student has taken detectors into hurricanes, where pressure can drop by over 100 hPa.
+
+---
+
+From section 2.10 of *The Example Measurements* (CosmicWatch v3X, August 2025). The full write-up, with plots and equations, is in the [GitHub repository](https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X/blob/main/The%20Example%20Measurements.pdf).
+
+{/* full-guide-link: generated, safe to re-run */}
+
+:::note[Full text]
+The complete text, with every figure, is in the Example Measurements: [Correlation between the cosmic-ray muon rate and atmospheric pressure](/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/).
+:::

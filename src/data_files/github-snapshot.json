@@ -1,0 +1,352 @@
+{
+  "takenAt": "2026-11-06T01:36:21.406Z",
+  "firmware": "1.1.52",
+  "lastUpdate": "2026-07-20T15:42:37-04:00",
+  "commitCount": 47,
+  "commits": [
+    {
+      "sha": "ade742d77e8be6e7f53b5547c4778736e3eef4cc",
+      "date": "2026-07-20T15:42:37-04:00",
+      "author": "Spencer Axani",
+      "message": "Update firmware to reduce OLED burn in. Pixels move every minute."
+    },
+    {
+      "sha": "ee16d5a5b2075ed7bc29bce4ce1e77b98161874c",
+      "date": "2026-07-20T15:39:26-04:00",
+      "author": "Spencer Axani",
+      "message": "Update GUI for recording data in real time"
+    },
+    {
+      "sha": "f3f9252408b897761c27ff0010239c487a0b7950",
+      "date": "2026-07-09T12:32:25-04:00",
+      "author": "Spencer Axani",
+      "message": "Update firmware to include proper readout without peripherals"
+    },
+    {
+      "sha": "b92a7efab1d42eaa1bc839aee1c6e633db4d57af",
+      "date": "2026-05-29T08:09:08-04:00",
+      "author": "Spencer Axani",
+      "message": "Updated Silk screen for RP Pico"
+    },
+    {
+      "sha": "684e9e3acae3573a6f720c0646c3b378ccf27760",
+      "date": "2026-05-17T18:24:30+02:00",
+      "author": "Spencer Axani",
+      "message": "update use_OLED function"
+    },
+    {
+      "sha": "4d61a0e63580234c674ae03a66371cd5512da1ca",
+      "date": "2026-05-16T19:09:36-04:00",
+      "author": "Spencer Axani",
+      "message": "adding GUI, view readme if you want to install"
+    },
+    {
+      "sha": "b41bc6dc36db9e6a093e2e4d7edf03048339d85d",
+      "date": "2026-03-30T10:51:08-04:00",
+      "author": "Spencer Axani",
+      "message": "Update Firmware. Continues if periperals fail."
+    },
+    {
+      "sha": "9d43dc1bab8370047b77138dc6b977340795b0bd",
+      "date": "2026-03-04T20:43:20-05:00",
+      "author": "Spencer Axani",
+      "message": "simple change NPTH hole to through holes"
+    },
+    {
+      "sha": "69de45e6119b27aeeddae129c2cab8ba27c7368c",
+      "date": "2026-03-04T05:36:11-05:00",
+      "author": "Spencer Axani",
+      "message": "update firmware to report correct version"
+    },
+    {
+      "sha": "339ad966bf31adadadddad317a6ae6d29b98bac7",
+      "date": "2026-03-03T05:27:50-05:00",
+      "author": "Spencer Axani",
+      "message": "Remove Excel temporary files"
+    },
+    {
+      "sha": "58d9253190fa1b3fb3c7052ac97129c1258434c7",
+      "date": "2026-03-03T05:27:37-05:00",
+      "author": "Spencer Axani",
+      "message": "Ignore Excel temp files"
+    },
+    {
+      "sha": "5b9d936da984037d87999f519e3ba74a3cb57901",
+      "date": "2026-03-03T05:25:20-05:00",
+      "author": "Spencer Axani",
+      "message": "Remove all tracked .DS_Store files"
+    },
+    {
+      "sha": "226929cacc97b832045324ceaa44a3040303c5d0",
+      "date": "2026-03-03T05:25:03-05:00",
+      "author": "Spencer Axani",
+      "message": "Ignore macOS DS_Store files"
+    },
+    {
+      "sha": "c821ab81ad114732b10f88c0ee70a0368ee34c62",
+      "date": "2026-03-03T05:18:44-05:00",
+      "author": "Spencer Axani",
+      "message": "Update Firmware (Trigger PIO), removed R28 and R29, improved verbosity."
+    },
+    {
+      "sha": "f30257d78c41f20bddfe73f7eb59e00988fad2be",
+      "date": "2026-01-13T15:39:44-05:00",
+      "author": "Spencer Axani",
+      "message": "update firmware for detector name"
+    },
+    {
+      "sha": "50aadc8806ca86587977e0223ad46905fed3c06e",
+      "date": "2025-12-07T06:10:18-05:00",
+      "author": "Spencer Axani",
+      "message": "Use Straight-Thru Ethernet calble for coincidence connection"
+    },
+    {
+      "sha": "94477f468f5e497eca7f7ebaef858d57d8658e11",
+      "date": "2025-12-07T05:53:29-05:00",
+      "author": "Spencer Axani",
+      "message": "Small update to to import_data.py"
+    },
+    {
+      "sha": "5be446afcf51b272e77fd0ca65495169f2fc070e",
+      "date": "2025-11-25T05:59:54-05:00",
+      "author": "Spencer Axani",
+      "message": "Slight update to the faceplates"
+    },
+    {
+      "sha": "620c3be2c3e46630e774f6c885680ca31c3b1374",
+      "date": "2025-11-01T06:38:07-04:00",
+      "author": "Spencer Axani",
+      "message": "Updating plotting script for plotting data files"
+    },
+    {
+      "sha": "4a59660b16167b1a6d5b4ad4fed6e9037d356ce0",
+      "date": "2025-10-23T11:43:36-04:00",
+      "author": "Spencer Axani",
+      "message": "fixed buggy file for faceplates"
+    },
+    {
+      "sha": "93c40339f97ff82e2b7f78bd1e178f0d87a208ea",
+      "date": "2025-10-21T12:06:01-04:00",
+      "author": "Spencer Axani",
+      "message": "Stop tracking Excel temporary files"
+    },
+    {
+      "sha": "ac4217ac90e48d4fcd0e1db2e4b7a3188991d6f5",
+      "date": "2025-10-21T12:03:58-04:00",
+      "author": "Spencer Axani",
+      "message": "update"
+    },
+    {
+      "sha": "ed09ac788ee6d4043d590a3a7dc01b9e10c2d33a",
+      "date": "2025-10-21T12:02:42-04:00",
+      "author": "Spencer Axani",
+      "message": "Update .gitignore and remove temporary Excel file"
+    },
+    {
+      "sha": "93ddaa0cceef6fe16044fd2a084ec06c18a8aeb1",
+      "date": "2025-10-21T11:57:16-04:00",
+      "author": "Spencer Axani",
+      "message": "Udpated faceplates"
+    },
+    {
+      "sha": "d3b5c4b6b8ac300e5e365fa3dfe563c80572d1f5",
+      "date": "2025-10-17T05:50:33-04:00",
+      "author": "Spencer Axani",
+      "message": "Clean up: update .gitignore and remove temp Excel file"
+    },
+    {
+      "sha": "73973be930bd0a60503701bf48f04853d7ce2b44",
+      "date": "2025-10-17T05:48:12-04:00",
+      "author": "Spencer Axani",
+      "message": "Ignore temporary and system files"
+    },
+    {
+      "sha": "643b2de44c40d4812d63027b0ef06c2fccd069d1",
+      "date": "2025-10-17T05:47:05-04:00",
+      "author": "Spencer Axani",
+      "message": "changed R23 from 100 to 10k. Will not impact function."
+    },
+    {
+      "sha": "8ed2105349f986b7abafdedfced7bba2f466c9a6",
+      "date": "2025-10-16T13:22:08-04:00",
+      "author": "Spencer Axani",
+      "message": "Updating firmware"
+    },
+    {
+      "sha": "8dd0c7bac6bada6aa539b0d0ed0fd9460bb20260",
+      "date": "2025-10-13T12:37:12-04:00",
+      "author": "Spencer Axani",
+      "message": "Changing R23 100 Ohm to 10k, small change, does not change functionallity."
+    },
+    {
+      "sha": "0792e874a93921f1359c8fb4c03d1bf1f2d03092",
+      "date": "2025-10-13T09:35:21-04:00",
+      "author": "Spencer Axani",
+      "message": "Updated Purchasing list, removed two components"
+    },
+    {
+      "sha": "4fd302c2a2fc0c109c955ce545ae396e4c268620",
+      "date": "2025-10-13T09:28:10-04:00",
+      "author": "Spencer Axani",
+      "message": "Updated Purchasing list, removed two components"
+    },
+    {
+      "sha": "27c0fb70bcb84285e11993012ec5f14596821c8a",
+      "date": "2025-10-13T09:18:34-04:00",
+      "author": "Spencer Axani",
+      "message": "Updated Purchasing list, removed two components"
+    },
+    {
+      "sha": "20dc3a480d23426b0878eadb836487a8250d4d06",
+      "date": "2025-10-13T09:13:13-04:00",
+      "author": "Spencer Axani",
+      "message": "Updated Purchasing list, removed two components"
+    },
+    {
+      "sha": "d69ecdb350e86219f9cfc6b5ad8714e96fbcc131",
+      "date": "2025-09-09T06:05:54-04:00",
+      "author": "Spencer Axani",
+      "message": "updateing"
+    },
+    {
+      "sha": "3a363a436fd26c4a38f5db56d9de6d046b6bd1b5",
+      "date": "2025-08-21T10:30:29-04:00",
+      "author": "Spencer Axani",
+      "message": "updating import"
+    },
+    {
+      "sha": "67517cfcdf9bed8623ec4e02945e0fa71821cbfb",
+      "date": "2025-08-20T16:46:49-04:00",
+      "author": "Spencer Axani",
+      "message": "Update"
+    },
+    {
+      "sha": "05a436301f227d2b8972fb6ed99c9724263d45b6",
+      "date": "2025-08-20T16:43:55-04:00",
+      "author": "Spencer Axani",
+      "message": "Updtse"
+    },
+    {
+      "sha": "f6aa8d0d8e13b1fe18dfab6bb49b638f23b008fd",
+      "date": "2025-08-20T16:43:03-04:00",
+      "author": "Spencer Axani",
+      "message": "Updates"
+    },
+    {
+      "sha": "54f929216498efc677747ccd273ec14bf422dec0",
+      "date": "2025-07-05T06:45:25-04:00",
+      "author": "Spencer Axani",
+      "message": "remove link to rj45 digikey"
+    },
+    {
+      "sha": "7e36416296d054dacb9f244e8c8f8fba09be3ecd",
+      "date": "2025-06-15T07:20:33-04:00",
+      "author": "Spencer Axani",
+      "message": "Removing two pins on MPU6050 and BMP280 to reduce chance of connection"
+    },
+    {
+      "sha": "2ffca66d04a3faaed91035ed6b563f866cc388be",
+      "date": "2025-06-01T05:03:58-04:00",
+      "author": "Spencer Axani",
+      "message": "Update Liscense"
+    },
+    {
+      "sha": "5786c8a94166f3102f13fd85e986adfabb30e19e",
+      "date": "2025-05-01T14:47:45-04:00",
+      "author": "Spencer Axani",
+      "message": "Updateing files"
+    },
+    {
+      "sha": "090e2cfd9fa36f0cbd749fecb60b4d99664dc177",
+      "date": "2025-04-24T09:41:44-04:00",
+      "author": "Spencer Axani",
+      "message": "Merge branch 'main' of https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X"
+    },
+    {
+      "sha": "5d6c2ec6481c7c87cc81b6473058ebb27e9de667",
+      "date": "2025-04-24T09:41:05-04:00",
+      "author": "Spencer Axani",
+      "message": "updating"
+    },
+    {
+      "sha": "d6c2cd6ac3d035a52db6f8a9e4bf12363c77a568",
+      "date": "2025-04-23T15:57:46-04:00",
+      "author": "Spencer N. Axani",
+      "message": "Update README.md"
+    },
+    {
+      "sha": "36f8b8c9ade0e45428c8d6db9da61ad8b6385099",
+      "date": "2025-04-23T15:55:25-04:00",
+      "author": "Spencer N. Axani",
+      "message": "Update README.md"
+    },
+    {
+      "sha": "a584ac5ee3f0339d39d696b7d11013a910090aed",
+      "date": "2025-04-17T12:33:48-04:00",
+      "author": "Spencer N. Axani",
+      "message": "Initial commit"
+    }
+  ],
+  "files": [
+    {
+      "name": "Data",
+      "type": "dir"
+    },
+    {
+      "name": "Datasheets",
+      "type": "dir"
+    },
+    {
+      "name": "Enclosure",
+      "type": "dir"
+    },
+    {
+      "name": "Firmware",
+      "type": "dir"
+    },
+    {
+      "name": "GUI",
+      "type": "dir"
+    },
+    {
+      "name": "PCB",
+      "type": "dir"
+    },
+    {
+      "name": "Pictures",
+      "type": "dir"
+    },
+    {
+      "name": "Component_Placement_Sheet.xlsx",
+      "type": "file"
+    },
+    {
+      "name": "LICENSE",
+      "type": "file"
+    },
+    {
+      "name": "Purchasing_List_v3X_sa.xlsx",
+      "type": "file"
+    },
+    {
+      "name": "README.md",
+      "type": "file"
+    },
+    {
+      "name": "The Example Measurements.pdf",
+      "type": "file"
+    },
+    {
+      "name": "The Instruction Manual.pdf",
+      "type": "file"
+    },
+    {
+      "name": "The Physics Document.pdf",
+      "type": "file"
+    },
+    {
+      "name": "The Troubleshooting Document.pdf",
+      "type": "file"
+    }
+  ]
+}
