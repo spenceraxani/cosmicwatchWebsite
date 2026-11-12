@@ -187,3 +187,9 @@
 @utility surface {
   @apply rounded-xl bg-neutral-100 dark:bg-white/[.06];
 }
+
+/* Guide sync status: say nothing while the page matches the PDF; only show a
+   note when GitHub has a newer PDF than this page. */
+.cw-gs-status:not([data-state='stale']) {
+  display: none !important;
+}

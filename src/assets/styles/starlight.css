@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+/* Light-only: dark: utilities never apply (nothing adds a .dark class). */
+@custom-variant dark (&:is(.dark *));
 @import '@fontsource-variable/ibm-plex-sans';
 @import '@fontsource/ibm-plex-sans-condensed/600.css';
 @import '@fontsource/ibm-plex-mono/400.css';
@@ -10,27 +12,11 @@
   }
 }
 
-/* Dark mode colors. */
-:root {
-  --border: hsla(var(--border-neutral), 0.4);
-  --backdrop-color: #132231cc;
-  --sl-color-accent: #53a1d8;
-  --sl-color-accent-high: #a9d1ef;
-  --sl-color-accent-low: #12283a;
-  --sl-color-black: #132231;
-  --sl-color-gray-1: #eef3f8;
-  --sl-color-gray-2: #d6e0ea;
-  --sl-color-gray-3: #9aabbc;
-  --sl-color-gray-4: #6b7d8f;
-  --sl-color-gray-5: #34465a;
-  --sl-color-gray-6: #1b2c3d;
-  --sl-color-white: #ffffff;
-  --list-marker-color: #53a1d8;
-  --border-neutral: 0, 0%, 25.1%;
-}
-
-/* Light mode colors. */
-:root[data-theme='light'] {
+/* Colours. The site is light-only, so these apply whatever data-theme says. */
+:root,
+:root[data-theme='light'],
+:root[data-theme='dark'] {
+  color-scheme: light;
   --border: hsla(var(--border-yellow), 0.4);
   --backdrop-color: #f8fafd99;
   --sl-color-accent: #2a618f;
@@ -45,59 +31,62 @@
   --sl-color-gray-6: #eef3f8;
   --sl-color-gray-7: #f8fafd;
   --sl-color-white: #132231;
+  --sl-color-bg: #eef3f8;
+  --sl-color-bg-nav: transparent;
+  --sl-color-bg-sidebar: #eef3f8;
   --list-marker-color: #53a1d8;
   --border-yellow: 205, 60%, 85%;
 }
 
-header {
-  border: none !important;
-  padding: 0 !important;
+/* Header: the site's floating nav bubble (Header.astro) sits in a transparent
+   strip, 16px from the top, like on every other page. */
+:root {
+  --sl-nav-height: 5.5rem !important;
 }
-
-/* Normal full-width sticky header (the template used a floating rounded bar). */
 header.header {
-  background-color: var(--backdrop-color) !important;
-  backdrop-filter: blur(12px) !important;
-  border-bottom: 1px var(--border) solid !important;
-  height: 4.5rem !important;
-  margin-inline: 0 !important;
-  padding-block: 0 !important;
-  padding-inline: 2rem !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  height: var(--sl-nav-height) !important;
+  margin: 0 !important;
+  padding: 1rem 1rem 0.5rem !important;
+}
+@media (min-width: 40rem) {
+  header.header {
+    padding-inline: 1.5rem !important;
+  }
+}
+@media (min-width: 64rem) {
+  header.header {
+    padding-inline: 2rem !important;
+  }
+}
+/* The docs menu button sits inside the right end of the bubble on small screens. */
+button.sl-menu-button {
+  position: fixed !important;
+  top: 2rem !important; /* 1rem strip + (4rem bubble - 2rem button) / 2 */
+  inset-inline-end: 2rem !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #34465a !important;
 }
 
-header > div:first-of-type {
-  background-color: transparent !important;
-  border: none;
-  border-radius: 0;
-  height: 100% !important;
-  margin-inline: auto !important;
-  margin-top: 0 !important;
-  max-width: 1536px;
-  padding-inline: 0 !important;
-  width: auto !important;
-}
-
-#starlight__sidebar {
-  border-radius: 1rem;
-  margin-top: 2rem !important;
-}
-
-.content-panel:first-of-type {
-  margin-top: 2rem !important;
-}
-
-.right-sidebar {
-  top: 2rem !important;
-}
-
+/* Layout under the floating nav. Starlight positions the sidebar, the "On this
+   page" bar and the content from --sl-nav-height, so no extra offsets here. */
 #starlight__on-this-page--mobile {
   border: none !important;
 }
-
+/* Small screens: the "On this page" bar sits on a solid strip so text doesn't
+   show through it while scrolling. */
 mobile-starlight-toc > nav {
+  background: var(--sl-color-bg) !important;
   border: none !important;
-  border-radius: 1rem;
-  margin-top: 2rem !important;
+  border-bottom: 1px solid var(--sl-color-gray-5) !important;
+}
+/* Jumping to a section lands the heading below the nav (and the bar on small screens). */
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6),
+.sl-markdown-content .sl-heading-wrapper {
+  scroll-margin-top: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height, 0rem) + 1.5rem) !important;
 }
 
 select {
@@ -173,27 +162,6 @@ article.card {
   width: 0.875rem;
 }
 
-@media screen and (max-width: 800px) {
-  mobile-starlight-toc > nav {
-    border-radius: 1rem;
-    margin-top: 3rem !important;
-  }
-
-  header > div:first-of-type {
-    padding-inline-end: 5rem !important;
-  }
-
-  starlight-menu-button > button {
-    right: 1.5rem !important;
-    top: 1rem !important;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  header.header {
-    padding-inline: 1.5rem !important;
-  }
-}
 
 /* CosmicWatch type in the docs */
 :root {
@@ -307,4 +275,21 @@ h1#_top {
   border-top: 1px solid var(--sl-color-gray-5);
   font-size: var(--sl-text-sm);
   color: var(--sl-color-gray-3);
+}
+
+/* "Full PDF" link at the top of each manual in the sidebar (opens the live viewer). */
+.sidebar-content a.cw-sidebar-pdf {
+  color: var(--sl-color-accent);
+  font-weight: 600;
+}
+
+/* Guide sync status: say nothing while the page matches the PDF; only show a
+   note when GitHub has a newer PDF than this page. */
+.cw-gs-status:not([data-state='stale']) {
+  display: none !important;
+}
+
+/* With no "On this page" column, let chapters use the room (Starlight's default is 45rem). */
+:root {
+  --sl-content-width: 58rem;
 }

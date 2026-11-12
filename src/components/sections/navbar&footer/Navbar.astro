@@ -1,5 +1,4 @@
 ---
-import ThemeIcon from '@components/ThemeIcon.astro';
 import NavLink from '@components/ui/links/NavLink.astro';
 import BrandLogo from '@components/BrandLogo.astro';
 import NavbarToggle from '@components/ui/buttons/NavbarToggle.astro';
@@ -10,7 +9,7 @@ import { localePath } from '@utils/locale';
 const { locale, copy: t } = Astro.locals;
 ---
 
-<header class="sticky inset-x-0 top-4 z-50 w-full px-4 text-sm sm:px-6 lg:px-8">
+<header id="site-header" class="sticky inset-x-0 top-4 z-50 w-full px-4 text-sm sm:px-6 lg:px-8">
   <nav
     class="relative mx-auto w-full max-w-(--breakpoint-2xl) rounded-[36px] border border-white/70 bg-white/75 px-5 py-3 shadow-[0_8px_30px_-12px_rgba(13,26,39,0.25)] backdrop-blur-md lg:flex lg:h-16 lg:items-center lg:justify-between lg:px-8 lg:py-0 dark:border-neutral-700/60 dark:bg-neutral-900/80"
     aria-label="Global"
@@ -24,9 +23,6 @@ const { locale, copy: t } = Astro.locals;
         <BrandLogo class="h-8 w-auto" />
       </a>
       <NavbarToggle target="navbar-collapse-with-animation" />
-      <span class="inline-block lg:hidden">
-        <ThemeIcon />
-      </span>
     </div>
     <div
       id="navbar-collapse-with-animation"
@@ -48,9 +44,6 @@ const { locale, copy: t } = Astro.locals;
           <Icon name="githubMark" class="h-4 w-4 shrink-0" />
           <span class="lg:sr-only">GitHub</span>
         </a>
-        <span class="hidden lg:inline-block">
-          <ThemeIcon />
-        </span>
         <a
           href={localePath(locale, '/shop')}
           data-astro-prefetch
@@ -63,106 +56,14 @@ const { locale, copy: t } = Astro.locals;
   </nav>
 </header>
 <script is:inline>
-  const HSThemeAppearance = {
-    init() {
-      const defaultTheme = 'default';
-      let theme = localStorage.getItem('hs_theme') || defaultTheme;
-
-      if (document.querySelector('html').classList.contains('dark')) return;
-      this.setAppearance(theme);
-    },
-    _resetStylesOnLoad() {
-      const $resetStyles = document.createElement('style');
-      $resetStyles.innerText = `*{transition: unset !important;}`;
-      $resetStyles.setAttribute('data-hs-appearance-onload-styles', '');
-      document.head.appendChild($resetStyles);
-      return $resetStyles;
-    },
-    setAppearance(theme, saveInStore = true, dispatchEvent = true) {
-      const $resetStylesEl = this._resetStylesOnLoad();
-
-      if (saveInStore) {
-        localStorage.setItem('hs_theme', theme);
-      }
-
-      if (theme === 'auto') {
-        theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'default';
-      }
-
-      document.querySelector('html').classList.remove('dark');
-      document.querySelector('html').classList.remove('default');
-      document.querySelector('html').classList.remove('auto');
-
-      document
-        .querySelector('html')
-        .classList.add(this.getOriginalAppearance());
-
-      setTimeout(() => {
-        $resetStylesEl.remove();
-      });
-
-      if (dispatchEvent) {
-        window.dispatchEvent(
-          new CustomEvent('on-hs-appearance-change', { detail: theme })
-        );
-      }
-    },
-    getAppearance() {
-      let theme = this.getOriginalAppearance();
-      if (theme === 'auto') {
-        theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'default';
-      }
-      return theme;
-    },
-    getOriginalAppearance() {
-      const defaultTheme = 'default';
-      return localStorage.getItem('hs_theme') || defaultTheme;
-    },
-  };
-  HSThemeAppearance.init();
-
-  window
-    .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', () => {
-      if (HSThemeAppearance.getOriginalAppearance() === 'auto') {
-        HSThemeAppearance.setAppearance('auto', false);
-      }
-    });
-
-  window.addEventListener('load', () => {
-    const $clickableThemes = document.querySelectorAll(
-      '[data-hs-theme-click-value]'
-    );
-    const $switchableThemes = document.querySelectorAll(
-      '[data-hs-theme-switch]'
-    );
-
-    $clickableThemes.forEach($item => {
-      $item.addEventListener('click', () =>
-        HSThemeAppearance.setAppearance(
-          $item.getAttribute('data-hs-theme-click-value'),
-          true,
-          $item
-        )
-      );
-    });
-
-    $switchableThemes.forEach($item => {
-      $item.addEventListener('change', e => {
-        HSThemeAppearance.setAppearance(e.target.checked ? 'dark' : 'default');
-      });
-
-      $item.checked = HSThemeAppearance.getAppearance() === 'dark';
-    });
-
-    window.addEventListener('on-hs-appearance-change', e => {
-      $switchableThemes.forEach($item => {
-        $item.checked = e.detail === 'dark';
-      });
-    });
-  });
+  // Publish the header's height as --header-h so a full-screen hero can slide
+  // up underneath the floating nav (see HeroBackdrop.astro).
+  (() => {
+    const header = document.getElementById('site-header');
+    if (!header) return;
+    const set = () =>
+      document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    set();
+    if ('ResizeObserver' in window) new ResizeObserver(set).observe(header);
+  })();
 </script>

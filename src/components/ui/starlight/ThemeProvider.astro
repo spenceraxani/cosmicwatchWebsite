@@ -1,0 +1,12 @@
+---
+// The site is light-only. Replaces Starlight's theme provider, which follows the
+// system setting or a saved choice, and always uses the light theme.
+---
+
+<script is:inline>
+  document.documentElement.dataset.theme = 'light';
+  try {
+    localStorage.removeItem('starlight-theme');
+  } catch {}
+  window.StarlightThemeProvider = { updatePickers() {} };
+</script>

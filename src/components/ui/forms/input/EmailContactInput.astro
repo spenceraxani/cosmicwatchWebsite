@@ -1,9 +1,10 @@
 ---
-const { label = 'Email', id } = Astro.props;
+const { label = 'Email', id, name = 'hs-email-contacts' } = Astro.props;
 
 interface Props {
   label?: string;
   id: string;
+  name?: string;
 }
 ---
 
@@ -16,7 +17,7 @@ interface Props {
   {/* Email input field */}
   <input
     type="email"
-    name="hs-email-contacts"
+    name={name}
     id={id}
     required
     autocomplete="email"

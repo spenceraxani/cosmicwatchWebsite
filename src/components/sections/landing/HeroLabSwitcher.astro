@@ -1,0 +1,34 @@
+---
+// Floating picker for the /hero-lab/ test pages (dev only).
+interface Props {
+  current: string;
+}
+const { current } = Astro.props;
+import { heroPhotos } from '@data/heroPhotos';
+
+const versions = [
+  { id: 'tracks', label: 'Tracks (home now)' },
+  ...Object.entries(heroPhotos).map(([id, p]) => ({ id, label: p.label })),
+];
+---
+
+<nav
+  aria-label="Hero versions"
+  class="fixed bottom-4 left-4 z-[60] flex max-w-[calc(100vw-2rem)] flex-wrap items-center gap-1 rounded-lg border border-neutral-300 bg-white/95 p-1 text-xs font-semibold shadow-lg backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/95"
+>
+  <span class="px-2 text-neutral-500">Hero</span>
+  {versions.map(v => (
+    <a
+      href={`/hero-lab/${v.id}/`}
+      aria-current={v.id === current ? 'page' : undefined}
+      class:list={[
+        'rounded-md px-2.5 py-1.5 transition-colors',
+        v.id === current
+          ? 'bg-orange-400 text-white'
+          : 'text-neutral-700 hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-800',
+      ]}
+    >
+      {v.label}
+    </a>
+  ))}
+</nav>

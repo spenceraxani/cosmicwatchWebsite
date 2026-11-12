@@ -1,0 +1,77 @@
+---
+// Full-screen hero over a darkened photo, with the headline and buttons centred
+// and filling the screen. The photo scrolls slower than the page (parallax).
+import { reveal, delay } from '@utils/motion';
+import { Image } from 'astro:assets';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import type { HeroPhoto } from '@data/heroPhotos';
+
+interface Props {
+  photo: HeroPhoto;
+  title: string;
+  subTitle?: string;
+  primaryBtn?: string;
+  primaryBtnURL?: string;
+  secondaryBtn?: string;
+  secondaryBtnURL?: string;
+}
+
+const { photo, title, subTitle, primaryBtn, primaryBtnURL, secondaryBtn, secondaryBtnURL } = Astro.props;
+---
+
+<section
+  data-parallax-root
+  class="relative isolate mx-[calc(50%-50vw)] mt-[calc(-1*var(--header-h,72px))] flex min-h-svh w-screen items-center overflow-hidden bg-neutral-950"
+>
+  {/* Taller than the hero so the parallax drift never shows an edge. */}
+  <div data-parallax="0.35" aria-hidden="true" class="absolute inset-x-0 -top-[10%] -z-10 h-[120%] will-change-transform">
+    <Image
+      src={photo.image}
+      alt=""
+      class="h-full w-full object-cover"
+      style={`object-position: ${photo.position}`}
+      loading="eager"
+      fetchpriority="high"
+      widths={[960, 1600, 2400]}
+      sizes="100vw"
+      format="avif"
+    />
+  </div>
+  {/* Darken evenly, a bit more at the top (under the nav) and bottom. */}
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[#07121f]/65"></div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-[#07121f]/70 via-transparent to-[#07121f]/80"></div>
+
+  <div
+    data-parallax-content
+    class="mx-auto w-full max-w-5xl px-6 pt-[calc(var(--header-h,72px)+3rem)] pb-20 text-center sm:px-10"
+  >
+    <h1 class:list={['text-4xl font-bold tracking-tight text-balance text-white sm:text-6xl lg:text-7xl lg:leading-[1.05]', reveal]}>
+      <Fragment set:html={title} />
+    </h1>
+    {subTitle && (
+      <p class:list={['mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-200 sm:text-xl', [reveal, delay(1)]]}>
+        {subTitle}
+      </p>
+    )}
+    <div class:list={['mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center', [reveal, delay(2)]]}>
+      {primaryBtn && <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="yellow" />}
+      {secondaryBtn && (
+        <a
+          href={secondaryBtnURL}
+          class="inline-flex items-center justify-center gap-x-2 rounded-lg border border-white/50 px-4 py-3 text-sm font-bold text-white ring-zinc-200 outline-hidden transition-colors duration-200 hover:border-white/80 hover:bg-white/10 focus-visible:ring-3 2xl:text-base"
+        >
+          {secondaryBtn}
+        </a>
+      )}
+    </div>
+  </div>
+
+  <p class="absolute right-4 bottom-4 max-w-[60vw] text-right text-xs text-white/60 sm:right-6 sm:bottom-5">
+    {photo.caption}
+  </p>
+</section>
+
+<script>
+  import { initParallax } from '@/scripts/parallax';
+  initParallax();
+</script>

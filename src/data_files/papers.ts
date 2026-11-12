@@ -1,4 +1,4 @@
-/** Papers about CosmicWatch, newest first. Shown on the About page. */
+/** Papers about CosmicWatch, newest first. Shown in the About section of the home page. */
 export interface Paper {
   year: number;
   title: string;

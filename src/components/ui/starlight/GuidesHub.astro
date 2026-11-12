@@ -1,133 +1,34 @@
 ---
-// Lists the four PDF guides with their chapters and a live "matches GitHub" check.
-// Data comes from src/data_files/guides.json, written by scripts/sync-guides.py.
+// One card per manual: a line about it, its chapters, and the live PDF.
+// Built only from Starlight's own components (CardGrid, Card, LinkButton), so it
+// matches the rest of the guides. Data: src/data_files/guides.json (scripts/sync-guides.py).
+import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
 import manifest from '@data/guides.json';
 
-const fmt = (iso: string) =>
-  new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-const mb = (b: number) => `${(b / 1e6).toFixed(1)} MB`;
-// show sections; fall back to subsections when a chapter has fewer than two sections
-const outline = (secs: { title: string; level: number; id: string }[]) => {
-  const l2 = secs.filter((s) => s.level === 2);
-  return l2.length >= 2 ? l2 : secs.filter((s) => s.level <= 3);
+const icons: Record<string, 'open-book' | 'analytics' | 'notes' | 'setting'> = {
+  'instruction-manual': 'open-book',
+  'example-measurements': 'analytics',
+  physics: 'notes',
+  troubleshooting: 'setting',
 };
 ---
 
-<div class="cw-hub not-content">
+<CardGrid>
   {
     manifest.guides.map((g) => (
-      <section class="cw-hub-card">
-        <header>
-          <h2>{g.title}</h2>
-          <p>{g.blurb}</p>
-        </header>
-        <div
-          class="cw-guide-source"
-          data-repo={manifest.repo}
-          data-branch={manifest.branch}
-          data-path={g.file}
-          data-sha={g.blobSha}
-          data-date={g.commitDate}
-        >
-          <span class="cw-gs-doc">
-            <a href={g.pdfUrl}>{g.file}</a> ({g.pageCount} pages, {mb(g.bytes)})
-          </span>
-          <span class="cw-gs-status" data-state="idle">
-            Synced with the PDF from {fmt(g.commitDate)}
-          </span>
-          <span class="cw-gs-note" hidden />
-        </div>
-        <ol class="cw-hub-chapters">
+      <Card title={g.title} icon={icons[g.slug] ?? 'document'}>
+        <p>{g.blurb}</p>
+        <ol>
           {g.chapters.map((c) => (
             <li>
               <a href={c.url}>{c.title}</a>
-              <span class="cw-hub-pages">
-                p. {c.pages[0]}
-                {c.pages[1] > c.pages[0] ? `–${c.pages[1]}` : ''}
-              </span>
-              {'children' in c && c.children && (
-                <ul>
-                  {c.children.map((s) => (
-                    <li>
-                      <a href={s.url}>{s.title}</a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {!('children' in c && c.children) && outline(c.sections).length > 0 && (
-                <ul>
-                  {outline(c.sections)
-                    .map((s) => (
-                      <li>
-                        <a href={`${c.url}#${s.id}`}>{s.title}</a>
-                      </li>
-                    ))}
-                </ul>
-              )}
             </li>
           ))}
         </ol>
-      </section>
+        <LinkButton href={`/pdf/${g.slug}/`} variant="secondary" icon="external" target="_blank" rel="noopener">
+          Open the PDF
+        </LinkButton>
+      </Card>
     ))
   }
-</div>
-
-<style>
-  .cw-hub {
-    display: grid;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-  .cw-hub-card {
-    border-radius: 0.75rem;
-    border: 1px solid var(--sl-color-gray-5);
-    padding: 1.25rem 1.25rem 0.75rem;
-  }
-  .cw-hub-card h2 {
-    margin: 0;
-    font-size: var(--sl-text-h4);
-    color: var(--sl-color-white);
-  }
-  .cw-hub-card header p {
-    margin: 0.35rem 0 1rem;
-    color: var(--sl-color-gray-2);
-  }
-  .cw-hub-card .cw-guide-source {
-    margin-bottom: 1rem;
-  }
-  .cw-hub-chapters {
-    margin: 0;
-    padding-left: 1.25rem;
-    columns: 2 18rem;
-    column-gap: 2rem;
-  }
-  .cw-hub-chapters > li {
-    break-inside: avoid;
-    margin-bottom: 0.6rem;
-  }
-  .cw-hub-chapters a {
-    color: var(--sl-color-white);
-    text-decoration: none;
-  }
-  .cw-hub-chapters a:hover {
-    color: var(--sl-color-accent-high);
-    text-decoration: underline;
-  }
-  :root[data-theme='light'] .cw-hub-chapters a:hover {
-    color: var(--sl-color-accent);
-  }
-  .cw-hub-chapters ul {
-    margin: 0.25rem 0 0;
-    padding-left: 1rem;
-    list-style: disc;
-    font-size: var(--sl-text-sm);
-  }
-  .cw-hub-chapters ul a {
-    color: var(--sl-color-gray-2);
-  }
-  .cw-hub-pages {
-    margin-left: 0.4rem;
-    font-size: var(--sl-text-xs);
-    color: var(--sl-color-gray-3);
-  }
-</style>
+</CardGrid>

@@ -535,6 +535,8 @@ def page_text(g: Guide, meta: dict, title: str, order: int, first: int, last: in
     slug = g.cfg['slug']
     pages = f'{first}–{last}' if last > first else f'{first}'
     label = 'pages' if last > first else 'page'
+    # The site's live PDF viewer (src/pages/pdf/[slug].astro), opened at this chapter's first page.
+    viewer = f'/pdf/{slug}/#page={first}'
     head = [
         '---',
         f'title: {yaml_str(title)}',
@@ -548,16 +550,15 @@ def page_text(g: Guide, meta: dict, title: str, order: int, first: int, last: in
         '',
         f'<div class="cw-guide-source not-content" data-repo="{GITHUB_REPO}" data-branch="{BRANCH}" '
         f'data-path="{g.cfg["file"]}" data-sha="{meta["blobSha"]}" data-date="{meta["commitDate"]}">'
-        f'<span class="cw-gs-doc">From <a href="{pdf_url}">{g.cfg["file"]}</a>, {label} {pages}</span>'
+        f'<span class="cw-gs-doc">From <a href="{viewer}" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">{g.cfg["file"]}</a>, {label} {pages}</span>'
         f'<span class="cw-gs-status" data-state="idle">Synced with the PDF from {meta["commitDate"][:10]}</span>'
         f'<span class="cw-gs-note" hidden></span></div>',
         '',
     ]
     foot = [
         '',
-        f'<p class="cw-guide-foot">From <a href="{pdf_url}">{g.cfg["file"]}</a>, {label} {pages}. '
-        'Text and figures are extracted automatically, so check the PDF if something looks off. '
-        'Equations and tables are shown as images from the PDF.</p>',
+        f'<p class="cw-guide-foot">From <a href="{viewer}" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">{g.cfg["file"]}</a>, {label} {pages}.'
+        '</p>',
         '',
     ]
     return '\n'.join(head + body + foot)

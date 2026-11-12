@@ -2,6 +2,7 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import ContactSection from '@components/sections/misc/ContactSection.astro';
 import FAQ from '@components/sections/misc/FAQ.astro';
+import PeopleSection from '@components/sections/misc/PeopleSection.astro';
 import { getCopy } from '@/copy';
 import type { MarketingLocale } from '@utils/locale';
 
@@ -20,6 +21,7 @@ const copy = t.contact;
   ogTitle={copy.ogTitle}
 >
   <ContactSection />
+  <PeopleSection title={t.people.heading} subTitle={t.people.subTitle} />
   <div id="faq" class="scroll-mt-24">
     <FAQ title={copy.faqTitle} faqs={t.data.faqs} />
   </div>

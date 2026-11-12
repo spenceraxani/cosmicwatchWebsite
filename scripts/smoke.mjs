@@ -6,30 +6,32 @@ const DIST = resolve(new URL('../dist/', import.meta.url).pathname);
 // Every marketing route, plus a few docs pages.
 const ROUTES = [
   '/',
-  '/about/',
   '/detector/',
-  '/software/',
-  '/news/',
-  '/news/v3x-paper-published/',
-  '/people/',
   '/shop/',
   '/measure/',
   '/github/',
   '/contact/',
+  '/contact/thanks/',
   '/docs/',
-  '/docs/how-it-works/',
-  '/docs/build/',
-  '/docs/measurements/',
-  '/docs/measurements/full-sky-rate/',
-  '/docs/troubleshooting/',
+  '/docs/parts-list/',
+  '/pdf/instruction-manual/',
+  '/pdf/troubleshooting/',
+  '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/',
+  '/docs/guides/example-measurements/tested-measurements/',
+  '/docs/guides/troubleshooting/troubleshooting/',
   '/404',
 ];
 
 // Cheap content assertions on top of the status check.
 const EXPECTATIONS = {
-  '/': ['<html lang="en"', 'CosmicWatch'],
-  '/contact/': ['id="contact-form"'],
-  '/news/v3x-paper-published/': ['"@type":"BlogPosting"'],
+  '/contact/': ['id="contact-form"', 'id="people"', 'id="faq"'],
+  '/': ['<html lang="en"', 'CosmicWatch', 'id="about"'],
+  '/detector/': ['id="papers"'],
+  '/measure/': ['id="m-pdf"', 'data-tab="corr"'],
+  '/shop/': ['Purchases happen outside this site', '/docs/parts-list/'],
+  '/docs/parts-list/': ['Digi-Key Bulk Add, 1 detector', 'sl-steps', 'step-5-backorder'],
+  '/github/': ['id="gh-fw-link"'],
+  '/pdf/instruction-manual/': ['raw.githubusercontent.com', 'id="pdf-frame"'],
 };
 
 const MIME = {

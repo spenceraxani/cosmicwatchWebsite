@@ -1,22 +1,22 @@
 [
   {
     "heading": "Scintillator and SiPM",
-    "content": "A 5 × 5 × 1 cm plastic scintillator turns each passing particle into a flash of light. A 6 × 6 mm silicon photomultiplier counts the photons.",
+    "content": "A 5 × 5 × 1 cm slab of plastic scintillator as the detection medium, giving about 10,000 photons per MeV. A 6 × 6 mm SiPM for light collection: single-photon sensitive, nanosecond response, and not affected by magnetic fields.",
     "svg": "sparks"
   },
   {
     "heading": "Fast, low-noise electronics",
-    "content": "Custom analog shaping and a Raspberry Pi Pico give a 12-bit pulse-height measurement, 400 µs dead time and up to 700 events per second.",
+    "content": "A custom PCB shapes the signal, and the Raspberry Pi Pico measures it with a 12-bit ADC. One core takes data while the other runs the screen and card, so dead time is about 400 µs per event and it logs up to 700 events per second.",
     "svg": "dashboard"
   },
   {
     "heading": "Sensors on every event",
-    "content": "Temperature, barometric pressure, acceleration and rotation are logged with each event, so you can study weather and motion along with the rate.",
+    "content": "Temperature, barometric pressure, acceleration and angular velocity are recorded with each event, so you can look for correlations with the weather or track how the detector moved.",
     "svg": "earth"
   },
   {
-    "heading": "Takes it anywhere",
-    "content": "It draws 0.5 W and weighs 110 g in its aluminum case. Detectors have flown on airplanes, balloons, sounding rockets and the ISS.",
+    "heading": "Take it anywhere",
+    "content": "It draws 0.5 W from any USB port and weighs 110 g in its aluminum case; a 5,000 mAh power bank runs two detectors for 18 hours. Detectors have flown on high-altitude balloons, sounding rockets and the International Space Station.",
     "svg": "rocket"
   }
 ]

@@ -1,0 +1,133 @@
+---
+// Live PDF viewer, one page per manual: /pdf/instruction-manual/ and so on.
+// On every visit it fetches the newest PDF straight from GitHub (main branch),
+// so a new commit to a PDF shows up here right away, with no site rebuild.
+// The browser's own PDF viewer draws it; /pdf/<slug>/#page=15 opens at page 15.
+import MainLayout from '@/layouts/MainLayout.astro';
+import guides from '@data/guides.json';
+
+export function getStaticPaths() {
+  return guides.guides.map(g => ({ params: { slug: g.slug }, props: { guide: g } }));
+}
+
+const { guide } = Astro.props as { guide: (typeof guides.guides)[number] };
+const enc = (p: string) => p.split('/').map(encodeURIComponent).join('/');
+const raw = `https://raw.githubusercontent.com/${guides.repo}/${guides.branch}/${enc(guide.file)}`;
+const firstChapter = guide.chapters[0]?.url ?? '/docs/';
+const btn =
+  'inline-flex items-center justify-center gap-x-2 rounded-lg border border-neutral-300 bg-white px-3.5 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-100';
+---
+
+<MainLayout
+  title={`${guide.title} (PDF)`}
+  description={`The latest ${guide.file} from the CosmicWatch v3X GitHub repository.`}
+  hideFooter={true}
+>
+  <section
+    id="pdf"
+    class="mx-auto flex max-w-[85rem] flex-col gap-4 px-4 pt-6 pb-4 sm:px-6 lg:px-8 2xl:max-w-full"
+    data-raw={raw}
+    data-repo={guides.repo}
+    data-branch={guides.branch}
+    data-path={guide.file}
+    data-name={guide.file}
+  >
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-sm font-medium text-neutral-500"><a class="hover:underline" href="/docs/">Guides</a> / PDF</p>
+        <h1 class="mt-1 text-2xl font-bold tracking-tight text-neutral-800 sm:text-3xl">{guide.title}</h1>
+        <p id="pdf-status" class="mt-1 flex items-center gap-2 text-sm text-neutral-600" aria-live="polite">
+          <span id="pdf-dot" class="size-2 rounded-full bg-yellow-400" aria-hidden="true"></span>
+          <span id="pdf-status-text">Loading the latest PDF from GitHub…</span>
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a class={btn} href={firstChapter}>Read as web pages</a>
+        <a id="pdf-download" class={btn} href={raw} download={guide.file}>Download</a>
+        <a id="pdf-open" class={btn} href={guide.pdfUrl} target="_blank" rel="noopener noreferrer">Open full screen</a>
+        <a class={btn} href={guide.pdfUrl} target="_blank" rel="noopener noreferrer">On GitHub</a>
+      </div>
+    </div>
+
+    <div class="relative overflow-hidden rounded-xl border border-neutral-300 bg-white shadow-sm">
+      <iframe
+        id="pdf-frame"
+        title={`${guide.title} PDF`}
+        class="block h-[calc(100svh-15rem)] min-h-[28rem] w-full"
+      ></iframe>
+      <div id="pdf-error" class="absolute inset-0 hidden flex-col items-center justify-center gap-3 bg-white p-6 text-center">
+        <p class="max-w-md text-neutral-700">
+          GitHub did not send the PDF just now. You can still open it there.
+        </p>
+        <a class="font-semibold text-orange-400 underline underline-offset-2" href={guide.pdfUrl} target="_blank" rel="noopener noreferrer">Open {guide.file} on GitHub</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const root = document.getElementById('pdf')!;
+  const { raw = '', repo = '', branch = 'main', path = '', name = 'guide.pdf' } = root.dataset;
+  const frame = document.getElementById('pdf-frame') as HTMLIFrameElement;
+  const statusText = document.getElementById('pdf-status-text')!;
+  const dot = document.getElementById('pdf-dot')!;
+  const fmt = (iso: string) => new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  const page = () => {
+    const m = location.hash.match(/page=(\d+)/);
+    return m ? `#page=${m[1]}` : '';
+  };
+
+  let url = '';
+  async function load() {
+    try {
+      // no-cache: ask GitHub for the current file instead of a copy the browser kept.
+      const res = await fetch(raw, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(String(res.status));
+      const blob = new Blob([await res.arrayBuffer()], { type: 'application/pdf' });
+      url = URL.createObjectURL(blob);
+      frame.src = url + page();
+      (document.getElementById('pdf-open') as HTMLAnchorElement).href = url + page();
+      const dl = document.getElementById('pdf-download') as HTMLAnchorElement;
+      dl.href = url;
+      dl.download = name;
+      dot.className = 'size-2 rounded-full bg-emerald-500';
+      statusText.textContent = 'Latest version from GitHub';
+      lastChange();
+    } catch {
+      dot.className = 'size-2 rounded-full bg-red-500';
+      statusText.textContent = 'Could not load the PDF from GitHub.';
+      document.getElementById('pdf-error')!.classList.replace('hidden', 'flex');
+    }
+  }
+
+  // When the PDF last changed, from its newest commit (one GitHub API call, cached for 15 minutes).
+  async function lastChange() {
+    const key = `cw-pdf-commit:${repo}:${path}`;
+    let info: { date: string; url: string } | null = null;
+    try {
+      const hit = JSON.parse(sessionStorage.getItem(key) ?? 'null');
+      if (hit && Date.now() - hit.t < 15 * 60 * 1000) info = hit.v;
+    } catch {}
+    if (!info) {
+      try {
+        const r = await fetch(`https://api.github.com/repos/${repo}/commits?path=${encodeURIComponent(path)}&sha=${branch}&per_page=1`);
+        if (r.ok) {
+          const [c] = await r.json();
+          if (c) info = { date: c.commit.committer.date, url: c.html_url };
+          try { sessionStorage.setItem(key, JSON.stringify({ t: Date.now(), v: info })); } catch {}
+        }
+      } catch {}
+    }
+    if (info) {
+      statusText.textContent = 'Latest version from GitHub, last changed ';
+      const a = Object.assign(document.createElement('a'), { href: info.url, target: '_blank', rel: 'noopener noreferrer', textContent: fmt(info.date), className: 'underline underline-offset-2' });
+      statusText.append(a);
+    }
+  }
+
+  // #page=N links clicked while the viewer is already open
+  window.addEventListener('hashchange', () => {
+    if (url) frame.src = url + page();
+  });
+  load();
+</script>

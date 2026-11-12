@@ -1,4 +1,5 @@
-// No photos yet, so cards show initials. Confirm the list with Prof. Axani.
+// The current team only (Prof. Axani: list active people so visitors know who to
+// contact). No photos yet, so cards show initials. Confirm the list with him.
 import type { ImageMetadata } from 'astro';
 
 export interface Person {
@@ -36,23 +37,4 @@ export const team: Person[] = [
     role: 'Research intern',
     note: 'Spaceflight adaptation of the v3X and this website.',
   },
-];
-
-export const collaborators: Person[] = [
-  {
-    name: 'Katarzyna Frankiewicz',
-    role: 'Co-creator of CosmicWatch',
-    note: 'Built the program with Axani while at Poland\'s National Centre for Nuclear Research.',
-  },
-  {
-    name: 'Janet M. Conrad',
-    role: 'Professor of Physics, MIT',
-    note: 'Supported CosmicWatch from the start at MIT.',
-  },
-];
-
-export const sponsors: { name: string; detail: string }[] = [
-  { name: 'U.S. National Science Foundation', detail: 'Grant PHY-1505858 (MIT era)' },
-  { name: 'MIT', detail: 'Seed funding (MIT era)' },
-  { name: 'National Science Centre, Poland', detail: 'Grant 2015/17/N/ST2/04064' },
 ];

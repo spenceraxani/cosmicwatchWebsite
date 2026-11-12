@@ -16,15 +16,17 @@ export const specs: [string, string, string][] = [
   ['Parts cost', 'about $100', 'about $100'],
 ];
 
+/** Component list for the Detector page, in the style of the original site's "Components" tab.
+ *  Facts from the v3X paper (JINST 20 P10040, arXiv:2508.12111), sections 1.2–2.2. */
 export const parts: { name: string; detail: string }[] = [
-  { name: 'Plastic scintillator', detail: '5 × 5 × 1 cm' },
-  { name: 'Silicon photomultiplier', detail: 'onsemi MicroFC-60035, 6 × 6 mm active area' },
-  { name: 'Raspberry Pi Pico', detail: 'RP2040 microcontroller; a Pico W adds WiFi' },
-  { name: 'Analog front end', detail: 'Amplifier, peak detector and comparator for a hardware trigger' },
-  { name: '0.96" OLED screen', detail: 'Run time, counts, rates and file name' },
+  { name: 'Plastic scintillator', detail: '5 × 5 × 1 cm slab, the detection medium; about 10,000 photons per MeV' },
+  { name: 'Silicon photomultiplier', detail: 'onsemi MicroFC-60035 for light collection: 6 × 6 mm, biased at 30 V, about 43% efficient at 420 nm' },
+  { name: 'Raspberry Pi Pico', detail: 'Dual-core RP2040 at 133 MHz: one core takes data, the other runs the screen, card and sensors' },
+  { name: 'Analog front end', detail: '13.5× amplifier, peak detector and comparator; trigger threshold down to 4 mV' },
+  { name: '0.96" OLED screen', detail: 'Run time, counts and dead-time-corrected rate, updated in real time' },
   { name: 'BMP280 sensor', detail: 'Temperature and barometric pressure' },
-  { name: 'Accelerometer and gyroscope', detail: 'Orientation and motion on three axes' },
-  { name: 'microSD socket', detail: 'Logs every event as plain text' },
-  { name: 'RJ45 port', detail: 'Links two detectors for coincidence mode' },
-  { name: 'BNC connector', detail: 'Raw SiPM signal for an oscilloscope' },
+  { name: 'MPU-6050', detail: 'Accelerometer and gyroscope for orientation and motion' },
+  { name: 'microSD socket', detail: 'A new plain-text file every time the detector starts' },
+  { name: 'RJ45 port', detail: 'Links two detectors over a CAT5/6 cable for coincidence mode, and carries power' },
+  { name: 'BNC connector', detail: 'The raw SiPM pulse for an oscilloscope, with nanosecond timing' },
 ];

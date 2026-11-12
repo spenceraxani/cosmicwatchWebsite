@@ -1,7 +1,14 @@
 // Prices stay null ("Price on request") until the lab sets them.
+//
+// Purchases happen on a separate store outside the University of Delaware,
+// because UD does not allow payments on UD websites. Put that store's address
+// here when it exists; every Buy button links to it with ?item=<product id>.
+// While it is empty the buttons read "Available soon" and nothing is sold here.
+export const STORE_URL = '';
+export const STORE_NAME = 'the CosmicWatch store';
 import blue from '@images/cw/render-blue-iso.png';
 import yellow from '@images/cw/render-yellow-front.png';
-import pair from '@images/cw/cutout-stack.png';
+import pair from '@images/cw/detector-stack-cutout.png';
 import kit from '@images/cw/render-exploded.png';
 import pcb from '@images/cw/render-main-pcb.png';
 import glow from '@images/cw/scintillator-glow.jpg';

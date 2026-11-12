@@ -1,0 +1,51 @@
+---
+// Papers about CosmicWatch, newest first. Shown at the bottom of the Detector page.
+import { reveal } from '@utils/motion';
+import { papers } from '@data/papers';
+
+interface Props {
+  title: string;
+  subTitle: string;
+}
+const { title, subTitle } = Astro.props;
+---
+
+<section id="papers" class="mx-auto max-w-[85rem] scroll-mt-28 px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+  <h2 class:list={['text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200', reveal]}>{title}</h2>
+  <p class="mt-2 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">{subTitle}</p>
+  <div>
+    <ol class="mt-5 divide-y divide-neutral-300 border-y border-neutral-300 dark:divide-neutral-700 dark:border-neutral-700">
+      {papers.map(p => (
+        <li class="grid gap-1 py-4 sm:grid-cols-[4rem_1fr] sm:gap-3">
+          <span class="font-bold text-neutral-500 tabular-nums dark:text-neutral-400">{p.year}</span>
+          <div>
+            <a
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-bold text-neutral-800 underline-offset-2 hover:underline dark:text-neutral-200"
+            >
+              {p.title}
+            </a>
+            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+              {p.authors}. <em>{p.venue}</em>
+              {p.arxiv && (
+                <>
+                  {'. '}
+                  <a
+                    class="underline underline-offset-2 hover:text-neutral-800 dark:hover:text-neutral-200"
+                    href={`https://arxiv.org/abs/${p.arxiv}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    arXiv:{p.arxiv}
+                  </a>
+                </>
+              )}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

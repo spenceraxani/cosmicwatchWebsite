@@ -10,8 +10,11 @@ import guides from './src/data_files/guides.json' with { type: 'json' };
 // writes when it converts the PDFs. One group per guide, chapters inside it.
 const guideSidebar = guides.guides.map((g) => ({
   label: g.title,
-  collapsed: true,
-  items: g.chapters.map((c) =>
+  collapsed: false,
+  items: [
+    // The live PDF viewer (src/pages/pdf/[slug].astro), always the newest file on GitHub.
+    { label: 'Full PDF ↗', link: `/pdf/${g.slug}/`, attrs: { target: '_blank', rel: 'noopener', class: 'cw-sidebar-pdf' } },
+    ...g.chapters.map((c) =>
     c.children
       ? {
           label: c.title,
@@ -23,6 +26,7 @@ const guideSidebar = guides.guides.map((g) => ({
         }
       : { label: c.title, link: c.url }
   ),
+  ],
 }));
 
 // The UD address is not decided yet. Set SITE_URL when it is; on Vercel the
@@ -40,40 +44,17 @@ export default defineConfig({
   integrations: [
     sitemap(),
     starlight({
-      title: 'CosmicWatch Docs',
+      title: 'CosmicWatch Guides',
       // English only. The marketing pages are English only as well.
       locales: {
         root: { label: 'English', lang: 'en' },
       },
       // https://starlight.astro.build/guides/sidebar/
+      // One group per manual, chapters inside. Everything comes from the PDFs on GitHub.
       sidebar: [
-        {
-          label: 'Start here',
-          items: [
-            { label: 'Overview', link: '/docs/' },
-            { label: 'How the detector works', link: '/docs/how-it-works/' },
-            { label: 'Coincidence mode', link: '/docs/coincidence-mode/' },
-            { label: 'Recording data', link: '/docs/recording-data/' },
-          ],
-        },
-        {
-          label: 'Build a detector',
-          items: [{ autogenerate: { directory: 'docs/build' } }],
-        },
-        {
-          label: 'Measurements',
-          items: [{ autogenerate: { directory: 'docs/measurements' } }],
-        },
-        {
-          label: 'Help',
-          items: [
-            { label: 'Troubleshooting', link: '/docs/troubleshooting/' },
-          ],
-        },
-        {
-          label: 'Full guides (from the PDFs)',
-          items: [{ label: 'All guides and sync status', link: '/docs/guides/' }, ...guideSidebar],
-        },
+        { label: 'All guides', link: '/docs/' },
+        { label: 'Parts List & BOM', link: '/docs/parts-list/' },
+        ...guideSidebar,
       ],
       social: [
         {
@@ -83,13 +64,16 @@ export default defineConfig({
         },
       ],
       disable404Route: true,
+      // No "On this page" column or bar: the chapter text gets the full width.
+      tableOfContents: false,
+      routeMiddleware: './src/routeData.ts',
       customCss: ['./src/assets/styles/starlight.css'],
       favicon: '/favicon.ico',
       components: {
-        SiteTitle: './src/components/ui/starlight/SiteTitle.astro',
+        Header: './src/components/ui/starlight/Header.astro',
         Head: './src/components/ui/starlight/Head.astro',
-        MobileMenuFooter:
-          './src/components/ui/starlight/MobileMenuFooter.astro',
+        MobileMenuFooter: './src/components/ui/starlight/MobileMenuFooter.astro',
+        ThemeProvider: './src/components/ui/starlight/ThemeProvider.astro',
         ThemeSelect: './src/components/ui/starlight/ThemeSelect.astro',
       },
       head: [

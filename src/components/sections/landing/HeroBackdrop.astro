@@ -1,0 +1,206 @@
+---
+// Full-width hero with a dark backdrop, after the original cosmicwatch.lns.mit.edu
+// home page (detectors in front of a blue sky with particle tracks).
+//   tracks — navy gradient, drawn muon tracks, cut-out detectors on the right
+//   glow   — full-bleed photo of the glowing scintillator stack
+//   band   — solid navy band, faint tracks, the usual hero photo on the right
+import { reveal, revealImage, delay } from '@utils/motion';
+import { Image } from 'astro:assets';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import cutout from '@images/cw/detector-stack-cutout.png';
+import glowPhoto from '@images/cw/scintillator-glow.jpg';
+
+export type HeroBackdropVariant = 'tracks' | 'glow' | 'band';
+
+interface Props {
+  variant: HeroBackdropVariant;
+  title: string;
+  subTitle?: string;
+  primaryBtn?: string;
+  primaryBtnURL?: string;
+  secondaryBtn?: string;
+  secondaryBtnURL?: string;
+  src?: any;
+  alt?: string;
+  cutoutAlt?: string;
+}
+
+const {
+  variant,
+  title,
+  subTitle,
+  primaryBtn,
+  primaryBtnURL,
+  secondaryBtn,
+  secondaryBtnURL,
+  src,
+  alt,
+  cutoutAlt = 'Two CosmicWatch v3X detectors stacked, one in a yellow case and one in blue',
+} = Astro.props;
+
+// Straight muon tracks entering from the top, mostly steep (cos²θ-ish),
+// from a fixed seed so every build draws the same picture.
+let seed = 7;
+const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+const trackCount = variant === 'tracks' ? 26 : 14;
+const tracks = Array.from({ length: trackCount }, () => {
+  const x = rand() * 1600 - 100;
+  const angle = (rand() - 0.5) * 0.9; // radians from vertical
+  const len = 500 + rand() * 600;
+  return {
+    x1: x,
+    y1: -50,
+    x2: x + Math.sin(angle) * len,
+    y2: -50 + Math.cos(angle) * len,
+    w: 0.6 + rand() * 1.6,
+    o: 0.12 + rand() * 0.45,
+  };
+});
+---
+
+<section
+  data-parallax-root
+  class:list={[
+    // Break out of the layout's padded column so the backdrop spans the window,
+    // slide up under the floating nav (--header-h is set in Navbar.astro), and
+    // fill one screen on any device. svh ignores the mobile browser's URL bar.
+    'relative isolate mx-[calc(50%-50vw)] mt-[calc(-1*var(--header-h,72px))] flex min-h-svh w-screen items-center overflow-hidden',
+    variant === 'glow' ? 'bg-neutral-950' : 'bg-[#0d2440]',
+  ]}
+>
+  {/* Backdrop layers */}
+  {/* Background layers, taller than the hero so the parallax drift never shows an edge. */}
+  <div data-parallax="0.5" aria-hidden="true" class="absolute inset-x-0 -top-[10%] -z-10 h-[130%] will-change-transform">
+    {variant === 'tracks' && (
+      <div aria-hidden="true" class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_20%,#2a618f_0%,#14365d_40%,#0b1a2e_100%)]"></div>
+        <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0b1a2e] to-transparent"></div>
+      </div>
+    )}
+    {variant === 'glow' && (
+      <div aria-hidden="true" class="absolute inset-0 -z-10">
+        <div class="absolute inset-y-0 right-0 w-full md:w-[58%]">
+          <Image
+            src={glowPhoto}
+            alt=""
+            class="h-full w-full object-cover object-[50%_55%]"
+            loading="eager"
+            fetchpriority="high"
+            width={1300}
+            format="avif"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/40 to-transparent"></div>
+        </div>
+        <div class="absolute inset-0 bg-neutral-950/70 md:hidden"></div>
+      </div>
+    )}
+    {variant === 'band' && (
+      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#12304f_0%,#0d2440_100%)]"></div>
+    )}
+
+    {variant !== 'glow' && (
+      <svg
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+        viewBox="0 0 1440 800"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <linearGradient id={`trk-${variant}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#bcdcf3" stop-opacity="0" />
+            <stop offset="0.35" stop-color="#bcdcf3" stop-opacity="1" />
+            <stop offset="1" stop-color="#53a1d8" stop-opacity="0" />
+          </linearGradient>
+          <filter id={`glow-${variant}`} x="-50%" y="-10%" width="200%" height="120%">
+            <feGaussianBlur stdDeviation="3" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        {tracks.map(t => (
+          <line
+            x1={t.x1}
+            y1={t.y1}
+            x2={t.x2}
+            y2={t.y2}
+            stroke={`url(#trk-${variant})`}
+            stroke-width={t.w}
+            stroke-linecap="round"
+            opacity={variant === 'band' ? t.o * 0.45 : t.o}
+            filter={variant === 'tracks' && t.w > 1.4 ? `url(#glow-${variant})` : undefined}
+          />
+        ))}
+      </svg>
+    )}
+  </div>
+
+  <div
+    data-parallax-content
+    class:list={[
+      // Same width as the nav bubble, with side padding that lines the text up
+      // with the logo (header padding + nav padding). Top padding clears the nav.
+      'mx-auto grid w-full max-w-[calc(var(--breakpoint-2xl)+4rem)] gap-8 px-9 pt-[calc(var(--header-h,72px)+3rem)] pb-14 sm:px-11 md:grid-cols-[3fr_2fr] md:items-center md:gap-10 md:pb-20 lg:px-16',
+    ]}
+  >
+    <div>
+      <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-white sm:text-4xl lg:text-5xl lg:leading-tight xl:text-6xl', reveal]}>
+        <Fragment set:html={title} />
+      </h1>
+      {subTitle && (
+        <p class:list={['mt-4 text-lg leading-relaxed text-pretty text-neutral-300 lg:w-4/5', [reveal, delay(1)]]}>
+          {subTitle}
+        </p>
+      )}
+      <div class:list={['mt-8 grid w-full gap-3 sm:inline-flex', [reveal, delay(2)]]}>
+        {primaryBtn && <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="yellow" />}
+        {secondaryBtn && (
+          <a
+            href={secondaryBtnURL}
+            class="inline-flex items-center justify-center gap-x-2 rounded-lg border border-white/40 px-4 py-3 text-sm font-bold text-white ring-zinc-200 outline-hidden transition-colors duration-200 hover:border-white/70 hover:bg-white/10 focus-visible:ring-3 2xl:text-base"
+          >
+            {secondaryBtn}
+          </a>
+        )}
+      </div>
+    </div>
+
+    {variant === 'tracks' && (
+      <div data-parallax="-0.12" class="flex justify-center will-change-transform md:justify-end">
+        <div class:list={[revealImage, delay(1)]}>
+          <Image
+            src={cutout}
+            alt={cutoutAlt}
+            class="w-44 drop-shadow-[0_30px_40px_rgba(0,0,0,0.55)] sm:w-64 md:w-80 lg:w-[26rem]"
+            loading="eager"
+            fetchpriority="high"
+            width={656}
+            format="webp"
+          />
+        </div>
+      </div>
+    )}
+
+    {variant === 'band' && src && alt && (
+      <div class:list={['flex w-full', [revealImage, delay(1)]]}>
+        <div class="w-full overflow-hidden rounded-xl ring-1 ring-white/10 shadow-2xl shadow-black/40">
+          <Image
+            src={src}
+            alt={alt}
+            class="h-full w-full object-contain object-center"
+            loading="eager"
+            fetchpriority="high"
+            width={1100}
+            format="avif"
+          />
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  import { initParallax } from '@/scripts/parallax';
+  initParallax();
+</script>

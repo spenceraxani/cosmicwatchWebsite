@@ -22,11 +22,19 @@ export class Run {
   readonly t = new Column(Float64Array); // detector timestamp, s
   readonly flag = new Column(Uint8Array); // 1 = coincident
   readonly adc = new Column(Uint16Array); // 0 to 4095
-  readonly dead = new Column(Float64Array); // cumulative deadtime, s
+  readonly sipm = new Column(Float32Array); // SiPM peak, mV
+  readonly dead = new Column(Float64Array); // cumulative deadtime since the detector started, s
   readonly temp = new Column(Float32Array); // °C
   readonly press = new Column(Float32Array); // Pa
-  readonly tilt = new Column(Float32Array); // degrees from vertical, from the accelerometer
+  readonly ax = new Column(Float32Array); // acceleration, g
+  readonly ay = new Column(Float32Array);
+  readonly az = new Column(Float32Array);
+  readonly gx = new Column(Float32Array); // angular velocity, deg/s
+  readonly gy = new Column(Float32Array);
+  readonly gz = new Column(Float32Array);
   skipped = 0;
+
+  private readonly cols = [this.t, this.flag, this.adc, this.sipm, this.dead, this.temp, this.press, this.ax, this.ay, this.az, this.gx, this.gy, this.gz];
 
   clear() {
     this.n = 0;
@@ -54,26 +62,24 @@ export class Run {
     }
     const i = this.n;
     const need = i + 1;
-    this.t.ensure(need);
-    this.flag.ensure(need);
-    this.adc.ensure(need);
-    this.dead.ensure(need);
-    this.temp.ensure(need);
-    this.press.ensure(need);
-    this.tilt.ensure(need);
+    for (const col of this.cols) col.ensure(need);
     this.t.data[i] = t;
-    this.flag.data[i] = c[2] === '1' ? 1 : 0;
+    // Same rule as the GUI: anything other than 0/false/empty counts as coincident.
+    this.flag.data[i] = ['0', 'false', 'False', ''].includes(c[2].trim()) ? 0 : 1;
     this.adc.data[i] = parseInt(c[3], 10) || 0;
+    this.sipm.data[i] = parseFloat(c[4]);
     this.dead.data[i] = parseFloat(c[5]) || 0;
     this.temp.data[i] = parseFloat(c[6]);
     this.press.data[i] = parseFloat(c[7]);
-    let tilt = NaN;
-    if (c[8]) {
-      const [ax, ay, az] = c[8].split(':').map(Number);
-      const g = Math.hypot(ax, ay, az);
-      if (g > 0.2) tilt = (Math.acos(Math.min(1, Math.abs(az) / g)) * 180) / Math.PI;
-    }
-    this.tilt.data[i] = tilt;
+    const xyz = (s: string | undefined) => (s ? s.split(':').map(Number) : [NaN, NaN, NaN]);
+    const [ax, ay, az] = xyz(c[8]);
+    const [gx, gy, gz] = xyz(c[9]);
+    this.ax.data[i] = ax;
+    this.ay.data[i] = ay;
+    this.az.data[i] = az;
+    this.gx.data[i] = gx;
+    this.gy.data[i] = gy;
+    this.gz.data[i] = gz;
     if (!this.name && c[10] && !/^\d/.test(c[10])) this.name = c[10];
     this.n = need;
     return true;
@@ -81,11 +87,6 @@ export class Run {
 
   get duration() {
     return this.n > 1 ? this.t.data[this.n - 1] - this.t.data[0] : 0;
-  }
-  /** Live time: duration minus the detector's reported deadtime. */
-  get liveTime() {
-    if (this.n < 2) return 0;
-    return Math.max(1e-9, this.duration - (this.dead.data[this.n - 1] - this.dead.data[0]));
   }
 }
 

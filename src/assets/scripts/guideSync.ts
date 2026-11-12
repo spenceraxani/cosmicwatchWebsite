@@ -99,9 +99,12 @@ async function check(el: HTMLElement) {
     note.innerHTML = '';
     note.append(
       `The PDF on GitHub was updated${remote.date ? ` on ${fmt(remote.date)}` : ''}, after this page was generated. `,
-      'The page updates on the next site sync. Until then, ',
+      'This page updates on the next site sync. Until then, ',
       Object.assign(document.createElement('a'), {
-        href: pdfLink(repo, branch, path),
+        // the site's live viewer if this block links to it, otherwise GitHub
+        href: el.querySelector<HTMLAnchorElement>('a[href^="/pdf/"]')?.getAttribute('href') ?? pdfLink(repo, branch, path),
+        target: '_blank',
+        rel: 'noopener',
         textContent: 'read the latest PDF',
       }),
       '.'

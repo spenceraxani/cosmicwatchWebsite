@@ -1,29 +1,33 @@
 ---
-import { reveal, revealImage, delay } from '@utils/motion';
+import { reveal, delay } from '@utils/motion';
 import { Image } from 'astro:assets';
 import MainLayout from '@/layouts/MainLayout.astro';
 import CwIcon from '@components/ui/icons/CwIcon.astro';
 import Icon from '@components/ui/icons/Icon.astro';
-import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
-import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro';
-import PartsList from '@components/sections/cosmicwatch/PartsList.astro';
-import { products, groups } from '@data/shop';
+import { products, groups, STORE_URL, STORE_NAME } from '@data/shop';
 import { CONTACT_EMAIL } from '@data/navigation';
 import { getCopy } from '@/copy';
 import type { MarketingLocale } from '@utils/locale';
 
-// UD requires Treasury-approved payment tools (Interim Payment Card Policy 3-26), so orders go by email
-// until a provider is approved; render its button into #pay then.
+// Display only. The University of Delaware does not allow payments on UD
+// websites, so this page takes no orders, payments, or shipping details.
+// Each "Buy" button leaves the site for the separate store (STORE_URL in
+// src/data_files/shop.ts). Until that store exists the buttons show
+// "Available soon".
 interface Props {
   locale: MarketingLocale;
 }
 const { locale } = Astro.props;
 const copy = getCopy(locale).shop;
 const money = (n: number | null) => (n == null ? copy.priceOnRequest : `$${n.toFixed(2)}`);
-// the template's TextInput classes
-const field =
-  'block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:ring-3 focus:ring-neutral-400 focus:outline-hidden dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1';
-const catalog = products.map(p => ({ id: p.id, name: p.name, price: p.price }));
+const storeLink = (id: string) => {
+  if (!STORE_URL) return null;
+  const u = new URL(STORE_URL);
+  u.searchParams.set('item', id);
+  return u.toString();
+};
+const buy =
+  'inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-orange-400 px-4 py-2.5 text-sm font-bold text-neutral-50 ring-zinc-500 outline-hidden transition-colors duration-200 hover:bg-orange-500 focus-visible:ring-3 dark:ring-zinc-200';
 ---
 
 <MainLayout title={copy.title} description={copy.metaDescription} ogTitle={copy.ogTitle}>
@@ -32,17 +36,29 @@ const catalog = products.map(p => ({ id: p.id, name: p.name, price: p.price }));
       <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200', reveal]}>{copy.heading}</h1>
       <p class="mt-3 text-lg text-pretty text-neutral-700 lg:w-4/5 dark:text-neutral-400">{copy.subTitle}</p>
     </div>
+
+    <div class:list={['mt-8 flex max-w-4xl gap-4 surface p-5 sm:p-6', reveal]} role="note">
+      <CwIcon name="globe" class="mt-0.5 size-7 shrink-0 text-orange-400 dark:text-orange-300" />
+      <div class="text-sm text-pretty text-neutral-700 dark:text-neutral-300">
+        <p class="font-bold text-neutral-800 dark:text-neutral-200">{copy.policyTitle}</p>
+        <p class="mt-1">{copy.policyBody(STORE_NAME)}</p>
+        <p class="mt-2 text-neutral-600 dark:text-neutral-400">
+          {copy.bulkNote} <a class="font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </p>
+      </div>
+    </div>
   </section>
 
-  <div class="mx-auto grid max-w-[85rem] gap-10 px-4 pb-10 sm:px-6 lg:grid-cols-[1fr_22rem] lg:px-8 2xl:max-w-full">
-    <div>
-      {groups.map(group => (
-        <section class="py-6" aria-labelledby={`g-${group.id}`}>
-          <h2 id={`g-${group.id}`} class="text-2xl font-bold text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">{group.title}</h2>
-          <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">{group.body}</p>
-          <div class="mt-6 grid gap-6 md:grid-cols-2">
-            {products.filter(p => p.group === group.id).map((p, i) => (
-              <article class:list={['flex flex-col overflow-hidden surface', reveal, delay(i % 2)]} data-product={p.id}>
+  <div class="mx-auto max-w-[85rem] px-4 pb-10 sm:px-6 lg:px-8 2xl:max-w-full">
+    {groups.map(group => (
+      <section class="py-6" aria-labelledby={`g-${group.id}`}>
+        <h2 id={`g-${group.id}`} class="text-2xl font-bold text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">{group.title}</h2>
+        <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">{group.body}</p>
+        <div class="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {products.filter(p => p.group === group.id).map((p, i) => {
+            const href = storeLink(p.id);
+            return (
+              <article class:list={['flex flex-col overflow-hidden surface', reveal, delay(i % 3)]} data-product={p.id}>
                 <div class:list={['flex aspect-[16/10] items-center justify-center overflow-hidden', p.cutout ? 'bg-neutral-200/60 dark:bg-white/[.05]' : 'bg-night']}>
                   <Image src={p.image} alt={p.imageAlt} width={700} class:list={['size-full', p.cutout ? 'cw-float object-contain p-6' : 'object-cover']} />
                 </div>
@@ -57,203 +73,49 @@ const catalog = products.map(p => ({ id: p.id, name: p.name, price: p.price }));
                       <li class="flex gap-x-2"><Icon name="checkCircle" class="mt-0.5 size-4 shrink-0 text-orange-400 dark:text-orange-300" />{item}</li>
                     ))}
                   </ul>
-                  <div class="mt-auto flex flex-wrap items-end gap-3 pt-6">
-                    {p.options && (
-                      <label class="text-sm text-neutral-700 dark:text-neutral-300">
-                        <span class="mb-1 block">{p.options.label}</span>
-                        <select data-option class={field}>
-                          {p.options.values.map(v => <option>{v}</option>)}
-                        </select>
-                      </label>
+                  {p.options && (
+                    <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+                      <span class="font-medium text-neutral-700 dark:text-neutral-300">{p.options.label}:</span> {p.options.values.join(', ')}
+                    </p>
+                  )}
+                  <div class="mt-auto flex flex-wrap items-center gap-3 pt-6">
+                    {href ? (
+                      <a class={buy} href={href} target="_blank" rel="noopener noreferrer">
+                        {copy.buy} <Icon name="arrowUp" class="size-4 rotate-45" />
+                        <span class="sr-only">{copy.opensStore(STORE_NAME)}</span>
+                      </a>
+                    ) : (
+                      <span class="inline-flex items-center rounded-lg border border-neutral-300 px-4 py-2.5 text-sm font-bold text-neutral-500 dark:border-neutral-600 dark:text-neutral-400">
+                        {copy.soon}
+                      </span>
                     )}
-                    <label class="text-sm text-neutral-700 dark:text-neutral-300">
-                      <span class="mb-1 block">{copy.qty}</span>
-                      <input data-qty type="number" min="1" max="200" value="1" class={`${field} w-20 tabular-nums`} />
-                    </label>
-                    <span class="ms-auto">
-                      <PrimaryCTA title={copy.add} type="button" data-add />
-                    </span>
                   </div>
                 </div>
               </article>
-            ))}
-          </div>
-        </section>
-      ))}
-
-      <section class:list={['mt-4 flex flex-col gap-5 surface p-6 sm:flex-row sm:items-start sm:p-8', reveal]}>
-        <CwIcon name="people" class="mt-1 size-8 shrink-0 text-orange-400 dark:text-orange-300" />
-        <div>
-          <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">{copy.quarknetTitle}</h2>
-          <p class="mt-1 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">{copy.quarknetBody}</p>
-          <a class="group mt-3 inline-flex items-center gap-x-1 text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href="https://quarknet.org/" target="_blank" rel="noopener noreferrer">quarknet.org <Icon name="arrowRight" class="size-4 shrink-0 transition duration-300 group-hover:translate-x-1" /></a>
+            );
+          })}
         </div>
       </section>
-    </div>
+    ))}
 
-    <aside class="lg:pt-6" aria-labelledby="cart-title">
-      <div id="cart" class="surface p-5 lg:sticky lg:top-28" data-catalog={JSON.stringify(catalog)} data-email={CONTACT_EMAIL}>
-        <h2 id="cart-title" class="flex items-center gap-2 text-lg font-bold text-neutral-800 dark:text-neutral-200">
-          {copy.cartTitle} <span id="cart-count" class="rounded-full bg-orange-400 px-2 py-0.5 text-xs text-neutral-50 tabular-nums">0</span>
-        </h2>
-        <p id="cart-empty" class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">{copy.cartEmpty}</p>
-        <ul id="cart-lines" class="mt-2 divide-y divide-neutral-300 dark:divide-neutral-700"></ul>
-        <p id="cart-total" class="mt-3 hidden border-t border-neutral-300 pt-3 text-sm text-neutral-600 dark:border-neutral-700 dark:text-neutral-300"></p>
-
-        <form id="order" class="mt-5 hidden space-y-4" novalidate>
-          <label class="block text-sm text-neutral-700 dark:text-neutral-300"><span class="mb-2 block">{copy.name}</span>
-            <input name="name" required autocomplete="name" class={field} />
-          </label>
-          <label class="block text-sm text-neutral-700 dark:text-neutral-300"><span class="mb-2 block">{copy.email}</span>
-            <input name="email" type="email" required autocomplete="email" class={field} />
-          </label>
-          <label class="block text-sm text-neutral-700 dark:text-neutral-300"><span class="mb-2 block">{copy.org}</span>
-            <input name="org" autocomplete="organization" class={field} />
-          </label>
-          <label class="block text-sm text-neutral-700 dark:text-neutral-300"><span class="mb-2 block">{copy.ship}</span>
-            <textarea name="ship" rows="2" autocomplete="street-address" class={field}></textarea>
-          </label>
-          <p id="order-error" class="hidden text-sm text-red-700 dark:text-red-400" role="alert"></p>
-          <div class="grid gap-3">
-            <PrimaryCTA title={copy.send} type="submit" />
-            <SecondaryCTA title={copy.copyOrder} type="button" id="order-copy" />
-          </div>
-          <p id="order-status" class="text-sm text-neutral-600 dark:text-neutral-400" aria-live="polite"></p>
-          <div id="pay" class="rounded-lg bg-neutral-200/70 p-3 text-xs text-pretty text-neutral-600 dark:bg-white/[.05] dark:text-neutral-400">{copy.payNote}</div>
-        </form>
+    <section class:list={['mt-4 flex flex-col gap-5 surface p-6 sm:flex-row sm:items-start sm:p-8', reveal]}>
+      <CwIcon name="people" class="mt-1 size-8 shrink-0 text-orange-400 dark:text-orange-300" />
+      <div>
+        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">{copy.quarknetTitle}</h2>
+        <p class="mt-1 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">{copy.quarknetBody}</p>
+        <a class="group mt-3 inline-flex items-center gap-x-1 text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href="https://quarknet.org/" target="_blank" rel="noopener noreferrer">quarknet.org <Icon name="arrowRight" class="size-4 shrink-0 transition duration-300 group-hover:translate-x-1" /></a>
       </div>
-    </aside>
+    </section>
   </div>
 
-  <PartsList />
+  <section class="mx-auto max-w-[85rem] px-4 pb-14 sm:px-6 lg:px-8 2xl:max-w-full">
+    <a href="/docs/parts-list/" class:list={['group flex flex-col gap-4 surface p-6 transition-colors hover:bg-neutral-100 sm:flex-row sm:items-center sm:p-8', reveal]}>
+      <CwIcon name="parts" class="size-9 shrink-0 text-orange-400" />
+      <span class="grow">
+        <span class="block text-lg font-bold text-neutral-800">Building it yourself?</span>
+        <span class="mt-1 block text-pretty text-neutral-600">The Parts List &amp; BOM has every component, with Digi-Key part numbers and a list you can paste straight into the Digi-Key cart.</span>
+      </span>
+      <span class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-orange-400">Parts List &amp; BOM <Icon name="arrowRight" class="size-4 transition group-hover:translate-x-1" /></span>
+    </a>
+  </section>
 </MainLayout>
-
-<script>
-  type Line = { id: string; option: string; qty: number };
-  const cartEl = document.getElementById('cart')!;
-  const catalog: { id: string; name: string; price: number | null }[] = JSON.parse(cartEl.dataset.catalog!);
-  const email = cartEl.dataset.email!;
-  const KEY = 'cw-cart';
-  const $ = (id: string) => document.getElementById(id)!;
-
-  const readCart = (): Line[] => {
-    try {
-      return JSON.parse(localStorage.getItem(KEY) || '[]');
-    } catch {
-      return [];
-    }
-  };
-  let cart: Line[] = readCart();
-  const save = () => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(cart));
-    } catch {
-      /* storage can be unavailable; the cart still works for this visit */
-    }
-  };
-  const label = (l: Line) => {
-    const p = catalog.find(c => c.id === l.id);
-    return `${p?.name ?? l.id}${l.option ? ` (${l.option})` : ''}`;
-  };
-
-  function render() {
-    const lines = $('cart-lines');
-    lines.innerHTML = '';
-    for (const [i, l] of cart.entries()) {
-      const li = document.createElement('li');
-      li.className = 'flex items-center gap-3 py-3 text-sm';
-      const name = document.createElement('span');
-      name.className = 'grow text-neutral-800 dark:text-neutral-200';
-      name.textContent = label(l);
-      const qty = document.createElement('input');
-      qty.type = 'number';
-      qty.min = '1';
-      qty.value = String(l.qty);
-      qty.setAttribute('aria-label', `Quantity of ${label(l)}`);
-      qty.className = 'w-16 rounded-lg border border-neutral-200 bg-neutral-50 px-2 py-1.5 text-neutral-700 tabular-nums dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300';
-      qty.addEventListener('change', () => {
-        l.qty = Math.max(1, parseInt(qty.value, 10) || 1);
-        save();
-        render();
-      });
-      const rm = document.createElement('button');
-      rm.type = 'button';
-      rm.textContent = 'Remove';
-      rm.className = 'text-neutral-500 decoration-2 hover:text-orange-400 hover:underline dark:hover:text-orange-300';
-      rm.addEventListener('click', () => {
-        cart.splice(i, 1);
-        save();
-        render();
-      });
-      li.append(name, qty, rm);
-      lines.append(li);
-    }
-    const count = cart.reduce((s, l) => s + l.qty, 0);
-    $('cart-count').textContent = String(count);
-    $('cart-empty').classList.toggle('hidden', cart.length > 0);
-    $('order').classList.toggle('hidden', cart.length === 0);
-    const priced = cart.every(l => catalog.find(c => c.id === l.id)?.price != null);
-    const total = $('cart-total');
-    total.classList.toggle('hidden', cart.length === 0);
-    total.textContent = priced
-      ? `Total: $${cart.reduce((s, l) => s + (catalog.find(c => c.id === l.id)!.price as number) * l.qty, 0).toFixed(2)} plus shipping`
-      : 'Prices for these items are on request. The lab replies with a quote and invoice.';
-  }
-
-  document.querySelectorAll<HTMLElement>('[data-product]').forEach(card => {
-    card.querySelector('[data-add]')!.addEventListener('click', e => {
-      const id = card.dataset.product!;
-      const option = (card.querySelector('[data-option]') as HTMLSelectElement | null)?.value ?? '';
-      const qty = Math.max(1, parseInt((card.querySelector('[data-qty]') as HTMLInputElement).value, 10) || 1);
-      const existing = cart.find(l => l.id === id && l.option === option);
-      if (existing) existing.qty += qty;
-      else cart.push({ id, option, qty });
-      save();
-      render();
-      const btn = e.currentTarget as HTMLButtonElement;
-      const text = btn.textContent;
-      btn.textContent = 'Added';
-      setTimeout(() => (btn.textContent = text), 1200);
-    });
-  });
-
-  function orderText(form: HTMLFormElement) {
-    const f = new FormData(form);
-    return [
-      'CosmicWatch order request',
-      '',
-      ...cart.map(l => `- ${l.qty} × ${label(l)}`),
-      '',
-      `Name: ${f.get('name') || ''}`,
-      `Email: ${f.get('email') || ''}`,
-      `School or organization: ${f.get('org') || ''}`,
-      `Ship to: ${f.get('ship') || ''}`,
-    ].join('\n');
-  }
-
-  const form = $('order') as HTMLFormElement;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const err = $('order-error');
-    const f = new FormData(form);
-    if (!String(f.get('name')).trim() || !/^\S+@\S+\.\S+$/.test(String(f.get('email')))) {
-      err.textContent = 'Add your name and a valid email so the lab can reply.';
-      err.classList.remove('hidden');
-      return;
-    }
-    err.classList.add('hidden');
-    const body = orderText(form);
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent('CosmicWatch order request')}&body=${encodeURIComponent(body)}`;
-    $('order-status').textContent = `Your email app should open with the order filled in. If it does not, use "Copy order" and send it to ${email}.`;
-  });
-  $('order-copy').addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(orderText(form));
-      $('order-status').textContent = `Order copied. Paste it into an email to ${email}.`;
-    } catch {
-      $('order-status').textContent = `Copying is blocked here. Email ${email} with the items listed above.`;
-    }
-  });
-
-  render();
-</script>

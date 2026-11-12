@@ -3,14 +3,23 @@ import { reveal, revealImage, delay } from '@utils/motion';
 import MainLayout from '@/layouts/MainLayout.astro';
 import CwIcon from '@components/ui/icons/CwIcon.astro';
 
+import { CORR_VARS } from '../scripts/measure/charts';
+
+// The same plots, in the same order, as the CosmicWatch GUI (GUI/GUI.py on GitHub).
 const tabs = [
-  { id: 'rate', label: 'Count rate', doc: '/docs/measurements/full-sky-rate/', blurb: 'Events per second over the run. Fluctuations should be about the square root of the count in each bin; anything bigger is a real change.' },
-  { id: 'spectrum', label: 'Pulse height', doc: '/docs/measurements/radioactive-backgrounds/', blurb: 'How big each pulse was. Radioactivity in the room piles up at small pulse heights; muons crossing the full centimeter of plastic make the broad bump above it. Coincident events keep mostly the muons.' },
-  { id: 'pressure', label: 'Air pressure', doc: '/docs/measurements/pressure-correlation/', blurb: 'Rate against air pressure. More air overhead means fewer muons reach the ground, so the slope should come out negative, around a tenth of a percent per hPa for coincident muons.' },
-  { id: 'temperature', label: 'Temperature', doc: '/docs/measurements/pressure-correlation/', blurb: 'Rate against the temperature inside the case. A strong trend here usually means the SiPM gain is drifting, not that the sky changed.' },
-  { id: 'intervals', label: 'Time between events', doc: '/docs/measurements/random-numbers/', blurb: 'Gaps between consecutive events. If the arrivals are random the bars follow the exponential curve, which is what makes the detector usable as a random number source.' },
-  { id: 'tilt', label: 'Tilt angle', doc: '/docs/measurements/angular-dependence/', blurb: 'Rate at each angle from vertical, read from the built-in accelerometer. Tip the detector over during a run and the muon rate should fall off roughly as cos²θ.' },
+  { id: 'rate', label: 'Rate', doc: '/docs/guides/example-measurements/tested-measurements/a-full-sky-cosmic-ray-muon-measurement/', blurb: 'Count rate over time for all, non-coincident and coincident events.' },
+  { id: 'adc', label: 'ADC', doc: '/docs/guides/example-measurements/tested-measurements/reducing-radioactive-backgrounds/', blurb: 'Pulse-height spectrum in ADC counts.' },
+  { id: 'sipm', label: 'SiPM', doc: '/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/', blurb: 'Pulse-height spectrum in SiPM peak voltage.' },
+  { id: 'pressure', label: 'Pressure', doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/', blurb: 'Air pressure over time.' },
+  { id: 'temperature', label: 'Temperature', doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/', blurb: 'Temperature inside the case over time.' },
+  { id: 'accel', label: 'Linear acceleration', doc: '/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-angular-dependence/', blurb: 'Acceleration along X, Y and Z.' },
+  { id: 'gyro', label: 'Angular velocity', doc: '/docs/guides/example-measurements/tested-measurements/high-altitude-balloon-flight/', blurb: 'Rotation rate around X, Y and Z.' },
+  { id: 'deadtime', label: 'Deadtime', doc: '/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/', blurb: 'Share of each bin the detector was busy and could not record.' },
+  { id: 'ratedist', label: 'Rate distribution', doc: '/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/', blurb: 'Histogram of the binned rates, with a Poisson fit.' },
+  { id: 'dt', label: 'Δt distribution', doc: '/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/', blurb: 'Time between events, with an exponential fit.' },
+  { id: 'corr', label: 'Correlation', doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/', blurb: 'Any two binned quantities against each other, with a straight-line fit.' },
 ];
+const corrOptions = Object.entries(CORR_VARS).map(([value, v]) => ({ value, label: v.label }));
 // the template's card, SecondaryCTA, PrimaryCTA and TextInput styles
 const box = 'surface';
 const inner = 'md:border-l md:border-neutral-300 md:pl-6 md:first:border-l-0 md:first:pl-0 dark:md:border-neutral-700';
@@ -24,13 +33,13 @@ const field =
 
 <MainLayout
   title="Measure"
-  description="Connect a CosmicWatch detector over USB or open a data file, then plot count rate, pulse height, pressure and temperature correlations, event timing and tilt. Send live summaries to a webhook."
+  description="Connect a CosmicWatch detector over USB or open a data file and get the same plots as the CosmicWatch GUI: rate, ADC and SiPM spectra, pressure, temperature, motion, deadtime, rate and Δt distributions, and correlations. Download CSV or a PDF report."
   ogTitle="Measure | CosmicWatch"
 >
   <section class="mx-auto max-w-[85rem] px-4 pt-10 pb-6 sm:px-6 lg:px-8 lg:pt-14 2xl:max-w-full">
     <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200', reveal]}>Measure</h1>
     <p class="mt-3 max-w-2xl text-lg text-pretty text-neutral-700 dark:text-neutral-400">
-      Plug in a detector or open a file it recorded, then pick a measurement. Everything runs in your browser; your data is not uploaded anywhere unless you set up a webhook below.
+      Plug a detector into this computer, or open a file it recorded, and plot the data as it comes in. There is nothing to install.
     </p>
   </section>
 
@@ -108,51 +117,59 @@ const field =
             </button>
           ))}
         </nav>
-        <fieldset class="flex items-center gap-1 rounded-lg bg-neutral-200 p-1 text-sm dark:bg-neutral-700">
-          <legend class="sr-only">Which events</legend>
-          <label class="cursor-pointer rounded-md px-3 py-1.5 font-medium text-neutral-600 has-[:checked]:bg-neutral-50 has-[:checked]:text-orange-400 has-[:checked]:shadow-xs dark:text-neutral-300 dark:has-[:checked]:bg-neutral-800 dark:has-[:checked]:text-orange-300">
-            <input type="radio" name="m-sel" value="all" class="sr-only" checked /> All events
-          </label>
-          <label class="cursor-pointer rounded-md px-3 py-1.5 font-medium text-neutral-600 has-[:checked]:bg-neutral-50 has-[:checked]:text-orange-400 has-[:checked]:shadow-xs dark:text-neutral-300 dark:has-[:checked]:bg-neutral-800 dark:has-[:checked]:text-orange-300">
-            <input type="radio" name="m-sel" value="coinc" class="sr-only" /> Coincident only
-          </label>
-        </fieldset>
       </div>
 
       <div id="m-panel" role="tabpanel" aria-labelledby="tab-rate" class="p-4 sm:p-6">
         {tabs.map((t, i) => (
           <div data-blurb={t.id} hidden={i !== 0}>
             <p class="max-w-3xl text-sm text-pretty text-neutral-600 dark:text-neutral-400">
-              {t.blurb} <a class="font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href={t.doc}>How to run this measurement</a>
+              {t.blurb}
             </p>
           </div>
         ))}
         <div class="mt-4 flex flex-wrap items-end gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-          <label data-ctl="bin" class="block">Bin size
+          <label data-ctl="bin" class="block">Bin time
             <select id="m-bin" class:list={[field, 'block']}>
               <option value="auto">Automatic</option>
-              <option value="10">10 seconds</option>
-              <option value="60">1 minute</option>
-              <option value="600">10 minutes</option>
-              <option value="3600">1 hour</option>
+              <option value="30">30 s</option>
+              <option value="60">60 s</option>
+              <option value="120">120 s</option>
+              <option value="180">180 s</option>
+              <option value="240">240 s</option>
+              <option value="600">600 s</option>
+              <option value="custom">Custom</option>
             </select>
           </label>
-          <label data-ctl="log" class="flex items-center gap-2 pb-2" hidden>
-            <input id="m-log" type="checkbox" class="size-4 rounded border-neutral-300 text-orange-400 focus:ring-orange-400" checked /> Log scale
+          <label id="m-bin-custom-wrap" class="block" hidden>Seconds
+            <input id="m-bin-custom" type="number" min="1" step="1" value="300" class:list={[field, 'block w-28 tabular-nums']} />
           </label>
-          <label data-ctl="step" class="block" hidden>Angle step
-            <select id="m-step" class:list={[field, 'block']}>
-              <option value="5">5°</option>
-              <option value="10" selected>10°</option>
-              <option value="15">15°</option>
+          <label data-ctl="corr" class="block" hidden>X axis
+            <select id="m-corr-x" class:list={[field, 'block']}>
+              {corrOptions.map(o => <option value={o.value} selected={o.value === 'pressure'}>{o.label}</option>)}
             </select>
           </label>
-          <div class="ms-auto flex gap-2">
+          <label data-ctl="corr" class="block" hidden>Y axis
+            <select id="m-corr-y" class:list={[field, 'block']}>
+              {corrOptions.map(o => <option value={o.value} selected={o.value === 'rate_coinc'}>{o.label}</option>)}
+            </select>
+          </label>
+          <fieldset class="flex items-end gap-2">
+            <legend class="sr-only">ADC window (applies to every plot)</legend>
+            <label class="block">ADC min
+              <input id="m-adc-min" type="number" min="0" max="4095" step="1" value="0" class:list={[field, 'block w-24 tabular-nums']} />
+            </label>
+            <label class="block">ADC max
+              <input id="m-adc-max" type="number" min="0" max="4095" step="1" value="4095" class:list={[field, 'block w-24 tabular-nums']} />
+            </label>
+            <button type="button" id="m-adc-reset" class={btn}>Reset</button>
+          </fieldset>
+          <div class="ms-auto flex flex-wrap gap-2">
             <button type="button" id="m-csv" class={btn} disabled>Download CSV</button>
             <button type="button" id="m-copy" class={btn} disabled>Copy CSV</button>
+            <button type="button" id="m-pdf" class={primary} disabled>PDF report</button>
           </div>
         </div>
-        <div class="relative mt-4 h-80 sm:h-96">
+        <div class="relative mt-4 h-80 sm:h-[26rem]">
           <canvas id="m-chart" aria-label="Measurement chart" role="img"></canvas>
           <p id="m-empty" class="absolute inset-0 flex items-center justify-center rounded-lg bg-neutral-50 px-6 text-center text-sm text-neutral-500 dark:bg-white/[.04] dark:text-neutral-400">
             Connect a detector, open a file or load the sample run to see this measurement.
@@ -168,7 +185,7 @@ const field =
         <div>
           <h2 id="wh-title" class="text-xl font-bold text-neutral-800 dark:text-neutral-200">Webhooks</h2>
           <p class="mt-1 max-w-3xl text-sm text-pretty text-neutral-600 dark:text-neutral-400">
-            While a detector is connected, send a summary every few minutes to a web address: your own server, a Google Apps Script that writes to a sheet, a Discord channel or a Slack channel. Only the summary leaves this page, never the raw events.
+            Send a summary to a server, Google Sheet, Discord or Slack while a detector is connected.
           </p>
         </div>
       </div>

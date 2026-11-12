@@ -1,0 +1,15 @@
+---
+// Dev-only test pages for the home-page hero. Not generated in production builds.
+import HomeView from '@views/HomeView.astro';
+import { heroPhotos } from '@data/heroPhotos';
+
+export function getStaticPaths() {
+  if (!import.meta.env.DEV) return [];
+  return ['current', 'tracks', 'glow', 'band', ...Object.keys(heroPhotos)].map(variant => ({ params: { variant } }));
+}
+
+const { variant } = Astro.params;
+const heroVariant = (variant === 'current' ? 'classic' : variant) as Parameters<typeof HomeView>[0]['heroVariant'];
+---
+
+<HomeView locale="en" heroVariant={heroVariant} heroLab={variant} />

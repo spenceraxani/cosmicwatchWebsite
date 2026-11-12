@@ -1,7 +1,5 @@
 import {
   Chart,
-  BarController,
-  BarElement,
   CategoryScale,
   Filler,
   Legend,
@@ -12,18 +10,14 @@ import {
   PointElement,
   ScatterController,
   Tooltip,
-  type ChartConfiguration,
-  type ChartDataset,
 } from 'chart.js';
 import { Run, parseStream, streamFromBlob } from './run';
-import { binByTime, correlate, intervals, spectrum, summary, tilt } from './analysis';
+import { autoBin, roundPair, select, totals } from './analysis';
+import { build, theme, type CorrVar, type Tab } from './charts';
 import { loadConfig, saveConfig, send, body, type Report, type WebhookConfig, type WebhookFormat } from './webhook';
 
-Chart.register(BarController, BarElement, CategoryScale, Filler, Legend, LinearScale, LineController, LineElement, LogarithmicScale, PointElement, ScatterController, Tooltip);
+Chart.register(CategoryScale, Filler, Legend, LinearScale, LineController, LineElement, LogarithmicScale, PointElement, ScatterController, Tooltip);
 
-type Tab = 'rate' | 'spectrum' | 'pressure' | 'temperature' | 'intervals' | 'tilt';
-
-const BLUE = '#2a618f';
 const SKY = '#53a1d8';
 
 export function initMeasure() {
@@ -34,6 +28,7 @@ export function initMeasure() {
   let csv: string[][] = [];
   let live = false;
   let rawLines: string[] = [];
+  let fileLabel = '';
 
   // Status
   const status = (text: string, state: 'idle' | 'busy' | 'live' | 'ok' | 'error' = 'ok') => {
@@ -51,238 +46,120 @@ export function initMeasure() {
     const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = Math.floor(s % 60);
     return h ? `${h} h ${m} min` : m ? `${m} min ${sec} s` : `${sec} s`;
   };
-  const pm = (v: number, e: number, unit: string) => `${v.toFixed(v < 1 ? 3 : 2)} ± ${e.toFixed(e < 0.01 ? 4 : 3)} ${unit}`;
+
+  // Controls, as in the GUI: bin time, ADC window, and the correlation pair.
+  const binSel = $<HTMLSelectElement>('m-bin');
+  const binCustom = $<HTMLInputElement>('m-bin-custom');
+  const adcMinIn = $<HTMLInputElement>('m-adc-min');
+  const adcMaxIn = $<HTMLInputElement>('m-adc-max');
+  const corrXIn = $<HTMLSelectElement>('m-corr-x');
+  const corrYIn = $<HTMLSelectElement>('m-corr-y');
+  const clampAdc = (v: string, d: number) => {
+    const n = Math.round(Number(v));
+    return Number.isFinite(n) ? Math.min(4095, Math.max(0, n)) : d;
+  };
+  function options() {
+    let adcMin = clampAdc(adcMinIn.value, 0);
+    let adcMax = clampAdc(adcMaxIn.value, 4095);
+    if (adcMin > adcMax) [adcMin, adcMax] = [adcMax, adcMin];
+    let binSec: number;
+    if (binSel.value === 'auto') binSec = autoBin(run.duration);
+    else if (binSel.value === 'custom') binSec = Math.max(1, Math.round(Number(binCustom.value) || 60));
+    else binSec = Number(binSel.value);
+    return { binSec, adcMin, adcMax, corrX: corrXIn.value as CorrVar, corrY: corrYIn.value as CorrVar };
+  }
+  const events = () => {
+    const o = options();
+    return select(run, o.adcMin, o.adcMax);
+  };
 
   function showSummary() {
-    const s = summary(run);
-    $('s-duration').textContent = run.n ? fmtDur(s.duration) : '–';
-    $('s-events').textContent = run.n ? s.events.toLocaleString('en-US') : '–';
-    $('s-rate').textContent = run.n > 1 ? `${s.rate.toFixed(2)} Hz` : '–';
-    $('s-coinc').textContent = run.n > 1 ? `${s.coincRate.toFixed(3)} Hz` : '–';
+    const idx = events();
+    const s = totals(run, idx);
+    const ok = idx.length > 1;
+    const hz = (k: 'all' | 'coinc') => roundPair(s.rate[k], s.err[k]).join(' ± ') + ' Hz';
+    $('s-duration').textContent = idx.length ? fmtDur(s.duration) : '–';
+    $('s-events').textContent = idx.length ? s.events.toLocaleString('en-US') : '–';
+    $('s-rate').textContent = ok ? hz('all') : '–';
+    $('s-coinc').textContent = ok ? hz('coinc') : '–';
     $('s-temp').textContent = Number.isFinite(s.temp) ? `${s.temp.toFixed(1)} °C` : '–';
-    $('s-press').textContent = Number.isFinite(s.pressHPa) ? `${s.pressHPa.toFixed(1)} hPa` : '–';
+    $('s-press').textContent = Number.isFinite(s.press) ? `${(s.press / 100).toFixed(1)} hPa` : '–';
+    const auto = binSel.querySelector('option[value="auto"]');
+    if (auto) auto.textContent = run.n > 1 ? `Automatic (${autoBin(run.duration)} s)` : 'Automatic';
   }
 
   // Chart
   const dark = () => document.documentElement.classList.contains('dark');
-  const theme = () => ({
-    text: dark() ? '#d6e0ea' : '#34465a',
-    grid: dark() ? 'rgba(214,224,234,0.12)' : 'rgba(27,44,61,0.08)',
-    main: dark() ? SKY : BLUE,
-    second: dark() ? '#bcdcf3' : SKY,
-  });
   Chart.defaults.font.family = "'IBM Plex Sans Variable', 'IBM Plex Sans', system-ui, sans-serif";
 
-  function draw(config: ChartConfiguration) {
-    const th = theme();
-    type Scale = { ticks?: object; grid?: object; title?: object };
-    type Opts = { scales?: Record<string, Scale>; plugins?: object; maintainAspectRatio?: boolean; animation?: boolean };
-    const opts = (config.options ??= {}) as Opts;
-    const scales = opts.scales ?? {};
-    for (const k of Object.keys(scales)) {
-      scales[k].ticks = { color: th.text, ...(scales[k].ticks ?? {}) };
-      scales[k].grid = { color: th.grid, ...(scales[k].grid ?? {}) };
-      if (scales[k].title) scales[k].title = { display: true, color: th.text, ...scales[k].title };
-    }
-    opts.plugins = {
-      legend: { labels: { color: th.text, boxWidth: 12 } },
-      tooltip: { intersect: false, mode: 'nearest' },
-      ...(opts.plugins ?? {}),
-    };
-    opts.maintainAspectRatio = false;
-    opts.animation = false;
-    chart?.destroy();
-    chart = new Chart($<HTMLCanvasElement>('m-chart'), config);
-  }
-
-  function autoBin() {
-    const d = run.duration;
-    if (d < 20 * 60) return 10;
-    if (d < 3 * 3600) return 60;
-    if (d < 24 * 3600) return 600;
-    return 3600;
-  }
-
   function render() {
-    const empty = run.n < 2;
+    const idx = events();
+    const empty = idx.length < 2;
     $('m-empty').hidden = !empty;
-    $<HTMLButtonElement>('m-csv').disabled = empty;
-    $<HTMLButtonElement>('m-copy').disabled = empty;
+    for (const id of ['m-csv', 'm-copy', 'm-pdf']) $<HTMLButtonElement>(id).disabled = empty;
     if (empty) {
       chart?.destroy();
       chart = null;
-      $('m-result').textContent = '';
+      csv = [];
+      $('m-result').textContent = run.n > 1 ? 'No events inside this ADC window.' : '';
       return;
     }
-    const coinc = (document.querySelector('input[name="m-sel"]:checked') as HTMLInputElement).value === 'coinc';
-    const binSel = $<HTMLSelectElement>('m-bin').value;
-    const binSec = binSel === 'auto' ? autoBin() : Number(binSel);
-    const th = theme();
-    const which = coinc ? 'Coincident' : 'All';
-    let result = '';
-
-    if (tab === 'rate') {
-      const b = binByTime(run, binSec, coinc, live);
-      csv = [['hours', 'rate_hz', 'error_hz', 'counts', 'temp_c', 'pressure_hpa'], ...b.x.map((x, i) => [x, b.rate[i], b.err[i], b.counts[i], b.temp[i], b.press[i]].map(v => String(+Number(v).toFixed(5))))];
-      draw({
-        type: 'line',
-        data: {
-          datasets: [
-            { label: '+1σ', data: b.x.map((x, i) => ({ x, y: b.rate[i] + b.err[i] })), borderWidth: 0, pointRadius: 0, fill: '+1', backgroundColor: th.main + '22' },
-            { label: '−1σ', data: b.x.map((x, i) => ({ x, y: b.rate[i] - b.err[i] })), borderWidth: 0, pointRadius: 0, fill: false },
-            { label: `${which} events`, data: b.x.map((x, i) => ({ x, y: b.rate[i] })), borderColor: th.main, borderWidth: 2, pointRadius: b.x.length < 80 ? 2 : 0, tension: 0 },
-          ],
-        },
-        options: {
-          parsing: false,
-          plugins: { legend: { labels: { filter: (i: any) => !i.text.includes('σ'), color: th.text } } },
-          scales: {
-            x: { type: 'linear', title: { text: `Hours since start (bins of ${binSec >= 3600 ? binSec / 3600 + ' h' : binSec >= 60 ? binSec / 60 + ' min' : binSec + ' s'})` } },
-            y: { title: { text: 'Rate (events per second)' } },
-          },
-        },
-      } as ChartConfiguration);
-      const s = summary(run);
-      result = coinc ? `Coincident rate: ${pm(s.coincRate, s.coincErr, 'Hz')}` : `Average rate: ${pm(s.rate, s.rateErr, 'Hz')}`;
-    }
-
-    if (tab === 'spectrum') {
-      const full = spectrum(run);
-      let last = full.all.length - 1;
-      while (last > 8 && full.all[last] === 0) last--;
-      const sp = { ...full, centres: full.centres.slice(0, last + 2), all: full.all.slice(0, last + 2), coinc: full.coinc.slice(0, last + 2) };
-      const log = $<HTMLInputElement>('m-log').checked;
-      csv = [['adc_bin_centre', 'all_events', 'coincident_events'], ...sp.centres.map((c, i) => [c, sp.all[i], sp.coinc[i]].map(String))];
-      const datasets: any[] = [];
-      if (!coinc) datasets.push({ label: 'All events', data: sp.all, backgroundColor: th.second, borderWidth: 0, barPercentage: 1, categoryPercentage: 1 });
-      datasets.push({ label: 'Coincident events', data: sp.coinc, backgroundColor: th.main, borderWidth: 0, barPercentage: 1, categoryPercentage: 1 });
-      draw({
-        type: 'bar',
-        data: { labels: sp.centres, datasets },
-        options: {
-          scales: {
-            x: { stacked: false, title: { text: 'Pulse height (ADC counts, 0 to 4095)' }, ticks: { maxTicksLimit: 9 } },
-            y: { type: log ? 'logarithmic' : 'linear', title: { text: 'Events per bin' } },
-          },
-        },
-      } as ChartConfiguration);
-      const total = sp.all.reduce((a, b) => a + b, 0);
-      const c = sp.coinc.reduce((a, b) => a + b, 0);
-      result = `${(100 * c / Math.max(1, total)).toFixed(1)}% of events were coincident.`;
-    }
-
-    if (tab === 'pressure' || tab === 'temperature') {
-      const key = tab === 'pressure' ? 'press' : 'temp';
-      const b = binByTime(run, Math.max(binSec, 600), coinc);
-      const r = correlate(b, key);
-      const unit = key === 'press' ? 'hPa' : '°C';
-      csv = [[key === 'press' ? 'pressure_hpa' : 'temp_c', 'rate_hz', 'error_hz'], ...r.points.map((p, i) => [p.x, p.y, b.err[i]].map(v => String(+Number(v).toFixed(5))))];
-      const xs = r.points.map(p => p.x);
-      const lo = Math.min(...xs), hi = Math.max(...xs);
-      const fitLine = r.fit ? [{ x: lo, y: r.fit.a + r.fit.b * lo }, { x: hi, y: r.fit.a + r.fit.b * hi }] : [];
-      draw({
-        type: 'scatter',
-        data: {
-          datasets: [
-            { label: `${which} events, one point per ${Math.max(binSec, 600) >= 3600 ? 'hour' : '10 minutes'}`, data: r.points, backgroundColor: th.main, pointRadius: 3 },
-            { type: 'line', label: 'Straight-line fit', data: fitLine, borderColor: th.text, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0 },
-          ],
-        },
-        options: {
-          scales: {
-            x: { type: 'linear', title: { text: key === 'press' ? 'Air pressure (hPa)' : 'Temperature in the case (°C)' } },
-            y: { title: { text: 'Rate (events per second)' } },
-          },
-        },
-      } as ChartConfiguration);
-      const range = hi - lo;
-      const narrow = key === 'press' ? range < 4 : range < 2;
-      result = r.fit && r.points.length > 2
-        ? `Slope: ${r.percentPerUnit.toFixed(3)} ± ${r.percentErr.toFixed(3)} % per ${unit}, from ${r.points.length} points.` +
-          (narrow ? ` The ${key === 'press' ? 'pressure' : 'temperature'} only changed by ${range.toFixed(1)} ${unit} in this run, so the slope is mostly noise. Runs of a few days through a weather change work best.` : '')
-        : 'Needs a longer run: at least three 10-minute bins with different readings.';
-    }
-
-    if (tab === 'intervals') {
-      const iv = intervals(run, coinc);
-      if (!iv) {
-        result = 'Not enough events yet.';
-      } else {
-        const unit = iv.mean < 1 ? 'ms' : 's';
-        const k = unit === 'ms' ? 1000 : 1;
-        csv = [[`interval_${unit}`, 'observed', 'expected_exponential'], ...iv.centres.map((c, i) => [c * k, iv.hist[i], iv.expected[i]].map(v => String(+Number(v).toFixed(4))))];
-        draw({
-          type: 'bar',
-          data: {
-            labels: iv.centres.map(c => (c * k).toFixed(unit === 'ms' ? 0 : 1)),
-            datasets: [
-              { type: 'line', label: 'Expected if arrivals are random', data: iv.expected, borderColor: th.text, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0 } as unknown as ChartDataset<'bar'>,
-              { label: `${which} events`, data: iv.hist, backgroundColor: th.main, borderWidth: 0, barPercentage: 1, categoryPercentage: 1 },
-            ],
-          },
-          options: {
-            scales: {
-              x: { title: { text: `Time since the previous event (${unit})` }, ticks: { maxTicksLimit: 10 } },
-              y: { type: 'logarithmic', title: { text: 'Number of gaps' } },
-            },
-          },
-        } as ChartConfiguration);
-        result = `Mean gap ${(iv.mean * k).toFixed(unit === 'ms' ? 0 : 2)} ${unit} over ${iv.n.toLocaleString('en-US')} gaps.`;
-      }
-    }
-
-    if (tab === 'tilt') {
-      const step = Number($<HTMLSelectElement>('m-step').value);
-      const tl = tilt(run, coinc, step);
-      csv = [['angle_deg', 'rate_hz', 'error_hz', 'minutes_at_angle', 'cos2_reference_hz'], ...tl.rows.map((r, i) => [r.angle, r.rate, r.err, r.minutes, tl.cos2[i]].map(v => String(+Number(v).toFixed(5))))];
-      draw({
-        type: 'scatter',
-        data: {
-          datasets: [
-            { label: `${which} events`, data: tl.rows.map(r => ({ x: r.angle, y: r.rate })), backgroundColor: th.main, pointRadius: 4 },
-            { type: 'line', label: 'cos²θ, scaled to the first point', data: tl.rows.map((r, i) => ({ x: r.angle, y: tl.cos2[i] })), borderColor: th.text, borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0 },
-          ],
-        },
-        options: {
-          scales: {
-            x: { type: 'linear', min: 0, max: 90, title: { text: 'Tilt from vertical (degrees)' } },
-            y: { min: 0, title: { text: 'Rate (events per second)' } },
-          },
-        },
-      } as ChartConfiguration);
-      result = tl.rows.length > 1
-        ? `Data at ${tl.rows.length} angles. Spend at least an hour at each angle for clear coincident results.`
-        : 'This run stayed at one angle. Tip the detector during a run (or record several runs) to measure the angular dependence.';
-    }
-
-    $('m-result').textContent = result;
+    const built = build(tab, run, idx, options(), theme(dark()));
+    csv = built.csv;
+    $('m-result').textContent = built.result;
+    chart?.destroy();
+    chart = built.config ? new Chart($<HTMLCanvasElement>('m-chart'), built.config) : null;
   }
 
   // Tabs and controls
-  const ctlFor: Record<Tab, string[]> = { rate: ['bin'], spectrum: ['log'], pressure: ['bin'], temperature: ['bin'], intervals: [], tilt: ['step'] };
+  const ctlFor: Record<Tab, string[]> = {
+    rate: ['bin'], adc: [], sipm: [], pressure: ['bin'], temperature: ['bin'], accel: ['bin'], gyro: ['bin'],
+    deadtime: ['bin'], ratedist: ['bin'], dt: [], corr: ['bin', 'corr'],
+  };
+  function showControls() {
+    document.querySelectorAll<HTMLElement>('[data-ctl]').forEach(el => (el.hidden = !ctlFor[tab].includes(el.dataset.ctl!)));
+    $('m-bin-custom-wrap').hidden = !ctlFor[tab].includes('bin') || binSel.value !== 'custom';
+  }
   document.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach(b => {
     b.addEventListener('click', () => {
       tab = b.dataset.tab as Tab;
       document.querySelectorAll('[data-tab]').forEach(o => o.setAttribute('aria-selected', String(o === b)));
       $('m-panel').setAttribute('aria-labelledby', b.id);
       document.querySelectorAll<HTMLElement>('[data-blurb]').forEach(el => (el.hidden = el.dataset.blurb !== tab));
-      document.querySelectorAll<HTMLElement>('[data-ctl]').forEach(el => (el.hidden = !ctlFor[tab].includes(el.dataset.ctl!)));
+      showControls();
       render();
     });
   });
-  ['m-bin', 'm-log', 'm-step'].forEach(id => $(id).addEventListener('change', render));
-  document.querySelectorAll('input[name="m-sel"]').forEach(r => r.addEventListener('change', render));
+  binSel.addEventListener('change', () => {
+    showControls();
+    render();
+  });
+  [binCustom, corrXIn, corrYIn].forEach(el => el.addEventListener('change', render));
+  [adcMinIn, adcMaxIn].forEach(el =>
+    el.addEventListener('change', () => {
+      showSummary();
+      render();
+    })
+  );
+  $('m-adc-reset').addEventListener('click', () => {
+    adcMinIn.value = '0';
+    adcMaxIn.value = '4095';
+    showSummary();
+    render();
+  });
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  showControls();
 
-  // CSV
+  // Exports
   const csvText = () => csv.map(r => r.join(',')).join('\n') + '\n';
-  $('m-csv').addEventListener('click', () => {
+  const download = (blob: Blob, name: string) => {
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([csvText()], { type: 'text/csv' }));
-    a.download = `${run.name || 'cosmicwatch'}-${tab}.csv`;
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  });
+  };
+  $('m-csv').addEventListener('click', () => download(new Blob([csvText()], { type: 'text/csv' }), `${run.name || 'cosmicwatch'}-${tab}.csv`));
   $('m-copy').addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(csvText());
@@ -291,12 +168,28 @@ export function initMeasure() {
       $('m-result').textContent = 'Copying is blocked here. Use Download CSV instead.';
     }
   });
+  $('m-pdf').addEventListener('click', async () => {
+    const btn = $<HTMLButtonElement>('m-pdf');
+    const label = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Making PDF…';
+    try {
+      const { downloadReport } = await import('./report');
+      await downloadReport(run, events(), options(), fileLabel || (live ? 'live from USB' : 'data file'));
+    } catch (e) {
+      $('m-result').textContent = `The PDF could not be made: ${(e as Error).message}`;
+    } finally {
+      btn.textContent = label;
+      btn.disabled = run.n < 2;
+    }
+  });
 
   // Files and the sample
   async function loadBlob(blob: Blob, label: string) {
     if (live) await disconnect();
     run.clear();
     rawLines = [];
+    fileLabel = label;
     status(`Reading ${label}…`, 'busy');
     const prog = $<HTMLProgressElement>('m-progress');
     prog.classList.remove('hidden');
@@ -389,6 +282,7 @@ export function initMeasure() {
     }
     run.clear();
     rawLines = [];
+    fileLabel = 'live from USB';
     live = true;
     $('m-connect').hidden = true;
     $('m-disconnect').hidden = false;
@@ -469,7 +363,7 @@ export function initMeasure() {
     let c = 0;
     for (let i = startIdx; i < end; i++) c += run.flag.data[i];
     const window = Math.max(1e-6, t1 - from);
-    const s = summary(run);
+    const s = totals(run, select(run));
     const n = end - startIdx;
     return {
       detector: run.name || 'CosmicWatch',

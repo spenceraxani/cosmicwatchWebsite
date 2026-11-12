@@ -33,7 +33,7 @@ const { title, subTitle, measurements, allTitle, allUrl } = Astro.props;
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {measurements.map((m, i) => (
       <a
-        href={`/docs/measurements/${m.slug}/`}
+        href={m.url}
         class:list={['group surface flex h-full flex-col overflow-hidden ring-zinc-500 outline-hidden transition-colors duration-200 hover:bg-neutral-50 focus-visible:ring-3 dark:ring-zinc-200 dark:hover:bg-white/[.09]', reveal, delay(i % 3)]}
       >
         <div class="aspect-[16/10] overflow-hidden bg-white">

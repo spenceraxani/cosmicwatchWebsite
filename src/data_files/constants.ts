@@ -16,35 +16,3 @@ export const SITE = {
 export const OG = {
   image: ogImageSrc,
 };
-
-// Shown as plain text; use official logos only with each group's permission.
-const wordmark = (name: string, detail: string) =>
-  `<span class="block py-3 text-center sm:text-left"><span class="block text-lg font-bold tracking-tight text-neutral-700 dark:text-neutral-300">${name}</span><span class="block text-sm text-neutral-500 dark:text-neutral-400">${detail}</span></span>`;
-
-export const partnersData = [
-  {
-    icon: wordmark('MIT', 'Junior Lab'),
-    name: 'MIT Junior Lab',
-    href: 'https://arxiv.org/abs/2508.12111',
-  },
-  {
-    icon: wordmark('University of Delaware', 'Advanced Lab'),
-    name: 'UD Advanced Lab',
-    href: 'https://arxiv.org/abs/2508.12111',
-  },
-  {
-    icon: wordmark('Cornell', 'Intro physics labs'),
-    name: 'Cornell',
-    href: 'https://arxiv.org/abs/2508.12111',
-  },
-  {
-    icon: wordmark('QuarkNet', 'Teacher workshops'),
-    name: 'QuarkNet',
-    href: 'https://quarknet.org/',
-  },
-  {
-    icon: wordmark('NASA TechRise', 'Rocket and balloon payloads'),
-    name: 'NASA TechRise',
-    href: 'https://arxiv.org/abs/2508.12111',
-  },
-];

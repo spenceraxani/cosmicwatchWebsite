@@ -1,158 +1,330 @@
+// The same calculations as the CosmicWatch GUI (GUI/GUI.py in the v3X repo),
+// so a file gives the same numbers here as on the desktop.
 import type { Run } from './run';
 
-export interface Binned {
-  x: number[]; // bin centre, hours since the first event
-  rate: number[]; // events per second
-  err: number[]; // Poisson error on the rate
-  temp: number[]; // mean °C in the bin
-  press: number[]; // mean hPa in the bin
-  counts: number[];
+export type Series = 'all' | 'non' | 'coinc';
+export const SERIES: Series[] = ['all', 'non', 'coinc'];
+
+/** Indices of the events inside the ADC window, like the GUI's ADC Min / Max cut. */
+export function select(run: Run, adcMin = 0, adcMax = 4095): Uint32Array {
+  const out = new Uint32Array(run.n);
+  let k = 0;
+  for (let i = 0; i < run.n; i++) {
+    const a = run.adc.data[i];
+    if (a >= adcMin && a <= adcMax) out[k++] = i;
+  }
+  return out.subarray(0, k);
 }
 
-const sel = (run: Run, coinc: boolean, i: number) => !coinc || run.flag.data[i] === 1;
+const isCoinc = (run: Run, i: number) => run.flag.data[i] === 1;
+const inSeries = (run: Run, i: number, s: Series) => s === 'all' || (s === 'coinc') === isCoinc(run, i);
 
-/** Rate in fixed time bins. The last, partial bin is dropped unless `keepPartial`. */
-export function binByTime(run: Run, binSec: number, coinc: boolean, keepPartial = false): Binned {
-  const out: Binned = { x: [], rate: [], err: [], temp: [], press: [], counts: [] };
-  if (run.n < 2) return out;
-  const t0 = run.t.data[0];
-  const tEnd = run.t.data[run.n - 1];
-  const nb = Math.max(1, Math.floor((tEnd - t0) / binSec) + (keepPartial ? 1 : 0));
-  const counts = new Float64Array(nb);
-  const tSum = new Float64Array(nb);
-  const pSum = new Float64Array(nb);
-  const all = new Float64Array(nb);
-  for (let i = 0; i < run.n; i++) {
-    const b = Math.floor((run.t.data[i] - t0) / binSec);
-    if (b >= nb) continue;
-    all[b]++;
-    tSum[b] += run.temp.data[i];
-    pSum[b] += run.press.data[i];
-    if (sel(run, coinc, i)) counts[b]++;
+/** Round a value and its error to the error's second significant digit (GUI `round`). */
+export function roundPair(x: number, err: number): [string, string] {
+  if (!(err > 0) || !Number.isFinite(x)) return [String(x), String(err)];
+  const digits = Math.max(0, 1 - Math.floor(Math.log10(err)));
+  return [x.toFixed(digits), err.toFixed(digits)];
+}
+
+export interface Totals {
+  events: number;
+  coincident: number;
+  duration: number; // s
+  liveTime: number; // s, duration minus the detector's deadtime
+  rate: Record<Series, number>;
+  err: Record<Series, number>;
+  temp: number;
+  press: number; // Pa
+}
+
+export function totals(run: Run, idx: Uint32Array): Totals {
+  const n = idx.length;
+  const zero = { all: 0, non: 0, coinc: 0 };
+  if (n < 2) return { events: n, coincident: 0, duration: 0, liveTime: 0, rate: { ...zero }, err: { ...zero }, temp: NaN, press: NaN };
+  let c = 0, tSum = 0, pSum = 0, tN = 0, pN = 0;
+  let tMin = Infinity, tMax = -Infinity, dMin = Infinity, dMax = -Infinity;
+  for (const i of idx) {
+    if (isCoinc(run, i)) c++;
+    const t = run.t.data[i], d = run.dead.data[i];
+    if (t < tMin) tMin = t;
+    if (t > tMax) tMax = t;
+    if (d < dMin) dMin = d;
+    if (d > dMax) dMax = d;
+    const T = run.temp.data[i], P = run.press.data[i];
+    if (Number.isFinite(T)) { tSum += T; tN++; }
+    if (Number.isFinite(P)) { pSum += P; pN++; }
   }
+  const duration = tMax - tMin;
+  const live = Math.max(1e-9, duration - (dMax - dMin));
+  const counts = { all: n, non: n - c, coinc: c };
+  const rate = { all: counts.all / live, non: counts.non / live, coinc: counts.coinc / live };
+  const err = { all: Math.sqrt(counts.all) / live, non: Math.sqrt(counts.non) / live, coinc: Math.sqrt(counts.coinc) / live };
+  return { events: n, coincident: c, duration, liveTime: live, rate, err, temp: tN ? tSum / tN : NaN, press: pN ? pSum / pN : NaN };
+}
+
+/** The GUI's default bin: the choice closest to run length / 200. */
+export const BIN_CHOICES = [30, 60, 120, 180, 240, 600];
+export function autoBin(duration: number) {
+  const ideal = duration / 200;
+  return BIN_CHOICES.reduce((best, b) => (Math.abs(b - ideal) < Math.abs(best - ideal) ? b : best), BIN_CHOICES[0]);
+}
+
+export interface Binned {
+  binSec: number;
+  minutes: number[]; // bin centre, minutes since the first event
+  counts: Record<Series, number[]>;
+  rate: Record<Series, number[]>;
+  rateErr: Record<Series, number[]>;
+  press: number[]; // Pa
+  temp: number[]; // °C
+  ax: number[]; ay: number[]; az: number[];
+  gx: number[]; gy: number[]; gz: number[];
+  deadPct: number[]; // deadtime / bin width, %
+}
+
+/**
+ * Fixed time bins from the first event, dropping the last partial bin (as the GUI's
+ * `range(0, max_t, bin)` does). Rates divide by each bin's live time: the sum of
+ * the event gaps minus the deadtime the detector reported for those events.
+ */
+export function binByTime(run: Run, idx: Uint32Array, binSec: number): Binned {
+  const empty = (): Record<Series, number[]> => ({ all: [], non: [], coinc: [] });
+  const out: Binned = { binSec, minutes: [], counts: empty(), rate: empty(), rateErr: empty(), press: [], temp: [], ax: [], ay: [], az: [], gx: [], gy: [], gz: [], deadPct: [] };
+  if (idx.length < 2) return out;
+  const t0 = run.t.data[idx[0]];
+  let dMin = Infinity;
+  for (const i of idx) dMin = Math.min(dMin, run.dead.data[i]);
+  const tLast = run.t.data[idx[idx.length - 1]] - t0;
+  const nb = Math.max(0, Math.ceil(Math.floor(tLast) / binSec) - 1);
+  if (nb === 0) return out;
+
+  const zeros = () => new Float64Array(nb);
+  const cAll = zeros(), cCo = zeros(), live = zeros(), dead = zeros(), nEv = zeros();
+  const sums = { press: zeros(), temp: zeros(), ax: zeros(), ay: zeros(), az: zeros(), gx: zeros(), gy: zeros(), gz: zeros() };
+  const cols = { press: run.press, temp: run.temp, ax: run.ax, ay: run.ay, az: run.az, gx: run.gx, gy: run.gy, gz: run.gz };
+  const hi = nb * binSec;
+  let prevT = 0, prevD = 0;
+  for (let k = 0; k < idx.length; k++) {
+    const i = idx[k];
+    const t = run.t.data[i] - t0;
+    const d = run.dead.data[i] - dMin;
+    const evDead = d - prevD;
+    const evLive = t - prevT - evDead;
+    prevT = t;
+    prevD = d;
+    if (t > hi) continue; // numpy's last bin includes its right edge
+    const b = Math.min(nb - 1, Math.floor(t / binSec));
+    cAll[b]++;
+    if (isCoinc(run, i)) cCo[b]++;
+    live[b] += evLive;
+    dead[b] += evDead;
+    nEv[b]++;
+    for (const key of Object.keys(sums) as (keyof typeof sums)[]) sums[key][b] += cols[key].data[i];
+  }
+  // Mean per bin; empty bins are filled by interpolating their neighbours, as in the GUI.
+  const mean = (sum: Float64Array) => {
+    const v = Array.from(sum, (s, b) => (nEv[b] ? s / nEv[b] : NaN));
+    const good = v.map((x, b) => (Number.isFinite(x) ? b : -1)).filter(b => b >= 0);
+    if (good.length > 1) {
+      for (let b = 0; b < nb; b++) {
+        if (Number.isFinite(v[b])) continue;
+        const r = good.find(g => g > b);
+        const l = [...good].reverse().find(g => g < b);
+        if (l === undefined) v[b] = v[r!];
+        else if (r === undefined) v[b] = v[l];
+        else v[b] = v[l] + ((v[r] - v[l]) * (b - l)) / (r - l);
+      }
+    }
+    return v;
+  };
   for (let b = 0; b < nb; b++) {
-    const width = keepPartial && b === nb - 1 ? Math.max(1e-6, tEnd - t0 - b * binSec) : binSec;
-    out.x.push(((b + 0.5) * binSec) / 3600);
-    out.counts.push(counts[b]);
-    out.rate.push(counts[b] / width);
-    out.err.push(Math.sqrt(counts[b]) / width);
-    out.temp.push(all[b] ? tSum[b] / all[b] : NaN);
-    out.press.push(all[b] ? pSum[b] / all[b] / 100 : NaN);
+    const lt = live[b] > 0 ? live[b] : NaN;
+    const counts = { all: cAll[b], non: cAll[b] - cCo[b], coinc: cCo[b] };
+    out.minutes.push(((b + 0.5) * binSec) / 60);
+    for (const s of SERIES) {
+      out.counts[s].push(counts[s]);
+      out.rate[s].push(counts[s] / lt);
+      out.rateErr[s].push(Math.sqrt(counts[s]) / lt);
+    }
+    out.deadPct.push((dead[b] / binSec) * 100);
   }
+  for (const key of Object.keys(sums) as (keyof typeof sums)[]) out[key] = mean(sums[key]);
   return out;
 }
 
-/** Weighted straight-line fit y = a + b·x with 1/σ² weights. */
-export function fitLine(x: number[], y: number[], s: number[]) {
-  let S = 0, Sx = 0, Sy = 0, Sxx = 0, Sxy = 0;
-  for (let i = 0; i < x.length; i++) {
-    if (!Number.isFinite(x[i]) || !Number.isFinite(y[i]) || !(s[i] > 0)) continue;
-    const w = 1 / (s[i] * s[i]);
-    S += w; Sx += w * x[i]; Sy += w * y[i]; Sxx += w * x[i] * x[i]; Sxy += w * x[i] * y[i];
-  }
-  const D = S * Sxx - Sx * Sx;
-  if (!(D > 0)) return null;
-  const a = (Sxx * Sy - Sx * Sxy) / D;
-  const b = (S * Sxy - Sx * Sy) / D;
-  return { a, b, sa: Math.sqrt(Sxx / D), sb: Math.sqrt(S / D) };
+export interface Hist {
+  centres: number[];
+  edges: number[];
+  values: Record<Series, number[]>; // rate per bin, s⁻¹
+  errs: Record<Series, number[]>;
 }
 
-/** Rate against an environmental variable, plus the fitted slope in % per unit. */
-export function correlate(bins: Binned, key: 'press' | 'temp') {
-  const x = bins[key];
-  const fit = fitLine(x, bins.rate, bins.err);
-  const mean = bins.rate.reduce((s, v) => s + v, 0) / (bins.rate.length || 1);
-  return {
-    points: x.map((v, i) => ({ x: v, y: bins.rate[i] })).filter(p => Number.isFinite(p.x)),
-    fit,
-    percentPerUnit: fit ? (fit.b / mean) * 100 : NaN,
-    percentErr: fit ? (fit.sb / mean) * 100 : NaN,
-  };
+/**
+ * Log-spaced histogram of ADC or SiPM values, each event weighted by 1 / live time,
+ * so the y axis is a rate per bin (the GUI's `NPlot`).
+ */
+export function logHistogram(run: Run, idx: Uint32Array, key: 'adc' | 'sipm', liveTime: number, nBins = 100): Hist | null {
+  const col = run[key].data;
+  let lo = Infinity, hi = -Infinity;
+  for (const i of idx) {
+    const v = col[i];
+    if (!Number.isFinite(v)) continue;
+    if (v < lo) lo = v;
+    if (v > hi) hi = v;
+  }
+  if (!Number.isFinite(lo) || !(hi > 0)) return null;
+  if (key === 'adc') lo = Math.max(lo, 1);
+  else { lo = Math.max(lo, 1e-10) * 0.95; hi *= 1.05; }
+  if (!(hi > lo)) hi = lo * 2;
+  const l0 = Math.log10(lo), l1 = Math.log10(hi);
+  const edges = Array.from({ length: nBins + 1 }, (_, k) => 10 ** (l0 + ((l1 - l0) * k) / nBins));
+  const w = 1 / Math.max(1e-9, liveTime);
+  const counts = { all: new Float64Array(nBins), non: new Float64Array(nBins), coinc: new Float64Array(nBins) };
+  for (const i of idx) {
+    const v = col[i];
+    if (!(v >= lo && v <= hi)) continue;
+    const b = Math.min(nBins - 1, Math.floor(((Math.log10(v) - l0) / (l1 - l0)) * nBins));
+    counts.all[b]++;
+    counts[isCoinc(run, i) ? 'coinc' : 'non'][b]++;
+  }
+  const values = { all: [] as number[], non: [] as number[], coinc: [] as number[] };
+  const errs = { all: [] as number[], non: [] as number[], coinc: [] as number[] };
+  for (const s of SERIES) {
+    for (let b = 0; b < nBins; b++) {
+      values[s].push(counts[s][b] * w);
+      errs[s].push(Math.sqrt(counts[s][b]) * w);
+    }
+  }
+  const centres = edges.slice(0, -1).map((e, k) => Math.sqrt(e * edges[k + 1]));
+  return { centres, edges, values, errs };
 }
 
-/** Pulse-height (ADC) histogram for all events and for coincident events. */
-export function spectrum(run: Run, nBins = 64, max = 4096) {
-  const all = new Array(nBins).fill(0);
-  const coinc = new Array(nBins).fill(0);
-  const w = max / nBins;
-  for (let i = 0; i < run.n; i++) {
-    const b = Math.min(nBins - 1, Math.floor(run.adc.data[i] / w));
-    all[b]++;
-    if (run.flag.data[i]) coinc[b]++;
+function logFactorial(k: number) {
+  if (k < 2) return 0;
+  if (k < 256) {
+    let s = 0;
+    for (let j = 2; j <= k; j++) s += Math.log(j);
+    return s;
   }
-  const centres = all.map((_, b) => Math.round((b + 0.5) * w));
-  return { centres, all, coinc, width: w };
+  // Stirling series
+  return k * Math.log(k) - k + 0.5 * Math.log(2 * Math.PI * k) + 1 / (12 * k) - 1 / (360 * k ** 3);
+}
+const poissonPmf = (k: number, lam: number) => (k < 0 ? 0 : Math.exp(k * Math.log(lam) - lam - logFactorial(k)));
+
+export interface FitCurve {
+  x: number[];
+  y: number[];
+  chi2dof: number;
 }
 
-// For a Poisson process the gaps are exponential with the same mean rate.
-export function intervals(run: Run, coinc: boolean, nBins = 50) {
-  const dts: number[] = [];
-  let last = NaN;
-  for (let i = 0; i < run.n; i++) {
-    if (!sel(run, coinc, i)) continue;
-    const t = run.t.data[i];
-    if (Number.isFinite(last)) dts.push(t - last);
-    last = t;
+/** Histogram of the binned rates with a Poisson fit (the GUI's Rate Distribution). */
+export function rateDistribution(b: Binned) {
+  const bin = b.binSec;
+  const step = 1 / bin;
+  const pos = (s: Series) => b.rate[s].filter(r => Number.isFinite(r) && r > 0);
+  const all = SERIES.flatMap(pos);
+  if (!all.length) return null;
+  const cMin = Math.floor(Math.min(...all) * bin);
+  const cMax = Math.ceil(Math.max(...all) * bin);
+  const edges: number[] = [];
+  for (let k = cMin; k <= cMax + 1; k++) edges.push((k - 0.5) * step);
+  const centres = edges.slice(0, -1).map((e, k) => (e + edges[k + 1]) / 2);
+  const out: Partial<Record<Series, { counts: number[]; fit: FitCurve }>> = {};
+  for (const s of SERIES) {
+    const rates = pos(s);
+    if (!rates.length) continue;
+    const counts = new Array(centres.length).fill(0);
+    for (const r of rates) {
+      const k = Math.floor((r - edges[0]) / step);
+      if (k >= 0 && k < counts.length) counts[k]++;
+    }
+    const lam = (rates.reduce((a, v) => a + v, 0) / rates.length) * bin;
+    const peak = Math.max(...counts);
+    if (!(lam > 0) || peak === 0) continue;
+    const sig = Math.sqrt(lam);
+    const xs: number[] = [], pdf: number[] = [];
+    const k0 = Math.max(0, lam - 4 * sig), k1 = lam + 4 * sig;
+    for (let j = 0; j < 300; j++) {
+      const k = k0 + ((k1 - k0) * j) / 299;
+      xs.push(k / bin);
+      pdf.push(Math.exp(-((k - lam) ** 2) / (2 * lam)) / Math.sqrt(2 * Math.PI * lam));
+    }
+    const amp = peak / Math.max(...pdf);
+    let chi2 = 0, used = 0;
+    centres.forEach((c, k) => {
+      const e = amp * poissonPmf(Math.round(c * bin), lam);
+      if (e > 0) {
+        chi2 += (counts[k] - e) ** 2 / e;
+        used++;
+      }
+    });
+    out[s] = { counts, fit: { x: xs, y: pdf.map(p => p * amp), chi2dof: chi2 / Math.max(1, used - 1) } };
   }
-  if (!dts.length) return null;
-  const mean = dts.reduce((s, v) => s + v, 0) / dts.length;
-  const max = mean * 6;
-  const w = max / nBins;
-  const hist = new Array(nBins).fill(0);
-  for (const d of dts) if (d < max) hist[Math.floor(d / w)]++;
-  const rate = 1 / mean;
-  const expected = hist.map((_, b) => dts.length * (Math.exp(-rate * b * w) - Math.exp(-rate * (b + 1) * w)));
-  return { centres: hist.map((_, b) => (b + 0.5) * w), hist, expected, mean, n: dts.length, width: w };
+  return { centres, width: step, series: out };
 }
 
-// Time at each angle is the sum of event gaps while the detector sat there.
-export function tilt(run: Run, coinc: boolean, step = 10) {
-  const nb = Math.ceil(90 / step);
-  const counts = new Array(nb).fill(0);
-  const time = new Array(nb).fill(0);
-  for (let i = 1; i < run.n; i++) {
-    const a = run.tilt.data[i];
-    if (!Number.isFinite(a)) continue;
-    const b = Math.min(nb - 1, Math.floor(a / step));
-    time[b] += run.t.data[i] - run.t.data[i - 1];
-    if (sel(run, coinc, i)) counts[b]++;
+/** Log-binned gaps between events with an exponential fit (the GUI's Δt Distribution). */
+export function dtDistribution(run: Run, idx: Uint32Array, nBins = 101) {
+  const gaps: Record<Series, number[]> = { all: [], non: [], coinc: [] };
+  for (const s of SERIES) {
+    const ts: number[] = [];
+    for (const i of idx) if (inSeries(run, i, s)) ts.push(run.t.data[i]);
+    ts.sort((a, b) => a - b);
+    for (let k = 1; k < ts.length; k++) {
+      const d = ts[k] - ts[k - 1];
+      if (d > 0) gaps[s].push(d);
+    }
   }
-  const rows = counts
-    .map((c, b) => ({
-      angle: (b + 0.5) * step,
-      rate: time[b] > 60 ? c / time[b] : NaN,
-      err: time[b] > 60 ? Math.sqrt(c) / time[b] : NaN,
-      minutes: time[b] / 60,
-    }))
-    .filter(r => r.minutes > 1);
-  const ref = rows.find(r => Number.isFinite(r.rate));
-  const cos2 = rows.map(r => {
-    if (!ref) return NaN;
-    const rad = (r.angle * Math.PI) / 180;
-    const rad0 = (ref.angle * Math.PI) / 180;
-    return (ref.rate * Math.cos(rad) ** 2) / Math.cos(rad0) ** 2;
-  });
-  return { rows, cos2 };
+  const tMin = 0.01;
+  let tMax = 0;
+  for (const s of SERIES) for (const d of gaps[s]) if (d > tMax) tMax = d;
+  if (!(tMax > tMin)) return null;
+  const l0 = Math.log10(tMin), l1 = Math.log10(tMax);
+  const edges = Array.from({ length: nBins + 1 }, (_, k) => 10 ** (l0 + ((l1 - l0) * k) / nBins));
+  const centres = edges.slice(0, -1).map((e, k) => (e + edges[k + 1]) / 2);
+  const out: Partial<Record<Series, { counts: number[]; fit: FitCurve; mean: number; n: number }>> = {};
+  for (const s of SERIES) {
+    const g = gaps[s];
+    if (g.length < 2) continue;
+    const counts = new Array(nBins).fill(0);
+    for (const d of g) {
+      if (d < tMin || d > tMax) continue;
+      counts[Math.min(nBins - 1, Math.floor(((Math.log10(d) - l0) / (l1 - l0)) * nBins))]++;
+    }
+    const mean = g.reduce((a, v) => a + v, 0) / g.length;
+    const lam = 1 / mean;
+    const xs = Array.from({ length: 300 }, (_, j) => 10 ** (l0 + ((l1 - l0) * j) / 299));
+    const ys = xs.map(t => (g.length * lam * Math.exp(-lam * t) * t * Math.LN10 * (l1 - l0)) / nBins);
+    let chi2 = 0, used = 0;
+    centres.forEach((c, k) => {
+      const e = g.length * lam * Math.exp(-lam * c) * (edges[k + 1] - edges[k]);
+      if (e > 0) {
+        chi2 += (counts[k] - e) ** 2 / e;
+        used++;
+      }
+    });
+    out[s] = { counts, fit: { x: xs, y: ys, chi2dof: chi2 / Math.max(1, used - 1) }, mean, n: g.length };
+  }
+  return { centres, edges, tMin, tMax, series: out };
 }
 
-export function summary(run: Run) {
-  const n = run.n;
-  let c = 0, t = 0, p = 0;
-  for (let i = 0; i < n; i++) {
-    c += run.flag.data[i];
-    t += run.temp.data[i];
-    p += run.press.data[i];
+/** Pearson r and a straight-line fit for two equally long series. */
+export function correlation(x: number[], y: number[]) {
+  const pts: { x: number; y: number }[] = [];
+  for (let k = 0; k < Math.min(x.length, y.length); k++) {
+    if (Number.isFinite(x[k]) && Number.isFinite(y[k])) pts.push({ x: x[k], y: y[k] });
   }
-  const live = run.liveTime;
-  return {
-    events: n,
-    coincident: c,
-    duration: run.duration,
-    rate: live ? n / live : 0,
-    rateErr: live ? Math.sqrt(n) / live : 0,
-    coincRate: live ? c / live : 0,
-    coincErr: live ? Math.sqrt(c) / live : 0,
-    temp: n ? t / n : NaN,
-    pressHPa: n ? p / n / 100 : NaN,
-  };
+  if (pts.length < 3) return null;
+  const n = pts.length;
+  const mx = pts.reduce((a, p) => a + p.x, 0) / n;
+  const my = pts.reduce((a, p) => a + p.y, 0) / n;
+  let sxx = 0, syy = 0, sxy = 0;
+  for (const p of pts) {
+    sxx += (p.x - mx) ** 2;
+    syy += (p.y - my) ** 2;
+    sxy += (p.x - mx) * (p.y - my);
+  }
+  if (!(sxx > 0) || !(syy > 0)) return { pts, r: NaN, slope: NaN, intercept: NaN };
+  const slope = sxy / sxx;
+  return { pts, r: sxy / Math.sqrt(sxx * syy), slope, intercept: my - slope * mx };
 }
