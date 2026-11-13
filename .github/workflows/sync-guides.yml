@@ -1,7 +1,7 @@
 # Keeps /docs/guides/ in step with the PDF manuals in the v3X repository.
 #
 # Runs every day, on demand, and when the v3X repository sends a
-# `v3x-updated` repository_dispatch event (see README, "Guide sync").
+# `v3x-updated` repository_dispatch event.
 # If any PDF changed, it regenerates the guide pages with
 # scripts/sync-guides.py and commits them. The normal deploy then
 # publishes the new pages.

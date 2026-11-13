@@ -151,7 +151,7 @@
   }
 }
 
-/* CosmicWatch: Plex as the site font; the template's own heading weights. */
+/* Plex as the site font, with its heading weights. */
 @layer base {
   :focus-visible {
     outline: 2px solid #53a1d8;
