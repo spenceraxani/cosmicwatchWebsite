@@ -1,22 +1,22 @@
 [
   {
-    "heading": "Scintillator and SiPM",
-    "content": "A 5 × 5 × 1 cm slab of plastic scintillator as the detection medium, giving about 10,000 photons per MeV. A 6 × 6 mm SiPM for light collection: single-photon sensitive, nanosecond response, and not affected by magnetic fields.",
+    "heading": "Scintillator and Single Photon Sensor",
+    "content": "The detector uses a 5 × 5 × 1 cm³ slab of organic plastic scintillator, rated to yield approximately 10,000 photons/MeV of deposited energy. A portion of these photons reach a photosensor, an OnSemiconductor MicroFC SiPM with a 6 mm × 6 mm active area, operated at 30 V reverse bias.",
     "svg": "sparks"
   },
   {
-    "heading": "Fast, low-noise electronics",
-    "content": "A custom PCB shapes the signal, and the Raspberry Pi Pico measures it with a 12-bit ADC. One core takes data while the other runs the screen and card, so dead time is about 400 µs per event and it logs up to 700 events per second.",
+    "heading": "Digital Electronics",
+    "content": "At the heart of the detector’s digital system is the Raspberry Pi Pico (RPi), a dual-core MCU operating at 133 MHz. While one core handles time-critical data acquisition tasks, the other manages peripheral communication, like the OLED display, microSD card, and environmental sensors. The separation of these tasks significantly reduces dead time.",
     "svg": "dashboard"
   },
   {
-    "heading": "Sensors on every event",
-    "content": "Temperature, barometric pressure, acceleration and angular velocity are recorded with each event, so you can look for correlations with the weather or track how the detector moved.",
+    "heading": "Environmental Sensors",
+    "content": "Additional digital peripherals, such as a temperature and pressure sensor (BMP280), and an accelerometer and gyroscope (MPU-6050), provide additional information to help with data analysis.",
     "svg": "earth"
   },
   {
-    "heading": "Take it anywhere",
-    "content": "It draws 0.5 W from any USB port and weighs 110 g in its aluminum case; a 5,000 mAh power bank runs two detectors for 18 hours. Detectors have flown on high-altitude balloons, sounding rockets and the International Space Station.",
+    "heading": "Powering",
+    "content": "The detector itself can be powered through a USB port on a computer, using a small battery, power bank, a mobile phone, or through the coincidence cable. A single detector consumes 0.5 W. For context, a commonly available 5,000 mAh power bank was measured to power two detectors for 18 hours.",
     "svg": "rocket"
   }
 ]

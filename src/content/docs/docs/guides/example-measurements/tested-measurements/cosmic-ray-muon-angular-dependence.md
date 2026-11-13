@@ -1,6 +1,6 @@
 ---
-title: "Cosmic-ray muon angular dependence"
-description: "Example Measurements, pages 10–11. Generated from the PDF on GitHub."
+title: 'Cosmic-ray muon angular dependence'
+description: 'Example Measurements, pages 10–11. Generated from the PDF on GitHub.'
 sidebar:
   order: 2
 editUrl: false
@@ -31,6 +31,5 @@ A slight increase in rate at 𝜃= 𝜋/2 is attributed to this configuration ac
   <figcaption>Figure 2.5: Leaving McMurdo Station, Antarctica on a C-130 Hercules for the South Pole Station.</figcaption>
 
 </figure>
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=10" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 10–11.</p>

@@ -1,6 +1,6 @@
 ---
-title: "Conclusion"
-description: "Physics Document, pages 29–33. Generated from the PDF on GitHub."
+title: 'Conclusion'
+description: 'Physics Document, pages 29–33. Generated from the PDF on GitHub.'
 sidebar:
   order: 6
 editUrl: false
@@ -14,113 +14,113 @@ The CosmicWatch Desktop Muon Detectors offer a versatile platform for exploring 
 
 ### Bibliography
 
-\[1\] K. O. et al, “Cosmic rays - particle data group,” *Nuclear Instruments and Methods in*
+\[1\] K. O. et al, “Cosmic rays - particle data group,” _Nuclear Instruments and Methods in_
 
-*Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equip-* *ment*, vol. 38, no. 090001, p. 6, 2014.
+_Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equip-_ _ment_, vol. 38, no. 090001, p. 6, 2014.
 
-\[2\] S. K. LBNL, *32. PASSAGE OF PARTICLES THROUGH MATTER*. LBNL, 2017.
+\[2\] S. K. LBNL, _32. PASSAGE OF PARTICLES THROUGH MATTER_. LBNL, 2017.
 
-\[3\] B. Rossi, *Cosmic Rays*. New York: McGraw-Hill, 1964.
+\[3\] B. Rossi, _Cosmic Rays_. New York: McGraw-Hill, 1964.
 
-\[4\] M. W. Friedlander, *A thin cosmic rain: Particles from outer space*. Harvard University
+\[4\] M. W. Friedlander, _A thin cosmic rain: Particles from outer space_. Harvard University
 
 Press, 2002.
 
-\[5\] P. K. Grieder, *Cosmic rays at Earth*. Elsevier, 2001.
+\[5\] P. K. Grieder, _Cosmic rays at Earth_. Elsevier, 2001.
 
-\[6\] T. K. Gaisser, R. Engel, and E. Resconi, *Cosmic rays and particle physics*. Cambridge
+\[6\] T. K. Gaisser, R. Engel, and E. Resconi, _Cosmic rays and particle physics_. Cambridge
 
 University Press, 2016.
 
-\[7\] W. R. Leo, *Techniques for nuclear and particle physics experiments: a how-to approach*.
+\[7\] W. R. Leo, _Techniques for nuclear and particle physics experiments: a how-to approach_.
 
 Springer Science & Business Media, 2012.
 
-\[8\] C. Grupen and B. Shwartz, *Particle detectors*, vol. 26. Cambridge university press, 2008.
+\[8\] C. Grupen and B. Shwartz, _Particle detectors_, vol. 26. Cambridge university press, 2008.
 
-\[9\] H. Kolanoski and N. Wermes, *Particle detectors: fundamentals and applications*. Oxford
+\[9\] H. Kolanoski and N. Wermes, _Particle detectors: fundamentals and applications_. Oxford
 
 University Press, 2020.
 
 \[10\] D. Bird, S. Corbató, H. Dai, B. Dawson, J. Elbert, T. Gaisser, K. Green, M. Huang,
 
-D. Kieda, S. Ko, *et al.*, “Evidence for correlated changes in the spectrum and composition of cosmic rays at extremely high energies,” *Physical review letters*, vol. 71, no. 21, p. 3401, 1993.
+D. Kieda, S. Ko, _et al._, “Evidence for correlated changes in the spectrum and composition of cosmic rays at extremely high energies,” _Physical review letters_, vol. 71, no. 21, p. 3401, 1993.
 
-\[11\] G. Taubes, “Pattern emerges in cosmic ray mystery,” *Science*, vol. 262, no. 5140, pp. 1649–
+\[11\] G. Taubes, “Pattern emerges in cosmic ray mystery,” _Science_, vol. 262, no. 5140, pp. 1649–
 
 1650, 1993.
 
 \[12\] F. Halzen and A. D. Martin, “Quarks and leptons,” 1984.
 
-\[13\] D. Griffiths, *Introduction to elementary particles*. John Wiley & Sons, 2008.
+\[13\] D. Griffiths, _Introduction to elementary particles_. John Wiley & Sons, 2008.
 
-\[14\] M. Fukugita and T. Yanagida, *Physics of Neutrinos: and Application to Astrophysics*.
+\[14\] M. Fukugita and T. Yanagida, _Physics of Neutrinos: and Application to Astrophysics_.
 
 Springer Science & Business Media, 2013.
 
 \[15\] M. Tanabashi, P. Richardson, A. Bettini, A. Vogt, L. Garren, A. J. Schwartz, K. Terashi,
 
-M. Karliner, R. S. Chivukula, T. Sjöstrand, *et al.*, “Aps: Review of particle physics,” *Phys.* *Rev. D*, vol. 98, p. 030001, 2018.
+M. Karliner, R. S. Chivukula, T. Sjöstrand, _et al._, “Aps: Review of particle physics,” _Phys._ _Rev. D_, vol. 98, p. 030001, 2018.
 
-\[16\] T. K. Gaisser and M. Honda, “Flux of atmospheric neutrinos,” *Annual Review of Nuclear* *and Particle Science*, vol. 52, no. 1, pp. 153–199, 2002.
+\[16\] T. K. Gaisser and M. Honda, “Flux of atmospheric neutrinos,” _Annual Review of Nuclear_ _and Particle Science_, vol. 52, no. 1, pp. 153–199, 2002.
 
-\[17\] E. Regener and G. Pfotzer, “Vertical intensity of cosmic rays by threefold coincidences in the stratosphere,” *Nature*, vol. 136, no. 3444, p. 718, 1935.
+\[17\] E. Regener and G. Pfotzer, “Vertical intensity of cosmic rays by threefold coincidences in the stratosphere,” _Nature_, vol. 136, no. 3444, p. 718, 1935.
 
 \[18\] O. Allkofer, R. Andresen, and W. Dau, “The muon spectra near the geomagnetic equator,”
 
-*Canadian Journal of Physics*, vol. 46, no. 10, pp. S301–S305, 1968.
+_Canadian Journal of Physics_, vol. 46, no. 10, pp. S301–S305, 1968.
 
-\[19\] O. Allkofer, R. Andresen, K. Clausen, and W. Dau, “Sea-level muon spectrum at two different latitudes,” *Journal of Geophysical Research*, vol. 77, no. 22, pp. 4251–4253, 1972.
+\[19\] O. Allkofer, R. Andresen, K. Clausen, and W. Dau, “Sea-level muon spectrum at two different latitudes,” _Journal of Geophysical Research_, vol. 77, no. 22, pp. 4251–4253, 1972.
 
-\[20\] C. Augusto, C. Navia, and K. Tsui, “Muon enhancements at sea level in association with swift-bat and milagro triggers,” *Physical Review D*, vol. 77, no. 12, p. 123008, 2008.
+\[20\] C. Augusto, C. Navia, and K. Tsui, “Muon enhancements at sea level in association with swift-bat and milagro triggers,” _Physical Review D_, vol. 77, no. 12, p. 123008, 2008.
 
 \[21\] <https://www.nasa.gov/mission_pages/station/research/experiments/1043.html>, “International space station internal radiation monitoring (iss internal radiation monitoring) - 04.05.17,” Dec 2018.
 
-\[22\] T. Dachev, W. Atwell, E. Semones, B. Tomov, and B. Reddell, “Observations of the saa radiation distribution by liulin-e094 instrument on iss,” *Advances in Space Research*, vol. 37, no. 9, pp. 1672–1677, 2006.
+\[22\] T. Dachev, W. Atwell, E. Semones, B. Tomov, and B. Reddell, “Observations of the saa radiation distribution by liulin-e094 instrument on iss,” _Advances in Space Research_, vol. 37, no. 9, pp. 1672–1677, 2006.
 
-\[23\] L. Pinsky, W. Osborne, J. Bailey, R. Benson, and L. Thompson, “Light flashes observed by astronauts on apollo 11 through apollo 17,” *Science*, vol. 183, no. 4128, pp. 957–959, 1974.
+\[23\] L. Pinsky, W. Osborne, J. Bailey, R. Benson, and L. Thompson, “Light flashes observed by astronauts on apollo 11 through apollo 17,” _Science_, vol. 183, no. 4128, pp. 957–959, 1974.
 
 \[24\] C. Fuglesang, L. Narici, P. Picozza, and W. G. Sannita, “Phosphenes in low earth orbit:
 
-survey responses from 59 astronauts,” *Aviation, space, and environmental medicine*, vol. 77, no. 4, pp. 449–452, 2006.
+survey responses from 59 astronauts,” _Aviation, space, and environmental medicine_, vol. 77, no. 4, pp. 449–452, 2006.
 
 \[25\] A. Rinaldi, “Phosphenes in space: a study on the interaction between carbon ions and rod photoreceptor,” 2009.
 
-\[26\] C. Augusto, C. Navia, H. Shigueoka, K. Tsui, and A. Fauth, “Muon excess at sea level from solar flares in association with the fermi gbm spacecraft detector,” *Physical Review* *D*, vol. 84, no. 4, p. 042002, 2011.
+\[26\] C. Augusto, C. Navia, H. Shigueoka, K. Tsui, and A. Fauth, “Muon excess at sea level from solar flares in association with the fermi gbm spacecraft detector,” _Physical Review_ _D_, vol. 84, no. 4, p. 042002, 2011.
 
 \[27\] M. Savić, D. Maletić, D. Joković, N. Veselinović, R. Banjanac, V. Udovičić, and A. Dragić,
 
-“Pressure and temperature effect corrections of atmospheric muon data in the belgrade cosmic-ray station,” in *Journal of Physics: Conference Series*, vol. 632, p. 012059, IOP Publishing, 2015.
+“Pressure and temperature effect corrections of atmospheric muon data in the belgrade cosmic-ray station,” in _Journal of Physics: Conference Series_, vol. 632, p. 012059, IOP Publishing, 2015.
 
-\[28\] P. H. Barrett, L. M. Bollinger, G. Cocconi, Y. Eisenberg, and K. Greisen, “Interpretation of cosmic-ray measurements far underground,” *Reviews of Modern Physics*, vol. 24, no. 3, p. 133, 1952.
+\[28\] P. H. Barrett, L. M. Bollinger, G. Cocconi, Y. Eisenberg, and K. Greisen, “Interpretation of cosmic-ray measurements far underground,” _Reviews of Modern Physics_, vol. 24, no. 3, p. 133, 1952.
 
 \[29\] F. An, A. Balantekin, H. Band, M. Bishai, S. Blyth, D. Cao, G. Cao, J. Cao, Y. Chan,
 
-J. Chang, *et al.*, “Seasonal variation of the underground cosmic muon flux observed at daya bay,” *Journal of Cosmology and Astroparticle Physics*, vol. 2018, no. 01, p. 001, 2018.
+J. Chang, _et al._, “Seasonal variation of the underground cosmic muon flux observed at daya bay,” _Journal of Cosmology and Astroparticle Physics_, vol. 2018, no. 01, p. 001, 2018.
 
-\[30\] A. Bouchta, “Seasonal variation of the muon flux seen by amanda,” in *International Cosmic*
+\[30\] A. Bouchta, “Seasonal variation of the muon flux seen by amanda,” in _International Cosmic_
 
-*Ray Conference*, vol. 2, p. 108, 1999.
+_Ray Conference_, vol. 2, p. 108, 1999.
 
 \[31\] M. Ambrosio, R. Antolini, G. Auriemma, R. Baker, A. Baldini, G. Barbarino, B. Barish,
 
-G. Battistoni, R. Bellotti, C. Bemporad, *et al.*, “Seasonal variations in the underground muon intensity as seen by macro,” *Astroparticle Physics*, vol. 7, no. 1-2, pp. 109–124, 1997.
+G. Battistoni, R. Bellotti, C. Bemporad, _et al._, “Seasonal variations in the underground muon intensity as seen by macro,” _Astroparticle Physics_, vol. 7, no. 1-2, pp. 109–124, 1997.
 
-\[32\] W. Benenson, J. W. Harris, H. Stöcker, and H. Lutz, *Handbook of physics*. Springer Science
+\[32\] W. Benenson, J. W. Harris, H. Stöcker, and H. Lutz, _Handbook of physics_. Springer Science
 
 & Business Media, 2006.
 
-\[33\] D. Green, *The physics of particle detectors*, vol. 12. Cambridge University Press, 2000.
+\[33\] D. Green, _The physics of particle detectors_, vol. 12. Cambridge University Press, 2000.
 
 \[34\] W. Li, M. D. Rodriguez, P. Kluth, M. Lang, N. Medvedev, M. Sorokin, J. Zhang, B. Afra,
 
-M. Bender, D. Severin, *et al.*, “Nu clear instrum ents and methods in phy sics research b,” *Nuclear Instruments and Methods in Physics Research B*, vol. 302, pp. 40–47, 2013.
+M. Bender, D. Severin, _et al._, “Nu clear instrum ents and methods in phy sics research b,” _Nuclear Instruments and Methods in Physics Research B_, vol. 302, pp. 40–47, 2013.
 
-\[35\] K. A. Olive *et al.*, “Review of Particle Physics,” *Chin. Phys.*, vol. C38, p. 090001, 2014.
+\[35\] K. A. Olive _et al._, “Review of Particle Physics,” _Chin. Phys._, vol. C38, p. 090001, 2014.
 
-\[36\] B. R. Martin, *Nuclear and particle physics: an introduction*. John Wiley & Sons, 2006.
+\[36\] B. R. Martin, _Nuclear and particle physics: an introduction_. John Wiley & Sons, 2006.
 
-\[37\] T. Tabata, R. Ito, and S. Okabe, “An empirical equation for the backscattering coefficient of electrons,” *Nuclear instruments and methods*, vol. 94, no. 3, pp. 509–513, 1971.
+\[37\] T. Tabata, R. Ito, and S. Okabe, “An empirical equation for the backscattering coefficient of electrons,” _Nuclear instruments and methods_, vol. 94, no. 3, pp. 509–513, 1971.
 
 \[38\] M. J. Berger and S. M. Seltzer, “Stopping powers and ranges of electrons and positions,” tech. rep., NATIONAL STANDARD REFERENCE DATA SYSTEM, 1982.
 
@@ -128,23 +128,22 @@ M. Bender, D. Severin, *et al.*, “Nu clear instrum ents and methods in phy sic
 
 \[40\] <https://www.sensl.com/downloads/ds/TN>
 
-\[41\] A. Pla-Dalmau, A. D. Bross, V. V. Rykalin, and B. M. Wood, “Extruded plastic scintillator for minerva,” in *Nuclear Science Symposium Conference Record, 2005 IEEE*, vol. 3, pp. 1298–1300, IEEE, 2005.
+\[41\] A. Pla-Dalmau, A. D. Bross, V. V. Rykalin, and B. M. Wood, “Extruded plastic scintillator for minerva,” in _Nuclear Science Symposium Conference Record, 2005 IEEE_, vol. 3, pp. 1298–1300, IEEE, 2005.
 
 \[42\] Eljen. <https://eljentechnology.com/products/plastic-scintillators>, accessed: Oct 2018 2018.
 
-\[43\] H. Yang, D. Cao, Z. Qian, X. Zhu, C. Loh, A. Huang, R. Zhang, Y. Yang, Y. Liu, B. Xu, *et al.*, “Light attenuation length of high quality linear alkyl benzene as liquid scintillator solvent for the juno experiment,” *Journal of Instrumentation*, vol. 12, no. 11, p. T11004, 2017.
+\[43\] H. Yang, D. Cao, Z. Qian, X. Zhu, C. Loh, A. Huang, R. Zhang, Y. Yang, Y. Liu, B. Xu, _et al._, “Light attenuation length of high quality linear alkyl benzene as liquid scintillator solvent for the juno experiment,” _Journal of Instrumentation_, vol. 12, no. 11, p. T11004, 2017.
 
-\[44\] D. Beznosko, A. Bross, A. Dyshkant, and P.-D. Rykalin, “Fnal-nicadd extruded scintillator,” in *Nuclear Science Symposium Conference Record, 2004 IEEE*, vol. 2, pp. 790–793, IEEE, 2004.
+\[44\] D. Beznosko, A. Bross, A. Dyshkant, and P.-D. Rykalin, “Fnal-nicadd extruded scintillator,” in _Nuclear Science Symposium Conference Record, 2004 IEEE_, vol. 2, pp. 790–793, IEEE, 2004.
 
-\[45\] D. Horrocks, *Applications of liquid scintillation counting*. Elsevier, 2012.
+\[45\] D. Horrocks, _Applications of liquid scintillation counting_. Elsevier, 2012.
 
 \[46\] I. Ambats, Y. Antipov, A. Sadovski, K. Lang, W. Allison, D. Wall, A. Napier, Y. Lai,
 
-R. Heinz, D. Wright, *et al.*, “The minos detectors technical design report,” tech. rep., FNAL, 1998.
+R. Heinz, D. Wright, _et al._, “The minos detectors technical design report,” tech. rep., FNAL, 1998.
 
 \[47\] L. Aliaga, L. Bagby, B. Baldin, A. Baumbaugh, A. Bodek, R. Bradford, W. Brooks,
 
-D. Boehnlein, S. Boyd, H. Budd, *et al.*, “Design, calibration, and performance of the minerva detector,” *Nuclear Instruments and Methods in Physics Research Section A: Accelerators,* *Spectrometers, Detectors and Associated Equipment*, vol. 743, pp. 130–159, 2014.
-
+D. Boehnlein, S. Boyd, H. Budd, _et al._, “Design, calibration, and performance of the minerva detector,” _Nuclear Instruments and Methods in Physics Research Section A: Accelerators,_ _Spectrometers, Detectors and Associated Equipment_, vol. 743, pp. 130–159, 2014.
 
 <p class="cw-guide-foot">From <a href="/pdf/physics/#page=29" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Physics Document.pdf</a>, pages 29–33.</p>

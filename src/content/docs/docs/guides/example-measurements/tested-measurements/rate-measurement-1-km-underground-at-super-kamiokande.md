@@ -1,6 +1,6 @@
 ---
-title: "Rate measurement 1 km underground at Super-Kamiokande"
-description: "Example Measurements, pages 29–31. Generated from the PDF on GitHub."
+title: 'Rate measurement 1 km underground at Super-Kamiokande'
+description: 'Example Measurements, pages 29–31. Generated from the PDF on GitHub.'
 sidebar:
   order: 15
 editUrl: false
@@ -35,6 +35,5 @@ The master detector count rate did not significantly change when it was brought 
 One unaccounted background (briefly mentioned in Sec. ??) consists of events in which a gammaray from a radioactive decay Compton scattered off the scintillator of the master detector, and then deposited sufficient energy in the coincident detector scintillator. This is thought to be the dominant source of triggers in this dataset, and a Monte Carlo simulation is currently being developed to investigate this. If these events originate from Compton scattering, we can estimate the rate for these types of events. Given the 101 events (with 1-2 assumed to be accidental coincidences and cosmic-ray muons), the calculated accidental Compton scattering coincidence rate in configuration (c) from Fig. ?? is found to be 0.0038 ± 0.0004. A second 8-hour run was performed using the same configuration and location, which found 92 events (with a similar SiPM peak voltage spectrum) corresponding to a count rate of 0.0035 ± 0.0004.
 
 This result could be further investigated by repeating the measurement, this time with a thin piece of lead between the scintillator. Lead, being a dense material, is likely to either absorb the gamma-ray or absorb some of the energy from the gamma-ray through Compton scattering. Both processes would reduce the probability of measuring the event with the coincident detector. Another potential source for these events is correlated noise. If the lead does not alter the coincident count rate, this is a potential source for this signal; however, thus far, we have not found any evidence of events due to noise.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=29" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 29–31.</p>

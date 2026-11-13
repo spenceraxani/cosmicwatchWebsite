@@ -1,75 +1,30 @@
 {
-  "subTitle": "Quick answers about building, running and buying a CosmicWatch detector. Still stuck? Email us.",
+  "subTitle": "Still stuck? Send a message or email us.",
   "faqs": [
     {
-      "question": "What are the benefits of this detector over conventional instructional muon detectors?",
-      "answer": "It is fully self-contained: you don't need a high-voltage supply, NIM modules or an oscilloscope. It draws 0.5 W from any USB port, so a computer, a phone charger or a power bank will run it. It weighs 110 g, costs about $100 in parts, records every event to a microSD card, and links to a second detector for coincidence measurements. It is also a lot of fun. Try climbing a mountain with it.",
-      "icon": "detector"
-    },
-    {
       "question": "How long does it take to build one?",
-      "answer": "Each detector takes a novice high-school student about four hours to build for the first time, and a second detector can be built in about an hour. If you order the circuit boards from a board house, allow about two weeks for them to arrive.",
+      "answer": "Each detector takes a novice high-school student about four hours to build for the first time, and a second detector can be built in about an hour. If you order the circuit boards from a manufacturer like Elecrow, allow about two weeks for them to arrive.",
       "icon": "wrench"
     },
     {
-      "question": "Do I need to know how to solder small parts?",
-      "answer": "No. Almost every part is an 0805 surface-mount component, which is a good size to learn on. The Instruction Manual walks through the technique and the order to place parts, with tests along the way so you catch mistakes early.",
-      "icon": "solder"
-    },
-    {
-      "question": "What does the detector actually detect?",
-      "answer": "Anything that leaves enough energy in the plastic scintillator. A minimum-ionizing muon deposits about 2 MeV crossing the 1 cm slab. Gamma rays from natural radioactivity also trigger it, while alphas and most betas are stopped before they reach the scintillator. A single detector at sea level triggers roughly three times a second, mostly from background. Put two detectors in coincidence and you get a fairly clean sample of cosmic-ray muons.",
-      "icon": "muon"
-    },
-    {
-      "question": "Where can I acquire scintillator?",
-      "answer": "While plastic scintillator can be tough to acquire, we've found that many universities have been part of experiments which purchase or make their own scintillator. Besides buying it from a company like Eljen, talk to some of the physics professors. The Parts List links to a 50 × 50 × 10 mm piece that fits the v3X.",
+      "question": "Where can I acquire a plastic scintillator?",
+      "answer": "While plastic scintillator can be tough to acquire, we've found that many universities have been part of experiments which purchase or make their own scintillator. The Parts List links to a 50 × 50 × 10 mm piece that fits the v3X, sold on eBay.",
       "icon": "scintillator"
     },
     {
-      "question": "What about the SiPM?",
-      "answer": "The v3X uses an onsemi MicroFC-60035, with a 6 × 6 mm active area. It is the most expensive part on the board, about $28 from Digi-Key. If you are building a set for a class, buying SiPMs together with other schools or universities can get you a bulk discount.",
-      "icon": "sipm"
-    },
-    {
       "question": "What voltage does the SiPM require?",
-      "answer": "The SiPM breaks down at about 24.5 V. The v3X runs it at 30.0 V, an overvoltage of 5.5 V, from a DC-DC booster on the main board, so no separate supply is needed. The detector measures the bias voltage every time it starts and reports it over USB.",
+      "answer": "The SiPM breaks down at about 24.5 V. The v3X runs it at 30.0 V, with an overvoltage of 5.5 V, from a DC-DC booster on the main board. The detector measures the bias voltage every time it starts and reports it over USB.",
       "icon": "pulse"
     },
     {
       "question": "How do you set the trigger threshold?",
-      "answer": "When you insert a microSD card, the detector creates a file called configure.txt. Change the trigger threshold there; it goes down to about 4 mV. The same file renames the detector, turns off the screen and LEDs, and switches the buzzer on or off.",
+      "answer": "When you insert a microSD card, the detector creates a file called configure.txt. You can change the trigger threshold there.",
       "icon": "datafile"
     },
     {
       "question": "My finished detector's count rate is too high.",
-      "answer": "At sea level you should expect about 0.4 counts per second from muons alone, with radioactive background on top of that, for a few counts per second in total. If the count rate is much larger, it may be an indication that there is a light leak in your detector. Check the black tape around the scintillator, then work through the Troubleshooting guide.",
+      "answer": "At sea level you should expect about 0.4 counts per second from muons alone using a coincidence pair. If the count rate is much larger, it may be an indication that there is a light leak in your detector. Check the black tape around the scintillator and work through the Troubleshooting guide.",
       "icon": "coincidence"
-    },
-    {
-      "question": "My finished detector's count rate is too low.",
-      "answer": "The two main issues we see are a trigger threshold set too high, or a component of the circuit that is wrong. Connect the BNC output to an oscilloscope and you should see the raw SiPM pulses; the startup messages over USB also report the bias voltage and threshold. The most common mistakes we see are using the wrong component or insufficient solder on one of the connections.",
-      "icon": "firmware"
-    },
-    {
-      "question": "Is it safe?",
-      "answer": "Yes. The detector only measures radiation that is already around you. It contains no radioactive source and runs on about half a watt from a USB port.",
-      "icon": "globe"
-    },
-    {
-      "question": "Can I buy one instead of building it?",
-      "answer": "Yes, see the Shop page. Teachers can also ask QuarkNet, which lends detectors to classrooms.",
-      "icon": "parts"
-    },
-    {
-      "question": "Can I sell detectors I build?",
-      "answer": "The designs are licensed CC BY-NC 4.0, so you can build and modify them for personal and educational use. Selling detectors or using the design commercially needs written permission from Prof. Axani.",
-      "icon": "people"
-    },
-    {
-      "question": "Where are the older versions?",
-      "answer": "The v2 design, files and papers are still on GitHub. New builds should use the v3X: for about the same price it has a 12-bit ADC instead of under 8-bit, 400 µs dead time instead of 50 ms, and a pressure sensor, accelerometer and gyroscope.",
-      "icon": "docs"
     }
   ]
 }

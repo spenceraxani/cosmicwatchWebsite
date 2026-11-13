@@ -2,12 +2,14 @@
 import type { Props } from '@astrojs/starlight/props';
 import StarlightHead from '@astrojs/starlight/components/Head.astro';
 import VtbotStarlight from 'astro-vtbot/components/starlight/Base.astro';
+import { TOGGLES_ON, earlyScript } from '@utils/designToggles';
 ---
 
 <VtbotStarlight {...Astro.props} viewTransitionsFallback="animate">
   <StarlightHead {...Astro.props}>
     <slot />
   </StarlightHead>
+  {TOGGLES_ON && <script is:inline set:html={earlyScript} />}
   <script>
     import '@scripts/guideSync';
   </script>

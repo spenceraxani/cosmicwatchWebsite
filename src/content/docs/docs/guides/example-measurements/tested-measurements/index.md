@@ -1,6 +1,6 @@
 ---
-title: "Tested Measurements"
-description: "Example Measurements, pages 7–31. Generated from the PDF on GitHub."
+title: 'Tested Measurements'
+description: 'Example Measurements, pages 7–31. Generated from the PDF on GitHub.'
 sidebar:
   order: 0
 editUrl: false

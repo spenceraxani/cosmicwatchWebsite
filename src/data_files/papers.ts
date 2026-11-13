@@ -31,7 +31,7 @@ export const papers: Paper[] = [
     year: 2019,
     title: 'The Physics Behind the CosmicWatch Desktop Muon Detectors',
     authors: 'S. N. Axani',
-    venue: 'MIT master\'s thesis',
+    venue: "MIT master's thesis",
     url: 'https://arxiv.org/abs/1908.00146',
     arxiv: '1908.00146',
   },

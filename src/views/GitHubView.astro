@@ -28,24 +28,16 @@ const downloads = {
 const card = 'flex flex-col surface p-6 sm:p-8';
 const btn =
   'inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-orange-400 px-4 py-3 text-sm font-bold text-neutral-50 ring-zinc-500 outline-hidden transition duration-300 hover:bg-orange-500 focus-visible:ring-3 2xl:text-base dark:ring-zinc-200';
-const link = 'font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300';
-const webGuide = (file: string) => guides.guides.find((g) => g.file === file);
+const link =
+  'font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300';
+const webGuide = (file: string) => guides.guides.find(g => g.file === file);
 const fmt = (iso: string) =>
-  new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  new Date(iso).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 
-// Commits per month across the whole v3X history.
-const first = new Date(snapshot.commits.at(-1)!.date);
-const last = new Date(snapshot.commits[0].date);
-const months: { key: string; label: string; year: number; n: number }[] = [];
-for (let d = new Date(first.getFullYear(), first.getMonth(), 1); d <= last; d = new Date(d.getFullYear(), d.getMonth() + 1, 1)) {
-  months.push({ key: `${d.getFullYear()}-${d.getMonth()}`, label: d.toLocaleString('en-US', { month: 'short' }), year: d.getFullYear(), n: 0 });
-}
-for (const c of snapshot.commits) {
-  const d = new Date(c.date);
-  const m = months.find(x => x.key === `${d.getFullYear()}-${d.getMonth()}`);
-  if (m) m.n++;
-}
-const max = Math.max(1, ...months.map(m => m.n));
 const repoLinks: Record<string, CwIconName> = {
   Firmware: 'firmware',
   GUI: 'gui',
@@ -57,148 +49,320 @@ const repoLinks: Record<string, CwIconName> = {
 };
 ---
 
-<MainLayout title={copy.title} description={copy.metaDescription} ogTitle={copy.ogTitle}>
-  <section class="mx-auto max-w-[85rem] px-4 pt-10 pb-6 sm:px-6 lg:px-8 lg:pt-14 2xl:max-w-full">
-    <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200', reveal]}>{copy.heading}</h1>
-    <p class="mt-3 max-w-2xl text-lg text-pretty text-neutral-700 dark:text-neutral-400">{copy.subTitle}</p>
-    <a href={REPO_URL} target="_blank" rel="noopener noreferrer" class="mt-4 inline-block font-mono text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300">{REPO}</a>
+<MainLayout
+  title={copy.title}
+  description={copy.metaDescription}
+  ogTitle={copy.ogTitle}
+>
+  <section class="mx-auto max-w-[85rem] px-4 pt-10 pb-8 sm:px-6 lg:px-8 lg:pt-14 lg:pb-10 2xl:max-w-full">
+    <h1
+      class:list={[
+        'block text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200',
+        reveal,
+      ]}
+    >
+      {copy.heading}
+    </h1>
+    <p class="mt-3 max-w-2xl text-lg text-pretty text-neutral-700 dark:text-neutral-400">
+      {copy.subTitle}
+    </p>
+    <a
+      href={REPO_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-4 inline-block font-mono text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300"
+    >
+      {REPO}
+    </a>
   </section>
 
-  <section class="mx-auto grid max-w-[85rem] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-3 lg:px-8 2xl:max-w-full" aria-label="Software and firmware">
+  <section
+    class="mx-auto grid max-w-[85rem] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-3 lg:px-8 2xl:max-w-full"
+    aria-label="Software and firmware"
+  >
     <div class:list={[card, reveal]}>
       <CwIcon name="gui" class="size-9 text-orange-400 dark:text-orange-300" />
-      <h2 class="mt-4 text-2xl font-bold text-neutral-800 dark:text-neutral-200">CosmicWatch GUI</h2>
+      <h2 class="mt-4 text-2xl font-bold text-neutral-800 dark:text-neutral-200">
+        CosmicWatch GUI
+      </h2>
       <p class="mt-3 text-pretty text-neutral-600 dark:text-neutral-400">
-        Records from a detector on USB or opens a file from the microSD card, and plots rate, pulse height, the sensors, deadtime and timing. Windows, macOS and Linux.
+        Records from a detector on USB or opens a file from the microSD card.
+        The GUI can plot rate, pulse height, the sensors, deadtime and timing.
       </p>
-      <ol class="mt-4 grow list-decimal space-y-1.5 ps-5 text-sm text-neutral-700 dark:text-neutral-300">
-        <li>Install <a class={link} href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Python 3.8 or newer</a>.</li>
-        <li>Download the files and open the <code>GUI</code> folder.</li>
-        <li>Run <code>install.bat</code> (Windows) or <code>bash install.sh</code>.</li>
-        <li>Start it with <code>python GUI.py</code>.</li>
-      </ol>
+      <details class="group mt-3 grow text-sm">
+        <summary class="cursor-pointer font-semibold text-neutral-700 select-none hover:text-orange-400 dark:text-neutral-300 dark:hover:text-orange-300">
+          How to Install
+        </summary>
+        <ol class="mt-2 list-decimal space-y-1.5 ps-5 text-neutral-700 dark:text-neutral-300">
+          <li>
+            Install{' '}
+            <a
+              class={link}
+              href="https://www.python.org/downloads/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Python 3.8 or newer
+            </a>
+            <span>.</span>
+          </li>
+          <li>
+            Download the files and open the <code>GUI</code> folder.
+          </li>
+          <li>
+            Run <code>install.bat</code> (Windows) or{' '}
+            <code>bash install.sh</code>
+            <span>.</span>
+          </li>
+          <li>
+            Start it with <code>python GUI.py</code>.
+          </li>
+        </ol>
+      </details>
       <div class="mt-6 flex flex-wrap items-center gap-4">
-        <a class={btn} href={downloads.repoZip}>Download (.zip)</a>
-        <a class={link} href={downloads.gui} target="_blank" rel="noopener noreferrer">GUI folder</a>
+        <a class={btn} href={downloads.repoZip}>
+          Download (.zip)
+        </a>
+        <a
+          class={link}
+          href={downloads.gui}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GUI folder
+        </a>
       </div>
     </div>
     <div class:list={[card, reveal, delay(1)]}>
-      <CwIcon name="firmware" class="size-9 text-orange-400 dark:text-orange-300" />
-      <h2 class="mt-4 text-2xl font-bold text-neutral-800 dark:text-neutral-200">Firmware <span id="gh-fw-name" class="tabular-nums">{snapshot.firmware}</span></h2>
+      <CwIcon
+        name="firmware"
+        class="size-9 text-orange-400 dark:text-orange-300"
+      />
+      <h2 class="mt-4 text-2xl font-bold text-neutral-800 dark:text-neutral-200">
+        Firmware{' '}
+        <span id="gh-fw-name" class="tabular-nums">
+          {snapshot.firmware}
+        </span>
+      </h2>
       <p class="mt-3 grow text-pretty text-neutral-600 dark:text-neutral-400">
-        Hold BOOTSEL on the Pico, plug it in, and drag the <code>.uf2</code> file onto the drive that appears. This link is checked against GitHub when the page opens, so it is always the newest version.
+        Hold BOOTSEL on the Pico, plug it in, and drag the <code>.uf2</code>{' '}
+        file onto the drive that appears.
       </p>
       <div class="mt-6 flex flex-wrap items-center gap-4">
-        <a id="gh-fw-link" class={btn} href={downloads.firmware}>Download .uf2</a>
-        <a class={link} href={downloads.firmwareFolder} target="_blank" rel="noopener noreferrer">All firmware</a>
+        <a id="gh-fw-link" class={btn} href={downloads.firmware}>
+          Download .uf2
+        </a>
+        <a
+          class={link}
+          href={downloads.firmwareFolder}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          All firmware
+        </a>
       </div>
     </div>
     <div class:list={[card, reveal, delay(2)]}>
-      <CwIcon name="script" class="size-9 text-orange-400 dark:text-orange-300" />
-      <h2 class="mt-4 text-2xl font-bold text-neutral-800 dark:text-neutral-200">Record and plot</h2>
+      <CwIcon
+        name="script"
+        class="size-9 text-orange-400 dark:text-orange-300"
+      />
+      <h2 class="mt-4 text-2xl font-bold text-neutral-800 dark:text-neutral-200">
+        Record and Plot
+      </h2>
       <p class="mt-3 grow text-pretty text-neutral-600 dark:text-neutral-400">
-        <code>import_data.py</code> saves a detector's USB output to a file with your computer's time stamp on every event (needs <code>pyserial</code>). <code>plot.py</code> plots the pulse heights from a data file. No install at all? Use the <a class={link} href="/measure">Measure page</a>.
+        <code>import_data.py</code> records a detector’s USB output to a file
+        and adds your computer’s time to each event (requires{' '}
+        <code>pyserial</code>). To record and plot data without installing
+        anything, use the{' '}
+        <a class={link} href="/measure">
+          Measure page
+        </a>
+        <span>.</span>
       </p>
       <div class="mt-6 flex flex-wrap items-center gap-4">
-        <a class={btn} href={downloads.importData} target="_blank" rel="noopener noreferrer">import_data.py</a>
-        <a class={link} href={downloads.plot} target="_blank" rel="noopener noreferrer">plot.py</a>
+        <a
+          class={btn}
+          href={downloads.importData}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          import_data.py
+        </a>
+        <a
+          class={link}
+          href={downloads.plot}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          plot.py
+        </a>
       </div>
     </div>
   </section>
 
-  <section id="gh" data-repo={REPO} data-taken={snapshot.takenAt} class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 2xl:max-w-full">
-    <p id="gh-note" class="mb-6 text-sm text-neutral-500 dark:text-neutral-400">
-      Showing the repository as of {fmt(snapshot.takenAt)}. Checking GitHub for anything newer.
-    </p>
+  <section
+    id="gh"
+    data-repo={REPO}
+    data-taken={snapshot.takenAt}
+    class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 2xl:max-w-full"
+  >
+    <h2 class="mb-4 text-lg font-bold text-neutral-800 dark:text-neutral-200">
+      From the GitHub Repository
+    </h2>
     <div class="flex flex-wrap items-end gap-x-14 gap-y-5">
       <div>
-        <p class="text-neutral-600 dark:text-neutral-400">Latest firmware</p>
-        <p id="gh-fw" class="text-5xl font-bold text-orange-400 tabular-nums dark:text-orange-300">{snapshot.firmware}</p>
+        <p class="text-neutral-600 dark:text-neutral-400">
+          Latest Firmware on GitHub
+        </p>
+        <p
+          id="gh-fw"
+          class="text-5xl font-bold text-orange-400 tabular-nums dark:text-orange-300"
+        >
+          {snapshot.firmware}
+        </p>
       </div>
       <dl class="flex flex-wrap gap-x-8 gap-y-2 pb-1.5 text-neutral-600 dark:text-neutral-400">
-        <div><dt class="inline">Last change:</dt>{" "}<dd id="gh-pushed" class="inline font-semibold text-neutral-800 dark:text-neutral-200">{fmt(snapshot.lastUpdate)}</dd></div>
-        <div><dt class="inline">Commits:</dt>{" "}<dd id="gh-count" class="inline font-semibold text-neutral-800 tabular-nums dark:text-neutral-200">{snapshot.commitCount}</dd></div>
-        <div><dt class="inline">Stars:</dt>{" "}<dd id="gh-stars" class="inline font-semibold text-neutral-800 tabular-nums dark:text-neutral-200">–</dd></div>
+        <div>
+          <dt class="inline">Last Change on GitHub:</dt>{' '}
+          <dd
+            id="gh-pushed"
+            class="inline font-semibold text-neutral-800 dark:text-neutral-200"
+          >
+            {fmt(snapshot.lastUpdate)}
+          </dd>
+        </div>
       </dl>
     </div>
 
     <div class="mt-6 grid gap-6 lg:grid-cols-3">
       <div class:list={[box, 'lg:col-span-2', reveal]}>
-        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">Recent changes on GitHub</h2>
-        <ol id="gh-commits" class="mt-3 divide-y divide-neutral-300 dark:divide-neutral-700">
+        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">
+          Recent Changes on GitHub
+        </h2>
+        <ol
+          id="gh-commits"
+          class="mt-3 divide-y divide-neutral-300 dark:divide-neutral-700"
+        >
           {snapshot.commits.slice(0, 8).map(c => (
             <li class="py-3">
-              <a class="font-medium text-neutral-800 hover:text-orange-400 hover:underline dark:text-neutral-200 dark:hover:text-orange-300" href={`${REPO_URL}/commit/${c.sha}`} target="_blank" rel="noopener noreferrer">{c.message}</a>
-              <span class="block text-sm text-neutral-500 dark:text-neutral-400">{fmt(c.date)}, {c.author}</span>
+              <a
+                class="font-medium text-neutral-800 hover:text-orange-400 hover:underline dark:text-neutral-200 dark:hover:text-orange-300"
+                href={`${REPO_URL}/commit/${c.sha}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {c.message}
+              </a>
+              <span class="block text-sm text-neutral-500 dark:text-neutral-400">
+                {fmt(c.date)}, {c.author}
+              </span>
             </li>
           ))}
         </ol>
       </div>
       <div class:list={[box, reveal]}>
-        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">Commits per month</h2>
-        <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Since the v3X repository opened in {months[0].label} {months[0].year}</p>
-        <div class="mt-6 flex h-40 items-end gap-1" role="img" aria-label={`Commits per month, ${months.map(m => `${m.label} ${m.year}: ${m.n}`).join(', ')}`}>
-          {months.map(m => (
-            <div class="flex-1 rounded-t-sm bg-orange-400 dark:bg-orange-300" style={`height:${Math.max(2, (m.n / max) * 100)}%`} title={`${m.label} ${m.year}: ${m.n}`}></div>
+        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">
+          What Is in the Repository
+        </h2>
+        <ul class="mt-4 grid gap-1 text-sm sm:grid-cols-2 lg:grid-cols-1">
+          {snapshot.files.map(f => (
+            <li>
+              <a
+                class="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-neutral-700 hover:bg-neutral-200 hover:text-orange-400 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-orange-300"
+                href={`${REPO_URL}/${f.type === 'dir' ? 'tree' : 'blob'}/main/${encodeURIComponent(f.name)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CwIcon
+                  name={
+                    (repoLinks[f.name] ??
+                      (f.name.endsWith('.pdf')
+                        ? 'docs'
+                        : f.name.endsWith('.xlsx')
+                          ? 'parts'
+                          : 'datafile')) as CwIconName
+                  }
+                  class="size-5 shrink-0 text-neutral-500 dark:text-neutral-400"
+                />
+                {f.name}
+              </a>
+              {webGuide(f.name) && (
+                <a
+                  class="ms-9 text-xs font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300"
+                  href={webGuide(f.name)!.chapters[0]?.url}
+                >
+                  Read on this site
+                </a>
+              )}
+            </li>
           ))}
-        </div>
-        <div class="mt-2 flex justify-between text-xs text-neutral-500 dark:text-neutral-400">
-          <span>{months[0].label} {months[0].year}</span><span>{months.at(-1)!.label} {months.at(-1)!.year}</span>
-        </div>
+        </ul>
       </div>
     </div>
 
     <div class:list={[box, 'mt-6', reveal]}>
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">The guides, as web pages</h2>
-        <a href="/docs/" class="text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300">All guides</a>
+        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">
+          View the Guides as Web Pages
+        </h2>
+        <a
+          href="/docs/"
+          class="text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300"
+        >
+          All Guides
+        </a>
       </div>
       <ul class="mt-5 grid gap-x-10 md:grid-cols-2">
-        {guides.guides.map((g) => (
+        {guides.guides.map(g => (
           <li class="border-t border-neutral-300 py-4 dark:border-neutral-700">
             <div class="flex items-start gap-3">
-              <CwIcon name="docs" class="mt-0.5 size-6 shrink-0 text-orange-400 dark:text-orange-300" />
+              <CwIcon
+                name="docs"
+                class="mt-0.5 size-6 shrink-0 text-orange-400 dark:text-orange-300"
+              />
               <div class="min-w-0 grow">
-                <a class="font-bold text-neutral-800 hover:text-orange-400 dark:text-neutral-200 dark:hover:text-orange-300" href={g.chapters[0]?.url}>{g.title}</a>
-                <p class="mt-0.5 text-sm text-neutral-600 dark:text-neutral-400">{g.chapters.length} chapters, {g.pageCount} pages. <a class="underline decoration-1 underline-offset-2 hover:text-orange-400" href={`/pdf/${g.slug}/`} target="_blank" rel="noopener">Open the PDF</a></p>
-                <div class="cw-guide-source mt-2" data-repo={guides.repo} data-branch={guides.branch} data-path={g.file} data-sha={g.blobSha} data-date={g.commitDate}>
-                  <span class="cw-gs-status inline-flex items-center gap-1.5 text-xs text-neutral-600 dark:text-neutral-400" data-state="idle">Synced with the PDF from {fmt(g.commitDate)}</span>
-                  <span class="cw-gs-note mt-1 block text-xs text-neutral-700 dark:text-neutral-300" hidden></span>
+                <a
+                  class="font-bold text-neutral-800 hover:text-orange-400 dark:text-neutral-200 dark:hover:text-orange-300"
+                  href={g.chapters[0]?.url}
+                >
+                  {g.title}
+                </a>
+                <p class="mt-0.5 text-sm text-neutral-600 dark:text-neutral-400">
+                  {g.chapters.length} chapters, {g.pageCount} pages.{' '}
+                  <a
+                    class="underline decoration-1 underline-offset-2 hover:text-orange-400"
+                    href={`/pdf/${g.slug}/`}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Open the PDF
+                  </a>
+                </p>
+                <div
+                  class="cw-guide-source mt-2"
+                  data-repo={guides.repo}
+                  data-branch={guides.branch}
+                  data-path={g.file}
+                  data-sha={g.blobSha}
+                  data-date={g.commitDate}
+                >
+                  <span
+                    class="cw-gs-status inline-flex items-center gap-1.5 text-xs text-neutral-600 dark:text-neutral-400"
+                    data-state="idle"
+                  >
+                    Synced with the PDF from {fmt(g.commitDate)}
+                  </span>
+                  <span
+                    class="cw-gs-note mt-1 block text-xs text-neutral-700 dark:text-neutral-300"
+                    hidden
+                  ></span>
                 </div>
               </div>
             </div>
           </li>
         ))}
       </ul>
-    </div>
-
-    <div class:list={[box, 'mt-6', reveal]}>
-      <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">What is in the repository</h2>
-      <ul class="mt-4 grid gap-1 text-sm sm:grid-cols-2 lg:grid-cols-3">
-        {snapshot.files.map(f => (
-          <li>
-            <a class="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-neutral-700 hover:bg-neutral-200 hover:text-orange-400 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-orange-300" href={`${REPO_URL}/${f.type === 'dir' ? 'tree' : 'blob'}/main/${encodeURIComponent(f.name)}`} target="_blank" rel="noopener noreferrer">
-              <CwIcon name={(repoLinks[f.name] ?? (f.name.endsWith('.pdf') ? 'docs' : f.name.endsWith('.xlsx') ? 'parts' : 'datafile')) as CwIconName} class="size-5 shrink-0 text-neutral-500 dark:text-neutral-400" />
-              {f.name}
-            </a>
-            {webGuide(f.name) && (
-              <a class="ms-9 text-xs font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href={webGuide(f.name)!.chapters[0]?.url}>Read on this site</a>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-    <div class:list={['flex flex-col gap-6 surface p-8 sm:flex-row sm:items-start', reveal]}>
-      <CwIcon name="globe" class="size-10 shrink-0 text-orange-400 dark:text-orange-300" />
-      <div>
-        <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200">Coming later: a live map of detectors</h2>
-        <p class="mt-2 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">
-          The plan is for detectors to send their rates to a server at UD, over WiFi or through a small script on a computer. This space will show every connected detector and its rate as it comes in.
-        </p>
-      </div>
     </div>
   </section>
 </MainLayout>
@@ -207,21 +371,29 @@ const repoLinks: Record<string, CwIconName> = {
   import '@scripts/guideSync';
   const root = document.getElementById('gh')!;
   const repo = root.dataset.repo!;
-  const taken = new Date(root.dataset.taken!);
   const api = `https://api.github.com/repos/${repo}`;
   const el = (id: string) => document.getElementById(id)!;
-  const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const fmt = (d: Date) =>
+    d.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
 
   async function get(path: string) {
-    const r = await fetch(api + path, { headers: { Accept: 'application/vnd.github+json' } });
+    const r = await fetch(api + path, {
+      headers: { Accept: 'application/vnd.github+json' },
+    });
     if (!r.ok) throw new Error(String(r.status));
     return r.json();
   }
 
   (async () => {
     try {
-      const [info, fw] = await Promise.all([get(''), get('/contents/Firmware')]);
-      el('gh-stars').textContent = info.stargazers_count.toLocaleString();
+      const [info, fw] = await Promise.all([
+        get(''),
+        get('/contents/Firmware'),
+      ]);
       el('gh-pushed').textContent = fmt(new Date(info.pushed_at));
       const versions = (fw as { name: string }[])
         .map(f => f.name.match(/(\d+\.\d+\.\d+)\.uf2$/)?.[1])
@@ -231,15 +403,15 @@ const repoLinks: Record<string, CwIconName> = {
         const v = versions.at(-1)!;
         el('gh-fw').textContent = v;
         el('gh-fw-name').textContent = v;
-        const file = (fw as { name: string }[]).find(f => f.name.endsWith(`${v}.uf2`));
-        if (file) (el('gh-fw-link') as HTMLAnchorElement).href = `https://github.com/${repo}/raw/main/Firmware/${encodeURIComponent(file.name)}`;
+        const file = (fw as { name: string }[]).find(f =>
+          f.name.endsWith(`${v}.uf2`)
+        );
+        if (file)
+          (el('gh-fw-link') as HTMLAnchorElement).href =
+            `https://github.com/${repo}/raw/main/Firmware/${encodeURIComponent(file.name)}`;
       }
-      const newer = new Date(info.pushed_at) > taken;
-      el('gh-note').textContent = newer
-        ? `Live from GitHub. The repository has changed since this page was built on ${fmt(taken)}; the commit list updates when the site is rebuilt.`
-        : 'Live from GitHub. Nothing has changed since this page was built.';
     } catch {
-      el('gh-note').textContent = `Showing the repository as of ${fmt(taken)}. GitHub did not answer just now, so the star count is not shown.`;
+      /* GitHub did not answer; the build-time values stay. */
     }
   })();
 </script>

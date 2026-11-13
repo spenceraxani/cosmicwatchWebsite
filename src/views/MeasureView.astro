@@ -3,26 +3,64 @@ import { reveal, revealImage, delay } from '@utils/motion';
 import MainLayout from '@/layouts/MainLayout.astro';
 import CwIcon from '@components/ui/icons/CwIcon.astro';
 
-import { CORR_VARS } from '../scripts/measure/charts';
-
 // The same plots, in the same order, as the CosmicWatch GUI (GUI/GUI.py on GitHub).
 const tabs = [
-  { id: 'rate', label: 'Rate', doc: '/docs/guides/example-measurements/tested-measurements/a-full-sky-cosmic-ray-muon-measurement/', blurb: 'Count rate over time for all, non-coincident and coincident events.' },
-  { id: 'adc', label: 'ADC', doc: '/docs/guides/example-measurements/tested-measurements/reducing-radioactive-backgrounds/', blurb: 'Pulse-height spectrum in ADC counts.' },
-  { id: 'sipm', label: 'SiPM', doc: '/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/', blurb: 'Pulse-height spectrum in SiPM peak voltage.' },
-  { id: 'pressure', label: 'Pressure', doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/', blurb: 'Air pressure over time.' },
-  { id: 'temperature', label: 'Temperature', doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/', blurb: 'Temperature inside the case over time.' },
-  { id: 'accel', label: 'Linear acceleration', doc: '/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-angular-dependence/', blurb: 'Acceleration along X, Y and Z.' },
-  { id: 'gyro', label: 'Angular velocity', doc: '/docs/guides/example-measurements/tested-measurements/high-altitude-balloon-flight/', blurb: 'Rotation rate around X, Y and Z.' },
-  { id: 'deadtime', label: 'Deadtime', doc: '/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/', blurb: 'Share of each bin the detector was busy and could not record.' },
-  { id: 'ratedist', label: 'Rate distribution', doc: '/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/', blurb: 'Histogram of the binned rates, with a Poisson fit.' },
-  { id: 'dt', label: 'Δt distribution', doc: '/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/', blurb: 'Time between events, with an exponential fit.' },
-  { id: 'corr', label: 'Correlation', doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/', blurb: 'Any two binned quantities against each other, with a straight-line fit.' },
+  {
+    id: 'rate',
+    label: 'Rate',
+    doc: '/docs/guides/example-measurements/tested-measurements/a-full-sky-cosmic-ray-muon-measurement/',
+    blurb:
+      'Count rate over time for all, non-coincident and coincident events.',
+  },
+  {
+    id: 'adc',
+    label: 'ADC',
+    doc: '/docs/guides/example-measurements/tested-measurements/reducing-radioactive-backgrounds/',
+    blurb: 'Pulse-height spectrum in ADC counts.',
+  },
+  {
+    id: 'sipm',
+    label: 'SiPM',
+    doc: '/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/',
+    blurb: 'Pulse-height spectrum in SiPM peak voltage.',
+  },
+  {
+    id: 'pressure',
+    label: 'Pressure',
+    doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/',
+    blurb: 'Air pressure over time.',
+  },
+  {
+    id: 'temperature',
+    label: 'Temperature',
+    doc: '/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/',
+    blurb: 'Temperature inside the case over time.',
+  },
+  {
+    id: 'accel',
+    label: 'Linear Acceleration',
+    doc: '/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-angular-dependence/',
+    blurb: 'Acceleration along X, Y and Z.',
+  },
+  {
+    id: 'ratedist',
+    label: 'Rate Distribution',
+    doc: '/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/',
+    blurb:
+      'A histogram of the number of events in each time bin, with a Poisson fit. If the detector is working properly, χ²/dof should be close to 1.',
+  },
+  {
+    id: 'dt',
+    label: 'Δt Distribution',
+    doc: '/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/',
+    blurb:
+      'A histogram of the time between consecutive events, with an exponential fit. A spike at very short times usually indicates that there is electrical noise.',
+  },
 ];
-const corrOptions = Object.entries(CORR_VARS).map(([value, v]) => ({ value, label: v.label }));
 // the template's card, SecondaryCTA, PrimaryCTA and TextInput styles
 const box = 'surface';
-const inner = 'md:border-l md:border-neutral-300 md:pl-6 md:first:border-l-0 md:first:pl-0 dark:md:border-neutral-700';
+const inner =
+  'md:border-l md:border-neutral-300 md:pl-6 md:first:border-l-0 md:first:pl-0 dark:md:border-neutral-700';
 const btn =
   'inline-flex items-center justify-center gap-x-2 rounded-lg border border-neutral-200 bg-neutral-300 px-4 py-2.5 text-center text-sm font-medium text-neutral-600 shadow-xs ring-zinc-500 outline-hidden transition duration-300 hover:bg-neutral-400/50 hover:text-neutral-600 focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-zinc-700 dark:text-neutral-300 dark:ring-zinc-200 dark:hover:bg-zinc-600';
 const primary =
@@ -33,76 +71,155 @@ const field =
 
 <MainLayout
   title="Measure"
-  description="Connect a CosmicWatch detector over USB or open a data file and get the same plots as the CosmicWatch GUI: rate, ADC and SiPM spectra, pressure, temperature, motion, deadtime, rate and Δt distributions, and correlations. Download CSV or a PDF report."
+  description="Connect a CosmicWatch detector over USB or open a data file and get the same plots as the CosmicWatch GUI: rate, ADC and SiPM spectra, pressure, temperature, motion, and rate and Δt distributions. Download CSV or a PDF report."
   ogTitle="Measure | CosmicWatch"
 >
-  <section class="mx-auto max-w-[85rem] px-4 pt-10 pb-6 sm:px-6 lg:px-8 lg:pt-14 2xl:max-w-full">
-    <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200', reveal]}>Measure</h1>
-    <p class="mt-3 max-w-2xl text-lg text-pretty text-neutral-700 dark:text-neutral-400">
-      Plug a detector into this computer, or open a file it recorded, and plot the data as it comes in. There is nothing to install.
-    </p>
+  <section class="mx-auto max-w-[85rem] px-4 pt-10 pb-8 sm:px-6 lg:px-8 lg:pt-14 lg:pb-10 2xl:max-w-full">
+    <h1
+      class:list={[
+        'block text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200',
+        reveal,
+      ]}
+    >
+      Measure With CosmicWatch
+      <span
+        id="m-title-name"
+        class="text-orange-400 dark:text-orange-300"
+      ></span>
+    </h1>
   </section>
 
-  <div id="measure" class="mx-auto max-w-[85rem] space-y-6 px-4 pb-20 sm:px-6 lg:px-8 2xl:max-w-full">
-    <section class:list={[box, 'p-5 sm:p-6', reveal]} aria-labelledby="src-title">
-      <h2 id="src-title" class="text-xl font-bold text-neutral-800 dark:text-neutral-200">Data source</h2>
-      <div class="mt-4 grid gap-6 md:grid-cols-3">
+  <div
+    id="measure"
+    class="mx-auto max-w-[85rem] space-y-6 px-4 pb-20 sm:px-6 lg:px-8 2xl:max-w-full"
+  >
+    <section class:list={[box, 'p-5 sm:p-6', reveal]} aria-label="Data source">
+      <div class="grid gap-6 md:grid-cols-3">
         <div class={inner}>
-          <CwIcon name="usb" class="size-8 text-orange-400 dark:text-orange-300" />
-          <h3 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">Connect a detector</h3>
-          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">Over USB, in Chrome or Edge on a computer. Events appear as they happen.</p>
+          <CwIcon
+            name="usb"
+            class="size-8 text-orange-400 dark:text-orange-300"
+          />
+          <h2 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">
+            Connect a Detector
+          </h2>
           <div class="mt-4 flex flex-wrap gap-2">
-            <button type="button" id="m-connect" class={primary}>Connect</button>
-            <button type="button" id="m-disconnect" class={btn} hidden>Disconnect</button>
-            <button type="button" id="m-save" class={btn} hidden>Save data (.txt)</button>
+            <button type="button" id="m-connect" class={primary}>
+              Connect detector
+            </button>
+            <button type="button" id="m-save" class={btn} hidden>
+              Save data (.txt)
+            </button>
           </div>
-          <p id="m-noserial" class="mt-3 hidden text-sm text-neutral-600 dark:text-neutral-400">This browser cannot open USB serial ports. Use Chrome or Edge on a computer, or open a file instead.</p>
+          <p
+            id="m-noserial"
+            class="mt-3 hidden text-sm text-neutral-600 dark:text-neutral-400"
+          >
+            This browser cannot open USB serial ports. Use Chrome or Edge on a
+            computer, or open a file instead.
+          </p>
         </div>
-        <div id="m-drop" class:list={[inner, 'rounded-lg ring-orange-400 ring-offset-4 ring-offset-neutral-100 transition-shadow dark:ring-offset-neutral-800']}>
-          <CwIcon name="datafile" class="size-8 text-orange-400 dark:text-orange-300" />
-          <h3 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">Open a data file</h3>
-          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">A .txt file from the microSD card or from import_data.py. You can also drop it on this box.</p>
+        <div
+          id="m-drop"
+          class:list={[
+            inner,
+            'rounded-lg ring-orange-400 ring-offset-4 ring-offset-neutral-100 transition-shadow dark:ring-offset-neutral-800',
+          ]}
+        >
+          <CwIcon
+            name="datafile"
+            class="size-8 text-orange-400 dark:text-orange-300"
+          />
+          <h2 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">
+            Open a Data File
+          </h2>
           <label class:list={[btn, 'mt-4 cursor-pointer']}>
             Choose file
-            <input id="m-file" type="file" accept=".txt,.csv,.gz,text/plain" class="sr-only" />
+            <input
+              id="m-file"
+              type="file"
+              accept=".txt,.csv,.gz,text/plain"
+              class="sr-only"
+            />
           </label>
         </div>
         <div class={inner}>
-          <CwIcon name="coincidence" class="size-8 text-orange-400 dark:text-orange-300" />
-          <h3 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">Use the sample run</h3>
-          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">The first 12 hours of a real coincidence run from the Axani lab, about 131,000 events.</p>
+          <CwIcon
+            name="coincidence"
+            class="size-8 text-orange-400 dark:text-orange-300"
+          />
+          <h2 class="mt-3 text-lg font-bold text-neutral-800 dark:text-neutral-200">
+            Use the Sample Run
+          </h2>
           <div class="mt-4 flex flex-wrap items-center gap-3">
-            <button type="button" id="m-sample" class={btn}>Load sample</button>
-            <a id="m-sample-file" href="/data/axlab-sample-12h.txt.gz" class="text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300">Download it (2.8 MB)</a>
+            <button type="button" id="m-sample" class={btn}>
+              Load sample
+            </button>
+            <a
+              id="m-sample-file"
+              href="/data/axlab-sample-12h.txt.gz"
+              class="text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300"
+            >
+              Download it (2.8 MB)
+            </a>
           </div>
         </div>
       </div>
-      <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-neutral-200 pt-4 text-sm dark:border-neutral-700">
-        <span id="m-led" class="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600" aria-hidden="true"></span>
-        <p id="m-status" class="text-neutral-600 dark:text-neutral-400" aria-live="polite">No data yet.</p>
-        <progress id="m-progress" class="hidden h-1.5 w-40 accent-orange-400" max="1" value="0"></progress>
+      <div
+        id="m-status-row"
+        class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-neutral-200 pt-4 text-sm dark:border-neutral-700"
+        hidden
+      >
+        <p
+          id="m-status"
+          class="text-neutral-600 dark:text-neutral-400"
+          aria-live="polite"
+        ></p>
+        <progress
+          id="m-progress"
+          class="hidden h-1.5 w-40 accent-orange-400"
+          max="1"
+          value="0"
+        ></progress>
       </div>
     </section>
 
-    <dl id="m-summary" class="surface grid grid-cols-2 gap-y-2 py-2 sm:grid-cols-3 lg:grid-cols-6 lg:divide-x lg:divide-neutral-300 dark:lg:divide-neutral-700">
+    <dl
+      id="m-summary"
+      class="surface grid grid-cols-2 gap-y-2 py-2 sm:grid-cols-3 lg:grid-cols-6 lg:divide-x lg:divide-neutral-300 dark:lg:divide-neutral-700"
+    >
       {[
-        ['duration', 'Run length'],
+        ['duration', 'Run Length'],
         ['events', 'Events'],
         ['rate', 'Rate'],
-        ['coinc', 'Coincident rate'],
+        ['coinc', 'Coincident Rate'],
         ['temp', 'Temperature'],
         ['press', 'Pressure'],
       ].map(([id, label]) => (
         <div class="flex flex-col-reverse px-5 py-3">
-          <dt class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{label}</dt>
-          <dd id={`s-${id}`} class="text-2xl font-bold text-orange-400 tabular-nums dark:text-orange-300">–</dd>
+          <dt class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            {label}
+          </dt>
+          <dd
+            id={`s-${id}`}
+            class="text-2xl font-bold text-orange-400 tabular-nums dark:text-orange-300"
+          >
+            –
+          </dd>
         </div>
       ))}
     </dl>
 
-    <section class:list={[box, 'overflow-hidden', reveal]} aria-label="Measurements">
+    <section
+      class:list={[box, 'overflow-hidden', reveal]}
+      aria-label="Measurements"
+    >
       <div class="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200 px-4 py-3 sm:px-6 dark:border-neutral-700">
-        <nav role="tablist" aria-label="Measurement" class="flex gap-1 overflow-x-auto">
+        <nav
+          role="tablist"
+          aria-label="Measurement"
+          class="flex gap-1 overflow-x-auto"
+        >
           {tabs.map((t, i) => (
             <button
               type="button"
@@ -119,7 +236,12 @@ const field =
         </nav>
       </div>
 
-      <div id="m-panel" role="tabpanel" aria-labelledby="tab-rate" class="p-4 sm:p-6">
+      <div
+        id="m-panel"
+        role="tabpanel"
+        aria-labelledby="tab-rate"
+        class="p-4 sm:p-6"
+      >
         {tabs.map((t, i) => (
           <div data-blurb={t.id} hidden={i !== 0}>
             <p class="max-w-3xl text-sm text-pretty text-neutral-600 dark:text-neutral-400">
@@ -128,7 +250,8 @@ const field =
           </div>
         ))}
         <div class="mt-4 flex flex-wrap items-end gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-          <label data-ctl="bin" class="block">Bin time
+          <label data-ctl="bin" class="block">
+            Bin time
             <select id="m-bin" class:list={[field, 'block']}>
               <option value="auto">Automatic</option>
               <option value="30">30 s</option>
@@ -140,90 +263,89 @@ const field =
               <option value="custom">Custom</option>
             </select>
           </label>
-          <label id="m-bin-custom-wrap" class="block" hidden>Seconds
-            <input id="m-bin-custom" type="number" min="1" step="1" value="300" class:list={[field, 'block w-28 tabular-nums']} />
-          </label>
-          <label data-ctl="corr" class="block" hidden>X axis
-            <select id="m-corr-x" class:list={[field, 'block']}>
-              {corrOptions.map(o => <option value={o.value} selected={o.value === 'pressure'}>{o.label}</option>)}
-            </select>
-          </label>
-          <label data-ctl="corr" class="block" hidden>Y axis
-            <select id="m-corr-y" class:list={[field, 'block']}>
-              {corrOptions.map(o => <option value={o.value} selected={o.value === 'rate_coinc'}>{o.label}</option>)}
-            </select>
+          <label id="m-bin-custom-wrap" class="block" hidden>
+            Seconds
+            <input
+              id="m-bin-custom"
+              type="number"
+              min="1"
+              step="1"
+              value="300"
+              class:list={[field, 'block w-28 tabular-nums']}
+            />
           </label>
           <fieldset class="flex items-end gap-2">
-            <legend class="sr-only">ADC window (applies to every plot)</legend>
-            <label class="block">ADC min
-              <input id="m-adc-min" type="number" min="0" max="4095" step="1" value="0" class:list={[field, 'block w-24 tabular-nums']} />
+            <legend class="sr-only">ADC Window (Applies to Every Plot)</legend>
+            <label class="block">
+              ADC min
+              <input
+                id="m-adc-min"
+                type="number"
+                min="0"
+                max="4095"
+                step="1"
+                value="0"
+                class:list={[field, 'block w-24 tabular-nums']}
+              />
             </label>
-            <label class="block">ADC max
-              <input id="m-adc-max" type="number" min="0" max="4095" step="1" value="4095" class:list={[field, 'block w-24 tabular-nums']} />
+            <label class="block">
+              ADC max
+              <input
+                id="m-adc-max"
+                type="number"
+                min="0"
+                max="4095"
+                step="1"
+                value="4095"
+                class:list={[field, 'block w-24 tabular-nums']}
+              />
             </label>
-            <button type="button" id="m-adc-reset" class={btn}>Reset</button>
+            <button type="button" id="m-adc-reset" class={btn}>
+              Reset
+            </button>
           </fieldset>
           <div class="ms-auto flex flex-wrap gap-2">
-            <button type="button" id="m-csv" class={btn} disabled>Download CSV</button>
-            <button type="button" id="m-copy" class={btn} disabled>Copy CSV</button>
-            <button type="button" id="m-pdf" class={primary} disabled>PDF report</button>
+            <button type="button" id="m-csv" class={btn} disabled>
+              Download CSV
+            </button>
+            <button type="button" id="m-copy" class={btn} disabled>
+              Copy CSV
+            </button>
+            <button type="button" id="m-pdf" class={primary} disabled>
+              PDF report
+            </button>
           </div>
         </div>
         <div class="relative mt-4 h-80 sm:h-[26rem]">
-          <canvas id="m-chart" aria-label="Measurement chart" role="img"></canvas>
-          <p id="m-empty" class="absolute inset-0 flex items-center justify-center rounded-lg bg-neutral-50 px-6 text-center text-sm text-neutral-500 dark:bg-white/[.04] dark:text-neutral-400">
-            Connect a detector, open a file or load the sample run to see this measurement.
+          <canvas
+            id="m-chart"
+            aria-label="Measurement chart"
+            role="img"
+          ></canvas>
+          <p
+            id="m-empty"
+            class="absolute inset-0 flex items-center justify-center rounded-lg bg-neutral-50 px-6 text-center text-sm text-neutral-500 dark:bg-white/[.04] dark:text-neutral-400"
+          >
+            Connect a detector, open a file or load the sample run to see this
+            measurement.
           </p>
         </div>
-        <p id="m-result" class="mt-4 min-h-6 font-bold text-neutral-800 dark:text-neutral-200" aria-live="polite"></p>
+        <p
+          id="m-result"
+          class="mt-4 min-h-6 font-bold text-neutral-800 dark:text-neutral-200"
+          aria-live="polite"
+        ></p>
       </div>
     </section>
 
-    <section class:list={[box, 'p-5 sm:p-6', reveal]} aria-labelledby="wh-title">
-      <div class="flex items-start gap-4">
-        <CwIcon name="globe" class="mt-1 size-8 shrink-0 text-orange-400 dark:text-orange-300" />
-        <div>
-          <h2 id="wh-title" class="text-xl font-bold text-neutral-800 dark:text-neutral-200">Webhooks</h2>
-          <p class="mt-1 max-w-3xl text-sm text-pretty text-neutral-600 dark:text-neutral-400">
-            Send a summary to a server, Google Sheet, Discord or Slack while a detector is connected.
-          </p>
-        </div>
-      </div>
-      <form id="wh-form" class="mt-5 grid gap-4 lg:grid-cols-[2fr_1fr_1fr_auto] lg:items-end">
-        <label class="block text-sm text-neutral-700 dark:text-neutral-300">Webhook URL
-          <input id="wh-url" type="url" inputmode="url" placeholder="https://" class:list={[field, 'w-full']} />
-        </label>
-        <label class="block text-sm text-neutral-700 dark:text-neutral-300">Format
-          <select id="wh-format" class:list={[field, 'w-full']}>
-            <option value="json">JSON (servers, Apps Script)</option>
-            <option value="discord">Discord</option>
-            <option value="slack">Slack</option>
-          </select>
-        </label>
-        <label class="block text-sm text-neutral-700 dark:text-neutral-300">Send every
-          <select id="wh-every" class:list={[field, 'w-full']}>
-            <option value="10">10 seconds</option>
-            <option value="60" selected>1 minute</option>
-            <option value="300">5 minutes</option>
-            <option value="900">15 minutes</option>
-            <option value="3600">1 hour</option>
-          </select>
-        </label>
-        <div class="flex flex-wrap gap-2">
-          <button type="button" id="wh-test" class={btn}>Send now</button>
-          <button type="button" id="wh-toggle" aria-pressed="false" class:list={[btn, 'aria-pressed:border-transparent aria-pressed:bg-orange-400 aria-pressed:font-bold aria-pressed:text-neutral-50 dark:aria-pressed:bg-orange-400 dark:aria-pressed:text-neutral-50']}>Send while connected</button>
-        </div>
-      </form>
-      <details class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
-        <summary class="cursor-pointer font-bold text-neutral-800 hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400">What gets sent</summary>
-        <pre id="wh-preview" class="mt-2 overflow-x-auto rounded-lg bg-night p-3 font-mono text-xs leading-relaxed text-neutral-200"></pre>
-      </details>
-      <ol id="wh-log" class="mt-4 space-y-1 text-sm text-neutral-600 dark:text-neutral-400" aria-live="polite"></ol>
-    </section>
-
-    <details class:list={[box, 'p-5 sm:p-6', reveal]}>
-      <summary class="cursor-pointer text-lg font-bold text-neutral-800 hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400">Raw lines from the detector</summary>
-      <pre id="m-raw" class="mt-3 h-48 overflow-auto rounded-lg bg-night p-3 font-mono text-xs leading-relaxed text-neutral-300">Lines show up here exactly as the detector sends them.</pre>
+    <details open class:list={[box, 'p-5 sm:p-6', reveal]}>
+      <summary class="cursor-pointer text-lg font-bold text-neutral-800 hover:text-neutral-500 dark:text-neutral-200 dark:hover:text-neutral-400">
+        Live .txt Entries From the Detector
+      </summary>
+      <pre
+        id="m-raw"
+        class="mt-3 h-[28rem] overflow-auto rounded-lg bg-night p-3 font-mono text-xs leading-relaxed text-neutral-300"
+      >No data yet.</pre>
     </details>
   </div>
 </MainLayout>

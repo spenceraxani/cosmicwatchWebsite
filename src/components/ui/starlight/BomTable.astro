@@ -11,19 +11,50 @@ const { rows } = Astro.props;
 
 <table>
   <thead>
-    <tr><th>Part</th><th>Qty</th><th>Ref.</th><th>Unit price</th><th>Where to buy</th></tr>
+    <tr>
+      <th>Part</th>
+      <th>Qty</th>
+      <th>Ref.</th>
+      <th>Unit price</th>
+      <th>Where to buy</th>
+    </tr>
   </thead>
   <tbody>
-    {rows.map((p) => (
+    {rows.map(p => (
       <tr>
-        <td><strong>{p.name}</strong>{p.desc && <><br /><small>{p.desc}</small></>}</td>
+        <td>
+          <strong>{p.name}</strong>
+          {p.desc && (
+            <>
+              <br />
+              <small>{p.desc}</small>
+            </>
+          )}
+        </td>
         <td>{p.qty}</td>
-        <td><small>{refs(p)}</small></td>
+        <td>
+          <small>{refs(p)}</small>
+        </td>
         <td>{money(p.unit)}</td>
         <td>
-          {p.digikey && <a href={p.digikey.url}>Digi-Key <code>{p.digikey.partNumber}</code></a>}
-          {p.links.map((l, i) => <>{(p.digikey || i > 0) && ', '}<a href={l.url}>{l.label}</a></>)}
-          {!p.digikey && !p.links.length && (p.digikeySearch ? <a href={p.digikeySearch}>Search Digi-Key</a> : '–')}
+          {p.digikey && (
+            <a href={p.digikey.url}>
+              Digi-Key <code>{p.digikey.partNumber}</code>
+            </a>
+          )}
+          {p.links.map((l, i) => (
+            <>
+              {(p.digikey || i > 0) && ', '}
+              <a href={l.url}>{l.label}</a>
+            </>
+          ))}
+          {!p.digikey &&
+            !p.links.length &&
+            (p.digikeySearch ? (
+              <a href={p.digikeySearch}>Search Digi-Key</a>
+            ) : (
+              '–'
+            ))}
         </td>
       </tr>
     ))}

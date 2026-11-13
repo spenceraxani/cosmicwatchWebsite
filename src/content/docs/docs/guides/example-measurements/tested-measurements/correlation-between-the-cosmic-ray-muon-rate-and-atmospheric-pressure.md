@@ -1,6 +1,6 @@
 ---
-title: "Correlation between the cosmic-ray muon rate and atmospheric pressure"
-description: "Example Measurements, pages 20–22. Generated from the PDF on GitHub."
+title: 'Correlation between the cosmic-ray muon rate and atmospheric pressure'
+description: 'Example Measurements, pages 20–22. Generated from the PDF on GitHub.'
 sidebar:
   order: 10
 editUrl: false
@@ -23,13 +23,12 @@ where 𝐼 represents cosmic-ray muon intensity, ∆𝑃 is the measured atmosph
 
 </figure>
 
-For this measurement, we decided to use an array of master-coincident detectors (ten detectors) to improve the statistics. Five pairs of detectors were each connected in configuration (c) of Fig. ??, and left to record the cosmic-ray muon rate over the course of 24.8 days (from 13:35 hrs Nov. 12th to 09:00 hrs Dec. 7th 2018.). Data was recorded directly to a microSD card and powered through an 8-way USB hub powered through a wall outlet. Since the CosmicWatch does not keep accurate time over long time-scales, we assume the time drifts linearly with time, and scale the uptime of all detectors such that they are all the same. This is not ideal, and we would recommend recording the data directly to a computer through the *import_data.py* script in the future to get an accurate time stamp on all events. However, this is more prone to losing data, since you would require a computer that runs continuously for a significant amount of time. The array of detectors was placed in the 4<sup>th</sup> floor WiPAC lab in Madison, WI. Atmospheric pressure for Madison was found in Ref. \[14\]. However, the UD version has a built in pressure sensor if you would like to try using it.
+For this measurement, we decided to use an array of master-coincident detectors (ten detectors) to improve the statistics. Five pairs of detectors were each connected in configuration (c) of Fig. ??, and left to record the cosmic-ray muon rate over the course of 24.8 days (from 13:35 hrs Nov. 12th to 09:00 hrs Dec. 7th 2018.). Data was recorded directly to a microSD card and powered through an 8-way USB hub powered through a wall outlet. Since the CosmicWatch does not keep accurate time over long time-scales, we assume the time drifts linearly with time, and scale the uptime of all detectors such that they are all the same. This is not ideal, and we would recommend recording the data directly to a computer through the _import_data.py_ script in the future to get an accurate time stamp on all events. However, this is more prone to losing data, since you would require a computer that runs continuously for a significant amount of time. The array of detectors was placed in the 4<sup>th</sup> floor WiPAC lab in Madison, WI. Atmospheric pressure for Madison was found in Ref. \[14\]. However, the UD version has a built in pressure sensor if you would like to try using it.
 
 Fig. 2.14 (left) shows the correlation between the detector count rate and the atmospheric pressure. The calculated correlation is shown in the dotted white line. A least squares fit yielded a barometric coefficient of −0.141 ± 0.007 %/hPa, in agreement with Ref. \[15\].
 
 This may be difficult to do with only two detectors since the statistics will be lower, but it will be interesting to see! You can increase the amount of data you have if you ask a friend to also take data at their location, and you add that to yours.
 
 One of our latest adventures is HurricaneWatch. A meteorology student who is a hurricanechaser is taking our detectors into the storms she studies. The atmospheric pressure during a hurricane can drop by over 100 hPa, which we hope to be able to see. We will be excited to get this dataset!
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=20" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 20–22.</p>

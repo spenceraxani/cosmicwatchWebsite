@@ -3,7 +3,10 @@
 
 class Column<T extends Float64Array | Float32Array | Uint8Array | Uint16Array> {
   data: T;
-  constructor(private Ctor: { new (n: number): T }, size = 4096) {
+  constructor(
+    private Ctor: { new (n: number): T },
+    size = 4096
+  ) {
     this.data = new Ctor(size);
   }
   ensure(n: number) {
@@ -11,7 +14,9 @@ class Column<T extends Float64Array | Float32Array | Uint8Array | Uint16Array> {
     let size = this.data.length;
     while (size < n) size *= 2;
     const next = new this.Ctor(size);
-    (next as ArrayLike<number> & { set(a: ArrayLike<number>): void }).set(this.data);
+    (next as ArrayLike<number> & { set(a: ArrayLike<number>): void }).set(
+      this.data
+    );
     this.data = next;
   }
 }
@@ -34,7 +39,21 @@ export class Run {
   readonly gz = new Column(Float32Array);
   skipped = 0;
 
-  private readonly cols = [this.t, this.flag, this.adc, this.sipm, this.dead, this.temp, this.press, this.ax, this.ay, this.az, this.gx, this.gy, this.gz];
+  private readonly cols = [
+    this.t,
+    this.flag,
+    this.adc,
+    this.sipm,
+    this.dead,
+    this.temp,
+    this.press,
+    this.ax,
+    this.ay,
+    this.az,
+    this.gx,
+    this.gy,
+    this.gz,
+  ];
 
   clear() {
     this.n = 0;
@@ -65,13 +84,18 @@ export class Run {
     for (const col of this.cols) col.ensure(need);
     this.t.data[i] = t;
     // Same rule as the GUI: anything other than 0/false/empty counts as coincident.
-    this.flag.data[i] = ['0', 'false', 'False', ''].includes(c[2].trim()) ? 0 : 1;
+    this.flag.data[i] = ['0', 'false', 'False', ''].includes(c[2].trim())
+      ? 0
+      : 1;
     this.adc.data[i] = parseInt(c[3], 10) || 0;
     this.sipm.data[i] = parseFloat(c[4]);
     this.dead.data[i] = parseFloat(c[5]) || 0;
-    this.temp.data[i] = parseFloat(c[6]);
-    this.press.data[i] = parseFloat(c[7]);
-    const xyz = (s: string | undefined) => (s ? s.split(':').map(Number) : [NaN, NaN, NaN]);
+    // Sensors switched off in config.txt report -999; store those as missing.
+    const val = (x: number) => (x === -999 ? NaN : x);
+    this.temp.data[i] = val(parseFloat(c[6]));
+    this.press.data[i] = val(parseFloat(c[7]));
+    const xyz = (s: string | undefined) =>
+      s ? s.split(':').map(v => val(Number(v))) : [NaN, NaN, NaN];
     const [ax, ay, az] = xyz(c[8]);
     const [gx, gy, gz] = xyz(c[9]);
     this.ax.data[i] = ax;
@@ -122,12 +146,19 @@ export async function parseStream(
 }
 
 /** Open a file that may be gzipped (checked by its first two bytes). */
-export async function streamFromBlob(blob: Blob): Promise<ReadableStream<Uint8Array>> {
+export async function streamFromBlob(
+  blob: Blob
+): Promise<ReadableStream<Uint8Array>> {
   const head = new Uint8Array(await blob.slice(0, 2).arrayBuffer());
   const gz = head[0] === 0x1f && head[1] === 0x8b;
   const s = blob.stream() as ReadableStream<Uint8Array>;
   if (gz && 'DecompressionStream' in window) {
-    return s.pipeThrough(new DecompressionStream('gzip') as ReadableWritablePair<Uint8Array, Uint8Array>);
+    return s.pipeThrough(
+      new DecompressionStream('gzip') as ReadableWritablePair<
+        Uint8Array,
+        Uint8Array
+      >
+    );
   }
   return s;
 }

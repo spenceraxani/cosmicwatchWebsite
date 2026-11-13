@@ -1,6 +1,6 @@
 ---
-title: "How to build a CosmicWatch detector v3X"
-description: "Instruction Manual, pages 15–21. Generated from the PDF on GitHub."
+title: 'How to build a CosmicWatch detector v3X'
+description: 'Instruction Manual, pages 15–21. Generated from the PDF on GitHub.'
 sidebar:
   order: 3
 editUrl: false
@@ -139,6 +139,5 @@ The fun begins when you have two detectors built. When booted up together, and p
 Note: when you supply power to one of the detectors, the RJ45 cable powers the second detector.
 
 If you run into problems see the Troubleshooting Document.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/instruction-manual/#page=15" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Instruction Manual.pdf</a>, pages 15–21.</p>

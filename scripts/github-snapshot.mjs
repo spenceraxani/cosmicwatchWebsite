@@ -13,7 +13,8 @@ if (!repo) {
   console.error('usage: node scripts/github-snapshot.mjs <path-to-clone>');
   process.exit(1);
 }
-const git = (...args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' });
+const git = (...args) =>
+  execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8' });
 
 const commits = git('log', '--format=%H%x1f%aI%x1f%an%x1f%s')
   .trim()
@@ -30,8 +31,13 @@ const versions = readdirSync(join(repo, 'Firmware'))
 
 const files = readdirSync(repo)
   .filter(n => !n.startsWith('.'))
-  .map(name => ({ name, type: statSync(join(repo, name)).isDirectory() ? 'dir' : 'file' }))
-  .sort((a, b) => (a.type === b.type ? a.name.localeCompare(b.name) : a.type === 'dir' ? -1 : 1));
+  .map(name => ({
+    name,
+    type: statSync(join(repo, name)).isDirectory() ? 'dir' : 'file',
+  }))
+  .sort((a, b) =>
+    a.type === b.type ? a.name.localeCompare(b.name) : a.type === 'dir' ? -1 : 1
+  );
 
 const snapshot = {
   takenAt: new Date().toISOString(),
@@ -45,4 +51,6 @@ writeFileSync(
   new URL('../src/data_files/github-snapshot.json', import.meta.url),
   JSON.stringify(snapshot, null, 2) + '\n'
 );
-console.log(`snapshot: ${commits.length} commits, firmware ${snapshot.firmware}, ${files.length} entries`);
+console.log(
+  `snapshot: ${commits.length} commits, firmware ${snapshot.firmware}, ${files.length} entries`
+);

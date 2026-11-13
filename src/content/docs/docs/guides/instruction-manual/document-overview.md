@@ -1,6 +1,6 @@
 ---
-title: "Document Overview"
-description: "Instruction Manual, pages 4–5. Generated from the PDF on GitHub."
+title: 'Document Overview'
+description: 'Instruction Manual, pages 4–5. Generated from the PDF on GitHub.'
 sidebar:
   order: 1
 editUrl: false
@@ -32,6 +32,5 @@ Components of this instructions manual has been lightly adapted from MIT’s Jun
 The original CosmicWatch project was significantly developed with co-collaborator Dr. Katarzyna Frankiewicz and Prof. Janet Conrad. The original project has had funding from the MIT Physics Department, the Wisconsin Particle Astrophysics Center (WiPAC), the National Science Foundation (NSF), and is now funded through the University of Delaware (UD).
 
 We are excited to have the CosmicWatch detector incorporated into the Experimental Methods in Physics courses at UD. Developing this detector has been a passion, not just a hobby. We hope you enjoy it, and even consider building your own.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/instruction-manual/#page=4" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Instruction Manual.pdf</a>, pages 4–5.</p>

@@ -1,6 +1,6 @@
 ---
-title: "Detailed description of the electronics"
-description: "Instruction Manual, pages 23–27. Generated from the PDF on GitHub."
+title: 'Detailed description of the electronics'
+description: 'Instruction Manual, pages 23–27. Generated from the PDF on GitHub.'
 sidebar:
   order: 5
 editUrl: false

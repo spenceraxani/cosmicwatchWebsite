@@ -1,6 +1,6 @@
 ---
-title: "Conclusion"
-description: "Troubleshooting Document, pages 7–8. Generated from the PDF on GitHub."
+title: 'Conclusion'
+description: 'Troubleshooting Document, pages 7–8. Generated from the PDF on GitHub.'
 sidebar:
   order: 3
 editUrl: false
@@ -13,6 +13,5 @@ editUrl: false
 The CosmicWatch Desktop Muon Detectors offer a versatile platform for exploring diverse natural phenomena. This document provided a comprehensive overview of the underlying physical processes influencing the detectors and demonstrated how valuable insights can be derived from the collected data. The detectors can be employed to investigate a wide range of phenomena related to the geomagnetic field, atmospheric conditions, cosmic-ray shower composition, particle attenuation in matter, radioactivity, and statistical properties of Poisson processes. Students are encouraged to further develop the concepts introduced or design their experiments. Feedback is highly welcomed to enhance and refine this manual. Enjoy your exploration with the CosmicWatch detectors!
 
 ### Bibliography
-
 
 <p class="cw-guide-foot">From <a href="/pdf/troubleshooting/#page=7" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Troubleshooting Document.pdf</a>, pages 7–8.</p>

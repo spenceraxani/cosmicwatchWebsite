@@ -11,11 +11,19 @@ const t = getCopy('en');
 <nav class="cw-mobile-site" aria-label="Site">
   <p>CosmicWatch</p>
   <ul>
-    <li><a href="/">Home</a></li>
+    <li>
+      <a href="/">Home</a>
+    </li>
     {navLinks.map(link => (
-      <li><a href={link.path}>{t.nav.labels[link.id]}</a></li>
+      <li>
+        <a href={link.path}>{t.nav.labels[link.id]}</a>
+      </li>
     ))}
-    <li><a class="cw-shop" href="/shop">{t.nav.buy}</a></li>
+    <li>
+      <a class="cw-shop" href="/shop">
+        {t.nav.buy}
+      </a>
+    </li>
   </ul>
 </nav>
 

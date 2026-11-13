@@ -1,6 +1,6 @@
 ---
-title: "Document Overview"
-description: "Troubleshooting Document, page 4. Generated from the PDF on GitHub."
+title: 'Document Overview'
+description: 'Troubleshooting Document, page 4. Generated from the PDF on GitHub.'
 sidebar:
   order: 1
 editUrl: false
@@ -17,6 +17,5 @@ If you’ve built a CosmicWatch v3X detector and need to troubleshoot, this is w
 `<https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X`>
 
 Since this project
-
 
 <p class="cw-guide-foot">From <a href="/pdf/troubleshooting/#page=4" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Troubleshooting Document.pdf</a>, page 4.</p>

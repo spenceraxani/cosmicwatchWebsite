@@ -1,6 +1,6 @@
 ---
-title: "High altitude balloon measurement at 107,000 ft"
-description: "Example Measurements, pages 27–29. Generated from the PDF on GitHub."
+title: 'High altitude balloon measurement at 107,000 ft'
+description: 'Example Measurements, pages 27–29. Generated from the PDF on GitHub.'
 sidebar:
   order: 14
 editUrl: false
@@ -42,6 +42,5 @@ The HAB was launched on September 22<sup>nd</sup>, 2018, at 12:53 pm. DFN System
 The shape of the measured spectrum in Fig. 2.23 corresponds to the Pfotzer curve. We find an initial maximum count rate (Regener-Pfotzer maximum) for the master detector at an altitude from approximately 16-23 km, around 70-95 minutes into the measurement. After the balloon popped (at minute 118), the detectors fell through the Regener-Pfotzer maximum. The decrease in the trigger rate after passing the maximum occurs due to the detectors ascending beyond the primary interaction region.
 
 The coincidence detector shows a flatter maximum at an altitude from approximately 12-25 km. The peak begins at lower altitudes since we are now preferentially triggering on vertically downgoing particles. As described in Sec. ??, primary particles entering the Earth’s atmosphere at larger angles from the zenith will interact at higher altitudes. In agreement with the data.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=27" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 27–29.</p>

@@ -21,13 +21,20 @@ const icons = ['muon', 'scintillator', 'sipm', 'pulse', 'datafile'] as const;
     <h2 class="text-2xl font-bold text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">
       {title}
     </h2>
-    {subTitle && <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">{subTitle}</p>}
+    {subTitle && (
+      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
+        {subTitle}
+      </p>
+    )}
   </div>
   <ol class="grid gap-8 sm:grid-cols-2 md:gap-12 lg:grid-cols-3">
     {steps.map((step, i) => (
-      <li class:list={[reveal, delay(i % 3 + 1)]}>
+      <li class:list={[reveal, delay((i % 3) + 1)]}>
         <IconBlock heading={`${i + 1}. ${step.title}`} content={step.body}>
-          <CwIcon name={icons[i] ?? 'muon'} class="mt-1 h-8 w-8 shrink-0 text-orange-400 dark:text-orange-300" />
+          <CwIcon
+            name={icons[i] ?? 'muon'}
+            class="mt-1 h-8 w-8 shrink-0 text-orange-400 dark:text-orange-300"
+          />
         </IconBlock>
       </li>
     ))}

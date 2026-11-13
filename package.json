@@ -10,8 +10,7 @@
     "format:fix": "prettier --write .",
     "preview": "astro preview",
     "astro": "astro",
-    "test:smoke": "node scripts/smoke.mjs",
-    "audit:style": "python3 scripts/style-audit.py src"
+    "test:smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.12",

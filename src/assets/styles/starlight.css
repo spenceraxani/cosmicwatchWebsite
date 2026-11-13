@@ -38,34 +38,27 @@
   --border-yellow: 205, 60%, 85%;
 }
 
-/* Header: the site's floating nav bubble (Header.astro) sits in a transparent
-   strip, 16px from the top, like on every other page. */
+/* Header: the site's full-width nav bar (Header.astro), the same translucent
+   white bar as on every other page. */
 :root {
-  --sl-nav-height: 5.5rem !important;
+  --sl-nav-height: 4rem !important;
 }
 header.header {
-  background: transparent !important;
-  backdrop-filter: none !important;
+  background: rgb(255 255 255 / 0.75) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   border: none !important;
+  border-bottom: 1px solid rgb(255 255 255 / 0.7) !important;
+  box-shadow: 0 8px 30px -12px rgb(13 26 39 / 0.25) !important;
   height: var(--sl-nav-height) !important;
   margin: 0 !important;
-  padding: 1rem 1rem 0.5rem !important;
+  padding: 0 !important;
 }
-@media (min-width: 40rem) {
-  header.header {
-    padding-inline: 1.5rem !important;
-  }
-}
-@media (min-width: 64rem) {
-  header.header {
-    padding-inline: 2rem !important;
-  }
-}
-/* The docs menu button sits inside the right end of the bubble on small screens. */
+/* The docs menu button sits at the right end of the bar on small screens. */
 button.sl-menu-button {
   position: fixed !important;
-  top: 2rem !important; /* 1rem strip + (4rem bubble - 2rem button) / 2 */
-  inset-inline-end: 2rem !important;
+  top: 1rem !important; /* (4rem bar - 2rem button) / 2 */
+  inset-inline-end: 1rem !important;
   background: transparent !important;
   box-shadow: none !important;
   color: #34465a !important;
@@ -86,7 +79,9 @@ mobile-starlight-toc > nav {
 /* Jumping to a section lands the heading below the nav (and the bar on small screens). */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6),
 .sl-markdown-content .sl-heading-wrapper {
-  scroll-margin-top: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height, 0rem) + 1.5rem) !important;
+  scroll-margin-top: calc(
+    var(--sl-nav-height) + var(--sl-mobile-toc-height, 0rem) + 1.5rem
+  ) !important;
 }
 
 select {
@@ -162,10 +157,11 @@ article.card {
   width: 0.875rem;
 }
 
-
 /* CosmicWatch type in the docs */
 :root {
-  --sl-font: 'IBM Plex Sans Variable', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --sl-font:
+    'IBM Plex Sans Variable', 'IBM Plex Sans', ui-sans-serif, system-ui,
+    sans-serif;
   --sl-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 .sl-markdown-content :is(h1, h2, h3),

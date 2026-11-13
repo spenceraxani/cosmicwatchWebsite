@@ -20,32 +20,32 @@ Someone with a UD login needs access to FDP, through either of these:
 Log in at <https://www.udel.edu/fdp/>, open **Manage forms**, click **Add a form**
 and enter:
 
-| FDP setting | Value |
-| --- | --- |
-| Form ID | `cosmicwatch-contact` |
-| Status | Active |
-| Description | CosmicWatch website contact form |
-| URL | `https://<site address>/contact/` |
-| Group | the department's FDP group |
-| Email results to | `saxani@udel.edu` |
-| From value | `saxani@udel.edu` |
-| Replyto value | Variable, form field `email` (so Reply goes to the visitor) |
-| Message subject | `CosmicWatch website message` |
-| Email template | see below |
-| Return page | `https://<site address>/contact/thanks/` |
+| FDP setting      | Value                                                       |
+| ---------------- | ----------------------------------------------------------- |
+| Form ID          | `cosmicwatch-contact`                                       |
+| Status           | Active                                                      |
+| Description      | CosmicWatch website contact form                            |
+| URL              | `https://<site address>/contact/`                           |
+| Group            | the department's FDP group                                  |
+| Email results to | `saxani@udel.edu`                                           |
+| From value       | `saxani@udel.edu`                                           |
+| Replyto value    | Variable, form field `email` (so Reply goes to the visitor) |
+| Message subject  | `CosmicWatch website message`                               |
+| Email template   | see below                                                   |
+| Return page      | `https://<site address>/contact/thanks/`                    |
 
 `<site address>` is wherever the site is live (the Vercel address now, the UD
 address later). If it moves, update **URL** and **Return page** in FDP.
 
 ### Fields the form sends
 
-| Field name | What it is |
-| --- | --- |
-| `first` | First name |
-| `last` | Last name |
-| `email` | Visitor's email address |
-| `message` | The message |
-| `formId` | Hidden; `cosmicwatch-contact` |
+| Field name      | What it is                                        |
+| --------------- | ------------------------------------------------- |
+| `first`         | First name                                        |
+| `last`          | Last name                                         |
+| `email`         | Visitor's email address                           |
+| `message`       | The message                                       |
+| `formId`        | Hidden; `cosmicwatch-contact`                     |
 | `website_check` | Hidden spam trap; always empty from real visitors |
 
 ### Email template

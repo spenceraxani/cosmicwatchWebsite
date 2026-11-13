@@ -1,6 +1,6 @@
 ---
-title: "Untested measurements for the adventurous"
-description: "Example Measurements, pages 32–37. Generated from the PDF on GitHub."
+title: 'Untested measurements for the adventurous'
+description: 'Example Measurements, pages 32–37. Generated from the PDF on GitHub.'
 sidebar:
   order: 3
 editUrl: false
@@ -87,6 +87,5 @@ This section compiles a list of potential future experiments that we intend to p
 7. **Solar flare events**: Capture data during an intense solar flare.
 
 8. **Solar activity**: There is an 11-year due to the solar activity that modulates the lowenergy cosmic rays.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=32" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 32–37.</p>

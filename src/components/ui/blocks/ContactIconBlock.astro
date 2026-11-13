@@ -10,6 +10,7 @@ const {
   linkTitle,
   linkURL,
   isArrowVisible,
+  oneLine,
 } = Astro.props;
 
 interface Props {
@@ -21,6 +22,8 @@ interface Props {
   linkTitle?: string;
   linkURL?: string;
   isArrowVisible?: boolean;
+  /** Keep the description on one line on wide screens. */
+  oneLine?: boolean;
 }
 ---
 
@@ -28,7 +31,14 @@ interface Props {
   <slot />
   <div class="grow">
     <h3 class="font-bold text-neutral-700 dark:text-neutral-300">{heading}</h3>
-    <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{content}</p>
+    <p
+      class:list={[
+        'mt-1 text-sm text-neutral-600 dark:text-neutral-400',
+        oneLine && 'xl:whitespace-nowrap',
+      ]}
+    >
+      {content}
+    </p>
     {isAddressVisible ? (
       <p class="mt-1 text-sm text-neutral-500 italic">{addressContent}</p>
     ) : null}

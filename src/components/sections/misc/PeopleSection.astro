@@ -21,27 +21,62 @@ const initials = (name: string) =>
     .join('');
 ---
 
-<section id="people" class="mx-auto max-w-[85rem] scroll-mt-28 px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+<section
+  id="people"
+  class="mx-auto max-w-[85rem] scroll-mt-28 px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+>
   <div class="mx-auto max-w-2xl text-center lg:max-w-5xl">
-    <h2 class:list={['text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200', reveal]}>{title}</h2>
-    <p class="mt-2 text-pretty text-neutral-600 dark:text-neutral-400">{subTitle}</p>
+    <h2
+      class:list={[
+        'text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200',
+        reveal,
+      ]}
+    >
+      {title}
+    </h2>
+    <p class="mt-2 text-pretty text-neutral-600 dark:text-neutral-400">
+      {subTitle}
+    </p>
   </div>
   <div class="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {team.map((p, i) => (
-      <article class:list={['flex gap-4 rounded-xl bg-neutral-100 p-5 dark:bg-white/[.075]', reveal, delay(i % 3)]}>
+      <article
+        class:list={[
+          'flex gap-4 rounded-xl bg-neutral-100 p-5 dark:bg-white/[.075]',
+          reveal,
+          delay(i % 3),
+        ]}
+      >
         {p.photo ? (
-          <Image src={p.photo} alt={p.name} width={160} class="size-14 shrink-0 rounded-full object-cover" />
+          <Image
+            src={p.photo}
+            alt={p.name}
+            width={160}
+            class="size-14 shrink-0 rounded-full object-cover"
+          />
         ) : (
-          <span class="flex size-14 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-base font-bold text-neutral-800" aria-hidden="true">
+          <span
+            class="flex size-14 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-base font-bold text-neutral-800"
+            aria-hidden="true"
+          >
             {initials(p.name)}
           </span>
         )}
         <div class="min-w-0">
-          <h3 class="font-bold text-neutral-800 dark:text-neutral-200">{p.name}</h3>
+          <h3 class="font-bold text-neutral-800 dark:text-neutral-200">
+            {p.name}
+          </h3>
           <p class="text-sm text-neutral-600 dark:text-neutral-400">{p.role}</p>
-          {p.note && <p class="mt-1.5 text-sm text-neutral-600 dark:text-neutral-400">{p.note}</p>}
+          {p.note && (
+            <p class="mt-1.5 text-sm text-neutral-600 dark:text-neutral-400">
+              {p.note}
+            </p>
+          )}
           {p.email && (
-            <a class="mt-1.5 inline-block text-sm font-medium text-orange-400 underline underline-offset-2" href={`mailto:${p.email}`}>
+            <a
+              class="mt-1.5 inline-block text-sm font-medium text-orange-400 underline underline-offset-2"
+              href={`mailto:${p.email}`}
+            >
               {p.email}
             </a>
           )}

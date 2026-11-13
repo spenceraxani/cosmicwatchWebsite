@@ -1,6 +1,6 @@
 ---
-title: "The Firmware"
-description: "Instruction Manual, pages 28–31. Generated from the PDF on GitHub."
+title: 'The Firmware'
+description: 'Instruction Manual, pages 28–31. Generated from the PDF on GitHub.'
 sidebar:
   order: 6
 editUrl: false
@@ -1142,6 +1142,5 @@ B
 Figure B.2: The circuit diagram of the v3X Desktop Muon Detector. Vectorized version available on GitHub.
 
 ### Bibliography
-
 
 <p class="cw-guide-foot">From <a href="/pdf/instruction-manual/#page=28" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Instruction Manual.pdf</a>, pages 28–31.</p>

@@ -1,6 +1,6 @@
 ---
-title: "Reducing radioactive backgrounds"
-description: "Example Measurements, pages 19–20. Generated from the PDF on GitHub."
+title: 'Reducing radioactive backgrounds'
+description: 'Example Measurements, pages 19–20. Generated from the PDF on GitHub.'
 sidebar:
   order: 9
 editUrl: false
@@ -26,6 +26,5 @@ The use of dense materials around the detector can attenuate the incoming flux f
 Lab 303 (AxLab) has several led bricks if you would like to use them. Alternatively, you can experiment with different materials, bury the detectors in the ground, or try using water (ensuring the detectors are sealed securely). Explore measuring the effectiveness of various materials of the same thickness and consider why some materials are more effective than others. Additionally, investigate the impact of different thicknesses of shielding.
 
 Another experiment you can conduct involves studying the reduction in rate with distance from a radioactive gamma-ray source. To set up this experiment, you can contact a lab instructors, who have access to radioactive button sources located in Sharp Lab 016A. This experiment provides an opportunity to demonstrate the inverse square law (1/𝑟<sup>2</sup>) decay associated with ALARA (As Low As Reasonably Achievable) principles, a concept emphasized in radiation safety lectures.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=19" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 19–20.</p>

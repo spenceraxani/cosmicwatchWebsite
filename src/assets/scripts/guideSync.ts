@@ -25,7 +25,11 @@ function cacheSet(key: string, v: Remote) {
   }
 }
 
-export async function remoteFile(repo: string, branch: string, path: string): Promise<Remote | null> {
+export async function remoteFile(
+  repo: string,
+  branch: string,
+  path: string
+): Promise<Remote | null> {
   const key = `cw-guide:${repo}:${branch}:${path}`;
   const hit = cacheGet(key);
   if (hit) return hit;
@@ -33,14 +37,19 @@ export async function remoteFile(repo: string, branch: string, path: string): Pr
   const p = (async () => {
     try {
       const enc = path.split('/').map(encodeURIComponent).join('/');
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${enc}?ref=${branch}`, {
-        headers: { Accept: 'application/vnd.github+json' },
-      });
+      const res = await fetch(
+        `https://api.github.com/repos/${repo}/contents/${enc}?ref=${branch}`,
+        {
+          headers: { Accept: 'application/vnd.github+json' },
+        }
+      );
       if (!res.ok) return null;
       const meta = await res.json();
       const out: Remote = { sha: meta.sha };
       // the date only matters when the file changed, so spend the second request only then
-      const known = document.querySelector<HTMLElement>(`[data-path="${CSS.escape(path)}"][data-sha]`)?.dataset.sha;
+      const known = document.querySelector<HTMLElement>(
+        `[data-path="${CSS.escape(path)}"][data-sha]`
+      )?.dataset.sha;
       if (known && known !== meta.sha) {
         const c = await fetch(
           `https://api.github.com/repos/${repo}/commits?path=${encodeURIComponent(path)}&sha=${branch}&per_page=1`
@@ -64,7 +73,13 @@ export async function remoteFile(repo: string, branch: string, path: string): Pr
 }
 
 const fmt = (iso?: string) =>
-  iso ? new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+  iso
+    ? new Date(iso).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : '';
 
 export function pdfLink(repo: string, branch: string, path: string) {
   return `https://github.com/${repo}/blob/${branch}/${path.split('/').map(encodeURIComponent).join('/')}`;
@@ -73,7 +88,13 @@ export function pdfLink(repo: string, branch: string, path: string) {
 async function check(el: HTMLElement) {
   if (el.dataset.checked) return;
   el.dataset.checked = '1';
-  const { repo = '', branch = 'main', path = '', sha = '', date = '' } = el.dataset;
+  const {
+    repo = '',
+    branch = 'main',
+    path = '',
+    sha = '',
+    date = '',
+  } = el.dataset;
   const status = el.querySelector<HTMLElement>('.cw-gs-status');
   const note = el.querySelector<HTMLElement>('.cw-gs-note');
   if (!status) return;
@@ -83,7 +104,8 @@ async function check(el: HTMLElement) {
   if (!remote) {
     status.dataset.state = 'unknown';
     status.textContent = `Synced with the PDF from ${fmt(date)}`;
-    status.title = 'GitHub could not be reached just now, so this page was not checked against the latest PDF.';
+    status.title =
+      'GitHub could not be reached just now, so this page was not checked against the latest PDF.';
     return;
   }
   if (remote.sha === sha) {
@@ -102,7 +124,10 @@ async function check(el: HTMLElement) {
       'This page updates on the next site sync. Until then, ',
       Object.assign(document.createElement('a'), {
         // the site's live viewer if this block links to it, otherwise GitHub
-        href: el.querySelector<HTMLAnchorElement>('a[href^="/pdf/"]')?.getAttribute('href') ?? pdfLink(repo, branch, path),
+        href:
+          el
+            .querySelector<HTMLAnchorElement>('a[href^="/pdf/"]')
+            ?.getAttribute('href') ?? pdfLink(repo, branch, path),
         target: '_blank',
         rel: 'noopener',
         textContent: 'read the latest PDF',
@@ -113,7 +138,9 @@ async function check(el: HTMLElement) {
 }
 
 function run() {
-  document.querySelectorAll<HTMLElement>('.cw-guide-source[data-sha]').forEach(check);
+  document
+    .querySelectorAll<HTMLElement>('.cw-guide-source[data-sha]')
+    .forEach(check);
 }
 
 document.addEventListener('astro:page-load', run);

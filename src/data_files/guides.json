@@ -19,19 +19,13 @@
       "chapters": [
         {
           "title": "Document Overview",
-          "pages": [
-            4,
-            5
-          ],
+          "pages": [4, 5],
           "url": "/docs/guides/instruction-manual/document-overview/",
           "sections": []
         },
         {
           "title": "The CosmicWatch Desktop Muon Detector (v3X)",
-          "pages": [
-            6,
-            14
-          ],
+          "pages": [6, 14],
           "url": "/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/",
           "sections": [
             {
@@ -53,10 +47,7 @@
         },
         {
           "title": "How to build a CosmicWatch detector v3X",
-          "pages": [
-            15,
-            21
-          ],
+          "pages": [15, 21],
           "url": "/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/",
           "sections": [
             {
@@ -78,19 +69,13 @@
         },
         {
           "title": "Conclusion",
-          "pages": [
-            22,
-            22
-          ],
+          "pages": [22, 22],
           "url": "/docs/guides/instruction-manual/conclusion/",
           "sections": []
         },
         {
           "title": "Detailed description of the electronics",
-          "pages": [
-            23,
-            27
-          ],
+          "pages": [23, 27],
           "url": "/docs/guides/instruction-manual/detailed-description-of-the-electronics/",
           "sections": [
             {
@@ -137,10 +122,7 @@
         },
         {
           "title": "The Firmware",
-          "pages": [
-            28,
-            31
-          ],
+          "pages": [28, 31],
           "url": "/docs/guides/instruction-manual/the-firmware/",
           "sections": [
             {
@@ -167,163 +149,109 @@
       "chapters": [
         {
           "title": "Document Overview",
-          "pages": [
-            4,
-            6
-          ],
+          "pages": [4, 6],
           "url": "/docs/guides/example-measurements/document-overview/",
           "sections": []
         },
         {
           "title": "Tested Measurements",
-          "pages": [
-            7,
-            31
-          ],
+          "pages": [7, 31],
           "url": "/docs/guides/example-measurements/tested-measurements/",
           "children": [
             {
               "title": "A full-sky cosmic-ray muon measurement",
               "url": "/docs/guides/example-measurements/tested-measurements/a-full-sky-cosmic-ray-muon-measurement/",
-              "pages": [
-                8,
-                10
-              ],
+              "pages": [8, 10],
               "sections": []
             },
             {
               "title": "Cosmic-ray muon angular dependence",
               "url": "/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-angular-dependence/",
-              "pages": [
-                10,
-                11
-              ],
+              "pages": [10, 11],
               "sections": []
             },
             {
               "title": "Muon rate measurement while flying to the South Pole",
               "url": "/docs/guides/example-measurements/tested-measurements/muon-rate-measurement-while-flying-to-the-south-pole/",
-              "pages": [
-                11,
-                13
-              ],
+              "pages": [11, 13],
               "sections": []
             },
             {
               "title": "Latitude correction to the cosmic-ray muons",
               "url": "/docs/guides/example-measurements/tested-measurements/latitude-correction-to-the-cosmic-ray-muons/",
-              "pages": [
-                13,
-                14
-              ],
+              "pages": [13, 14],
               "sections": []
             },
             {
               "title": "High-altitude balloon flight",
               "url": "/docs/guides/example-measurements/tested-measurements/high-altitude-balloon-flight/",
-              "pages": [
-                14,
-                15
-              ],
+              "pages": [14, 15],
               "sections": []
             },
             {
               "title": "Cosmic-ray muon velocity",
               "url": "/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-velocity/",
-              "pages": [
-                15,
-                16
-              ],
+              "pages": [15, 16],
               "sections": []
             },
             {
               "title": "Cosmic-ray muon attenuation in a Subway station",
               "url": "/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-attenuation-in-a-subway-station/",
-              "pages": [
-                16,
-                17
-              ],
+              "pages": [16, 17],
               "sections": []
             },
             {
               "title": "Electromagnetic component of cosmic-ray showers",
               "url": "/docs/guides/example-measurements/tested-measurements/electromagnetic-component-of-cosmic-ray-showers/",
-              "pages": [
-                17,
-                19
-              ],
+              "pages": [17, 19],
               "sections": []
             },
             {
               "title": "Reducing radioactive backgrounds",
               "url": "/docs/guides/example-measurements/tested-measurements/reducing-radioactive-backgrounds/",
-              "pages": [
-                19,
-                20
-              ],
+              "pages": [19, 20],
               "sections": []
             },
             {
               "title": "Correlation between the cosmic-ray muon rate and atmospheric pressure",
               "url": "/docs/guides/example-measurements/tested-measurements/correlation-between-the-cosmic-ray-muon-rate-and-atmospheric-pressure/",
-              "pages": [
-                20,
-                22
-              ],
+              "pages": [20, 22],
               "sections": []
             },
             {
               "title": "A true random number generator?",
               "url": "/docs/guides/example-measurements/tested-measurements/a-true-random-number-generator/",
-              "pages": [
-                22,
-                25
-              ],
+              "pages": [22, 25],
               "sections": []
             },
             {
               "title": "Gamma-ray spectroscopy",
               "url": "/docs/guides/example-measurements/tested-measurements/gamma-ray-spectroscopy/",
-              "pages": [
-                25,
-                26
-              ],
+              "pages": [25, 26],
               "sections": []
             },
             {
               "title": "Measuring the cosmic-ray muon rate in an airplane at 33,000 ft",
               "url": "/docs/guides/example-measurements/tested-measurements/measuring-the-cosmic-ray-muon-rate-in-an-airplane-at-33000-ft/",
-              "pages": [
-                26,
-                27
-              ],
+              "pages": [26, 27],
               "sections": []
             },
             {
               "title": "High altitude balloon measurement at 107,000 ft",
               "url": "/docs/guides/example-measurements/tested-measurements/high-altitude-balloon-measurement-at-107000-ft/",
-              "pages": [
-                27,
-                29
-              ],
+              "pages": [27, 29],
               "sections": []
             },
             {
               "title": "Rate measurement 1 km underground at Super-Kamiokande",
               "url": "/docs/guides/example-measurements/tested-measurements/rate-measurement-1-km-underground-at-super-kamiokande/",
-              "pages": [
-                29,
-                31
-              ],
+              "pages": [29, 31],
               "sections": []
             },
             {
               "title": "Portable trigger system for an accelerator beamline",
               "url": "/docs/guides/example-measurements/tested-measurements/portable-trigger-system-for-an-accelerator-beamline/",
-              "pages": [
-                31,
-                31
-              ],
+              "pages": [31, 31],
               "sections": []
             }
           ],
@@ -331,10 +259,7 @@
         },
         {
           "title": "Untested measurements for the adventurous",
-          "pages": [
-            32,
-            37
-          ],
+          "pages": [32, 37],
           "url": "/docs/guides/example-measurements/untested-measurements-for-the-adventurous/",
           "sections": [
             {
@@ -361,10 +286,7 @@
         },
         {
           "title": "Conclusion",
-          "pages": [
-            38,
-            40
-          ],
+          "pages": [38, 40],
           "url": "/docs/guides/example-measurements/conclusion/",
           "sections": [
             {
@@ -391,19 +313,13 @@
       "chapters": [
         {
           "title": "Document Overview",
-          "pages": [
-            4,
-            5
-          ],
+          "pages": [4, 5],
           "url": "/docs/guides/physics/document-overview/",
           "sections": []
         },
         {
           "title": "Sources of ionizing radiation",
-          "pages": [
-            6,
-            13
-          ],
+          "pages": [6, 13],
           "url": "/docs/guides/physics/sources-of-ionizing-radiation/",
           "sections": [
             {
@@ -430,10 +346,7 @@
         },
         {
           "title": "Particle interactions with matter",
-          "pages": [
-            14,
-            20
-          ],
+          "pages": [14, 20],
           "url": "/docs/guides/physics/particle-interactions-with-matter/",
           "sections": [
             {
@@ -465,10 +378,7 @@
         },
         {
           "title": "Detection methods",
-          "pages": [
-            21,
-            25
-          ],
+          "pages": [21, 25],
           "url": "/docs/guides/physics/detection-methods/",
           "sections": [
             {
@@ -485,10 +395,7 @@
         },
         {
           "title": "Additional things you should know",
-          "pages": [
-            26,
-            28
-          ],
+          "pages": [26, 28],
           "url": "/docs/guides/physics/additional-things-you-should-know/",
           "sections": [
             {
@@ -515,10 +422,7 @@
         },
         {
           "title": "Conclusion",
-          "pages": [
-            29,
-            33
-          ],
+          "pages": [29, 33],
           "url": "/docs/guides/physics/conclusion/",
           "sections": [
             {
@@ -545,28 +449,19 @@
       "chapters": [
         {
           "title": "Document Overview",
-          "pages": [
-            4,
-            4
-          ],
+          "pages": [4, 4],
           "url": "/docs/guides/troubleshooting/document-overview/",
           "sections": []
         },
         {
           "title": "Troubleshooting",
-          "pages": [
-            5,
-            6
-          ],
+          "pages": [5, 6],
           "url": "/docs/guides/troubleshooting/troubleshooting/",
           "sections": []
         },
         {
           "title": "Conclusion",
-          "pages": [
-            7,
-            8
-          ],
+          "pages": [7, 8],
           "url": "/docs/guides/troubleshooting/conclusion/",
           "sections": [
             {

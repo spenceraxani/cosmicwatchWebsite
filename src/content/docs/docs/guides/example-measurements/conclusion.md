@@ -1,6 +1,6 @@
 ---
-title: "Conclusion"
-description: "Example Measurements, pages 38–40. Generated from the PDF on GitHub."
+title: 'Conclusion'
+description: 'Example Measurements, pages 38–40. Generated from the PDF on GitHub.'
 sidebar:
   order: 4
 editUrl: false
@@ -14,57 +14,56 @@ The CosmicWatch Desktop Muon Detectors offer a versatile platform for exploring 
 
 ### Bibliography
 
-\[1\] K. O. et al, “Cosmic rays - particle data group,” *Nuclear Instruments and Methods in*
+\[1\] K. O. et al, “Cosmic rays - particle data group,” _Nuclear Instruments and Methods in_
 
-*Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equip-* *ment*, vol. 38, no. 090001, p. 6, 2014.
+_Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equip-_ _ment_, vol. 38, no. 090001, p. 6, 2014.
 
 \[2\] S. K. LBNL, “32. passage of particles through matter,” 2017.
 
 \[3\] B. Rossi, “Cosmic rays,” 1964.
 
-\[4\] M. W. Friedlander, *A thin cosmic rain: Particles from outer space*. Harvard University
+\[4\] M. W. Friedlander, _A thin cosmic rain: Particles from outer space_. Harvard University
 
 Press, 2002.
 
-\[5\] P. K. Grieder, *Cosmic rays at Earth*. Elsevier, 2001.
+\[5\] P. K. Grieder, _Cosmic rays at Earth_. Elsevier, 2001.
 
-\[6\] T. K. Gaisser, R. Engel, and E. Resconi, *Cosmic rays and particle physics*. Cambridge
+\[6\] T. K. Gaisser, R. Engel, and E. Resconi, _Cosmic rays and particle physics_. Cambridge
 
 University Press, 2016.
 
-\[7\] W. R. Leo, *Techniques for nuclear and particle physics experiments: a how-to approach*.
+\[7\] W. R. Leo, _Techniques for nuclear and particle physics experiments: a how-to approach_.
 
 Springer Science & Business Media, 2012.
 
-\[8\] C. Grupen and B. Shwartz, *Particle detectors*, vol. 26. Cambridge university press, 2008.
+\[8\] C. Grupen and B. Shwartz, _Particle detectors_, vol. 26. Cambridge university press, 2008.
 
-\[9\] H. Kolanoski and N. Wermes, *Particle detectors: fundamentals and applications*. Oxford
+\[9\] H. Kolanoski and N. Wermes, _Particle detectors: fundamentals and applications_. Oxford
 
 University Press, 2020.
 
-\[10\] K. Albrecht *et al*. (The IceCube Collaboration), “IceCube - the next generation neutrino telescope at the South Pole,” *Nuclear Physics B-Proceedings Supplements*, vol. 118, pp. 388– 395, 2003.
+\[10\] K. Albrecht _et al_. (The IceCube Collaboration), “IceCube - the next generation neutrino telescope at the South Pole,” _Nuclear Physics B-Proceedings Supplements_, vol. 118, pp. 388– 395, 2003.
 
 \[11\] Flight Aware. <https://flightaware.com/>, Dec. 2017.
 
-\[12\] E. Regener and G. Pfotzer, “Vertical intensity of cosmic rays by threefold coincidences in the stratosphere,” *Nature*, vol. 136, no. 3444, p. 718, 1935.
+\[12\] E. Regener and G. Pfotzer, “Vertical intensity of cosmic rays by threefold coincidences in the stratosphere,” _Nature_, vol. 136, no. 3444, p. 718, 1935.
 
-\[13\] R. De Mendonca, J.-P. Raulin, E. Echer, V. Makhmutov, and G. Fernandez, “Analysis of atmospheric pressure and temperature effects on cosmic ray measurements,” *Journal of* *Geophysical Research: Space Physics*, vol. 118, no. 4, pp. 1403–1409, 2013.
+\[13\] R. De Mendonca, J.-P. Raulin, E. Echer, V. Makhmutov, and G. Fernandez, “Analysis of atmospheric pressure and temperature effects on cosmic ray measurements,” _Journal of_ _Geophysical Research: Space Physics_, vol. 118, no. 4, pp. 1403–1409, 2013.
 
 \[14\] LocalConditions.com. <https://www.localconditions.com/weather-madisonwisconsin/53701/past.php>, accessed: Dec. 2018.
 
 \[15\] K. Jourde, D. Gibert, J. Marteau, J. de Bremond d’Ars, S. Gardien, C. Girerd, and J.-C.
 
-Ianigro, “Monitoring temporal opacity fluctuations of large structures with muon radiography: a calibration experiment using a water tower,” *Scientific reports*, vol. 6, p. 23054, 2016.
+Ianigro, “Monitoring temporal opacity fluctuations of large structures with muon radiography: a calibration experiment using a water tower,” _Scientific reports_, vol. 6, p. 23054, 2016.
 
 \[16\] <http://nearspace.pl/>, “Near space conference 2018,” Dec 2018.
 
 \[17\] S. N. Axani, K. Frankiewicz, and J. M. Conrad, “The cosmicwatch desktop muon detector:
 
-a self-contained, pocket sized particle detector,” *Journal of Instrumentation*, vol. 13, no. 03, p. P03019, 2018.
+a self-contained, pocket sized particle detector,” _Journal of Instrumentation_, vol. 13, no. 03, p. P03019, 2018.
 
-\[18\] M. Fukugita and T. Yanagida, *Physics of Neutrinos: and Application to Astrophysics*.
+\[18\] M. Fukugita and T. Yanagida, _Physics of Neutrinos: and Application to Astrophysics_.
 
 Springer Science & Business Media, 2013.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=38" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 38–40.</p>

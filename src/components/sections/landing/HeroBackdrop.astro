@@ -14,6 +14,8 @@ export type HeroBackdropVariant = 'tracks' | 'glow' | 'band';
 
 interface Props {
   variant: HeroBackdropVariant;
+  /** Small line above the headline. */
+  eyebrow?: string;
   title: string;
   subTitle?: string;
   primaryBtn?: string;
@@ -27,6 +29,7 @@ interface Props {
 
 const {
   variant,
+  eyebrow,
   title,
   subTitle,
   primaryBtn,
@@ -41,7 +44,7 @@ const {
 // Straight muon tracks entering from the top, mostly steep (cos²θ-ish),
 // from a fixed seed so every build draws the same picture.
 let seed = 7;
-const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 const trackCount = variant === 'tracks' ? 26 : 14;
 const tracks = Array.from({ length: trackCount }, () => {
   const x = rand() * 1600 - 100;
@@ -70,7 +73,11 @@ const tracks = Array.from({ length: trackCount }, () => {
 >
   {/* Backdrop layers */}
   {/* Background layers, taller than the hero so the parallax drift never shows an edge. */}
-  <div data-parallax="0.5" aria-hidden="true" class="absolute inset-x-0 -top-[10%] -z-10 h-[130%] will-change-transform">
+  <div
+    data-parallax="0.5"
+    aria-hidden="true"
+    class="absolute inset-x-0 -top-[10%] -z-10 h-[130%] will-change-transform"
+  >
     {variant === 'tracks' && (
       <div aria-hidden="true" class="absolute inset-0 -z-10">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_20%,#2a618f_0%,#14365d_40%,#0b1a2e_100%)]"></div>
@@ -95,7 +102,10 @@ const tracks = Array.from({ length: trackCount }, () => {
       </div>
     )}
     {variant === 'band' && (
-      <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#12304f_0%,#0d2440_100%)]"></div>
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#12304f_0%,#0d2440_100%)]"
+      ></div>
     )}
 
     {variant !== 'glow' && (
@@ -111,7 +121,13 @@ const tracks = Array.from({ length: trackCount }, () => {
             <stop offset="0.35" stop-color="#bcdcf3" stop-opacity="1" />
             <stop offset="1" stop-color="#53a1d8" stop-opacity="0" />
           </linearGradient>
-          <filter id={`glow-${variant}`} x="-50%" y="-10%" width="200%" height="120%">
+          <filter
+            id={`glow-${variant}`}
+            x="-50%"
+            y="-10%"
+            width="200%"
+            height="120%"
+          >
             <feGaussianBlur stdDeviation="3" result="b" />
             <feMerge>
               <feMergeNode in="b" />
@@ -129,7 +145,11 @@ const tracks = Array.from({ length: trackCount }, () => {
             stroke-width={t.w}
             stroke-linecap="round"
             opacity={variant === 'band' ? t.o * 0.45 : t.o}
-            filter={variant === 'tracks' && t.w > 1.4 ? `url(#glow-${variant})` : undefined}
+            filter={
+              variant === 'tracks' && t.w > 1.4
+                ? `url(#glow-${variant})`
+                : undefined
+            }
           />
         ))}
       </svg>
@@ -145,16 +165,35 @@ const tracks = Array.from({ length: trackCount }, () => {
     ]}
   >
     <div>
-      <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-white sm:text-4xl lg:text-5xl lg:leading-tight xl:text-6xl', reveal]}>
-        <Fragment set:html={title} />
+      <h1 class:list={['block text-white', reveal]}>
+        {eyebrow && (
+          <span class="mb-3 block text-sm font-semibold tracking-[0.3em] text-white/75 uppercase sm:text-base">
+            {eyebrow}
+          </span>
+        )}
+        <span class="block text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl lg:leading-tight xl:text-6xl">
+          <Fragment set:html={title} />
+        </span>
       </h1>
       {subTitle && (
-        <p class:list={['mt-4 text-lg leading-relaxed text-pretty text-neutral-300 lg:w-4/5', [reveal, delay(1)]]}>
+        <p
+          class:list={[
+            'mt-4 text-lg leading-relaxed text-pretty text-neutral-300 lg:w-4/5',
+            [reveal, delay(1)],
+          ]}
+        >
           {subTitle}
         </p>
       )}
-      <div class:list={['mt-8 grid w-full gap-3 sm:inline-flex', [reveal, delay(2)]]}>
-        {primaryBtn && <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="yellow" />}
+      <div
+        class:list={[
+          'mt-8 grid w-full gap-3 sm:inline-flex',
+          [reveal, delay(2)],
+        ]}
+      >
+        {primaryBtn && (
+          <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="yellow" />
+        )}
         {secondaryBtn && (
           <a
             href={secondaryBtnURL}
@@ -167,7 +206,10 @@ const tracks = Array.from({ length: trackCount }, () => {
     </div>
 
     {variant === 'tracks' && (
-      <div data-parallax="-0.12" class="flex justify-center will-change-transform md:justify-end">
+      <div
+        data-parallax="-0.12"
+        class="flex justify-center will-change-transform md:justify-end"
+      >
         <div class:list={[revealImage, delay(1)]}>
           <Image
             src={cutout}

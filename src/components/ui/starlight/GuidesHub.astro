@@ -1,34 +1,81 @@
 ---
-// One card per manual: a line about it, its chapters, and the live PDF.
-// Built only from Starlight's own components (CardGrid, Card, LinkButton), so it
-// matches the rest of the guides. Data: src/data_files/guides.json (scripts/sync-guides.py).
-import { Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+// One plain card per manual: its title, its chapters and the live PDF.
+// Data: src/data_files/guides.json (written by scripts/sync-guides.py).
+import { LinkButton } from '@astrojs/starlight/components';
 import manifest from '@data/guides.json';
-
-const icons: Record<string, 'open-book' | 'analytics' | 'notes' | 'setting'> = {
-  'instruction-manual': 'open-book',
-  'example-measurements': 'analytics',
-  physics: 'notes',
-  troubleshooting: 'setting',
-};
 ---
 
-<CardGrid>
-  {
-    manifest.guides.map((g) => (
-      <Card title={g.title} icon={icons[g.slug] ?? 'document'}>
-        <p>{g.blurb}</p>
-        <ol>
-          {g.chapters.map((c) => (
-            <li>
-              <a href={c.url}>{c.title}</a>
-            </li>
-          ))}
-        </ol>
-        <LinkButton href={`/pdf/${g.slug}/`} variant="secondary" icon="external" target="_blank" rel="noopener">
-          Open the PDF
-        </LinkButton>
-      </Card>
-    ))
+<div class="cw-guides">
+  {manifest.guides.map(g => (
+    <section class="cw-guide" aria-labelledby={`guide-${g.slug}`}>
+      <p class="cw-guide-title" id={`guide-${g.slug}`}>
+        {g.title}
+      </p>
+      <ul class="cw-guide-chapters">
+        {g.chapters.map(c => (
+          <li>
+            <a href={c.url}>{c.title}</a>
+          </li>
+        ))}
+      </ul>
+      <LinkButton
+        href={`/pdf/${g.slug}/`}
+        variant="secondary"
+        icon="external"
+        target="_blank"
+        rel="noopener"
+      >
+        Open the PDF
+      </LinkButton>
+    </section>
+  ))}
+</div>
+
+<style>
+  .cw-guides {
+    display: grid;
+    gap: 1rem;
   }
-</CardGrid>
+  @media (min-width: 50rem) {
+    .cw-guides {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .cw-guide {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 1.25rem 1.5rem 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg);
+  }
+  .cw-guide > * {
+    margin: 0;
+  }
+  .cw-guide-title {
+    font-size: var(--sl-text-h4);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--sl-color-white);
+  }
+  .cw-guide-chapters {
+    flex-grow: 1;
+    list-style: none;
+    padding: 0;
+  }
+  .cw-guide-chapters li + li {
+    margin-top: 0.35rem;
+  }
+  /* No bullets or dashes: a plain list of chapter links. */
+  .cw-guide-chapters li {
+    padding-inline-start: 0 !important;
+  }
+  .cw-guide-chapters li::before {
+    display: none !important;
+  }
+  .cw-guide :global(.sl-link-button) {
+    align-self: flex-start;
+  }
+</style>

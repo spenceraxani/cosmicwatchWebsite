@@ -12,6 +12,16 @@ interface Props {
 const { src, alt } = Astro.props;
 ---
 
-<a href={src.src} target="_blank" rel="noopener" title="Open the full-size image">
-  <Image src={src} alt={alt} widths={[960, 1440, 1920, src.width]} sizes="(min-width: 72rem) 58rem, 100vw" />
+<a
+  href={src.src}
+  target="_blank"
+  rel="noopener"
+  title="Open the full-size image"
+>
+  <Image
+    src={src}
+    alt={alt}
+    widths={[960, 1440, 1920, src.width]}
+    sizes="(min-width: 72rem) 58rem, 100vw"
+  />
 </a>

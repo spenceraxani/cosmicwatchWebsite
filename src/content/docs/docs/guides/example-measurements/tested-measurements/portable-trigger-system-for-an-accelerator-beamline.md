@@ -1,6 +1,6 @@
 ---
-title: "Portable trigger system for an accelerator beamline"
-description: "Example Measurements, page 31. Generated from the PDF on GitHub."
+title: 'Portable trigger system for an accelerator beamline'
+description: 'Example Measurements, page 31. Generated from the PDF on GitHub.'
 sidebar:
   order: 16
 editUrl: false
@@ -22,6 +22,5 @@ A single detector, powered by a 10,000 mAh USB power bank, was placed in the Fer
 </figure>
 
 The detector was identified as a useful beamline trigger due to its simplicity. This capability was facilitated by incorporating a BNC output directly connected to the SiPM. For this measurement, the approximate 10 ns uncertainty in the trigger was deemed acceptable. However, if users desire to utilize the FAST output of the SiPM for single nanosecond precision, the SiPM PCB could be modified. We plan on investigating this sometime in the future.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=31" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, page 31.</p>

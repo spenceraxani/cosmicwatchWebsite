@@ -7,7 +7,11 @@ export const SITE = {
     'CosmicWatch is a University of Delaware outreach program built around a pocket-sized cosmic-ray muon detector that costs about $100 in parts and that students can build themselves.',
   description_short:
     'A pocket-sized cosmic-ray muon detector that students build themselves.',
-  url: 'https://cosmicwatch.example.udel.edu',
+  // Comes from `site` in astro.config.mjs (set SITE_URL when the address is decided).
+  url: (import.meta.env.SITE ?? 'https://cosmicwatch.example.udel.edu').replace(
+    /\/$/,
+    ''
+  ),
   author: 'CosmicWatch, University of Delaware',
 };
 

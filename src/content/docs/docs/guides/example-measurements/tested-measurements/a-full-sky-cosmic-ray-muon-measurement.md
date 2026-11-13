@@ -1,6 +1,6 @@
 ---
-title: "A full-sky cosmic-ray muon measurement"
-description: "Example Measurements, pages 8–10. Generated from the PDF on GitHub."
+title: 'A full-sky cosmic-ray muon measurement'
+description: 'Example Measurements, pages 8–10. Generated from the PDF on GitHub.'
 sidebar:
   order: 1
 editUrl: false
@@ -25,7 +25,7 @@ The SiPM pulse-height spectrum (Fig. 2.2, left) exhibits the characteristic Land
 
 </figure>
 
-This demonstrates the ability to select muons using *coincidence mode* and shows how the SiPM pulse amplitude can be used to discriminate between muons and radiogenic backgrounds based on energy deposition. The ratio plotted in the left subplot of Fig. 2.2 indicates that above approximately 18 mV, cosmic-ray muons dominate the spectrum.
+This demonstrates the ability to select muons using _coincidence mode_ and shows how the SiPM pulse amplitude can be used to discriminate between muons and radiogenic backgrounds based on energy deposition. The ratio plotted in the left subplot of Fig. 2.2 indicates that above approximately 18 mV, cosmic-ray muons dominate the spectrum.
 
 The precise location of the MIP peak depends on the quality of the detector assembly: the efficiency of the optical coupling between the SiPM and scintillator, the scintillator surface finish, the reflectivity of any wrapping, and other factors that influence photon collection. It also shifts with the SiPM bias voltage, which is set by precision (0.1 %) resistors and directly determines the gain. Nevertheless, because the MIP peak occurs well above the trigger threshold (≈4 mV), even substantial variations in collection efficiency have minimal effect on muon detection efficiency; only corner-clipping events register near threshold. Overall count rates, however, are expected to show more significant detector-to-detector variations due to the steep rise of the non-coincident background near threshold.
 
@@ -37,6 +37,5 @@ Fig. 2.2 (right) displays the event rate versus time for the same dataset, compa
   <figcaption>Figure 2.3: Left: Barometric pressure recorded by the onboard BMP280 sensor over time. Right: Temperature measured by the same sensor, used to monitor environmental conditions and correct for temperature dependent SiPM gain variations.</figcaption>
 
 </figure>
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=8" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 8–10.</p>

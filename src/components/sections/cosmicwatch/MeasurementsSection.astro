@@ -16,7 +16,12 @@ const { title, subTitle, measurements, allTitle, allUrl } = Astro.props;
 ---
 
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-  <div class:list={['mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between', reveal]}>
+  <div
+    class:list={[
+      'mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between',
+      reveal,
+    ]}
+  >
     <div class="max-w-2xl">
       <h2 class="text-2xl font-bold text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">
         {title}
@@ -27,14 +32,20 @@ const { title, subTitle, measurements, allTitle, allUrl } = Astro.props;
         </p>
       )}
     </div>
-    {allTitle && allUrl && <PrimaryCTA title={allTitle} url={allUrl} variant="yellow" />}
+    {allTitle && allUrl && (
+      <PrimaryCTA title={allTitle} url={allUrl} variant="yellow" />
+    )}
   </div>
 
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {measurements.map((m, i) => (
       <a
         href={m.url}
-        class:list={['group surface flex h-full flex-col overflow-hidden ring-zinc-500 outline-hidden transition-colors duration-200 hover:bg-neutral-50 focus-visible:ring-3 dark:ring-zinc-200 dark:hover:bg-white/[.09]', reveal, delay(i % 3)]}
+        class:list={[
+          'group surface flex h-full flex-col overflow-hidden ring-zinc-500 outline-hidden transition-colors duration-200 hover:bg-neutral-50 focus-visible:ring-3 dark:ring-zinc-200 dark:hover:bg-white/[.09]',
+          reveal,
+          delay(i % 3),
+        ]}
       >
         <div class="aspect-[16/10] overflow-hidden bg-white">
           <Image

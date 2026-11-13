@@ -8,24 +8,28 @@ import guides from './src/data_files/guides.json' with { type: 'json' };
 
 // Sidebar for the full guides, built from the manifest that scripts/sync-guides.py
 // writes when it converts the PDFs. One group per guide, chapters inside it.
-const guideSidebar = guides.guides.map((g) => ({
+const guideSidebar = guides.guides.map(g => ({
   label: g.title,
   collapsed: false,
   items: [
     // The live PDF viewer (src/pages/pdf/[slug].astro), always the newest file on GitHub.
-    { label: 'Full PDF ↗', link: `/pdf/${g.slug}/`, attrs: { target: '_blank', rel: 'noopener', class: 'cw-sidebar-pdf' } },
-    ...g.chapters.map((c) =>
-    c.children
-      ? {
-          label: c.title,
-          collapsed: true,
-          items: [
-            { label: 'Introduction', link: c.url },
-            ...c.children.map((s) => ({ label: s.title, link: s.url })),
-          ],
-        }
-      : { label: c.title, link: c.url }
-  ),
+    {
+      label: 'Full PDF ↗',
+      link: `/pdf/${g.slug}/`,
+      attrs: { target: '_blank', rel: 'noopener', class: 'cw-sidebar-pdf' },
+    },
+    ...g.chapters.map(c =>
+      c.children
+        ? {
+            label: c.title,
+            collapsed: true,
+            items: [
+              { label: 'Introduction', link: c.url },
+              ...c.children.map(s => ({ label: s.title, link: s.url })),
+            ],
+          }
+        : { label: c.title, link: c.url }
+    ),
   ],
 }));
 
@@ -42,9 +46,18 @@ export default defineConfig({
   site: SITE_URL,
   prefetch: true,
   integrations: [
-    sitemap(),
+    sitemap({
+      // Not for search results: the form's thank-you page, the old /purchase
+      // redirect and the PDF viewer pages (the PDFs themselves are on GitHub).
+      filter: page =>
+        !/\/(contact\/thanks|purchase|pdf\/[^/]+)\/$/.test(
+          new URL(page).pathname
+        ),
+    }),
     starlight({
       title: 'CosmicWatch Guides',
+      // No search box in the guides, so no search index either.
+      pagefind: false,
       // English only. The marketing pages are English only as well.
       locales: {
         root: { label: 'English', lang: 'en' },
@@ -52,7 +65,7 @@ export default defineConfig({
       // https://starlight.astro.build/guides/sidebar/
       // One group per manual, chapters inside. Everything comes from the PDFs on GitHub.
       sidebar: [
-        { label: 'All guides', link: '/docs/' },
+        { label: 'All Guides', link: '/docs/' },
         { label: 'Parts List & BOM', link: '/docs/parts-list/' },
         ...guideSidebar,
       ],
@@ -72,7 +85,8 @@ export default defineConfig({
       components: {
         Header: './src/components/ui/starlight/Header.astro',
         Head: './src/components/ui/starlight/Head.astro',
-        MobileMenuFooter: './src/components/ui/starlight/MobileMenuFooter.astro',
+        MobileMenuFooter:
+          './src/components/ui/starlight/MobileMenuFooter.astro',
         ThemeProvider: './src/components/ui/starlight/ThemeProvider.astro',
         ThemeSelect: './src/components/ui/starlight/ThemeSelect.astro',
       },

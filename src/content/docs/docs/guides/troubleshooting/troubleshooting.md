@@ -1,6 +1,6 @@
 ---
-title: "Troubleshooting"
-description: "Troubleshooting Document, pages 5–6. Generated from the PDF on GitHub."
+title: 'Troubleshooting'
+description: 'Troubleshooting Document, pages 5–6. Generated from the PDF on GitHub.'
 sidebar:
   order: 2
 editUrl: false

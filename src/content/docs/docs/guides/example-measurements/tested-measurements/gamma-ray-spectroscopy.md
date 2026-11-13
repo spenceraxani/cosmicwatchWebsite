@@ -1,6 +1,6 @@
 ---
-title: "Gamma-ray spectroscopy"
-description: "Example Measurements, pages 25–26. Generated from the PDF on GitHub."
+title: 'Gamma-ray spectroscopy'
+description: 'Example Measurements, pages 25–26. Generated from the PDF on GitHub.'
 sidebar:
   order: 12
 editUrl: false
@@ -22,6 +22,5 @@ While challenging, some information can still be extracted from gamma ray source
 </figure>
 
 Gamma ray spectroscopy with these detectors would be enhanced by utilizing a denser material, larger volume detectors, and greater photocathode coverage. We do have dense scintillator crystals if you would like to try.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=25" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 25–26.</p>

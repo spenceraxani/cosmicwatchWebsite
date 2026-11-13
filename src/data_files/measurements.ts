@@ -19,44 +19,50 @@ export interface Measurement {
 export const featuredMeasurements: Measurement[] = [
   {
     url: '/docs/guides/example-measurements/tested-measurements/a-full-sky-cosmic-ray-muon-measurement/',
-    title: "A full-sky muon rate measurement",
-    summary: "Stack two detectors, log for a day, and separate muons from background by pulse height.",
+    title: 'A Full-Sky Muon Rate Measurement',
+    summary:
+      'The SiPM pulse-height spectrum exhibits the characteristic Landau-shaped “minimum ionizing particle (MIP) bump” produced by through-going muons in a thin absorber.',
     image: render_pair,
-    alt: "Two v3X detectors stacked on top of each other in coincidence mode",
+    alt: 'Two v3X detectors stacked on top of each other in coincidence mode',
   },
   {
     url: '/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-angular-dependence/',
-    title: "How the muon rate depends on angle",
-    summary: "Tilt a coincidence pair and watch the rate follow the cos² law.",
+    title: 'How the Muon Rate Depends on Angle',
+    summary:
+      'The angular dependence of cosmic-ray muons at sea level follows a cosine-squared law.',
     image: m_angular,
-    alt: "Two detectors mounted on a bar leaning against a wall at angle theta",
+    alt: 'Two detectors mounted on a bar leaning against a wall at angle theta',
   },
   {
     url: '/docs/guides/example-measurements/tested-measurements/muon-rate-measurement-while-flying-to-the-south-pole/',
-    title: "Muon rate on a flight to the South Pole",
-    summary: "Six flights, one power bank, and a clear latitude effect.",
+    title: 'Muon Rate on a Flight to the South Pole',
+    summary:
+      'During the flight to the South Pole, the ionizing radiation was measured with two detectors, powered through a single 30,000 mAh power bank.',
     image: m_southpole,
-    alt: "Measured muon rate on each leg of a flight from Wisconsin to the South Pole",
+    alt: 'Measured muon rate on each leg of a flight from Wisconsin to the South Pole',
   },
   {
     url: '/docs/guides/example-measurements/tested-measurements/latitude-correction-to-the-cosmic-ray-muons/',
-    title: "Correcting the rate for latitude and altitude",
-    summary: "Fit a simple model to flight data, then use it to estimate altitude.",
+    title: 'Correcting the Rate for Latitude and Altitude',
+    summary:
+      'Latitudinal variation in the cosmic-ray muon rate is an expected effect due to the change in the Earth’s magnetic field as a function of latitude.',
     image: geomagnetic,
     alt: "Diagram of charged particles moving in Earth's magnetic field",
   },
   {
     url: '/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-velocity/',
-    title: "Measuring the speed of muons",
-    summary: "Time-of-flight between two detectors three meters apart.",
+    title: 'Measuring the Speed of Muons',
+    summary:
+      'Time-of-flight (TOF) measurements to estimate the cosmic-ray muon velocities, with two detectors vertically separated by 2.97 m.',
     image: m_velocity,
-    alt: "Histogram of measured muon speeds with a Gaussian fit centered near 0.92c",
+    alt: 'Histogram of measured muon speeds with a Gaussian fit centered near 0.92c',
   },
   {
     url: '/docs/guides/example-measurements/tested-measurements/cosmic-ray-muon-attenuation-in-a-subway-station/',
-    title: "Muon attenuation in a subway station",
-    summary: "Take a detector underground and watch the rate drop.",
+    title: 'Muon Attenuation in a Subway Station',
+    summary:
+      'The Aobayama subway station was extremely deep underground, and the muon attenuation was found to be surprisingly pronounced.',
     image: m_subway,
-    alt: "Muon rate measured in an office, two deep subway stations and at ground level in Sendai, Japan",
+    alt: 'Muon rate measured in an office, two deep subway stations and at ground level in Sendai, Japan',
   },
 ];

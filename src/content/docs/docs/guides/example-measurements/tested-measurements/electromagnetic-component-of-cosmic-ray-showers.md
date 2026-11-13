@@ -1,6 +1,6 @@
 ---
-title: "Electromagnetic component of cosmic-ray showers"
-description: "Example Measurements, pages 17–19. Generated from the PDF on GitHub."
+title: 'Electromagnetic component of cosmic-ray showers'
+description: 'Example Measurements, pages 17–19. Generated from the PDF on GitHub.'
 sidebar:
   order: 8
 editUrl: false
@@ -26,6 +26,5 @@ Two detectors were placed in coincidence mode, one atop the other, following con
 The results reveal that the rate on the building’s top floor is 27% higher than the measurement made on the 5<sup>th</sup> floor. This discrepancy in rate is presumed to be primarily attributed to the reduction of the electromagnetic component. As elucidated in Sec. ??, we elucidate that approximately 33% of the total cosmic ionizing radiation flux at sea level emanates from the electromagnetic component.
 
 We’ve always entertained the idea of conducting a study by submerging CosmicWatch into a lake. In such a scenario, the level of shielding is precisely defined and is commonly expressed in physics experiments in terms of meter water equivalent (m.w.e.). If you decide to embark on this experiment, ensure that your detectors are enclosed in a water-tight container. An anticipated 30% reduction in the coincident rate is expected within the initial few feet as the electromagnetic component diminishes. Following that, there will be a more gradual decline in the muonic component as you proceed deeper into the water, ideally reaching depths of tens of meters.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=17" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 17–19.</p>

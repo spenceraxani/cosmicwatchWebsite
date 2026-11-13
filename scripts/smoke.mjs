@@ -24,12 +24,16 @@ const ROUTES = [
 
 // Cheap content assertions on top of the status check.
 const EXPECTATIONS = {
-  '/contact/': ['id="contact-form"', 'id="people"', 'id="faq"'],
+  '/contact/': ['id="contact-form"', 'id="faq"'],
   '/': ['<html lang="en"', 'CosmicWatch', 'id="about"'],
   '/detector/': ['id="papers"'],
-  '/measure/': ['id="m-pdf"', 'data-tab="corr"'],
-  '/shop/': ['Purchases happen outside this site', '/docs/parts-list/'],
-  '/docs/parts-list/': ['Digi-Key Bulk Add, 1 detector', 'sl-steps', 'step-5-backorder'],
+  '/measure/': ['id="m-pdf"', 'data-tab="dt"'],
+  '/shop/': ['data-product="v3x-assembled"', '/docs/parts-list/'],
+  '/docs/parts-list/': [
+    'Digi-Key Bulk Add, 1 detector',
+    'sl-steps',
+    'step-5-backorder',
+  ],
   '/github/': ['id="gh-fw-link"'],
   '/pdf/instruction-manual/': ['raw.githubusercontent.com', 'id="pdf-frame"'],
 };

@@ -1,6 +1,6 @@
 ---
-title: "A true random number generator?"
-description: "Example Measurements, pages 22–25. Generated from the PDF on GitHub."
+title: 'A true random number generator?'
+description: 'Example Measurements, pages 22–25. Generated from the PDF on GitHub.'
 sidebar:
   order: 11
 editUrl: false
@@ -21,7 +21,7 @@ Many applications require random numbers. Often, a random number may be generate
 
 Any number can be expressed in terms of a sequence of ones and zeros; this is known as binary. An N-length sequence is able to represent a number from zero to 2<sup>𝑁</sup>−1 (corresponding to 2<sup>𝑁</sup> different values). For example, the 4-bit binary sequence "1011" corresponds to 1 × (2<sup>3</sup>) + 0 × (2<sup>2</sup>) + 1 × (2<sup>1</sup>) + 1 × (2<sup>0</sup>) = 8 + 0 + 2 + 1 = 11.
 
-We can convert the time stamp of a radioactive decay trigger into a "1" or a "0" using a *toggle* *flip-flop*. The toggle flip-flop is simply a state that changes from one to zero periodically (we will use a frequency of 1 kHz). If a particle passes through the scintillator during an even time stamp (as measured in milliseconds), we assign it a "1"; if it passes through an odd time stamp, we assign it a "0". After N triggers, we can build an N-bit random number. This is schematically illustrated in Fig. 2.15.
+We can convert the time stamp of a radioactive decay trigger into a "1" or a "0" using a _toggle_ _flip-flop_. The toggle flip-flop is simply a state that changes from one to zero periodically (we will use a frequency of 1 kHz). If a particle passes through the scintillator during an even time stamp (as measured in milliseconds), we assign it a "1"; if it passes through an odd time stamp, we assign it a "0". After N triggers, we can build an N-bit random number. This is schematically illustrated in Fig. 2.15.
 
 For this measurement, we use data taken from a 20-day background lab measurement. A single detector was used. After triggering on a total of t events, we can build t/N N-bit random numbers. To illustrate this, if we choose to generate 8-bit random numbers (from 0 to 255), we can plot the number of each occurrence. This is shown in Fig. 2.16.
 
@@ -54,7 +54,6 @@ Another potential source of bias arises if the microcontroller fails to produce 
 
 </figure>
 
-A funny thought could be to use this idea to turn the detector into a *magic eight ball*.
-
+A funny thought could be to use this idea to turn the detector into a _magic eight ball_.
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=22" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 22–25.</p>

@@ -1,6 +1,6 @@
 ---
-title: "Additional things you should know"
-description: "Physics Document, pages 26–28. Generated from the PDF on GitHub."
+title: 'Additional things you should know'
+description: 'Physics Document, pages 26–28. Generated from the PDF on GitHub.'
 sidebar:
   order: 5
 editUrl: false
@@ -12,11 +12,11 @@ editUrl: false
 
 ## Accidental coincident events
 
-: Two distinct events (like two independent gamma rays) might accidentally trigger both detectors setup in coincidence mode if they happen to occur within the coincidence time window 𝜏. This is referred to as an accidental coincidence. This probability increases at higher count rates. Assuming that individual count rates follow Poisson statistics and that the events are independent, the probability of observing *n* events when the mean number of events expected is 𝜇, is described by the Poisson distribution:
+: Two distinct events (like two independent gamma rays) might accidentally trigger both detectors setup in coincidence mode if they happen to occur within the coincidence time window 𝜏. This is referred to as an accidental coincidence. This probability increases at higher count rates. Assuming that individual count rates follow Poisson statistics and that the events are independent, the probability of observing _n_ events when the mean number of events expected is 𝜇, is described by the Poisson distribution:
 
 <p class="cw-guide-eq"><img src="/guides/physics/eq-13-p26.webp" width="117" alt="𝑓(n, 𝜇) = 𝜇n𝑒−𝜇" loading="lazy" decoding="async" /></p>
 
-*n*! (5.1)
+_n_! (5.1)
 
 Let’s assume you turned on both detectors and measured the individual master count rates: N<sub>1</sub> and N<sub>2</sub>. We will now calculate the rate at which two events happen to occur within a time window 𝜏.
 
@@ -60,7 +60,6 @@ No. The maximum flux per unit area on the sky is vertical downwards, however, th
 
 ## What is dead time?
 
-The RPi is an inexpensive (4 USD) and relatively slow device compared to other much more expensive devices. While being a fairly new MCUs, inherent issues arise due to its speed limitations. An important aspect of any rate measurement with any detector is that every command, whether it involves simple arithmetic or printing detector information to the serial port or microSD card, takes time to execute. If during that time, the detector cannot monitor for incoming signals (i.e. it is dead), you need to account for that time. The term associated with the time during which the detector is unable to make a measurement is referred to as *dead time*. The detector software code calculates the dead time by measuring how long each command (or sets of commands) takes. The cumulative dead time up to the event you are looking at is recorded in the data output. To obtain an accurate measurement of the time the detector was able to make a measurement, the dead time must be subtracted from the total runtime; the result is termed *livetime*. dead time is a common feature in nearly all particle physics detectors. It becomes more problematic as rates increase as well, as part of the dead time might be associated with creating and reading out the event. At sea level, the dead time may affect the rate by 0.5%, while in a high-altitude balloon at 60,000 feet, where the count rates approach 60 Hz, the dead time impacts the rate measurement by roughly 3%. We strategically use dual cores with specially data buffering techniques to reduce the dead time as much as possible. For context, the dead time per event is more than two orders of magnitude lower than the previous published version of the detector.
-
+The RPi is an inexpensive (4 USD) and relatively slow device compared to other much more expensive devices. While being a fairly new MCUs, inherent issues arise due to its speed limitations. An important aspect of any rate measurement with any detector is that every command, whether it involves simple arithmetic or printing detector information to the serial port or microSD card, takes time to execute. If during that time, the detector cannot monitor for incoming signals (i.e. it is dead), you need to account for that time. The term associated with the time during which the detector is unable to make a measurement is referred to as _dead time_. The detector software code calculates the dead time by measuring how long each command (or sets of commands) takes. The cumulative dead time up to the event you are looking at is recorded in the data output. To obtain an accurate measurement of the time the detector was able to make a measurement, the dead time must be subtracted from the total runtime; the result is termed _livetime_. dead time is a common feature in nearly all particle physics detectors. It becomes more problematic as rates increase as well, as part of the dead time might be associated with creating and reading out the event. At sea level, the dead time may affect the rate by 0.5%, while in a high-altitude balloon at 60,000 feet, where the count rates approach 60 Hz, the dead time impacts the rate measurement by roughly 3%. We strategically use dual cores with specially data buffering techniques to reduce the dead time as much as possible. For context, the dead time per event is more than two orders of magnitude lower than the previous published version of the detector.
 
 <p class="cw-guide-foot">From <a href="/pdf/physics/#page=26" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Physics Document.pdf</a>, pages 26–28.</p>

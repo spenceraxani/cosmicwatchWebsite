@@ -1,6 +1,6 @@
 ---
-title: "Muon rate measurement while flying to the South Pole"
-description: "Example Measurements, pages 11–13. Generated from the PDF on GitHub."
+title: 'Muon rate measurement while flying to the South Pole'
+description: 'Example Measurements, pages 11–13. Generated from the PDF on GitHub.'
 sidebar:
   order: 3
 editUrl: false
@@ -26,6 +26,5 @@ Figure 2.6
 Fig. 2.6 illustrates several very interesting properties. First, there is a trend towards lower count rates near the equator. This is due to the latitudinal variation in the cosmic-ray flux described in Sec. ??. This effect is most obvious in the flight from SFO to ACK (labeled as flight 3 in Fig. 2.6), which traveled at nearly a constant altitude and a constant rate of latitude change from +32<sup>∘</sup> to -32<sup>∘</sup>. We see that the rate is not symmetric. This is because the magnetic latitude is offset from the geographical latitude, which in turn is because the magnetic field is not symmetric about the equator. Second, it’s interesting to see that when we landed at the South Pole, there is a noticeable change in trigger rate due to the combination of the elevation and change in Earth’s magnetic field.
 
 While flying through the equator at 35,000 ft, I also performed an East-West measurement using configuration (e) of Fig. ??. We measure a count rate coming from the east of 0.69 ± 0.02 cps, while from the west 0.84 ± 0.03 cps. This represents a 22.2±7.4% increase in the westward direction. This is due to the east-west asymmetry described in Sec. ??.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=11" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 11–13.</p>

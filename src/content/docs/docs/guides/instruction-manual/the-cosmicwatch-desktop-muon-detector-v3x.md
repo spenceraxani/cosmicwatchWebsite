@@ -1,6 +1,6 @@
 ---
-title: "The CosmicWatch Desktop Muon Detector (v3X)"
-description: "Instruction Manual, pages 6–14. Generated from the PDF on GitHub."
+title: 'The CosmicWatch Desktop Muon Detector (v3X)'
+description: 'Instruction Manual, pages 6–14. Generated from the PDF on GitHub.'
 sidebar:
   order: 2
 editUrl: false
@@ -25,7 +25,7 @@ The SiPM signal (a pulse of current) is directed through a custom-designed print
 
 An array of complete CosmicWatch v3X detectors is shown in Fig. 2.1. The front of the detector is equipped with a reset button, two LEDs, and a built-in 0.96" OLED screen displaying information such as the total run time, number of events, and count rates (accounting for detector dead time). The top 5 mm LED flashes on all events, while the bottom 3 mm LED triggers only on coincident events (events that simultaneously triggered connected detectors).
 
-The backside of the detector features a micro USB port on the RPi for powering the detector, uploading new firmware, or transmitting data to a serial port on a computer. It also includes an Ethernet connection for linking multiple detectors to perform coincidence measurements (see Sec. 2.2). The Ethernet connection will later be capable of communicating with a *CosmicWatch* *Expansion Module*, which will enable further use of additional peripherals, such as GPS, magnetic field sensors, real time clocks, or anything that communicates over i2C, SPI, or UART. A microSD card socket under the USB enables a simply way to log the event-by-event data, with a new file being produced after each reset or power cycle. Additionally, a BNC connection connects directly connected to the SiPM output, and thus can be used to either inject pulses into the circuit or view the high fidelity SiPM waveform on an oscilloscope.
+The backside of the detector features a micro USB port on the RPi for powering the detector, uploading new firmware, or transmitting data to a serial port on a computer. It also includes an Ethernet connection for linking multiple detectors to perform coincidence measurements (see Sec. 2.2). The Ethernet connection will later be capable of communicating with a _CosmicWatch_ _Expansion Module_, which will enable further use of additional peripherals, such as GPS, magnetic field sensors, real time clocks, or anything that communicates over i2C, SPI, or UART. A microSD card socket under the USB enables a simply way to log the event-by-event data, with a new file being produced after each reset or power cycle. Additionally, a BNC connection connects directly connected to the SiPM output, and thus can be used to either inject pulses into the circuit or view the high fidelity SiPM waveform on an oscilloscope.
 
 A single detector was measured to consume 0.5 W and can be powered through any USB connection supplying 1.8 V to 5.5 V. This could be a USB port on a computer, USB power bank, power outlet USB, or even a cell phone. The total mass of the detector, excluding the optional aluminum enclosure and end-plates, the detector has a mass of 83 g, whose measurements are illustrated in Fig. 2.2. Including the aluminum case, the mass is 110 g, and the case outer dimensions are 66.4 mm×70.0 mm×39.9 mm.
 
@@ -38,7 +38,7 @@ A single detector was measured to consume 0.5 W and can be powered through any U
 
 ## Setting detectors in coincidence mode
 
-Many measurements rely on the detectors operating in *coincidence mode*. This mode allows users to extra a rather pure sample of the cosmic-ray muon by rejecting events that likely came from radioactive backgrounds. Coincidence mode requires two detectors connected together using an Ethernet cable (we’ll refer to it as the *coincidence cable*). Once connected, only one of the detectors requires power; the other will be powered through the cable.
+Many measurements rely on the detectors operating in _coincidence mode_. This mode allows users to extra a rather pure sample of the cosmic-ray muon by rejecting events that likely came from radioactive backgrounds. Coincidence mode requires two detectors connected together using an Ethernet cable (we’ll refer to it as the _coincidence cable_). Once connected, only one of the detectors requires power; the other will be powered through the cable.
 
 To set the detectors into the coincident mode, simply reset both detectors within a second of each other while they are connected together. Alternatively, you can unplug the power cable (micro USB) and plug it back in. The detectors will acknowledge the presence of a coincidence detector by brightly illuminating both LEDs on the front panel for one second. An example of two detectors being set up in coincidence mode is shown in Fig. 2.3.
 
@@ -77,7 +77,7 @@ Data can be collected from the Desktop Muon Detector in many ways:
 
 1. **Via the 0.96" OLED screen**: The OLED display is ideal for users who only need overall event counts and average event rates, without detailed per-event data. It reports the total run time, number of triggered events, and the average count rate (accounting for dead time). If the detector boots into coincidence mode, two additional rows indicating the number of coincident events and coincidence average count rate are also reported. Additionally, the OLED display reports the microSD card file name (if present), and the detector name (modifiable in the configure.txt file located on the microSD card). The OLED can also be turned on/off using the configure.txt file.
 
-2. **(Recommended) Through a microSD card** :If a microSD card is inserted, the detector creates a new file each time it is powered on or reset. The microSD card must be formatted as exFAT. MicroSD card filenames begin with the detector name (configurable to fewer than 20 characters via the configure.txt file); followed by a mode indicator: "C" if the detector booted in *coincidence mode*, or "M" if in *master mode*; and a number that increments sequential upwards from the last saved file. Data is stored in plain text format with a .txt extension, as illustrated in the coincident data from a detector named "AxLab" operating in *coincidence mode* in figure 2.6. A relatively small microSD card (≥4 GB) enables users to save several months worth of continuous data at sea level.
+2. **(Recommended) Through a microSD card** :If a microSD card is inserted, the detector creates a new file each time it is powered on or reset. The microSD card must be formatted as exFAT. MicroSD card filenames begin with the detector name (configurable to fewer than 20 characters via the configure.txt file); followed by a mode indicator: "C" if the detector booted in _coincidence mode_, or "M" if in _master mode_; and a number that increments sequential upwards from the last saved file. Data is stored in plain text format with a .txt extension, as illustrated in the coincident data from a detector named "AxLab" operating in _coincidence mode_ in figure 2.6. A relatively small microSD card (≥4 GB) enables users to save several months worth of continuous data at sea level.
 
 3. **Through the import_data.py script on your computer**: When the detector is plugged into a computer USB port, data is transmitted asynchronously at a baud rate of 115200 bps. Running the python script import_data.py (after you’ve installed the pyserial library), will allow you to save the data directly to a file of your choice. When run, the user is prompted to supply the path and name of the file to where the data is to be stored. It will then begin recording the data in real time to that output file on your computer. The benefit here is that the computer will take a real-time global timestamp from the computer. It’s likely that your computer syncs with NTP (Network Time Protocol), which provides an accuracy to within roughly 1–10 ms. The RPi alone, will go out of sync with global time, at the rate of roughly 1 minute per day.
 
@@ -109,13 +109,13 @@ The data shown in Fig. 2.6 is formatted into tab-delimited columns, each of whic
 
 - **Event**: The event number. Sequentially counts upwards on each trigger.
 - **Timestamp \[s\]**: The total run time (not live time), measured in seconds. This is only accurate to roughly tens of seconds per day given the uncertainty by the precision of the RPi internal clock.
-- **Flag**: *Coincidence mode* flag. If the detector observes a coincidence signal while operating in *coincidence mode*, the event is flagged with a boolean "1." Non-coincident events are flagged with a "0."
+- **Flag**: _Coincidence mode_ flag. If the detector observes a coincidence signal while operating in _coincidence mode_, the event is flagged with a boolean "1." Non-coincident events are flagged with a "0."
 - **ADC \[12b\]**: The 12-bit (0-4095) ADC measurement of the buffered peak detector output. The ADC is referenced to 2.5 V.
 - **SiPM \[mV\]**: The calculated SiPM pulse height is based on the ADC measurement. This value is proportional to the energy deposited in the scintillator (see Sec. ??).
 - **Dead time \[s\]**: The cumulative dead time since the detector start. Dead time should be accounted for when making any rate measurement. To calculate the event rate, divide the total counts by the difference between the total run time and the total dead time. The denominator is what is called live time, and represents the amount of time the detector was actively searching for events.
 - **Temp. \[**<sup>∘</sup> **C\]**: The local temperature, in degrees Celcius, measured by the BMP280 sensor.
 - **Press. \[Pa\]**: The barometric pressure, in pascals, measured by the BMP280 sensor.
-- **Accel. (X:Y:Z) \[g\]**: The x-y-z acceleration measured in units of gravitational acceleration *g* (𝑔≈9.81 m/s<sup>2</sup>).
+- **Accel. (X:Y:Z) \[g\]**: The x-y-z acceleration measured in units of gravitational acceleration _g_ (𝑔≈9.81 m/s<sup>2</sup>).
 - **Gyro. (X:Y:Z) \[deg/s\]**: The x-y-z angular acceleration in degrees per second.
 
 If you record the data through the import_data.py script located in the Data directory, it will add three additional columns. You will also notice that the data taken prior to running the import_data.py script is not saved in the file. Example data from this script can be found in Fig. 2.7. The additional three columns of data are:
@@ -130,6 +130,5 @@ If you record the data through the import_data.py script located in the Data dir
   <figcaption>Figure 2.7: Example data taken from the import_data.py script. The three additional columns are highlighted in blue. They represent the detector name, the timestamp and data taken from the computer that is running the script.</figcaption>
 
 </figure>
-
 
 <p class="cw-guide-foot">From <a href="/pdf/instruction-manual/#page=6" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Instruction Manual.pdf</a>, pages 6–14.</p>

@@ -1,6 +1,6 @@
 ---
-title: "High-altitude balloon flight"
-description: "Example Measurements, pages 14–15. Generated from the PDF on GitHub."
+title: 'High-altitude balloon flight'
+description: 'Example Measurements, pages 14–15. Generated from the PDF on GitHub.'
 sidebar:
   order: 5
 editUrl: false
@@ -26,6 +26,5 @@ where 𝑇<sub>0</sub> = 288.15 K, 𝐿= 0.0065 K m<sup>−1</sup>, 𝑃<sub>0</
 </figure>
 
 The built-in accelerometer indicated that the payload was initially oriented sideways during launch but realigned vertically shortly after liftoff (Fig 2.9 upper right), and the tether remained stable throughout the flight. The gyroscope revealed significant rotation about the zenith throughout the flight (Fig 2.9 lower right). Temperature remained near 30<sup>∘</sup> C in the troposphere and decreased to approximately 23<sup>∘</sup> C at apogee in the stratosphere.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=14" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 14–15.</p>

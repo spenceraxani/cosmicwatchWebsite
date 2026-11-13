@@ -4,8 +4,7 @@ import { Image } from 'astro:assets';
 import MainLayout from '@/layouts/MainLayout.astro';
 import CwIcon from '@components/ui/icons/CwIcon.astro';
 import Icon from '@components/ui/icons/Icon.astro';
-import { products, groups, STORE_URL, STORE_NAME } from '@data/shop';
-import { CONTACT_EMAIL } from '@data/navigation';
+import { products, STORE_URL, STORE_NAME } from '@data/shop';
 import { getCopy } from '@/copy';
 import type { MarketingLocale } from '@utils/locale';
 
@@ -19,7 +18,6 @@ interface Props {
 }
 const { locale } = Astro.props;
 const copy = getCopy(locale).shop;
-const money = (n: number | null) => (n == null ? copy.priceOnRequest : `$${n.toFixed(2)}`);
 const storeLink = (id: string) => {
   if (!STORE_URL) return null;
   const u = new URL(STORE_URL);
@@ -30,92 +28,114 @@ const buy =
   'inline-flex items-center justify-center gap-x-2 rounded-lg border border-transparent bg-orange-400 px-4 py-2.5 text-sm font-bold text-neutral-50 ring-zinc-500 outline-hidden transition-colors duration-200 hover:bg-orange-500 focus-visible:ring-3 dark:ring-zinc-200';
 ---
 
-<MainLayout title={copy.title} description={copy.metaDescription} ogTitle={copy.ogTitle}>
+<MainLayout
+  title={copy.title}
+  description={copy.metaDescription}
+  ogTitle={copy.ogTitle}
+>
   <section class="mx-auto max-w-[85rem] px-4 pt-10 pb-4 sm:px-6 lg:px-8 lg:pt-14 2xl:max-w-full">
     <div class="max-w-3xl">
-      <h1 class:list={['block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200', reveal]}>{copy.heading}</h1>
-      <p class="mt-3 text-lg text-pretty text-neutral-700 lg:w-4/5 dark:text-neutral-400">{copy.subTitle}</p>
-    </div>
-
-    <div class:list={['mt-8 flex max-w-4xl gap-4 surface p-5 sm:p-6', reveal]} role="note">
-      <CwIcon name="globe" class="mt-0.5 size-7 shrink-0 text-orange-400 dark:text-orange-300" />
-      <div class="text-sm text-pretty text-neutral-700 dark:text-neutral-300">
-        <p class="font-bold text-neutral-800 dark:text-neutral-200">{copy.policyTitle}</p>
-        <p class="mt-1">{copy.policyBody(STORE_NAME)}</p>
-        <p class="mt-2 text-neutral-600 dark:text-neutral-400">
-          {copy.bulkNote} <a class="font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-        </p>
-      </div>
+      <h1
+        class:list={[
+          'block text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200',
+          reveal,
+        ]}
+      >
+        {copy.heading}
+      </h1>
     </div>
   </section>
 
   <div class="mx-auto max-w-[85rem] px-4 pb-10 sm:px-6 lg:px-8 2xl:max-w-full">
-    {groups.map(group => (
-      <section class="py-6" aria-labelledby={`g-${group.id}`}>
-        <h2 id={`g-${group.id}`} class="text-2xl font-bold text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">{group.title}</h2>
-        <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">{group.body}</p>
-        <div class="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {products.filter(p => p.group === group.id).map((p, i) => {
-            const href = storeLink(p.id);
-            return (
-              <article class:list={['flex flex-col overflow-hidden surface', reveal, delay(i % 3)]} data-product={p.id}>
-                <div class:list={['flex aspect-[16/10] items-center justify-center overflow-hidden', p.cutout ? 'bg-neutral-200/60 dark:bg-white/[.05]' : 'bg-night']}>
-                  <Image src={p.image} alt={p.imageAlt} width={700} class:list={['size-full', p.cutout ? 'cw-float object-contain p-6' : 'object-cover']} />
-                </div>
-                <div class="flex grow flex-col p-5 sm:p-6">
-                  <div class="flex items-baseline justify-between gap-4">
-                    <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">{p.name}</h3>
-                    <p class="shrink-0 text-sm font-bold text-orange-400 dark:text-orange-300">{money(p.price)}</p>
-                  </div>
-                  <p class="mt-2 text-sm text-pretty text-neutral-600 dark:text-neutral-400">{p.summary}</p>
-                  <ul class="mt-4 space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
-                    {p.includes.map(item => (
-                      <li class="flex gap-x-2"><Icon name="checkCircle" class="mt-0.5 size-4 shrink-0 text-orange-400 dark:text-orange-300" />{item}</li>
-                    ))}
-                  </ul>
-                  {p.options && (
-                    <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
-                      <span class="font-medium text-neutral-700 dark:text-neutral-300">{p.options.label}:</span> {p.options.values.join(', ')}
-                    </p>
+    <section class="py-6" aria-label="Products">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {products.map((p, i) => {
+          const href = storeLink(p.id);
+          return (
+            <article
+              class:list={[
+                'flex flex-col overflow-hidden surface',
+                reveal,
+                delay(i % 3),
+              ]}
+              data-product={p.id}
+            >
+              <div
+                class:list={[
+                  'flex aspect-[16/10] items-center justify-center overflow-hidden',
+                  p.cutout
+                    ? 'bg-neutral-200/60 dark:bg-white/[.05]'
+                    : 'bg-night',
+                ]}
+              >
+                <Image
+                  src={p.image}
+                  alt={p.imageAlt}
+                  width={700}
+                  class:list={[
+                    'size-full',
+                    p.cutout ? 'cw-float object-contain p-6' : 'object-cover',
+                  ]}
+                />
+              </div>
+              <div class="flex grow flex-col p-5 sm:p-6">
+                {/* Titles only for now. Summary, contents, options and price stay in
+                    src/data_files/shop.ts for when the store is set up. */}
+                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+                  {p.name}
+                </h3>
+                <div class="mt-auto flex flex-wrap items-center gap-3 pt-4">
+                  {href ? (
+                    <a
+                      class={buy}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {copy.buy}{' '}
+                      <Icon name="arrowUp" class="size-4 rotate-45" />
+                      <span class="sr-only">{copy.opensStore(STORE_NAME)}</span>
+                    </a>
+                  ) : (
+                    <span class="inline-flex items-center rounded-lg border border-neutral-300 px-4 py-2.5 text-sm font-bold text-neutral-500 dark:border-neutral-600 dark:text-neutral-400">
+                      {copy.soon}
+                    </span>
                   )}
-                  <div class="mt-auto flex flex-wrap items-center gap-3 pt-6">
-                    {href ? (
-                      <a class={buy} href={href} target="_blank" rel="noopener noreferrer">
-                        {copy.buy} <Icon name="arrowUp" class="size-4 rotate-45" />
-                        <span class="sr-only">{copy.opensStore(STORE_NAME)}</span>
-                      </a>
-                    ) : (
-                      <span class="inline-flex items-center rounded-lg border border-neutral-300 px-4 py-2.5 text-sm font-bold text-neutral-500 dark:border-neutral-600 dark:text-neutral-400">
-                        {copy.soon}
-                      </span>
-                    )}
-                  </div>
                 </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-    ))}
-
-    <section class:list={['mt-4 flex flex-col gap-5 surface p-6 sm:flex-row sm:items-start sm:p-8', reveal]}>
-      <CwIcon name="people" class="mt-1 size-8 shrink-0 text-orange-400 dark:text-orange-300" />
-      <div>
-        <h2 class="text-lg font-bold text-neutral-800 dark:text-neutral-200">{copy.quarknetTitle}</h2>
-        <p class="mt-1 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">{copy.quarknetBody}</p>
-        <a class="group mt-3 inline-flex items-center gap-x-1 text-sm font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300" href="https://quarknet.org/" target="_blank" rel="noopener noreferrer">quarknet.org <Icon name="arrowRight" class="size-4 shrink-0 transition duration-300 group-hover:translate-x-1" /></a>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   </div>
 
   <section class="mx-auto max-w-[85rem] px-4 pb-14 sm:px-6 lg:px-8 2xl:max-w-full">
-    <a href="/docs/parts-list/" class:list={['group flex flex-col gap-4 surface p-6 transition-colors hover:bg-neutral-100 sm:flex-row sm:items-center sm:p-8', reveal]}>
+    <a
+      href="/docs/parts-list/"
+      class:list={[
+        'group flex flex-col gap-4 surface p-6 transition-colors hover:bg-neutral-100 sm:flex-row sm:items-center sm:p-8',
+        reveal,
+      ]}
+    >
       <CwIcon name="parts" class="size-9 shrink-0 text-orange-400" />
       <span class="grow">
-        <span class="block text-lg font-bold text-neutral-800">Building it yourself?</span>
-        <span class="mt-1 block text-pretty text-neutral-600">The Parts List &amp; BOM has every component, with Digi-Key part numbers and a list you can paste straight into the Digi-Key cart.</span>
+        <span class="block text-lg font-bold text-neutral-800">
+          Want to Build It Yourself?
+        </span>
+        <span class="mt-1 block text-pretty text-neutral-600">
+          The Parts List has every component with its part number, and a list
+          you can paste straight into Digi-Key to order most of the parts
+          needed.
+        </span>
       </span>
-      <span class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-orange-400">Parts List &amp; BOM <Icon name="arrowRight" class="size-4 transition group-hover:translate-x-1" /></span>
+      <span class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-orange-400">
+        Parts List{' '}
+        <Icon
+          name="arrowRight"
+          class="size-4 transition group-hover:translate-x-1"
+        />
+      </span>
     </a>
   </section>
 </MainLayout>

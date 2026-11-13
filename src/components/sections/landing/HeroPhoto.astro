@@ -8,6 +8,8 @@ import type { HeroPhoto } from '@data/heroPhotos';
 
 interface Props {
   photo: HeroPhoto;
+  /** Small line above the headline. */
+  eyebrow?: string;
   title: string;
   subTitle?: string;
   primaryBtn?: string;
@@ -16,7 +18,16 @@ interface Props {
   secondaryBtnURL?: string;
 }
 
-const { photo, title, subTitle, primaryBtn, primaryBtnURL, secondaryBtn, secondaryBtnURL } = Astro.props;
+const {
+  photo,
+  eyebrow,
+  title,
+  subTitle,
+  primaryBtn,
+  primaryBtnURL,
+  secondaryBtn,
+  secondaryBtnURL,
+} = Astro.props;
 ---
 
 <section
@@ -24,7 +35,11 @@ const { photo, title, subTitle, primaryBtn, primaryBtnURL, secondaryBtn, seconda
   class="relative isolate mx-[calc(50%-50vw)] mt-[calc(-1*var(--header-h,72px))] flex min-h-svh w-screen items-center overflow-hidden bg-neutral-950"
 >
   {/* Taller than the hero so the parallax drift never shows an edge. */}
-  <div data-parallax="0.35" aria-hidden="true" class="absolute inset-x-0 -top-[10%] -z-10 h-[120%] will-change-transform">
+  <div
+    data-parallax="0.35"
+    aria-hidden="true"
+    class="absolute inset-x-0 -top-[10%] -z-10 h-[120%] will-change-transform"
+  >
     <Image
       src={photo.image}
       alt=""
@@ -39,22 +54,44 @@ const { photo, title, subTitle, primaryBtn, primaryBtnURL, secondaryBtn, seconda
   </div>
   {/* Darken evenly, a bit more at the top (under the nav) and bottom. */}
   <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[#07121f]/65"></div>
-  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-gradient-to-b from-[#07121f]/70 via-transparent to-[#07121f]/80"></div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 -z-10 bg-gradient-to-b from-[#07121f]/70 via-transparent to-[#07121f]/80"
+  ></div>
 
   <div
     data-parallax-content
-    class="mx-auto w-full max-w-5xl px-6 pt-[calc(var(--header-h,72px)+3rem)] pb-20 text-center sm:px-10"
+    class="mx-auto w-full max-w-6xl px-6 pt-[calc(var(--header-h,72px)+3rem)] pb-20 text-center sm:px-10"
   >
-    <h1 class:list={['text-4xl font-bold tracking-tight text-balance text-white sm:text-6xl lg:text-7xl lg:leading-[1.05]', reveal]}>
-      <Fragment set:html={title} />
+    <h1 class:list={['text-white', reveal]}>
+      {eyebrow && (
+        <span class="mb-4 block text-sm font-semibold tracking-[0.3em] text-white/75 uppercase sm:text-base">
+          {eyebrow}
+        </span>
+      )}
+      <span class="block text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-[1.1]">
+        <Fragment set:html={title} />
+      </span>
     </h1>
     {subTitle && (
-      <p class:list={['mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-200 sm:text-xl', [reveal, delay(1)]]}>
+      <p
+        class:list={[
+          'mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-200 sm:text-xl',
+          [reveal, delay(1)],
+        ]}
+      >
         {subTitle}
       </p>
     )}
-    <div class:list={['mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center', [reveal, delay(2)]]}>
-      {primaryBtn && <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="yellow" />}
+    <div
+      class:list={[
+        'mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center',
+        [reveal, delay(2)],
+      ]}
+    >
+      {primaryBtn && (
+        <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="yellow" />
+      )}
       {secondaryBtn && (
         <a
           href={secondaryBtnURL}
@@ -65,10 +102,6 @@ const { photo, title, subTitle, primaryBtn, primaryBtnURL, secondaryBtn, seconda
       )}
     </div>
   </div>
-
-  <p class="absolute right-4 bottom-4 max-w-[60vw] text-right text-xs text-white/60 sm:right-6 sm:bottom-5">
-    {photo.caption}
-  </p>
 </section>
 
 <script>

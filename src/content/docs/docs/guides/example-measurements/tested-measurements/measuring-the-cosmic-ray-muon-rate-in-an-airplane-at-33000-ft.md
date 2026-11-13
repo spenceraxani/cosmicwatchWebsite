@@ -1,6 +1,6 @@
 ---
-title: "Measuring the cosmic-ray muon rate in an airplane at 33,000 ft"
-description: "Example Measurements, pages 26–27. Generated from the PDF on GitHub."
+title: 'Measuring the cosmic-ray muon rate in an airplane at 33,000 ft'
+description: 'Example Measurements, pages 26–27. Generated from the PDF on GitHub.'
 sidebar:
   order: 13
 editUrl: false
@@ -24,6 +24,5 @@ Fig. 2.20 (right) displays the measured trigger rate as a function of true altit
 </figure>
 
 The cosmic-ray muon flux is recognized to vary with latitude, a variation we have sidestepped by measuring the flux at a nearly constant latitude. Additionally, we anticipate the exponential fit to become less reliable as we extend to higher altitudes, owing to the alteration in flux composition near the primary cosmic ray interaction region.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=26" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 26–27.</p>

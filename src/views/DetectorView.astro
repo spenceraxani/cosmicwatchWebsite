@@ -26,9 +26,15 @@ const copy = getCopy(locale).detector;
 const about = getCopy(locale).about;
 
 const gallery = [
-  { src: g1, alt: 'Front of a v3X in a yellow case: OLED screen, reset button and two LEDs' },
+  {
+    src: g1,
+    alt: 'Front of a v3X in a yellow case',
+  },
   { src: g2, alt: 'Two v3X detectors stacked for coincidence measurements' },
-  { src: g3, alt: 'v3X boards without the case, showing the Pico and the scintillator housing' },
+  {
+    src: g3,
+    alt: 'v3X boards without the case',
+  },
   { src: g4, alt: 'Exploded side view of the v3X assembly' },
   { src: g5, alt: 'Main board and SiPM board, top side' },
   { src: g6, alt: 'Front and back faceplate designs' },
@@ -39,58 +45,110 @@ const gallery = [
   title={copy.title}
   description={copy.metaDescription}
   ogTitle={copy.ogTitle}
-  kind={{ type: 'Product' }}
 >
   <section class="mx-auto grid max-w-[85rem] gap-8 px-4 py-14 sm:px-6 md:grid-cols-2 md:items-center lg:px-8 2xl:max-w-full">
     <div>
-      <h1 class:list={['text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl lg:text-5xl dark:text-neutral-200', reveal]}>
+      <h1
+        class:list={[
+          'text-3xl font-bold tracking-tight text-balance text-neutral-800 sm:text-4xl lg:text-5xl dark:text-neutral-200',
+          reveal,
+        ]}
+      >
         {copy.heading}
       </h1>
       <p class="mt-4 text-lg text-pretty text-neutral-600 dark:text-neutral-400">
         {copy.subTitle}
       </p>
-      <p class="mt-3 text-pretty text-neutral-600 dark:text-neutral-400">{copy.intro}</p>
       <div class="mt-7 grid w-full gap-3 sm:inline-flex">
-        <PrimaryCTA title={copy.buildBtn} url={localePath(locale, '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/')} />
+        <PrimaryCTA
+          title={copy.buildBtn}
+          url={localePath(
+            locale,
+            '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/'
+          )}
+        />
         <SecondaryCTA title={copy.buyBtn} url={localePath(locale, '/shop')} />
       </div>
     </div>
-    <Image src={heroImg} alt="Render of a CosmicWatch v3X detector in a blue aluminum case" width={900} class="mx-auto w-full max-w-lg drop-shadow-[0_24px_30px_rgba(13,26,39,0.18)]" loading="eager" />
+    <Image
+      src={heroImg}
+      alt="Render of a CosmicWatch v3X detector in a blue aluminum case"
+      width={900}
+      class="mx-auto w-full max-w-lg drop-shadow-[0_24px_30px_rgba(13,26,39,0.18)]"
+      loading="eager"
+    />
   </section>
 
   <section class="mx-auto grid max-w-[85rem] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-14 2xl:max-w-full">
-    <Image src={boardImg} alt="Annotated v3X main board" width={1100} class="w-full" loading="lazy" />
+    <Image
+      src={boardImg}
+      alt="Annotated v3X main board"
+      width={1100}
+      class="w-full"
+      loading="lazy"
+    />
     <div>
-      <h2 class:list={['text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200', reveal]}>
+      <h2
+        class:list={[
+          'text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200',
+          reveal,
+        ]}
+      >
         {copy.insideTitle}
       </h2>
       <dl class="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
         {parts.map(p => (
           <div>
-            <dt class="font-bold text-neutral-800 dark:text-neutral-200">{p.name}</dt>
-            <dd class="text-sm text-neutral-600 dark:text-neutral-400">{p.detail}</dd>
+            <dt class="font-bold text-neutral-800 dark:text-neutral-200">
+              {p.name}
+            </dt>
+            <dd class="text-sm text-neutral-600 dark:text-neutral-400">
+              {p.detail}
+            </dd>
           </div>
         ))}
       </dl>
       <p class="mt-6 text-sm text-neutral-500 dark:text-neutral-400">
-        <a class="underline underline-offset-2" href={localePath(locale, '/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/')}>How the detector works</a>
+        <a
+          class="underline underline-offset-2"
+          href={localePath(
+            locale,
+            '/docs/guides/instruction-manual/the-cosmicwatch-desktop-muon-detector-v3x/'
+          )}
+        >
+          How the detector works
+        </a>
       </p>
     </div>
   </section>
 
   <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-    <h2 class:list={['text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200', reveal]}>
+    <h2
+      class:list={[
+        'text-2xl font-bold text-neutral-800 md:text-4xl dark:text-neutral-200',
+        reveal,
+      ]}
+    >
       {copy.galleryTitle}
     </h2>
     <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {gallery.map(g => (
-        <figure class:list={['overflow-hidden rounded-xl bg-white', revealImage]}>
-          <Image src={g.src} alt={g.alt} width={800} class="aspect-[4/3] w-full object-contain p-2" loading="lazy" />
-          <figcaption class="bg-neutral-100 px-4 py-3 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">{g.alt}</figcaption>
+        <figure
+          class:list={['overflow-hidden rounded-xl bg-white', revealImage]}
+        >
+          <Image
+            src={g.src}
+            alt={g.alt}
+            width={800}
+            class="aspect-[4/3] w-full object-contain p-2"
+            loading="lazy"
+          />
+          <figcaption class="bg-neutral-100 px-4 py-3 text-sm text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400">
+            {g.alt}
+          </figcaption>
         </figure>
       ))}
     </div>
-    <p class="mt-8 max-w-3xl text-sm text-neutral-500 dark:text-neutral-400">{copy.licenseNote}</p>
   </section>
-  <Papers title={about.papersTitle} subTitle={about.papersSubTitle} />
+  <Papers title={about.papersTitle} />
 </MainLayout>

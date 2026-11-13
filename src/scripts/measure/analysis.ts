@@ -17,7 +17,8 @@ export function select(run: Run, adcMin = 0, adcMax = 4095): Uint32Array {
 }
 
 const isCoinc = (run: Run, i: number) => run.flag.data[i] === 1;
-const inSeries = (run: Run, i: number, s: Series) => s === 'all' || (s === 'coinc') === isCoinc(run, i);
+const inSeries = (run: Run, i: number, s: Series) =>
+  s === 'all' || (s === 'coinc') === isCoinc(run, i);
 
 /** Round a value and its error to the error's second significant digit (GUI `round`). */
 export function roundPair(x: number, err: number): [string, string] {
@@ -40,33 +41,78 @@ export interface Totals {
 export function totals(run: Run, idx: Uint32Array): Totals {
   const n = idx.length;
   const zero = { all: 0, non: 0, coinc: 0 };
-  if (n < 2) return { events: n, coincident: 0, duration: 0, liveTime: 0, rate: { ...zero }, err: { ...zero }, temp: NaN, press: NaN };
-  let c = 0, tSum = 0, pSum = 0, tN = 0, pN = 0;
-  let tMin = Infinity, tMax = -Infinity, dMin = Infinity, dMax = -Infinity;
+  if (n < 2)
+    return {
+      events: n,
+      coincident: 0,
+      duration: 0,
+      liveTime: 0,
+      rate: { ...zero },
+      err: { ...zero },
+      temp: NaN,
+      press: NaN,
+    };
+  let c = 0,
+    tSum = 0,
+    pSum = 0,
+    tN = 0,
+    pN = 0;
+  let tMin = Infinity,
+    tMax = -Infinity,
+    dMin = Infinity,
+    dMax = -Infinity;
   for (const i of idx) {
     if (isCoinc(run, i)) c++;
-    const t = run.t.data[i], d = run.dead.data[i];
+    const t = run.t.data[i],
+      d = run.dead.data[i];
     if (t < tMin) tMin = t;
     if (t > tMax) tMax = t;
     if (d < dMin) dMin = d;
     if (d > dMax) dMax = d;
-    const T = run.temp.data[i], P = run.press.data[i];
-    if (Number.isFinite(T)) { tSum += T; tN++; }
-    if (Number.isFinite(P)) { pSum += P; pN++; }
+    const T = run.temp.data[i],
+      P = run.press.data[i];
+    if (Number.isFinite(T)) {
+      tSum += T;
+      tN++;
+    }
+    if (Number.isFinite(P)) {
+      pSum += P;
+      pN++;
+    }
   }
   const duration = tMax - tMin;
   const live = Math.max(1e-9, duration - (dMax - dMin));
   const counts = { all: n, non: n - c, coinc: c };
-  const rate = { all: counts.all / live, non: counts.non / live, coinc: counts.coinc / live };
-  const err = { all: Math.sqrt(counts.all) / live, non: Math.sqrt(counts.non) / live, coinc: Math.sqrt(counts.coinc) / live };
-  return { events: n, coincident: c, duration, liveTime: live, rate, err, temp: tN ? tSum / tN : NaN, press: pN ? pSum / pN : NaN };
+  const rate = {
+    all: counts.all / live,
+    non: counts.non / live,
+    coinc: counts.coinc / live,
+  };
+  const err = {
+    all: Math.sqrt(counts.all) / live,
+    non: Math.sqrt(counts.non) / live,
+    coinc: Math.sqrt(counts.coinc) / live,
+  };
+  return {
+    events: n,
+    coincident: c,
+    duration,
+    liveTime: live,
+    rate,
+    err,
+    temp: tN ? tSum / tN : NaN,
+    press: pN ? pSum / pN : NaN,
+  };
 }
 
 /** The GUI's default bin: the choice closest to run length / 200. */
 export const BIN_CHOICES = [30, 60, 120, 180, 240, 600];
 export function autoBin(duration: number) {
   const ideal = duration / 200;
-  return BIN_CHOICES.reduce((best, b) => (Math.abs(b - ideal) < Math.abs(best - ideal) ? b : best), BIN_CHOICES[0]);
+  return BIN_CHOICES.reduce(
+    (best, b) => (Math.abs(b - ideal) < Math.abs(best - ideal) ? b : best),
+    BIN_CHOICES[0]
+  );
 }
 
 export interface Binned {
@@ -77,9 +123,12 @@ export interface Binned {
   rateErr: Record<Series, number[]>;
   press: number[]; // Pa
   temp: number[]; // °C
-  ax: number[]; ay: number[]; az: number[];
-  gx: number[]; gy: number[]; gz: number[];
-  deadPct: number[]; // deadtime / bin width, %
+  ax: number[];
+  ay: number[];
+  az: number[];
+  gx: number[];
+  gy: number[];
+  gz: number[];
 }
 
 /**
@@ -88,8 +137,26 @@ export interface Binned {
  * the event gaps minus the deadtime the detector reported for those events.
  */
 export function binByTime(run: Run, idx: Uint32Array, binSec: number): Binned {
-  const empty = (): Record<Series, number[]> => ({ all: [], non: [], coinc: [] });
-  const out: Binned = { binSec, minutes: [], counts: empty(), rate: empty(), rateErr: empty(), press: [], temp: [], ax: [], ay: [], az: [], gx: [], gy: [], gz: [], deadPct: [] };
+  const empty = (): Record<Series, number[]> => ({
+    all: [],
+    non: [],
+    coinc: [],
+  });
+  const out: Binned = {
+    binSec,
+    minutes: [],
+    counts: empty(),
+    rate: empty(),
+    rateErr: empty(),
+    press: [],
+    temp: [],
+    ax: [],
+    ay: [],
+    az: [],
+    gx: [],
+    gy: [],
+    gz: [],
+  };
   if (idx.length < 2) return out;
   const t0 = run.t.data[idx[0]];
   let dMin = Infinity;
@@ -99,11 +166,43 @@ export function binByTime(run: Run, idx: Uint32Array, binSec: number): Binned {
   if (nb === 0) return out;
 
   const zeros = () => new Float64Array(nb);
-  const cAll = zeros(), cCo = zeros(), live = zeros(), dead = zeros(), nEv = zeros();
-  const sums = { press: zeros(), temp: zeros(), ax: zeros(), ay: zeros(), az: zeros(), gx: zeros(), gy: zeros(), gz: zeros() };
-  const cols = { press: run.press, temp: run.temp, ax: run.ax, ay: run.ay, az: run.az, gx: run.gx, gy: run.gy, gz: run.gz };
+  const cAll = zeros(),
+    cCo = zeros(),
+    live = zeros(),
+    nEv = zeros();
+  const sums = {
+    press: zeros(),
+    temp: zeros(),
+    ax: zeros(),
+    ay: zeros(),
+    az: zeros(),
+    gx: zeros(),
+    gy: zeros(),
+    gz: zeros(),
+  };
+  const nVal = {
+    press: zeros(),
+    temp: zeros(),
+    ax: zeros(),
+    ay: zeros(),
+    az: zeros(),
+    gx: zeros(),
+    gy: zeros(),
+    gz: zeros(),
+  };
+  const cols = {
+    press: run.press,
+    temp: run.temp,
+    ax: run.ax,
+    ay: run.ay,
+    az: run.az,
+    gx: run.gx,
+    gy: run.gy,
+    gz: run.gz,
+  };
   const hi = nb * binSec;
-  let prevT = 0, prevD = 0;
+  let prevT = 0,
+    prevD = 0;
   for (let k = 0; k < idx.length; k++) {
     const i = idx[k];
     const t = run.t.data[i] - t0;
@@ -117,14 +216,21 @@ export function binByTime(run: Run, idx: Uint32Array, binSec: number): Binned {
     cAll[b]++;
     if (isCoinc(run, i)) cCo[b]++;
     live[b] += evLive;
-    dead[b] += evDead;
     nEv[b]++;
-    for (const key of Object.keys(sums) as (keyof typeof sums)[]) sums[key][b] += cols[key].data[i];
+    for (const key of Object.keys(sums) as (keyof typeof sums)[]) {
+      const v = cols[key].data[i];
+      if (Number.isFinite(v)) {
+        sums[key][b] += v;
+        nVal[key][b]++;
+      }
+    }
   }
   // Mean per bin; empty bins are filled by interpolating their neighbours, as in the GUI.
-  const mean = (sum: Float64Array) => {
-    const v = Array.from(sum, (s, b) => (nEv[b] ? s / nEv[b] : NaN));
-    const good = v.map((x, b) => (Number.isFinite(x) ? b : -1)).filter(b => b >= 0);
+  const mean = (sum: Float64Array, nv: Float64Array) => {
+    const v = Array.from(sum, (s, b) => (nv[b] ? s / nv[b] : NaN));
+    const good = v
+      .map((x, b) => (Number.isFinite(x) ? b : -1))
+      .filter(b => b >= 0);
     if (good.length > 1) {
       for (let b = 0; b < nb; b++) {
         if (Number.isFinite(v[b])) continue;
@@ -146,9 +252,9 @@ export function binByTime(run: Run, idx: Uint32Array, binSec: number): Binned {
       out.rate[s].push(counts[s] / lt);
       out.rateErr[s].push(Math.sqrt(counts[s]) / lt);
     }
-    out.deadPct.push((dead[b] / binSec) * 100);
   }
-  for (const key of Object.keys(sums) as (keyof typeof sums)[]) out[key] = mean(sums[key]);
+  for (const key of Object.keys(sums) as (keyof typeof sums)[])
+    out[key] = mean(sums[key], nVal[key]);
   return out;
 }
 
@@ -163,9 +269,16 @@ export interface Hist {
  * Log-spaced histogram of ADC or SiPM values, each event weighted by 1 / live time,
  * so the y axis is a rate per bin (the GUI's `NPlot`).
  */
-export function logHistogram(run: Run, idx: Uint32Array, key: 'adc' | 'sipm', liveTime: number, nBins = 100): Hist | null {
+export function logHistogram(
+  run: Run,
+  idx: Uint32Array,
+  key: 'adc' | 'sipm',
+  liveTime: number,
+  nBins = 100
+): Hist | null {
   const col = run[key].data;
-  let lo = Infinity, hi = -Infinity;
+  let lo = Infinity,
+    hi = -Infinity;
   for (const i of idx) {
     const v = col[i];
     if (!Number.isFinite(v)) continue;
@@ -174,21 +287,43 @@ export function logHistogram(run: Run, idx: Uint32Array, key: 'adc' | 'sipm', li
   }
   if (!Number.isFinite(lo) || !(hi > 0)) return null;
   if (key === 'adc') lo = Math.max(lo, 1);
-  else { lo = Math.max(lo, 1e-10) * 0.95; hi *= 1.05; }
+  else {
+    lo = Math.max(lo, 1e-10) * 0.95;
+    hi *= 1.05;
+  }
   if (!(hi > lo)) hi = lo * 2;
-  const l0 = Math.log10(lo), l1 = Math.log10(hi);
-  const edges = Array.from({ length: nBins + 1 }, (_, k) => 10 ** (l0 + ((l1 - l0) * k) / nBins));
+  const l0 = Math.log10(lo),
+    l1 = Math.log10(hi);
+  const edges = Array.from(
+    { length: nBins + 1 },
+    (_, k) => 10 ** (l0 + ((l1 - l0) * k) / nBins)
+  );
   const w = 1 / Math.max(1e-9, liveTime);
-  const counts = { all: new Float64Array(nBins), non: new Float64Array(nBins), coinc: new Float64Array(nBins) };
+  const counts = {
+    all: new Float64Array(nBins),
+    non: new Float64Array(nBins),
+    coinc: new Float64Array(nBins),
+  };
   for (const i of idx) {
     const v = col[i];
     if (!(v >= lo && v <= hi)) continue;
-    const b = Math.min(nBins - 1, Math.floor(((Math.log10(v) - l0) / (l1 - l0)) * nBins));
+    const b = Math.min(
+      nBins - 1,
+      Math.floor(((Math.log10(v) - l0) / (l1 - l0)) * nBins)
+    );
     counts.all[b]++;
     counts[isCoinc(run, i) ? 'coinc' : 'non'][b]++;
   }
-  const values = { all: [] as number[], non: [] as number[], coinc: [] as number[] };
-  const errs = { all: [] as number[], non: [] as number[], coinc: [] as number[] };
+  const values = {
+    all: [] as number[],
+    non: [] as number[],
+    coinc: [] as number[],
+  };
+  const errs = {
+    all: [] as number[],
+    non: [] as number[],
+    coinc: [] as number[],
+  };
   for (const s of SERIES) {
     for (let b = 0; b < nBins; b++) {
       values[s].push(counts[s][b] * w);
@@ -199,6 +334,24 @@ export function logHistogram(run: Run, idx: Uint32Array, key: 'adc' | 'sipm', li
   return { centres, edges, values, errs };
 }
 
+/** Median of the ADC or SiPM values of one series (NaN if there are none). */
+export function median(
+  run: Run,
+  idx: Uint32Array,
+  key: 'adc' | 'sipm',
+  s: Series
+): number {
+  const v: number[] = [];
+  for (const i of idx) {
+    const x = run[key].data[i];
+    if (inSeries(run, i, s) && Number.isFinite(x)) v.push(x);
+  }
+  if (!v.length) return NaN;
+  v.sort((a, b) => a - b);
+  const m = v.length >> 1;
+  return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+}
+
 function logFactorial(k: number) {
   if (k < 2) return 0;
   if (k < 256) {
@@ -207,9 +360,16 @@ function logFactorial(k: number) {
     return s;
   }
   // Stirling series
-  return k * Math.log(k) - k + 0.5 * Math.log(2 * Math.PI * k) + 1 / (12 * k) - 1 / (360 * k ** 3);
+  return (
+    k * Math.log(k) -
+    k +
+    0.5 * Math.log(2 * Math.PI * k) +
+    1 / (12 * k) -
+    1 / (360 * k ** 3)
+  );
 }
-const poissonPmf = (k: number, lam: number) => (k < 0 ? 0 : Math.exp(k * Math.log(lam) - lam - logFactorial(k)));
+const poissonPmf = (k: number, lam: number) =>
+  k < 0 ? 0 : Math.exp(k * Math.log(lam) - lam - logFactorial(k));
 
 export interface FitCurve {
   x: number[];
@@ -217,50 +377,79 @@ export interface FitCurve {
   chi2dof: number;
 }
 
-/** Histogram of the binned rates with a Poisson fit (the GUI's Rate Distribution). */
+/**
+ * Histogram of the counts per time bin with a Poisson fit (the GUI's Rate
+ * Distribution). The histogram groups neighbouring count values so each bar holds
+ * several time bins, the fit is scaled to the number of time bins, and χ² uses only
+ * bars expected to hold at least 5, so χ²/dof near 1 means the counts are Poisson.
+ */
 export function rateDistribution(b: Binned) {
   const bin = b.binSec;
-  const step = 1 / bin;
-  const pos = (s: Series) => b.rate[s].filter(r => Number.isFinite(r) && r > 0);
-  const all = SERIES.flatMap(pos);
-  if (!all.length) return null;
-  const cMin = Math.floor(Math.min(...all) * bin);
-  const cMax = Math.ceil(Math.max(...all) * bin);
-  const edges: number[] = [];
-  for (let k = cMin; k <= cMax + 1; k++) edges.push((k - 0.5) * step);
-  const centres = edges.slice(0, -1).map((e, k) => (e + edges[k + 1]) / 2);
-  const out: Partial<Record<Series, { counts: number[]; fit: FitCurve }>> = {};
+  const out: Partial<
+    Record<
+      Series,
+      {
+        centres: number[];
+        edges: number[];
+        counts: number[];
+        expected: number[];
+        fit: FitCurve;
+      }
+    >
+  > = {};
   for (const s of SERIES) {
-    const rates = pos(s);
-    if (!rates.length) continue;
-    const counts = new Array(centres.length).fill(0);
-    for (const r of rates) {
-      const k = Math.floor((r - edges[0]) / step);
-      if (k >= 0 && k < counts.length) counts[k]++;
-    }
-    const lam = (rates.reduce((a, v) => a + v, 0) / rates.length) * bin;
-    const peak = Math.max(...counts);
-    if (!(lam > 0) || peak === 0) continue;
+    const ks = b.counts[s].filter((_, i) => Number.isFinite(b.rate[s][i]));
+    const N = ks.length;
+    if (N < 3) continue;
+    const lam = ks.reduce((a, v) => a + v, 0) / N;
+    if (!(lam > 0)) continue;
     const sig = Math.sqrt(lam);
-    const xs: number[] = [], pdf: number[] = [];
-    const k0 = Math.max(0, lam - 4 * sig), k1 = lam + 4 * sig;
-    for (let j = 0; j < 300; j++) {
-      const k = k0 + ((k1 - k0) * j) / 299;
-      xs.push(k / bin);
-      pdf.push(Math.exp(-((k - lam) ** 2) / (2 * lam)) / Math.sqrt(2 * Math.PI * lam));
-    }
-    const amp = peak / Math.max(...pdf);
-    let chi2 = 0, used = 0;
-    centres.forEach((c, k) => {
-      const e = amp * poissonPmf(Math.round(c * bin), lam);
-      if (e > 0) {
-        chi2 += (counts[k] - e) ** 2 / e;
+    const lo = Math.max(
+      0,
+      Math.floor(Math.min(lam - 4 * sig, Math.min(...ks)))
+    );
+    const hi = Math.ceil(Math.max(lam + 4 * sig, Math.max(...ks)));
+    const target = Math.max(8, Math.min(40, Math.round(2 * Math.sqrt(N))));
+    const w = Math.max(1, Math.ceil((hi - lo + 1) / target));
+    const nb = Math.ceil((hi - lo + 1) / w);
+    const counts = new Array(nb).fill(0);
+    for (const k of ks) counts[Math.min(nb - 1, Math.floor((k - lo) / w))]++;
+    const expected = counts.map((_, j) => {
+      let p = 0;
+      for (let k = lo + j * w; k < lo + (j + 1) * w; k++)
+        p += poissonPmf(k, lam);
+      return N * p;
+    });
+    // Count k covers [k - 0.5, k + 0.5); shown as a rate, counts / bin time.
+    const edges = Array.from(
+      { length: nb + 1 },
+      (_, j) => (lo + j * w - 0.5) / bin
+    );
+    const centres = edges.slice(0, -1).map((e, j) => (e + edges[j + 1]) / 2);
+    let chi2 = 0,
+      used = 0;
+    expected.forEach((e, j) => {
+      if (e >= 5) {
+        chi2 += (counts[j] - e) ** 2 / e;
         used++;
       }
     });
-    out[s] = { counts, fit: { x: xs, y: pdf.map(p => p * amp), chi2dof: chi2 / Math.max(1, used - 1) } };
+    const xs: number[] = [],
+      ys: number[] = [];
+    const step = Math.max(1, Math.floor((hi - lo) / 300));
+    for (let k = lo; k <= hi; k += step) {
+      xs.push(k / bin);
+      ys.push(N * w * poissonPmf(k, lam));
+    }
+    out[s] = {
+      centres,
+      edges,
+      counts,
+      expected,
+      fit: { x: xs, y: ys, chi2dof: used > 1 ? chi2 / (used - 1) : NaN },
+    };
   }
-  return { centres, width: step, series: out };
+  return Object.keys(out).length ? { series: out } : null;
 }
 
 /** Log-binned gaps between events with an exponential fit (the GUI's Δt Distribution). */
@@ -279,23 +468,42 @@ export function dtDistribution(run: Run, idx: Uint32Array, nBins = 101) {
   let tMax = 0;
   for (const s of SERIES) for (const d of gaps[s]) if (d > tMax) tMax = d;
   if (!(tMax > tMin)) return null;
-  const l0 = Math.log10(tMin), l1 = Math.log10(tMax);
-  const edges = Array.from({ length: nBins + 1 }, (_, k) => 10 ** (l0 + ((l1 - l0) * k) / nBins));
+  const l0 = Math.log10(tMin),
+    l1 = Math.log10(tMax);
+  const edges = Array.from(
+    { length: nBins + 1 },
+    (_, k) => 10 ** (l0 + ((l1 - l0) * k) / nBins)
+  );
   const centres = edges.slice(0, -1).map((e, k) => (e + edges[k + 1]) / 2);
-  const out: Partial<Record<Series, { counts: number[]; fit: FitCurve; mean: number; n: number }>> = {};
+  const out: Partial<
+    Record<Series, { counts: number[]; fit: FitCurve; mean: number; n: number }>
+  > = {};
   for (const s of SERIES) {
     const g = gaps[s];
     if (g.length < 2) continue;
     const counts = new Array(nBins).fill(0);
     for (const d of g) {
       if (d < tMin || d > tMax) continue;
-      counts[Math.min(nBins - 1, Math.floor(((Math.log10(d) - l0) / (l1 - l0)) * nBins))]++;
+      counts[
+        Math.min(
+          nBins - 1,
+          Math.floor(((Math.log10(d) - l0) / (l1 - l0)) * nBins)
+        )
+      ]++;
     }
     const mean = g.reduce((a, v) => a + v, 0) / g.length;
     const lam = 1 / mean;
-    const xs = Array.from({ length: 300 }, (_, j) => 10 ** (l0 + ((l1 - l0) * j) / 299));
-    const ys = xs.map(t => (g.length * lam * Math.exp(-lam * t) * t * Math.LN10 * (l1 - l0)) / nBins);
-    let chi2 = 0, used = 0;
+    const xs = Array.from(
+      { length: 300 },
+      (_, j) => 10 ** (l0 + ((l1 - l0) * j) / 299)
+    );
+    const ys = xs.map(
+      t =>
+        (g.length * lam * Math.exp(-lam * t) * t * Math.LN10 * (l1 - l0)) /
+        nBins
+    );
+    let chi2 = 0,
+      used = 0;
     centres.forEach((c, k) => {
       const e = g.length * lam * Math.exp(-lam * c) * (edges[k + 1] - edges[k]);
       if (e > 0) {
@@ -303,28 +511,12 @@ export function dtDistribution(run: Run, idx: Uint32Array, nBins = 101) {
         used++;
       }
     });
-    out[s] = { counts, fit: { x: xs, y: ys, chi2dof: chi2 / Math.max(1, used - 1) }, mean, n: g.length };
+    out[s] = {
+      counts,
+      fit: { x: xs, y: ys, chi2dof: chi2 / Math.max(1, used - 1) },
+      mean,
+      n: g.length,
+    };
   }
   return { centres, edges, tMin, tMax, series: out };
-}
-
-/** Pearson r and a straight-line fit for two equally long series. */
-export function correlation(x: number[], y: number[]) {
-  const pts: { x: number; y: number }[] = [];
-  for (let k = 0; k < Math.min(x.length, y.length); k++) {
-    if (Number.isFinite(x[k]) && Number.isFinite(y[k])) pts.push({ x: x[k], y: y[k] });
-  }
-  if (pts.length < 3) return null;
-  const n = pts.length;
-  const mx = pts.reduce((a, p) => a + p.x, 0) / n;
-  const my = pts.reduce((a, p) => a + p.y, 0) / n;
-  let sxx = 0, syy = 0, sxy = 0;
-  for (const p of pts) {
-    sxx += (p.x - mx) ** 2;
-    syy += (p.y - my) ** 2;
-    sxy += (p.x - mx) * (p.y - my);
-  }
-  if (!(sxx > 0) || !(syy > 0)) return { pts, r: NaN, slope: NaN, intercept: NaN };
-  const slope = sxy / sxx;
-  return { pts, r: sxy / Math.sqrt(sxx * syy), slope, intercept: my - slope * mx };
 }

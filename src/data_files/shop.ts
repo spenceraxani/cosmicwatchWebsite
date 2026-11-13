@@ -29,8 +29,9 @@ export interface Product {
 export const products: Product[] = [
   {
     id: 'v3x-assembled',
-    name: 'v3X detector, assembled',
-    summary: 'Built and tested in the UD lab. Plug it into USB and it starts counting.',
+    name: 'Assembled CosmicWatch v3X Detector',
+    summary:
+      'Built and tested in the UD lab. Plug it into USB and it starts counting.',
     includes: [
       '5 × 5 × 1 cm plastic scintillator and SiPM',
       'OLED screen, microSD card slot, temperature, pressure and motion sensors',
@@ -46,9 +47,14 @@ export const products: Product[] = [
   },
   {
     id: 'v3x-pair',
-    name: 'Coincidence pair',
-    summary: 'Two assembled detectors and the network cable that links them. Use this for clean muon-only measurements.',
-    includes: ['Two assembled v3X detectors', 'Coincidence cable', 'One USB cable powers both'],
+    name: 'Coincidence Pair',
+    summary:
+      'Two assembled detectors and the network cable that links them. Use this for clean muon-only measurements.',
+    includes: [
+      'Two assembled v3X detectors',
+      'Coincidence cable',
+      'One USB cable powers both',
+    ],
     price: null,
     image: pair,
     imageAlt: 'Two v3X detectors, yellow and blue, stacked',
@@ -57,19 +63,27 @@ export const products: Product[] = [
   },
   {
     id: 'v3x-kit',
-    name: 'Build-it-yourself kit',
-    summary: 'Every part on the bill of materials in one box, with both circuit boards. You solder it; the build guide walks through each step.',
-    includes: ['Main board and SiPM board', 'All components from the parts list', 'Scintillator, SiPM and case', 'Printed component placement sheet'],
+    name: 'Build-It-Yourself Kit',
+    summary:
+      'Every part on the bill of materials in one box, with both circuit boards. You solder it; the build guide walks through each step.',
+    includes: [
+      'Main board and SiPM board',
+      'All components from the parts list',
+      'Scintillator, SiPM and case',
+      'Printed component placement sheet',
+    ],
     price: null,
     image: kit,
-    imageAlt: 'Exploded render of the v3X showing the case, boards and scintillator',
+    imageAlt:
+      'Exploded render of the v3X showing the case, boards and scintillator',
     cutout: true,
     group: 'build',
   },
   {
     id: 'v3x-pcbs',
-    name: 'Circuit board set',
-    summary: 'Bare main board and SiPM board, for groups who are ordering the components themselves.',
+    name: 'Circuit Board Set',
+    summary:
+      'Bare main board and SiPM board, for groups who are ordering the components themselves.',
     includes: ['Main board (v28)', 'SiPM board'],
     price: null,
     image: pcb,
@@ -79,8 +93,9 @@ export const products: Product[] = [
   },
   {
     id: 'scintillator',
-    name: 'Plastic scintillator',
-    summary: 'A 50 × 50 × 10 mm slab, drilled for the SiPM board and wrapped light-tight.',
+    name: 'Plastic Scintillator',
+    summary:
+      'A 50 × 50 × 10 mm slab, drilled for the SiPM board and wrapped light-tight.',
     includes: ['One wrapped scintillator slab'],
     price: null,
     image: glow,
@@ -88,10 +103,4 @@ export const products: Product[] = [
     cutout: false,
     group: 'parts',
   },
-];
-
-export const groups: { id: Product['group']; title: string; body: string }[] = [
-  { id: 'detectors', title: 'Ready to measure', body: 'Assembled and tested detectors.' },
-  { id: 'build', title: 'Build your own', body: 'Kits and boards for classes and clubs that want to solder.' },
-  { id: 'parts', title: 'Spare parts', body: 'Replacements for detectors you already have.' },
 ];

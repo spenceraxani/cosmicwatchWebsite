@@ -1,6 +1,6 @@
 ---
-title: "Latitude correction to the cosmic-ray muons"
-description: "Example Measurements, pages 13–14. Generated from the PDF on GitHub."
+title: 'Latitude correction to the cosmic-ray muons'
+description: 'Example Measurements, pages 13–14. Generated from the PDF on GitHub.'
 sidebar:
   order: 4
 editUrl: false
@@ -31,6 +31,5 @@ Here, 𝜃 represents a phase that offsets the latitude to account for the diffe
 </figure>
 
 Fig. 2.7 uses the function in Eq. 2.3 to fit the data for the first four flights, plus the data after landing at the South Pole. The best fit values are shown at the top left of Fig. 2.7. Using this result, we can then invert Eq. 2.3 to calculate the altitude of the two military flights (assuming we flew at a constant velocity directly south). The calculated altitude is shown in Fig. 2.8 for the military flights in green, as well as the measured altitude from GPS in red.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=13" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 13–14.</p>

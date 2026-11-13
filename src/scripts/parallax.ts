@@ -15,14 +15,33 @@ export function initParallax() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  document.querySelectorAll<HTMLElement>('[data-parallax-root]').forEach(root => {
-    const scroll = { trigger: root, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true };
-    root.querySelectorAll<HTMLElement>('[data-parallax]').forEach(layer => {
-      const speed = Number(layer.dataset.parallax) || 0.35; // negative = towards the viewer
-      gsap.to(layer, { y: () => root.offsetHeight * speed, ease: 'none', scrollTrigger: scroll });
+  document
+    .querySelectorAll<HTMLElement>('[data-parallax-root]')
+    .forEach(root => {
+      const scroll = {
+        trigger: root,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+        invalidateOnRefresh: true,
+      };
+      root.querySelectorAll<HTMLElement>('[data-parallax]').forEach(layer => {
+        const speed = Number(layer.dataset.parallax) || 0.35; // negative = towards the viewer
+        gsap.to(layer, {
+          y: () => root.offsetHeight * speed,
+          ease: 'none',
+          scrollTrigger: scroll,
+        });
+      });
+      root
+        .querySelectorAll<HTMLElement>('[data-parallax-content]')
+        .forEach(content => {
+          gsap.to(content, {
+            y: -60,
+            opacity: 0.25,
+            ease: 'none',
+            scrollTrigger: scroll,
+          });
+        });
     });
-    root.querySelectorAll<HTMLElement>('[data-parallax-content]').forEach(content => {
-      gsap.to(content, { y: -60, opacity: 0.25, ease: 'none', scrollTrigger: scroll });
-    });
-  });
 }

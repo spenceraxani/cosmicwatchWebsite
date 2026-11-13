@@ -6,7 +6,11 @@ import EmailContactInput from '@components/ui/forms/input/EmailContactInput.astr
 import TextAreaInput from '@components/ui/forms/input/TextAreaInput.astro';
 import AuthBtn from '@components/ui/buttons/AuthBtn.astro';
 import CwIcon from '@components/ui/icons/CwIcon.astro';
-import { CONTACT_EMAIL, CONTACT_FDP_FORM_ID, FDP_ACTION } from '@data/navigation';
+import {
+  CONTACT_EMAIL,
+  CONTACT_FDP_FORM_ID,
+  FDP_ACTION,
+} from '@data/navigation';
 
 // The form posts straight to UD's Forms Data Processor, which emails the message
 // to Prof. Axani and keeps a copy in a UD system, then sends the visitor to
@@ -21,7 +25,12 @@ const blockIconClass =
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
   <div class="mx-auto max-w-2xl lg:max-w-5xl">
     <div class="text-center">
-      <h1 class:list={['text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200', reveal]}>
+      <h1
+        class:list={[
+          'text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200',
+          reveal,
+        ]}
+      >
         {copy.heading}
       </h1>
       <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
@@ -31,7 +40,12 @@ const blockIconClass =
 
     <div class="mt-12 grid items-center gap-6 lg:grid-cols-2 lg:gap-16">
       <div class="flex flex-col rounded-xl p-4 sm:p-6 lg:p-8">
-        <h2 class:list={['mb-8 text-xl font-bold text-neutral-700 dark:text-neutral-300', reveal]}>
+        <h2
+          class:list={[
+            'mb-8 text-xl font-bold text-neutral-700 dark:text-neutral-300',
+            reveal,
+          ]}
+        >
           {copy.formTitle}
         </h2>
         <form
@@ -44,42 +58,98 @@ const blockIconClass =
           data-sending={copy.sending}
           data-missing={copy.missing}
         >
-          {live && <input type="hidden" name="formId" value={CONTACT_FDP_FORM_ID} />}
+          {live && (
+            <input type="hidden" name="formId" value={CONTACT_FDP_FORM_ID} />
+          )}
           <div class="grid gap-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <TextInput id="contact-first" label={copy.firstName} name="first" />
+              <TextInput
+                id="contact-first"
+                label={copy.firstName}
+                name="first"
+              />
               <TextInput id="contact-last" label={copy.lastName} name="last" />
             </div>
             <EmailContactInput id="contact-email" name="email" />
-            <TextAreaInput id="contact-message" label={copy.details} name="message" />
+            <TextAreaInput
+              id="contact-message"
+              label={copy.details}
+              name="message"
+            />
             {/* Spam trap: people never see or tick this; bots often do. */}
-            <input type="checkbox" name="website_check" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input
+              type="checkbox"
+              name="website_check"
+              class="hidden"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
           </div>
           <div class="mt-4 grid">
             <AuthBtn title={copy.send} />
           </div>
-          <p id="contact-status" class="mt-3 min-h-5 text-center text-sm font-medium text-neutral-700 dark:text-neutral-300" role="status" aria-live="polite"></p>
-          <p id="contact-failed" class="mt-1 text-center text-sm text-red-700 dark:text-red-400" hidden>
+          <p
+            id="contact-status"
+            class="mt-3 min-h-5 text-center text-sm font-medium text-neutral-700 dark:text-neutral-300"
+            role="status"
+            aria-live="polite"
+          ></p>
+          <p
+            id="contact-failed"
+            class="mt-1 text-center text-sm text-red-700 dark:text-red-400"
+            hidden
+          >
             {copy.notLive}{' '}
-            <a id="contact-fallback" class="underline underline-offset-2" href={`mailto:${CONTACT_EMAIL}`}>{copy.notLiveLink}</a>.
-          </p>
-          <p class="mt-3 text-center text-sm text-neutral-600 dark:text-neutral-400">
-            {copy.formSubTitle}
+            <a
+              id="contact-fallback"
+              class="underline underline-offset-2"
+              href={`mailto:${CONTACT_EMAIL}`}
+            >
+              {copy.notLiveLink}
+            </a>
+            .
           </p>
         </form>
       </div>
 
       <div class="divide-y divide-neutral-300 dark:divide-neutral-700">
-        <ContactIconBlock heading={copy.leadHeading} content={copy.leadContent} isLinkVisible={true} linkTitle={CONTACT_EMAIL} linkURL={`mailto:${CONTACT_EMAIL}`}>
+        <ContactIconBlock
+          heading={copy.leadHeading}
+          oneLine
+          content={copy.leadContent}
+          isLinkVisible={true}
+          linkTitle={CONTACT_EMAIL}
+          linkURL={`mailto:${CONTACT_EMAIL}`}
+        >
           <CwIcon name="mail" class={blockIconClass} />
         </ContactIconBlock>
-        <ContactIconBlock heading={copy.officeHeading} content={copy.officeContent} isAddressVisible={true} addressContent={copy.officeAddress}>
+        <ContactIconBlock
+          heading={copy.officeHeading}
+          content={copy.officeContent}
+          isAddressVisible={true}
+          addressContent={copy.officeAddress}
+        >
           <CwIcon name="pin" class={blockIconClass} />
         </ContactIconBlock>
-        <ContactIconBlock heading={copy.docsHeading} content={copy.docsContent} isLinkVisible={true} linkTitle={copy.docsLink} linkURL="/docs/" isArrowVisible={true}>
+        <ContactIconBlock
+          heading={copy.docsHeading}
+          content={copy.docsContent}
+          isLinkVisible={true}
+          linkTitle={copy.docsLink}
+          linkURL="/docs/"
+          isArrowVisible={true}
+        >
           <CwIcon name="docs" class={blockIconClass} />
         </ContactIconBlock>
-        <ContactIconBlock heading={copy.troubleshootHeading} content={copy.troubleshootContent} isLinkVisible={true} linkTitle={copy.troubleshootLink} linkURL="/docs/guides/troubleshooting/troubleshooting/" isArrowVisible={true}>
+        <ContactIconBlock
+          heading={copy.troubleshootHeading}
+          content={copy.troubleshootContent}
+          isLinkVisible={true}
+          linkTitle={copy.troubleshootLink}
+          linkURL="/docs/guides/troubleshooting/troubleshooting/"
+          isArrowVisible={true}
+        >
           <CwIcon name="wrench" class={blockIconClass} />
         </ContactIconBlock>
       </div>
@@ -90,12 +160,18 @@ const blockIconClass =
 <script>
   // Checks the fields, then lets the browser post the form to UD's Forms Data
   // Processor, which redirects to /contact/thanks/. Nothing is sent from script.
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const form = document.getElementById(
+    'contact-form'
+  ) as HTMLFormElement | null;
   if (form) {
     const status = document.getElementById('contact-status')!;
     const failed = document.getElementById('contact-failed')!;
-    const fallback = document.getElementById('contact-fallback') as HTMLAnchorElement;
-    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const fallback = document.getElementById(
+      'contact-fallback'
+    ) as HTMLAnchorElement;
+    const button = form.querySelector(
+      'button[type="submit"]'
+    ) as HTMLButtonElement;
     const { to, sending, missing, live } = form.dataset;
 
     form.addEventListener('submit', e => {
@@ -105,7 +181,9 @@ const blockIconClass =
       const name = `${get('first')} ${get('last')}`.trim();
       const email = get('email');
       const message = get('message');
-      const emailOk = (form.elements.namedItem('email') as HTMLInputElement).checkValidity();
+      const emailOk = (
+        form.elements.namedItem('email') as HTMLInputElement
+      ).checkValidity();
       if (!message || !email || !emailOk) {
         e.preventDefault();
         status.textContent = missing!;

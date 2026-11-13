@@ -1,16 +1,13 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import HeroSection from '@components/sections/landing/HeroSection.astro';
 import HeroSectionAlt from '@components/sections/landing/HeroSectionAlt.astro';
-import HeroBackdrop, { type HeroBackdropVariant } from '@components/sections/landing/HeroBackdrop.astro';
-import HeroLabSwitcher from '@components/sections/landing/HeroLabSwitcher.astro';
+import HeroBackdrop from '@components/sections/landing/HeroBackdrop.astro';
 import HeroPhoto from '@components/sections/landing/HeroPhoto.astro';
-import { heroPhotos, type HeroPhotoKey } from '@data/heroPhotos';
+import { heroPhoto } from '@data/heroPhotos';
 import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
 import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
 import MeasurementsSection from '@components/sections/cosmicwatch/MeasurementsSection.astro';
 import MuonPipeline from '@components/sections/cosmicwatch/MuonPipeline.astro';
-import RealRun from '@components/sections/cosmicwatch/RealRun.astro';
 import AboutBrief from '@components/sections/cosmicwatch/AboutBrief.astro';
 import heroImage from '@images/cw/detector-array.jpg';
 import featureImage from '@images/cw/exploded-labeled-cutout.png';
@@ -21,63 +18,57 @@ import { featuredMeasurements } from '@data/measurements';
 import { REPO_URL } from '@data/navigation';
 import { getCopy } from '@/copy';
 import { localePath, type MarketingLocale } from '@utils/locale';
+import { TOGGLES_ON } from '@utils/designToggles';
 
 interface Props {
   locale: MarketingLocale;
-  /** Hero style; 'classic' is the earlier light hero. Compare them at /hero-lab/ in dev. */
-  heroVariant?: HeroBackdropVariant | HeroPhotoKey | 'classic';
-  /** Set on the /hero-lab/ pages to show the version picker. */
-  heroLab?: string;
 }
 
-const { locale, heroVariant = 'tracks', heroLab } = Astro.props;
+const { locale } = Astro.props;
 const t = getCopy(locale);
 const copy = t.home;
+
+// On the dev server both heroes are on the page and the bottom-left switch
+// (DesignToggles) picks one. A build ships the photo hero only.
+const toggles = TOGGLES_ON;
+const heroProps = {
+  eyebrow: copy.hero.eyebrow,
+  title: copy.hero.title,
+  subTitle: copy.hero.subTitle,
+  primaryBtn: copy.hero.primaryBtn,
+  primaryBtnURL: localePath(
+    locale,
+    '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/'
+  ),
+  secondaryBtn: copy.hero.secondaryBtn,
+  secondaryBtnURL: localePath(locale, '/shop'),
+};
 ---
 
-<MainLayout>
-  {heroLab && <HeroLabSwitcher current={heroLab} />}
-  {heroVariant in heroPhotos ? (
-    <HeroPhoto
-      photo={heroPhotos[heroVariant as HeroPhotoKey]}
-      title={copy.hero.title}
-      subTitle={copy.hero.subTitle}
-      primaryBtn={copy.hero.primaryBtn}
-      primaryBtnURL={localePath(locale, '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/')}
-      secondaryBtn={copy.hero.secondaryBtn}
-      secondaryBtnURL={localePath(locale, '/shop')}
-    />
-  ) : heroVariant !== 'classic' ? (
-    <HeroBackdrop
-      variant={heroVariant as HeroBackdropVariant}
-      title={copy.hero.title}
-      subTitle={copy.hero.subTitle}
-      primaryBtn={copy.hero.primaryBtn}
-      primaryBtnURL={localePath(locale, '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/')}
-      secondaryBtn={copy.hero.secondaryBtn}
-      secondaryBtnURL={localePath(locale, '/shop')}
-      src={heroImage}
-      alt={copy.hero.imageAlt}
-    />
+<MainLayout designToggles="all">
+  {toggles ? (
+    <>
+      <div data-hero-variant="photo" class="contents">
+        <HeroPhoto photo={heroPhoto} {...heroProps} />
+      </div>
+      <div data-hero-variant="original" class="contents">
+        <HeroBackdrop
+          variant="tracks"
+          {...heroProps}
+          src={heroImage}
+          alt={copy.hero.imageAlt}
+        />
+      </div>
+    </>
   ) : (
-  <HeroSection
-    title={copy.hero.title}
-    subTitle={copy.hero.subTitle}
-    primaryBtn={copy.hero.primaryBtn}
-    primaryBtnURL={localePath(locale, '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/')}
-    secondaryBtn={copy.hero.secondaryBtn}
-    secondaryBtnURL={localePath(locale, '/shop')}
-    src={heroImage}
-    alt={copy.hero.imageAlt}
-    fit="contain"
-  />
+    <HeroPhoto photo={heroPhoto} {...heroProps} />
   )}
 
   <AboutBrief
     title={t.about.title}
     body={t.about.body}
     peopleCta={t.about.peopleCta}
-    peopleUrl={localePath(locale, '/contact#people')}
+    peopleUrl={localePath(locale, '/contact')}
   />
 
   <FeaturesGeneral
@@ -88,28 +79,31 @@ const copy = t.home;
     features={t.data.features}
   />
 
-  <MuonPipeline title={copy.pipeline.title} subTitle={copy.pipeline.subTitle} steps={copy.pipeline.steps} />
+  <MuonPipeline title={copy.pipeline.title} steps={copy.pipeline.steps} />
 
   <FeaturesNavs
     title={copy.featuresNavs.title}
     tabs={[
-      { ...copy.featuresNavs.tabs.sd, svg: 'dashboard', src: pcbImage, first: true, second: true },
-      { ...copy.featuresNavs.tabs.gui, svg: 'frame', src: guiImage, second: true },
-      { ...copy.featuresNavs.tabs.coincidence, svg: 'groups', src: pairImage, second: true },
+      {
+        ...copy.featuresNavs.tabs.sd,
+        svg: 'dashboard',
+        src: pcbImage,
+        first: true,
+        second: true,
+      },
+      {
+        ...copy.featuresNavs.tabs.gui,
+        svg: 'frame',
+        src: guiImage,
+        second: true,
+      },
+      {
+        ...copy.featuresNavs.tabs.coincidence,
+        svg: 'groups',
+        src: pairImage,
+        second: true,
+      },
     ]}
-  />
-
-  <RealRun
-    title={copy.realRun.title}
-    body={copy.realRun.body}
-    pressureLabel={copy.realRun.pressureLabel}
-    rateLabel={copy.realRun.rateLabel}
-    timeLabel={copy.realRun.timeLabel}
-    source={copy.realRun.source}
-    finding={copy.realRun.finding}
-    findingNote={copy.realRun.findingNote}
-    cta={copy.realRun.cta}
-    ctaUrl="/measure#sample"
   />
 
   <MeasurementsSection
@@ -119,7 +113,6 @@ const copy = t.home;
     allTitle={copy.measurements.all}
     allUrl="/docs/guides/example-measurements/tested-measurements/"
   />
-
 
   <HeroSectionAlt
     title={copy.heroAlt.title}

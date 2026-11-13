@@ -1,6 +1,6 @@
 ---
-title: "Cosmic-ray muon attenuation in a Subway station"
-description: "Example Measurements, pages 16–17. Generated from the PDF on GitHub."
+title: 'Cosmic-ray muon attenuation in a Subway station'
+description: 'Example Measurements, pages 16–17. Generated from the PDF on GitHub.'
 sidebar:
   order: 7
 editUrl: false
@@ -22,6 +22,5 @@ There are likely other underground areas in your area from which this measuremen
   <figcaption>Figure 2.11: Subway in Japan.</figcaption>
 
 </figure>
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=16" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 16–17.</p>

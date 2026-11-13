@@ -5,7 +5,14 @@ sidebar:
   order: 1
 ---
 
-import { Aside, Code, LinkButton, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+import {
+  Aside,
+  Code,
+  LinkButton,
+  Steps,
+  Tabs,
+  TabItem,
+} from '@astrojs/starlight/components';
 import BomTable from '@components/ui/starlight/BomTable.astro';
 import Screenshot from '@components/ui/starlight/Screenshot.astro';
 import step1 from '../../../assets/docs/bom/step-1.png';
@@ -18,85 +25,151 @@ import step5back from '../../../assets/docs/bom/step-5-backorder.png';
 import { required, optional, totals, digikeyList } from '@data/bomList';
 import { REPO_URL } from '@data/navigation';
 
-The first step is to purchase the required components. This page lists everything we use to build one v3X detector. Most of the electronics come from Digi-Key; the rest (scintillator, OLED, sensor boards, cables, screws and the case) come from the stores listed in the tables. If you are building a single detector, we still recommend purchasing extras of the small surface-mount resistors and capacitors.
+export const files = [
+  {
+    url: `${REPO_URL}/raw/main/Purchasing_List_v3X_sa.xlsx`,
+    label: 'Purchasing list (.xlsx)',
+  },
+  {
+    url: `${REPO_URL}/raw/main/PCB/PCB_Gerber_Files_v28.zip`,
+    label: 'PCB Gerbers v28 (.zip)',
+  },
+  {
+    url: `${REPO_URL}/raw/main/Component_Placement_Sheet.xlsx`,
+    label: 'Component placement sheet (.xlsx)',
+  },
+  {
+    url: `${REPO_URL}/tree/main/Enclosure`,
+    label: 'Enclosure files',
+  },
+];
 
-**Cost:** about {totals.required} in required parts for one detector, plus {totals.optional} for the aluminum case and optional extras. {totals.digikeyRequired} of the {totals.requiredCount} required parts can be ordered from Digi-Key in one go.
-
-**Source:** the lab's purchasing spreadsheet on GitHub. Prices are single-unit prices and will drift; some parts are only sold in bulk.
+The first step to build a detector is to purchase the required components. Most of the electronics come from Digi-Key, while the rest (scintillator, OLED, sensor boards, cables, screws and the case) come from the stores listed in the tables. If you are building a single detector, we recommend purchasing extras of the small surface-mount resistors and capacitors. The cost is about {totals.required} in required parts for one detector, and {totals.optional} for the aluminum case and optional extras.
 
 ## Files
 
-- <a href={`${REPO_URL}/raw/main/Purchasing_List_v3X_sa.xlsx`}>Purchasing list (.xlsx)</a>: the spreadsheet this page is built from
-- <a href={`${REPO_URL}/raw/main/PCB/PCB_Gerber_Files_v28.zip`}>PCB Gerbers v28 (.zip)</a>: send these to a board house
-- <a href={`${REPO_URL}/raw/main/Component_Placement_Sheet.xlsx`}>Component placement sheet (.xlsx)</a>: where each part goes on the board
-- <a href={`${REPO_URL}/tree/main/Enclosure`}>Enclosure files</a>: faceplate drawings for laser cutting
+<ul>
+  {files.map(f => (
+    <li>
+      <a href={f.url}>{f.label}</a>
+    </li>
+  ))}
+</ul>
 
-## Digi-Key order list
+## Digi-Key Order List
 
-Copy the list for the number of detectors you are building and paste it into **Bulk Add** in the Digi-Key cart. Each line is `quantity, Digi-Key part number`. The step-by-step guide is [below the tables](#ordering-from-digi-key-step-by-step).
+Copy the list for the number of detectors you are building and paste it into **Bulk Add** in the Digi-Key cart. Each line is `quantity, Digi-Key part number`. The step-by-step guide is [below the tables](#how-to-order-from-digi-key).
 
 <Tabs>
   <TabItem label="1 detector">
-    <Code code={digikeyList(1)} lang="txt" title="Digi-Key Bulk Add, 1 detector" />
+    <Code
+      code={digikeyList(1)}
+      lang="txt"
+      title="Digi-Key Bulk Add, 1 detector"
+    />
   </TabItem>
   <TabItem label="5 detectors">
-    <Code code={digikeyList(5)} lang="txt" title="Digi-Key Bulk Add, 5 detectors" />
+    <Code
+      code={digikeyList(5)}
+      lang="txt"
+      title="Digi-Key Bulk Add, 5 detectors"
+    />
   </TabItem>
   <TabItem label="10 detectors">
-    <Code code={digikeyList(10)} lang="txt" title="Digi-Key Bulk Add, 10 detectors" />
+    <Code
+      code={digikeyList(10)}
+      lang="txt"
+      title="Digi-Key Bulk Add, 10 detectors"
+    />
   </TabItem>
 </Tabs>
 
 For any other number of detectors, multiply each quantity. The optional parts (case, faceplates, feet, LED holders and a BNC test cable) are not on Digi-Key; see the [optional parts](#optional-parts) table.
 
-<LinkButton href="https://www.digikey.com/ordering/shoppingcart" icon="external" variant="secondary">Open the Digi-Key cart</LinkButton>
+<LinkButton
+  href="https://www.digikey.com/ordering/shoppingcart"
+  icon="external"
+  variant="secondary"
+>
+  Open the Digi-Key cart
+</LinkButton>
 
-## Required parts
+## Required Parts
 
-<BomTable rows={required} />
+<details>
+  <summary>Show all {required.length} required parts</summary>
+  <BomTable rows={required} />
+</details>
 
-## Optional parts
+## Optional Parts
 
-<BomTable rows={optional} />
+<details>
+  <summary>Show all {optional.length} optional parts</summary>
+  <BomTable rows={optional} />
+</details>
 
-## Ordering from Digi-Key, step by step
+## How to Order From Digi-Key
 
-We tested this list in a real Digi-Key cart on November 8, 2026: all 33 Digi-Key lines resolve to the right parts. You can check out as a guest; no account is needed.
+We strongly suggest ordering more than you need for the number of detectors you are building. Small parts are much cheaper per piece in larger quantities, and spares save a second order if a part is lost or damaged while soldering.
 
 <Steps>
 
 1. **Copy the list.** Pick the tab for the number of detectors you are building, then click the copy button in the top corner of the list.
 
-   <Screenshot src={step1} alt="The Digi-Key order list on this page, set to one detector, with the copy button in its top corner" />
+   <Screenshot
+     src={step1}
+     alt="The Digi-Key order list on this page, set to one detector, with the copy button in its top corner"
+   />
 
 2. **Open the Digi-Key cart.** Go to [digikey.com/ordering/shoppingcart](https://www.digikey.com/ordering/shoppingcart). Below the cart is a **Bulk Add** box.
 
-   <Screenshot src={step2} alt="The empty Digi-Key cart with the Bulk Add box below it" />
+   <Screenshot
+     src={step2}
+     alt="The empty Digi-Key cart with the Bulk Add box below it"
+   />
 
 3. **Paste and add.** Paste the list into **Bulk Add** and click the **Add to Cart** button next to it.
 
-   <Screenshot src={step3} alt="The 33-line parts list pasted into Bulk Add, with the Add to Cart button next to it" />
+   <Screenshot
+     src={step3}
+     alt="The 33-line parts list pasted into Bulk Add, with the Add to Cart button next to it"
+   />
 
 4. **Confirm the held lines.** For one detector, 29 parts go straight into the cart and 4 are held back with the message "A lower unit price is available at a higher quantity". This is not an error.
 
-   <Screenshot src={step4} alt="Four lines held back below the cart, each with a View Options link" />
+   <Screenshot
+     src={step4}
+     alt="Four lines held back below the cart, each with a View Options link"
+   />
 
-   Click **View Options** on each one. Digi-Key's Value Calculator opens with the quantity from the list already selected. Click **Add** to keep it, or pick the larger quantity first: for the 1k resistor, 10 cost $0.38 while 8 cost $0.80.
+   Click **View Options** on each. Digi-Key's Value Calculator opens with the quantity from the list already selected. Click **Add** to keep it, or pick the larger quantity first (for the 1k resistor, 10 cost about $0.38 while 8 cost about $0.80).
 
-   <Screenshot src={step4calc} alt="Digi-Key's Value Calculator for the 1k resistor, offering 8, 10 or 25 pieces" />
+   <Screenshot
+     src={step4calc}
+     alt="Digi-Key's Value Calculator for the 1k resistor, offering 8, 10 or 25 pieces"
+   />
 
-5. **Check the cart.** You should have 33 items, a $47.37 subtotal for one detector before shipping and tariff.
+5. **Check the cart.** You should have 33 items, with around a $47.37 subtotal for one detector before shipping and tariff.
 
-   <Screenshot src={step5} alt="The Digi-Key cart with 33 items and a $47.37 subtotal" />
+   <Screenshot
+     src={step5}
+     alt="The Digi-Key cart with 33 items and a $47.37 subtotal"
+   />
 
-   Then check the **Availability** column. A backordered part shows the date Digi-Key expects stock, with links to an alternate package or substitutes.
+   Then check the **Availability** column. Some parts may be backordered, like the four that were backordered in our screenshots:
 
-   <Screenshot src={step5back} alt="A backordered 4.7 µF capacitor in the cart, expected in stock on November 18, 2026, with View Substitutes" />
+   <Aside type="caution" title="Backordered when we ordered (November 8, 2026)">
+     The 4.7 µF capacitor (490-10751-1-ND), the 1 µF capacitor (1276-2928-1-ND),
+     the 6-pin socket (1212-1229-ND) and the BAT54S diode (4878-BAT54SCT-ND).
+     Order early, or use **View Substitutes** to pick an equivalent part that is
+     in stock.
+   </Aside>
+
+   <Screenshot
+     src={step5back}
+     alt="A backordered 4.7 µF capacitor in the cart, expected in stock on November 18, 2026, with View Substitutes"
+   />
 
 </Steps>
 
-<Aside type="caution" title="Backorders when we tested (November 8, 2026)">
-Four parts were on backorder: the 4.7 µF capacitor (490-10751-1-ND), the 1 µF capacitor (1276-2928-1-ND), the 6-pin socket (1212-1229-ND) and the BAT54S diode (4878-BAT54SCT-ND). Order early, or use **View Substitutes** to pick an equivalent part that is in stock.
-</Aside>
-
-The rest of the parts (scintillator, optical gel, OLED, BMP280 and motion-sensor boards, buzzer, LEDs, microSD socket and card, cables, standoffs and screws, tape and foil, and the case) are not sold by Digi-Key; their stores are listed in the tables above. There are several companies that sell plastic scintillator, but we found that physics departments often have leftover scintillator from previous experiments.
+The rest of the parts (scintillator, optical gel, OLED, BMP280 and motion-sensor boards, buzzer, LEDs, microSD socket and card, cables, standoffs and screws, tape and foil, and the case) are not sold by Digi-Key. Their stores are listed in the tables above, or in the BOM that you can download.

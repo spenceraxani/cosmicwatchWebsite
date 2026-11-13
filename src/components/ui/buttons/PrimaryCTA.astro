@@ -10,7 +10,8 @@ interface Props {
 const { title, url, variant = 'orange', ...rest } = Astro.props;
 
 const variants = {
-  orange: 'text-neutral-50 bg-orange-400 hover:bg-orange-500 active:bg-orange-500',
+  orange:
+    'text-neutral-50 bg-orange-400 hover:bg-orange-500 active:bg-orange-500',
   yellow: 'text-neutral-800 bg-yellow-400 hover:bg-yellow-500',
 };
 
@@ -24,5 +25,6 @@ const Element = url ? 'a' : 'button';
 ---
 
 <Element class={classes} href={url} {...rest}>
-  {title}<slot />
+  {title}
+  <slot />
 </Element>

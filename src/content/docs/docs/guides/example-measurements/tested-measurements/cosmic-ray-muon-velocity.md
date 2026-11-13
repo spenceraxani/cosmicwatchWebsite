@@ -1,6 +1,6 @@
 ---
-title: "Cosmic-ray muon velocity"
-description: "Example Measurements, pages 15–16. Generated from the PDF on GitHub."
+title: 'Cosmic-ray muon velocity'
+description: 'Example Measurements, pages 15–16. Generated from the PDF on GitHub.'
 sidebar:
   order: 6
 editUrl: false
@@ -30,6 +30,5 @@ The mean energy of the downgoign muons is 2GeV, which would have a velocity of 0
   <figcaption>Figure 2.10: Left: An example waveforms and fitted pulses for top (red) and bottom (orange) detectors. Vertical dashed lines mark estimated muon arrival times. The inset image shows the rising edge of each pulse along with the fit. Right: The distribution of muon velocities, along with a fitted Gaussian in red.</figcaption>
 
 </figure>
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=15" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 15–16.</p>

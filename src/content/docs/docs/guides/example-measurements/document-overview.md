@@ -1,6 +1,6 @@
 ---
-title: "Document Overview"
-description: "Example Measurements, pages 4–6. Generated from the PDF on GitHub."
+title: 'Document Overview'
+description: 'Example Measurements, pages 4–6. Generated from the PDF on GitHub.'
 sidebar:
   order: 1
 editUrl: false
@@ -27,11 +27,11 @@ Version v3X represents a significant advancement over the previous v2 detector. 
 
 </figure>
 
-Many documents have played a crucial role in compiling this information. A great and valuable reference, is the Particle Data Group’s (PDG) summary on cosmic rays \[1\] and energy loss in matter \[2\]. MIT Prof. Bruno Rossi’s textbook, *Cosmic Rays* from 1964 \[3\], is a great entrylevel resource, providing an early account of cosmic-ray physics investigations. It not only offers insightful reading but also allows readers to replicate many of the experiments conducted for the first time using the CosmicWatch detectors.
+Many documents have played a crucial role in compiling this information. A great and valuable reference, is the Particle Data Group’s (PDG) summary on cosmic rays \[1\] and energy loss in matter \[2\]. MIT Prof. Bruno Rossi’s textbook, _Cosmic Rays_ from 1964 \[3\], is a great entrylevel resource, providing an early account of cosmic-ray physics investigations. It not only offers insightful reading but also allows readers to replicate many of the experiments conducted for the first time using the CosmicWatch detectors.
 
-For a more contemporary perspective with a focus on history, Prof. M. Friedlander’s book titled *A Thin Cosmic Rain* \[4\] is recommended. Dr. P. Grieder’s comprehensive textbook, *Cosmic* *Rays at Earth* \[5\], provides an in-depth overview of cosmic-ray physics and will be frequently referenced. For higher-energy cosmic-ray physics, Prof. T. Gaisser’s book (from the University of Delaware), *Cosmic Rays and Particle Physics* \[6\], proves to be extremely useful.
+For a more contemporary perspective with a focus on history, Prof. M. Friedlander’s book titled _A Thin Cosmic Rain_ \[4\] is recommended. Dr. P. Grieder’s comprehensive textbook, _Cosmic_ _Rays at Earth_ \[5\], provides an in-depth overview of cosmic-ray physics and will be frequently referenced. For higher-energy cosmic-ray physics, Prof. T. Gaisser’s book (from the University of Delaware), _Cosmic Rays and Particle Physics_ \[6\], proves to be extremely useful.
 
-For a comprehensive understanding of energy loss in matter, *Techniques for Nuclear and Particle* *Physics* by W. Leo \[7\] stands out as one of the best resource for experimental particle physics. Additionally, Prof. C. Grupen’s textbook, *Particle Detectors* \[8\] and *Particle Detectors: Funda-* *mentals and Applications* \[9\] by H. Kolanoski, are extremely highly recommended as a reference for describing detection methods in particle physics.
+For a comprehensive understanding of energy loss in matter, _Techniques for Nuclear and Particle_ _Physics_ by W. Leo \[7\] stands out as one of the best resource for experimental particle physics. Additionally, Prof. C. Grupen’s textbook, _Particle Detectors_ \[8\] and _Particle Detectors: Funda-_ _mentals and Applications_ \[9\] by H. Kolanoski, are extremely highly recommended as a reference for describing detection methods in particle physics.
 
 Components of this instructions manual has been lightly adapted from MIT’s Junior Lab
 
@@ -40,6 +40,5 @@ Manual, which was based off of Prof. Spencer Axani’s Masters Thesis, accessibl
 The original CosmicWatch project was significantly developed with co-collaborator Dr. Katarzyna Frankiewicz and Prof. Janet Conrad. The original project has had funding from the MIT Physics Department, the Wisconsin Particle Astrophysics Center (WiPAC), the National Science Foundation (NSF), and is now funded through the University of Delaware (UD).
 
 We are excited to have the CosmicWatch detector incorporated into the Experimental Methods in Physics courses at UD. Developing this detector has been a passion, not just a hobby. We hope you enjoy it, and even consider building your own.
-
 
 <p class="cw-guide-foot">From <a href="/pdf/example-measurements/#page=4" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 4–6.</p>

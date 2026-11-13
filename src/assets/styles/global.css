@@ -27,8 +27,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans: 'IBM Plex Sans Variable', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans Variable', ui-sans-serif, sans-serif;
+  --font-sans:
+    'IBM Plex Sans Variable', 'IBM Plex Sans', ui-sans-serif, system-ui,
+    sans-serif;
+  --font-display:
+    'IBM Plex Sans Condensed', 'IBM Plex Sans Variable', ui-sans-serif,
+    sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   /* https://tailwindcss.com/docs/colors#customizing-your-colors */
   --color-*: initial;
@@ -149,18 +153,30 @@
 
 /* CosmicWatch: Plex as the site font; the template's own heading weights. */
 @layer base {
-  :focus-visible { outline: 2px solid #53a1d8; outline-offset: 2px; }
+  :focus-visible {
+    outline: 2px solid #53a1d8;
+    outline-offset: 2px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Cut-out hardware (renders and background-removed photos) sits on the page
    with a soft shadow instead of inside a white box. */
 @utility cw-float {
-  filter: drop-shadow(0 22px 22px rgb(13 26 39 / 0.18)) drop-shadow(0 4px 6px rgb(13 26 39 / 0.12));
+  filter: drop-shadow(0 22px 22px rgb(13 26 39 / 0.18))
+    drop-shadow(0 4px 6px rgb(13 26 39 / 0.12));
   :where(.dark) & {
-    filter: drop-shadow(0 22px 26px rgb(0 0 0 / 0.45)) drop-shadow(0 4px 6px rgb(0 0 0 / 0.3));
+    filter: drop-shadow(0 22px 26px rgb(0 0 0 / 0.45))
+      drop-shadow(0 4px 6px rgb(0 0 0 / 0.3));
   }
 }
 

@@ -3,11 +3,7 @@ export const REPO_URL = `https://github.com/${REPO}`;
 
 // Labels for these ids live in the copy table.
 export type NavLinkId =
-  | 'detector'
-  | 'docs'
-  | 'measure'
-  | 'downloads'
-  | 'contact';
+  'detector' | 'docs' | 'measure' | 'downloads' | 'contact';
 
 export const navLinks: { id: NavLinkId; path: string }[] = [
   { id: 'detector', path: '/detector' },
@@ -40,7 +36,6 @@ export const footerSections: {
     id: 'program',
     links: [
       { id: 'about', path: '/#about' },
-      { id: 'people', path: '/contact#people' },
       { id: 'contact', path: '/contact' },
     ],
   },
@@ -48,9 +43,18 @@ export const footerSections: {
     id: 'detector',
     links: [
       { id: 'detector', path: '/detector' },
-      { id: 'build', path: '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/' },
-      { id: 'measurements', path: '/docs/guides/example-measurements/tested-measurements/' },
-      { id: 'troubleshooting', path: '/docs/guides/troubleshooting/troubleshooting/' },
+      {
+        id: 'build',
+        path: '/docs/guides/instruction-manual/how-to-build-a-cosmicwatch-detector-v3x/',
+      },
+      {
+        id: 'measurements',
+        path: '/docs/guides/example-measurements/tested-measurements/',
+      },
+      {
+        id: 'troubleshooting',
+        path: '/docs/guides/troubleshooting/troubleshooting/',
+      },
     ],
   },
   {
