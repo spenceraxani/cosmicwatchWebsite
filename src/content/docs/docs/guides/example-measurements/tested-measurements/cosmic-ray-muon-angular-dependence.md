@@ -17,7 +17,7 @@ In this configuration, the detectors are oriented to sample muons within ±20<su
 <p class="cw-guide-eq"><img src="/guides/example-measurements/eq-07-p10.webp" width="387" alt="𝑅acc = 2 𝑁1 𝑁2 𝜏, (2.2)" loading="lazy" decoding="async" /></p>
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-06-p10.webp" width="988" height="412" alt="Figure 2.4: Left: The measured cosmic-ray muon angular distribution along with the fitted components to the data. Right: An illustration of the measurement configuration." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-06-p10.webp" width="1482" height="617" alt="Figure 2.4: Left: The measured cosmic-ray muon angular distribution along with the fitted components to the data. Right: An illustration of the measurement configuration." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.4: Left: The measured cosmic-ray muon angular distribution along with the fitted components to the data. Right: An illustration of the measurement configuration.</figcaption>
 
@@ -26,7 +26,7 @@ In this configuration, the detectors are oriented to sample muons within ±20<su
 A slight increase in rate at 𝜃= 𝜋/2 is attributed to this configuration accepting muons from both upward and downward directions, whereas all other orientations record only downward-going muons. Therefore, the single-muon contribution at 𝜃= 𝜋/2 should, in principle, be halved.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-08-p11.webp" width="989" height="521" alt="Figure 2.5: Leaving McMurdo Station, Antarctica on a C-130 Hercules for the South Pole Station." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-08-p11.webp" width="1483" height="780" alt="Figure 2.5: Leaving McMurdo Station, Antarctica on a C-130 Hercules for the South Pole Station." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.5: Leaving McMurdo Station, Antarctica on a C-130 Hercules for the South Pole Station.</figcaption>
 

@@ -13,7 +13,7 @@ editUrl: false
 You will design your own experiment for this laboratory class. The list below are some measurements that can be done at home, the lab, or office. Feel free to choose from this list or develop your own idea! Inspiration for new ideas may come from measurements described in Sec. ??.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-02-p7.webp" width="989" height="576" alt="Figure 2.1: This figure gives you an overview of the scope of the muon detectors. Some of these measurements will be described below, other we are still working on." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-02-p7.webp" width="1483" height="863" alt="Figure 2.1: This figure gives you an overview of the scope of the muon detectors. Some of these measurements will be described below, other we are still working on." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.1: This figure gives you an overview of the scope of the muon detectors. Some of these measurements will be described below, other we are still working on.</figcaption>
 

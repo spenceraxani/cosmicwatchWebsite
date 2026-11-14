@@ -1,11 +1,16 @@
-# Keeps /docs/guides/ in step with the PDF manuals in the v3X repository.
+# Keeps the website in step with the v3X repository
+# (spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X):
 #
-# Runs every day, on demand, and when the v3X repository sends a
-# `v3x-updated` repository_dispatch event.
-# If any PDF changed, it regenerates the guide pages with
-# scripts/sync-guides.py and commits them. The normal deploy then
-# publishes the new pages.
-name: Sync guides from the v3X repository
+#   - guide pages, from the four PDF manuals      (scripts/sync-guides.py)
+#   - Parts List and Digi-Key order lists, from
+#     Purchasing_List_v3X_sa.xlsx                  (scripts/sync-bom.py)
+#   - Downloads page and file links: newest firmware, Gerbers, commits
+#                                                  (scripts/github-snapshot.mjs)
+#
+# Runs every day, on demand (Actions → Run workflow), and when the v3X
+# repository sends a `v3x-updated` repository_dispatch event. When anything
+# changed it commits the regenerated files; the host then redeploys the site.
+name: Sync from the v3X repository
 
 on:
   schedule:
@@ -28,7 +33,7 @@ jobs:
       - name: Check out the website
         uses: actions/checkout@v4
 
-      - name: Check out the PDFs from the v3X repository
+      - name: Check out the v3X repository (PDFs and purchasing list only)
         uses: actions/checkout@v4
         with:
           repository: spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X
@@ -38,41 +43,73 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /*.pdf
+            /*.xlsx
 
-      - name: Compare PDF versions with the last sync
+      - name: What changed since the last sync
         id: diff
         run: |
-          changed=0
-          for path in $(jq -r '.guides[].file | @base64' src/data_files/guides.json); do
-            file=$(echo "$path" | base64 -d)
+          head=$(git -C .upstream rev-parse HEAD)
+          last=$(jq -r '.commits[0].sha // ""' src/data_files/github-snapshot.json)
+          echo "v3X repository: last synced $last, now $head"
+          repo=0; [ "$head" != "$last" ] && repo=1
+          pdfs=0
+          for p64 in $(jq -r '.guides[].file | @base64' src/data_files/guides.json); do
+            file=$(echo "$p64" | base64 -d)
             synced=$(jq -r --arg f "$file" '.guides[] | select(.file==$f) | .blobSha' src/data_files/guides.json)
             current=$(git -C .upstream rev-parse "HEAD:$file" 2>/dev/null || echo missing)
             echo "$file: synced $synced, current $current"
-            if [ "$synced" != "$current" ]; then changed=1; fi
+            if [ "$synced" != "$current" ]; then pdfs=1; fi
           done
-          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then repo=1; pdfs=1; fi
+          echo "repo=$repo" >> "$GITHUB_OUTPUT"
+          echo "pdfs=$pdfs" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5
-        if: steps.diff.outputs.changed == '1' || github.event_name == 'workflow_dispatch'
+        if: steps.diff.outputs.repo == '1'
         with:
           python-version: '3.12'
 
       - name: Regenerate the guide pages
-        if: steps.diff.outputs.changed == '1' || github.event_name == 'workflow_dispatch'
+        if: steps.diff.outputs.pdfs == '1'
         run: |
           pip install pymupdf pillow
           python scripts/sync-guides.py --repo .upstream
 
-      - name: Commit the new pages
-        if: steps.diff.outputs.changed == '1' || github.event_name == 'workflow_dispatch'
+      - name: Regenerate the parts list
+        if: steps.diff.outputs.repo == '1'
+        run: python scripts/sync-bom.py .upstream
+
+      - uses: pnpm/action-setup@v6
+        if: steps.diff.outputs.repo == '1'
+
+      - uses: actions/setup-node@v7
+        if: steps.diff.outputs.repo == '1'
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Refresh the GitHub snapshot (firmware, file names, commits)
+        if: steps.diff.outputs.repo == '1'
+        run: node scripts/github-snapshot.mjs .upstream
+
+      # The CI job checks formatting, so format the generated files the same
+      # way before committing them (otherwise every sync commit fails CI).
+      - name: Format the generated files
+        if: steps.diff.outputs.repo == '1'
         run: |
-          git config user.name "cosmicwatch-guide-sync"
+          pnpm install --frozen-lockfile
+          pnpm exec prettier --write src/content/docs/docs/guides src/data_files/guides.json src/data_files/bom.json src/data_files/github-snapshot.json
+
+      - name: Commit the changes
+        if: steps.diff.outputs.repo == '1'
+        run: |
+          git config user.name "cosmicwatch-sync"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/content/docs/docs/guides public/guides src/data_files/guides.json
+          git add src/content/docs/docs/guides public/guides src/data_files/guides.json src/data_files/bom.json src/data_files/github-snapshot.json
           if git diff --cached --quiet; then
             echo "Nothing changed."
             exit 0
           fi
           upstream=$(git -C .upstream rev-parse --short HEAD)
-          git commit -m "Sync guides with the v3X repository ($upstream)"
+          git commit -m "Sync with the v3X repository ($upstream)"
           git push

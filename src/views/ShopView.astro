@@ -48,7 +48,7 @@ const buy =
 
   <div class="mx-auto max-w-[85rem] px-4 pb-10 sm:px-6 lg:px-8 2xl:max-w-full">
     <section class="py-6" aria-label="Products">
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {products.map((p, i) => {
           const href = storeLink(p.id);
           return (
@@ -79,11 +79,11 @@ const buy =
                 />
               </div>
               <div class="flex grow flex-col p-5 sm:p-6">
-                {/* Titles only for now. Summary, contents, options and price stay in
-                    src/data_files/shop.ts for when the store is set up. */}
-                <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+                <h2 class="text-xl font-bold text-neutral-800 dark:text-neutral-200">
                   {p.name}
-                </h3>
+                </h2>
+                {/* Descriptions are off for now; summary and includes stay in
+                    src/data_files/shop.ts for when they are confirmed. */}
                 <div class="mt-auto flex flex-wrap items-center gap-3 pt-4">
                   {href ? (
                     <a
@@ -92,13 +92,14 @@ const buy =
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {copy.buy}{' '}
+                      {copy.buy} {p.name}{' '}
                       <Icon name="arrowUp" class="size-4 rotate-45" />
                       <span class="sr-only">{copy.opensStore(STORE_NAME)}</span>
                     </a>
                   ) : (
                     <span class="inline-flex items-center rounded-lg border border-neutral-300 px-4 py-2.5 text-sm font-bold text-neutral-500 dark:border-neutral-600 dark:text-neutral-400">
                       {copy.soon}
+                      <span class="sr-only">: {p.name}</span>
                     </span>
                   )}
                 </div>
@@ -114,22 +115,25 @@ const buy =
     <a
       href="/docs/parts-list/"
       class:list={[
-        'group flex flex-col gap-4 surface p-6 transition-colors hover:bg-neutral-100 sm:flex-row sm:items-center sm:p-8',
+        'group flex flex-col gap-4 surface p-6 transition-colors hover:bg-neutral-100 sm:flex-row sm:items-center sm:p-8 dark:hover:bg-white/[.06]',
         reveal,
       ]}
     >
-      <CwIcon name="parts" class="size-9 shrink-0 text-orange-400" />
+      <CwIcon
+        name="parts"
+        class="size-9 shrink-0 text-orange-400 dark:text-orange-300"
+      />
       <span class="grow">
-        <span class="block text-lg font-bold text-neutral-800">
+        <span class="block text-lg font-bold text-neutral-800 dark:text-neutral-200">
           Want to Build It Yourself?
         </span>
-        <span class="mt-1 block text-pretty text-neutral-600">
+        <span class="mt-1 block text-pretty text-neutral-600 dark:text-neutral-400">
           The Parts List has every component with its part number, and a list
           you can paste straight into Digi-Key to order most of the parts
           needed.
         </span>
       </span>
-      <span class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-orange-400">
+      <span class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-orange-400 dark:text-orange-300">
         Parts List{' '}
         <Icon
           name="arrowRight"

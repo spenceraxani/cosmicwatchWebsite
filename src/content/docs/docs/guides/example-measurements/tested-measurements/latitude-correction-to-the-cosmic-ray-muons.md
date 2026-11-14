@@ -11,7 +11,7 @@ editUrl: false
 <div class="cw-guide-source not-content" data-repo="spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X" data-branch="main" data-path="The Example Measurements.pdf" data-sha="f643047747bd56962428f35a5a5e83166c7e0c29" data-date="2025-08-20T16:43:03-04:00"><span class="cw-gs-doc">From <a href="/pdf/example-measurements/#page=13" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 13–14</span><span class="cw-gs-status" data-state="idle">Synced with the PDF from 2025-08-20</span><span class="cw-gs-note" hidden></span></div>
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-10-p13.webp" width="958" height="232" alt="Figure 2.7: The fitted data based on the altitude and latitude data from the first four flights. The fit also includes a measurement after landing at the South Pole, where the altitude and latitude we" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-10-p13.webp" width="1436" height="347" alt="Figure 2.7: The fitted data based on the altitude and latitude data from the first four flights. The fit also includes a measurement after landing at the South Pole, where the altitude and latitude we" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.7: The fitted data based on the altitude and latitude data from the first four flights. The fit also includes a measurement after landing at the South Pole, where the altitude and latitude were known (2700 m and -90<sup>∘</sup>). The two military flights were not included in the fit.</figcaption>
 
@@ -24,7 +24,7 @@ We observed latitudinal variation in the cosmic-ray muon rate in the previous me
 Here, 𝜃 represents a phase that offsets the latitude to account for the difference between the geographical latitude and the magnetic latitude, 𝛽 is a factor that permits an altitude effect at the magnetic equator (set the sine term to zero), 𝛼 is a scale factor that dictates the strength of the latitudinal and altitude effect, 𝑁 is a normalization that sets the scale for the exponential component, and 𝑏 is an offset that accounts for constant background radiation.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/example-measurements/fig-11-p13.webp" width="437" height="237" alt="Figure 2.8: The measured muon rate in blue along with the calculated flight alti- tude in green. The red markers show the few GPS altitude measurements during the flight." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-11-p13.webp" width="873" height="474" alt="Figure 2.8: The measured muon rate in blue along with the calculated flight alti- tude in green. The red markers show the few GPS altitude measurements during the flight." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.8: The measured muon rate in blue along with the calculated flight altitude in green. The red markers show the few GPS altitude measurements during the flight.</figcaption>
 

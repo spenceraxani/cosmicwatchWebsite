@@ -37,6 +37,7 @@ export const en = {
       contact: 'Contact',
     },
     buy: 'Shop',
+    tagline: 'Desktop Muon Detector',
     footer: {
       sectionTitles: {
         program: 'Program',
@@ -45,7 +46,7 @@ export const en = {
       },
       links: {
         about: 'About CosmicWatch',
-        people: 'People',
+        people: 'Project Members',
         contact: 'Contact & FAQ',
         detector: 'The v3X Detector',
         build: 'Build Guide',
@@ -60,7 +61,7 @@ export const en = {
       blurb:
         'A University of Delaware-led outreach program aimed at introducing students to particle, nuclear, and astro-particle physics.',
       department:
-        'Department of Physics and Astronomy, University of Delaware, Newark, DE',
+        'Department of Physics & Astronomy, University of Delaware, Newark, DE',
       license: 'Detector designs and documentation are licensed CC BY-NC 4.0.',
       email: 'Email',
       github: 'GitHub',
@@ -79,20 +80,19 @@ export const en = {
 
   home: {
     hero: {
-      // The v3X paper's title.
       eyebrow: '',
-      title: 'CosmicWatch: The Desktop Muon Detector (v3X)',
+      title: 'CosmicWatch: The Desktop Muon Detector',
       subTitle:
-        'CosmicWatch is a pocket-sized cosmic-ray muon detector that can be built from about $100 in parts, developed and run by the Department of Physics and Astronomy at the University of Delaware.',
+        'CosmicWatch is a pocket-sized cosmic-ray muon detector that can be built from about $100 in parts, developed and run by the Department of Physics & Astronomy at the University of Delaware.',
       primaryBtn: 'Build a Detector',
       secondaryBtn: 'Buy a Detector',
       imageAlt:
         'Three CosmicWatch v3X detectors in blue, yellow and silver aluminum cases, with the OLED screen, LEDs, USB, microSD and coincidence ports labeled',
     },
     featuresGeneral: {
-      title: 'Looking Inside the v3X',
+      title: 'Look Inside the Detector',
       subTitle:
-        'The v3X is a self-contained apparatus that uses a plastic scintillator to turn each passing particle into a flash of light, which a silicon photomultiplier (SiPM) collects. The custom printed circuit board is designed to process the signal and record the event, with onboard data storage, an OLED display, environmental sensors, and USB connectivity.',
+        'The latest version, the CosmicWatch v3X, is a self-contained apparatus that uses a plastic scintillator to turn each passing particle into a flash of light, which a silicon photomultiplier (SiPM) collects. The custom printed circuit board is designed to process the signal and record the event, with onboard data storage, an OLED display, environmental sensors, and USB connectivity.',
       imageAlt:
         'Exploded view of the CosmicWatch v3X: scintillator, SiPM board, main board, aluminum case and faceplates',
     },
@@ -103,24 +103,28 @@ export const en = {
           heading: 'Standalone on a microSD Card',
           content:
             'If a microSD card is inserted, the detector creates a new file each time it is powered on or reset. A relatively small microSD card (≥4 GB) holds several months of continuous data at sea level.',
-          alt: 'Top view of the CosmicWatch v3X main circuit board',
+          alt: 'Bottom of the CosmicWatch v3X circuit board with a microSD card inserted in its slot',
         },
         gui: {
           heading: 'Live on Your Computer',
           content:
             'The CosmicWatch graphical user interface (GUI) visualizes data in real time through a serial port connection, or from saved .txt files. Users can explore coincident and non-coincident event rates, SiPM pulse-height spectra, pressure, temperature, and motion.',
           alt: 'Screenshot of the CosmicWatch GUI plotting count rates',
+          link: 'Download the GUI',
+          linkNote: 'From GitHub',
+          install: 'How to install',
         },
-        coincidence: {
-          heading: 'Two Detectors in Coincidence',
+        web: {
+          heading: 'Live on This Website',
           content:
-            'When two detectors are connected through a CAT5 or CAT6 cable and rebooted, they automatically enter coincidence mode. Events that occur within approximately 2.3 µs of each other are labeled as coincident by both detectors.',
-          alt: 'Two CosmicWatch detectors stacked and connected in coincidence mode',
+            'Plug the detector into a USB port and open the Measure page in Chrome or Edge. The page reads the detector directly, plots the count rate and pulse heights as events arrive, and saves the run as a .txt file and a PDF report. Nothing to install.',
+          alt: 'The Measure page on this website plotting a CosmicWatch run',
+          link: 'Open the Measure Page',
         },
       },
     },
     pipeline: {
-      title: 'How the v3X Detects and Registers a Muon',
+      title: 'How CosmicWatch Detects and Registers a Muon',
       steps: [
         {
           title: 'A Particle Passes Through the Scintillator',
@@ -174,16 +178,17 @@ export const en = {
     send: 'Send message',
     sending: 'Sending…',
     missing: 'Please fill in your email address and a message.',
-    notLive: 'Sending from this page isn’t switched on yet. Please',
+    captcha: 'Please complete the check above the Send button.',
+    notLive: 'If your email app didn’t open or the message didn’t send, please',
     thanksTitle: 'Message Sent',
     thanksBody:
       'Thanks for getting in touch. Prof. Axani will reply to the email address you gave, usually within a few days.',
     thanksBack: 'Back to the home page',
     thanksGuides: 'Browse the guides',
-    notLiveLink: 'email your message to saxani@udel.edu',
+    notLiveLink: 'email it to saxani@udel.edu',
     leadHeading: 'Dr. Spencer Axani',
     leadContent:
-      'Program lead, Department of Physics and Astronomy, University of Delaware',
+      'Program lead, Department of Physics & Astronomy, University of Delaware',
     docsHeading: 'Guides',
     docsContent:
       'The build manual, example measurements, physics and troubleshooting.',
@@ -193,14 +198,14 @@ export const en = {
       'Most problems are a solder joint or a light leak. The troubleshooting guide walks through the checks.',
     troubleshootLink: 'Troubleshooting',
     officeHeading: 'Where We Are',
-    officeContent: 'CosmicWatch, Department of Physics and Astronomy',
+    officeContent: 'CosmicWatch, Department of Physics & Astronomy',
     officeAddress: 'Sharp Lab, University of Delaware, Newark, DE 19716',
     faqTitle: 'Frequently Asked Questions',
   },
 
   about: {
     title: 'About CosmicWatch',
-    body: 'CosmicWatch is an education and outreach program aimed at introducing people to particle, nuclear and astro-particle physics. It provides educational materials and support allowing to build or buy particle detectors and make physics measurements. The original program was initiated at the Massachusetts Institute of Technology (MIT) and Polish National Center for Nuclear Research (NCBJ) in 2017. Currently it is lead by University of Delaware and has substantially grown and changed, resulting in new detector versions and novel uses like calibration instruments for neutrino detectors, spacecraft instrumentation, education and outreach.',
+    body: 'CosmicWatch is an education and outreach program aimed at introducing people to particle, nuclear and astro-particle physics. It provides educational materials and support allowing to build or buy particle detectors and make physics measurements. The original program was initiated at the Massachusetts Institute of Technology (MIT) and Polish National Center for Nuclear Research (NCBJ) in 2017. Currently it is lead by University of Delaware and has substantially grown and changed, resulting in new detector versions and novel uses like calibration instruments for neutrino detectors, spacecraft instrumentation, education and outreach. The latest version of the detector is the CosmicWatch v3X.',
     peopleCta: 'Who to contact',
     papersTitle: 'Featured Papers Involving the CosmicWatch',
   },
@@ -220,19 +225,20 @@ export const en = {
   },
 
   people: {
-    heading: 'People',
+    heading: 'Project Members',
     subTitle:
-      'The team working on CosmicWatch now, in the Axani lab at the University of Delaware.',
+      'The team behind the CosmicWatch project in AxLab at the University of Delaware.',
   },
 
   shop: {
     title: 'Shop',
     metaDescription:
-      'Assembled CosmicWatch v3X detectors, coincidence pairs, build-it-yourself kits, circuit boards and spare parts.',
+      'Assembled CosmicWatch detectors, detector kits built around a pre-populated circuit board, circuit boards and plastic scintillators.',
     ogTitle: 'Shop | CosmicWatch',
     heading: 'Shop',
     subTitle:
-      'Buy assembled detectors, kits for classes, and spare parts. Everything here can also be built from the free designs on GitHub.',
+      'Choose how much of the detector you want to build yourself, from a ready-to-use detector to a single part.',
+    includes: 'Includes',
     priceOnRequest: 'Price on request',
     buy: 'Buy',
     opensStore: (store: string) => `(opens ${store} in a new tab)`,

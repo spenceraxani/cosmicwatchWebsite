@@ -1,12 +1,14 @@
-// Writes src/data_files/github-snapshot.json from a local clone of the
-// CosmicWatch v3X repository, so the GitHub page has real content even when
-// the live GitHub API is unreachable or rate-limited.
+// Writes src/data_files/github-snapshot.json from a clone of the CosmicWatch
+// v3X repository: newest firmware, recent commits, the top-level files, and the
+// current names of the files the site links to (Gerbers, purchasing list,
+// placement sheet). The Downloads and Parts List pages are built from it, and
+// the browser still asks GitHub for anything newer. Reads names from git, so a
+// sparse or blobless clone (as in .github/workflows/sync-guides.yml) works.
 //
 //   git clone https://github.com/spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X ../cw-repo
 //   node scripts/github-snapshot.mjs ../cw-repo
 import { execFileSync } from 'node:child_process';
-import { readdirSync, statSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { writeFileSync } from 'node:fs';
 
 const repo = process.argv[2];
 if (!repo) {
@@ -24,28 +26,53 @@ const commits = git('log', '--format=%H%x1f%aI%x1f%an%x1f%s')
     return { sha, date, author, message };
   });
 
-const versions = readdirSync(join(repo, 'Firmware'))
+// Every path in the repository at HEAD, with its type.
+const tree = git('ls-tree', '-r', '-t', '--name-only', 'HEAD')
+  .trim()
+  .split('\n');
+const dirs = new Set(
+  git('ls-tree', '-r', '-d', '--name-only', 'HEAD').trim().split('\n')
+);
+const inDir = dir => tree.filter(p => p.startsWith(`${dir}/`) && !dirs.has(p));
+const newest = (paths, re) =>
+  paths
+    .filter(p => re.test(p))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .at(-1) ?? null;
+
+const versions = inDir('Firmware')
   .map(n => n.match(/(\d+\.\d+\.\d+)\.uf2$/)?.[1])
   .filter(Boolean)
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
-const files = readdirSync(repo)
-  .filter(n => !n.startsWith('.'))
-  .map(name => ({
-    name,
-    type: statSync(join(repo, name)).isDirectory() ? 'dir' : 'file',
-  }))
+const files = tree
+  .filter(p => !p.includes('/') && !p.startsWith('.'))
+  .map(name => ({ name, type: dirs.has(name) ? 'dir' : 'file' }))
   .sort((a, b) =>
     a.type === b.type ? a.name.localeCompare(b.name) : a.type === 'dir' ? -1 : 1
   );
+
+// Current names of linked files, so a renamed or re-versioned file keeps working.
+const top = files.filter(f => f.type === 'file').map(f => f.name);
+const links = {
+  firmware: newest(inDir('Firmware'), /\.uf2$/i),
+  gerbers: newest(inDir('PCB'), /Gerber.*\.zip$/i),
+  purchasingList: newest(top, /^Purchasing_List.*\.xlsx$/i),
+  placementSheet: newest(top, /Placement.*\.xlsx$/i),
+  enclosure: dirs.has('Enclosure') ? 'Enclosure' : null,
+  gui: dirs.has('GUI') ? 'GUI' : null,
+  importData: tree.find(p => /(^|\/)import_data\.py$/.test(p)) ?? null,
+  plot: tree.find(p => /(^|\/)plot\.py$/.test(p)) ?? null,
+};
 
 const snapshot = {
   takenAt: new Date().toISOString(),
   firmware: versions.at(-1) ?? null,
   lastUpdate: commits[0]?.date ?? null,
   commitCount: commits.length,
-  commits,
+  commits: commits.slice(0, 50),
   files,
+  links,
 };
 writeFileSync(
   new URL('../src/data_files/github-snapshot.json', import.meta.url),

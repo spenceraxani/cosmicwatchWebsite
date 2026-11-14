@@ -1,24 +1,34 @@
 ---
 // Dark-blue logo in light mode, light-blue in dark mode (files in /public/brand).
+// With `tagline`, a short line in smaller type sits under the logo so visitors
+// on any page can tell what CosmicWatch is.
 interface Props {
   class?: string;
+  tagline?: string;
 }
-const { class: className = 'h-9 w-auto' } = Astro.props;
+const { class: className = 'h-9 w-auto', tagline } = Astro.props;
 ---
 
-<span class="inline-flex items-center">
-  <img
-    src="/brand/logo-darkblue.png"
-    alt="CosmicWatch"
-    width="1400"
-    height="528"
-    class:list={[className, 'block dark:hidden']}
-  />
-  <img
-    src="/brand/logo-lightblue.png"
-    alt="CosmicWatch"
-    width="1400"
-    height="528"
-    class:list={[className, 'hidden dark:block']}
-  />
+<span class="inline-flex flex-col items-start">
+  <span class="inline-flex items-center">
+    <img
+      src="/brand/logo-darkblue.png"
+      alt="CosmicWatch"
+      width="1400"
+      height="528"
+      class:list={[className, 'block dark:hidden']}
+    />
+    <img
+      src="/brand/logo-lightblue.png"
+      alt="CosmicWatch"
+      width="1400"
+      height="528"
+      class:list={[className, 'hidden dark:block']}
+    />
+  </span>
+  {tagline && (
+    <span class="mt-1 text-[0.6875rem] leading-none font-semibold tracking-wide whitespace-nowrap text-[#2a618f] dark:text-orange-200">
+      {tagline}
+    </span>
+  )}
 </span>

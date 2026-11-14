@@ -24,25 +24,32 @@ import step5 from '../../../assets/docs/bom/step-5.png';
 import step5back from '../../../assets/docs/bom/step-5-backorder.png';
 import { required, optional, totals, digikeyList } from '@data/bomList';
 import { REPO_URL } from '@data/navigation';
+import snapshot from '@data/github-snapshot.json';
 
+export const raw = (
+  path // file names come from the GitHub snapshot, refreshed by the daily sync
+) =>
+  `${REPO_URL}/raw/main/${path.split('/').map(encodeURIComponent).join('/')}`;
+export const gerberVersion =
+  snapshot.links.gerbers?.match(/v(\d+)\.zip$/i)?.[1];
 export const files = [
-  {
-    url: `${REPO_URL}/raw/main/Purchasing_List_v3X_sa.xlsx`,
+  snapshot.links.purchasingList && {
+    url: raw(snapshot.links.purchasingList),
     label: 'Purchasing list (.xlsx)',
   },
-  {
-    url: `${REPO_URL}/raw/main/PCB/PCB_Gerber_Files_v28.zip`,
-    label: 'PCB Gerbers v28 (.zip)',
+  snapshot.links.gerbers && {
+    url: raw(snapshot.links.gerbers),
+    label: `PCB Gerbers${gerberVersion ? ` v${gerberVersion}` : ''} (.zip)`,
   },
-  {
-    url: `${REPO_URL}/raw/main/Component_Placement_Sheet.xlsx`,
+  snapshot.links.placementSheet && {
+    url: raw(snapshot.links.placementSheet),
     label: 'Component placement sheet (.xlsx)',
   },
-  {
-    url: `${REPO_URL}/tree/main/Enclosure`,
+  snapshot.links.enclosure && {
+    url: `${REPO_URL}/tree/main/${snapshot.links.enclosure}`,
     label: 'Enclosure files',
   },
-];
+].filter(Boolean);
 
 The first step to build a detector is to purchase the required components. Most of the electronics come from Digi-Key, while the rest (scintillator, OLED, sensor boards, cables, screws and the case) come from the stores listed in the tables. If you are building a single detector, we recommend purchasing extras of the small surface-mount resistors and capacitors. The cost is about {totals.required} in required parts for one detector, and {totals.optional} for the aluminum case and optional extras.
 

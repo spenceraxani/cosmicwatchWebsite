@@ -19,7 +19,7 @@ The SiPM pulse-height spectrum (Fig. 2.2, left) exhibits the characteristic Land
 𝑐 , (2.1) where 𝜇 denotes the most probable value and 𝑐 the width parameter. A fit over the range 13 mV to 40 mV yields 𝜇≈21 mV, which corresponds to the ∼2 MeV energy loss of a minimumionizing muon traversing the ≈1 cm-thick plastic scintillator \[?\], and 𝑐≈5 mV. This is only approximate, as the average trajectory of the muons through the scintillator will be slightly larger than 1 cm. Detector saturation appears near 180 mV, as denoted by the overflow bin. The relatively flat tail below 10 mV in the coincident-event distribution is attributed to cornerclipping muons, which graze the scintillator edge and deposit reduced energy.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-03-p8.webp" width="968" height="352" alt="Figure 2.2: Left: the SiPM pulse-height spectra recorded by a set of detector in configuration (d). The coincident events begin dominating at SiPM pulse-heights greater than approximately 18 mV. Right" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-03-p8.webp" width="1452" height="528" alt="Figure 2.2: Left: the SiPM pulse-height spectra recorded by a set of detector in configuration (d). The coincident events begin dominating at SiPM pulse-heights greater than approximately 18 mV. Right" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.2: Left: the SiPM pulse-height spectra recorded by a set of detector in configuration (d). The coincident events begin dominating at SiPM pulse-heights greater than approximately 18 mV. Right: The measured detection rate of coincident and non-coincident events.</figcaption>
 
@@ -32,7 +32,7 @@ The precise location of the MIP peak depends on the quality of the detector asse
 Fig. 2.2 (right) displays the event rate versus time for the same dataset, comparing non-coincident and coincident counts. Each point represents a 240 s interval, with the rate calculated as the number of events divided by the effective live time (bin duration minus total dead time). These rate measurements enable searches for correlations with atmospheric variables–e.g., barometric pressure changes (Fig. 2.3 (left)–or transient phenomena such as solar flares. The detector also logs temperature (Fig. 2.3 \[right\]), allowing corrections for temperature-dependent gain shifts, although it currently isn’t implement.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-05-p9.webp" width="950" height="343" alt="Figure 2.3: Left: Barometric pressure recorded by the onboard BMP280 sensor over time. Right: Temperature measured by the same sensor, used to monitor environmental conditions and correct for temperat" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-05-p9.webp" width="1425" height="515" alt="Figure 2.3: Left: Barometric pressure recorded by the onboard BMP280 sensor over time. Right: Temperature measured by the same sensor, used to monitor environmental conditions and correct for temperat" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.3: Left: Barometric pressure recorded by the onboard BMP280 sensor over time. Right: Temperature measured by the same sensor, used to monitor environmental conditions and correct for temperature dependent SiPM gain variations.</figcaption>
 

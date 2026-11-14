@@ -15,7 +15,7 @@ The detection material is primarily composed of polystyrene, a low-density synth
 While challenging, some information can still be extracted from gamma ray sources, as exemplified in Fig. 2.19. In this context, data was collected with various sources at the MIT Junior Lab. Although we may not be able to discern monoenergetic peaks, interesting features emerge. For instance, Cobalt-60 emits two relatively high-energy gamma rays (1.17 and 1.33 MeV) compared to Cesium-137, which features a dominant gamma ray at 0.66 MeV. It is worth noting that the SiPM peak voltages, serving as a proxy for the number of observed photons and related to the energy deposited by a gamma ray, exhibit variations.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-26-p25.webp" width="559" height="335" alt="Figure 2.19: The distribution of number of events per unit time. Each cell represents a different amount of time in which the data is binned (labelled on the top right of each cell). The red line is t" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-26-p25.webp" width="838" height="503" alt="Figure 2.19: The distribution of number of events per unit time. Each cell represents a different amount of time in which the data is binned (labelled on the top right of each cell). The red line is t" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.19: The distribution of number of events per unit time. Each cell represents a different amount of time in which the data is binned (labelled on the top right of each cell). The red line is the expected Poissonian distribution from Eq. ??.</figcaption>
 

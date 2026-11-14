@@ -23,7 +23,7 @@ The energy of cosmic rays decreases rapidly: below 10<sup>6</sup> GeV, the flux 
 <sup>1</sup>The highest energy cosmic-ray observed, approximately 3×10<sup>20</sup> eV \[10\] (48 joules), equivalent to a brick falling on your toe \[11\], was contained in a single proton and later named the _Oh-My-God Particle_.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/physics/fig-01-p7.webp" width="795" height="365" alt="Figure 2.1: Simulated trajectories of low energy cosmic-rays interacting with the geomagnetic field. From Ref. [4]" loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-01-p7.webp" width="1191" height="546" alt="Figure 2.1: Simulated trajectories of low energy cosmic-rays interacting with the geomagnetic field. From Ref. [4]" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.1: Simulated trajectories of low energy cosmic-rays interacting with the geomagnetic field. From Ref. \[4\]</figcaption>
 
@@ -42,7 +42,7 @@ The high energy photon from the decay of the neutral mesons quickly materialize 
 <sup>3</sup>Mesons, unlike protons and neutrons, contain only two quarks: one quark and one anti-quark. The lightest meson is the pion, followed by the kaon. Although there are many other quark/anti-quark pair combinations, their higher masses make them less preferentially produced and are not discussed here \[12,13\].
 
 <figure class="cw-guide-fig">
-  <img src="/guides/physics/fig-02-p8.webp" width="988" height="725" alt="Figure 2.2: An schematic representation of the various decay and interactions chains that result from the interaction of a cosmic-ray in Earth’s atmosphere. This is a modified figure from Ref. [3]." loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-02-p8.webp" width="1482" height="1087" alt="Figure 2.2: An schematic representation of the various decay and interactions chains that result from the interaction of a cosmic-ray in Earth’s atmosphere. This is a modified figure from Ref. [3]." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.2: An schematic representation of the various decay and interactions chains that result from the interaction of a cosmic-ray in Earth’s atmosphere. This is a modified figure from Ref. \[3\].</figcaption>
 

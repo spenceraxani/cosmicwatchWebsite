@@ -13,7 +13,7 @@ editUrl: false
 There is a notable presence of natural radioactivity in the environment that the CosmicWatch detector can detect. Certain items, such as orange FiestaWare plates from 1936-1943 used natural uranium for coloring, exhibit radioactivity (Prof. Axani has a few if you are interested in seeing them). Even common household items like potassium chloride (salt substitute) can produce a signal (requiring approximately 11 oz for detection). Additionally, granite countertops in homes might also exhibit radioactivity, so it’s worth checking for.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/example-measurements/fig-19-p19.webp" width="446" height="249" alt="Figure 2.13: The effect of surrounding a single detector in a lead enclosure." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-19-p19.webp" width="892" height="497" alt="Figure 2.13: The effect of surrounding a single detector in a lead enclosure." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.13: The effect of surrounding a single detector in a lead enclosure.</figcaption>
 

@@ -17,7 +17,7 @@ Fig. 2.20 (left) illustrates the detector’s trigger rate in blue as a function
 Fig. 2.20 (right) displays the measured trigger rate as a function of true altitude. Here, we extend the exponential fit beyond the measured values. The count rate uncertainties were calculated by taking the square root of the sum of all events measured at a particular altitude. It’s important to note that this data was collected with a detector in master mode, making it sensitive to background radiation from the interior of the plane.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-27-p26.webp" width="945" height="257" alt="Figure 2.20: (Left) The count rate measured during a flight from Boston to Chicago as a function of flight time. The dashed red line shows the actual amplitude of the airplane [11] scaled by a fitted " loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-27-p26.webp" width="1417" height="384" alt="Figure 2.20: (Left) The count rate measured during a flight from Boston to Chicago as a function of flight time. The dashed red line shows the actual amplitude of the airplane [11] scaled by a fitted " loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.20: (Left) The count rate measured during a flight from Boston to Chicago as a function of flight time. The dashed red line shows the actual amplitude of the airplane \[11\] scaled by a fitted exponential shown at the top left of the plot. (Right) The measured count rate as a function of altitude. The dashed red line shows the fit.</figcaption>
 

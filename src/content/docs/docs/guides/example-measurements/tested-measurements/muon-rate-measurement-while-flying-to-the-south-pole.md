@@ -17,7 +17,7 @@ The first four flights (from Madison, WI USA to Christchurch, New Zealand) were 
 The full master and coincident detector data are shown in Fig. 2.6, with descriptions of each flight in the text boxes. To give perspective for other measurements, the total data collected by the master detector was about 50 Mb, whereas the coincidence detector was approximately 15 Mb.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/img-09-p12.webp" width="973" height="710" alt="Image from the PDF" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/img-09-p12.webp" width="1459" height="1064" alt="Image from the PDF" loading="lazy" decoding="async" />
 
 </figure>
 

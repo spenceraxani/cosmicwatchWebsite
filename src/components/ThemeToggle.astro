@@ -1,0 +1,72 @@
+---
+// Moon / sun button that switches the site between light and dark.
+// The saved choice is applied before paint by themeScript (src/utils/theme.ts).
+const t = Astro.locals.copy?.layout ?? {
+  darkTheme: 'Dark theme',
+  lightTheme: 'Light theme',
+  toggleTheme: 'Toggle theme',
+};
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  aria-label={t.toggleTheme}
+  title={t.toggleTheme}
+  class="cw-theme-toggle inline-flex size-8 items-center justify-center rounded-full text-neutral-600 ring-zinc-500 outline-hidden transition duration-300 hover:bg-neutral-200 hover:text-orange-400 focus-visible:ring-3 dark:text-neutral-400 dark:ring-zinc-200 dark:hover:bg-neutral-700 dark:hover:text-orange-300"
+>
+  {/* Moon in light mode (go dark), sun in dark mode (go light). */}
+  <svg
+    class="cw-moon size-4 dark:hidden"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+  </svg>
+  <svg
+    class="cw-sun hidden size-4.5 dark:block"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+  </svg>
+</button>
+
+<script>
+  const sync = () => {
+    const dark = document.documentElement.classList.contains('dark');
+    for (const b of document.querySelectorAll<HTMLButtonElement>(
+      '[data-theme-toggle]'
+    ))
+      b.setAttribute('aria-pressed', String(dark));
+  };
+  const toggle = () => {
+    const d = document.documentElement;
+    const next = d.classList.contains('dark') ? 'light' : 'dark';
+    try {
+      localStorage.setItem('cw-theme', next);
+    } catch {}
+    d.classList.toggle('dark', next === 'dark');
+    d.dataset.theme = next;
+    d.style.colorScheme = next;
+    sync();
+    window.dispatchEvent(new CustomEvent('cw-theme', { detail: next }));
+  };
+  // Delegated, so it keeps working after docs page swaps.
+  document.addEventListener('click', e => {
+    if ((e.target as Element).closest?.('[data-theme-toggle]')) toggle();
+  });
+  sync();
+  document.addEventListener('astro:after-swap', sync);
+</script>

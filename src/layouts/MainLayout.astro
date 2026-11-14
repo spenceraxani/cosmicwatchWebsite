@@ -3,8 +3,7 @@ import Meta from '@components/Meta.astro';
 import Navbar from '@components/sections/navbar&footer/Navbar.astro';
 import FooterSection from '@components/sections/navbar&footer/FooterSection.astro';
 import { buildPageMetadata, type PageKind } from '@utils/metadata';
-import DesignToggles from '@components/DesignToggles.astro';
-import { TOGGLES_ON, earlyScript } from '@utils/designToggles';
+import { themeScript } from '@utils/theme';
 import '@styles/global.css';
 
 interface Props {
@@ -17,8 +16,6 @@ interface Props {
   hideFooter?: boolean;
   /** Keep this page out of search results and the sitemap's intent. */
   noindex?: boolean;
-  /** Dev-only design switches: 'all' adds the hero switch (home page), false hides them. */
-  designToggles?: 'all' | 'nav' | false;
 }
 
 const {
@@ -29,7 +26,6 @@ const {
   kind,
   hideFooter = false,
   noindex = false,
-  designToggles = 'nav',
 } = Astro.props;
 const { locale, copy: t } = Astro.locals;
 
@@ -47,8 +43,8 @@ const metadata = buildPageMetadata({
 
 <html lang={metadata.lang} class="scroll-pt-28">
   <head>
+    <script is:inline set:html={themeScript} />
     <Meta metadata={metadata} />
-    {TOGGLES_ON && <script is:inline set:html={earlyScript} />}
   </head>
   <body class="flex min-h-screen flex-col overflow-x-clip bg-neutral-200 selection:bg-yellow-400 selection:text-neutral-700 dark:bg-neutral-800">
     <a
@@ -64,9 +60,6 @@ const metadata = buildPageMetadata({
       </main>
     </div>
     {!hideFooter && <FooterSection />}
-    {TOGGLES_ON && designToggles && (
-      <DesignToggles hero={designToggles === 'all'} />
-    )}
     <script>
       import 'preline';
       import { Observer } from 'tailwindcss-intersect/observer';

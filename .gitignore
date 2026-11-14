@@ -20,3 +20,7 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# contact worker local secrets
+workers/contact/.dev.vars
+workers/contact/.wrangler/

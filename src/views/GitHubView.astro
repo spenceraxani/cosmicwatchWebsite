@@ -17,13 +17,17 @@ const { locale } = Astro.props;
 const copy = getCopy(locale).github;
 const box = 'surface p-6';
 // Downloads always point at the repository, so they never go stale.
+// File paths come from the snapshot, which the daily sync refreshes.
+const path = (p: string) => p.split('/').map(encodeURIComponent).join('/');
+const links = snapshot.links;
 const downloads = {
-  repoZip: `${REPO_URL}/archive/refs/heads/main.zip`,
-  gui: `${REPO_URL}/tree/main/GUI`,
+  gui: `${REPO_URL}/tree/main/${links.gui ?? 'GUI'}`,
   firmwareFolder: `${REPO_URL}/tree/main/Firmware`,
-  firmware: `${REPO_URL}/raw/main/Firmware/CosmicWatch_v3X.${snapshot.firmware}.uf2`,
-  importData: `${REPO_URL}/blob/main/Data/import_data.py`,
-  plot: `${REPO_URL}/blob/main/Data/plot.py`,
+  firmware: links.firmware
+    ? `${REPO_URL}/raw/main/${path(links.firmware)}`
+    : `${REPO_URL}/tree/main/Firmware`,
+  importData: `${REPO_URL}/blob/main/${path(links.importData ?? 'Data/import_data.py')}`,
+  plot: `${REPO_URL}/blob/main/${path(links.plot ?? 'Data/plot.py')}`,
 };
 const card = 'flex flex-col surface p-6 sm:p-8';
 const btn =
@@ -80,7 +84,7 @@ const repoLinks: Record<string, CwIconName> = {
     class="mx-auto grid max-w-[85rem] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-3 lg:px-8 2xl:max-w-full"
     aria-label="Software and firmware"
   >
-    <div class:list={[card, reveal]}>
+    <div id="gui" class:list={[card, reveal, 'scroll-mt-28']}>
       <CwIcon name="gui" class="size-9 text-orange-400 dark:text-orange-300" />
       <h2 class="mt-4 text-2xl font-bold text-neutral-800 dark:text-neutral-200">
         CosmicWatch GUI
@@ -106,9 +110,7 @@ const repoLinks: Record<string, CwIconName> = {
             </a>
             <span>.</span>
           </li>
-          <li>
-            Download the files and open the <code>GUI</code> folder.
-          </li>
+          <li>Download the GUI and unzip it.</li>
           <li>
             Run <code>install.bat</code> (Windows) or{' '}
             <code>bash install.sh</code>
@@ -120,8 +122,8 @@ const repoLinks: Record<string, CwIconName> = {
         </ol>
       </details>
       <div class="mt-6 flex flex-wrap items-center gap-4">
-        <a class={btn} href={downloads.repoZip}>
-          Download (.zip)
+        <a class={btn} href={downloads.gui} data-gui-zip data-repo={REPO}>
+          <span data-label>Download the GUI (.zip)</span>
         </a>
         <a
           class={link}
@@ -369,6 +371,7 @@ const repoLinks: Record<string, CwIconName> = {
 
 <script>
   import '@scripts/guideSync';
+  import '@scripts/guiDownload';
   const root = document.getElementById('gh')!;
   const repo = root.dataset.repo!;
   const api = `https://api.github.com/repos/${repo}`;

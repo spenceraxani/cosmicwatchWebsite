@@ -11,7 +11,7 @@ editUrl: false
 <div class="cw-guide-source not-content" data-repo="spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X" data-branch="main" data-path="The Example Measurements.pdf" data-sha="f643047747bd56962428f35a5a5e83166c7e0c29" data-date="2025-08-20T16:43:03-04:00"><span class="cw-gs-doc">From <a href="/pdf/example-measurements/#page=22" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 22–25</span><span class="cw-gs-status" data-state="idle">Synced with the PDF from 2025-08-20</span><span class="cw-gs-note" hidden></span></div>
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-22-p22.webp" width="988" height="403" alt="Figure 2.15: An illustrative diagram of the principle behind the random number generator. The x-axis indicates the time measure in milliseconds. Above this, we have the toggle flip-flop, which changes" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-22-p22.webp" width="1482" height="604" alt="Figure 2.15: An illustrative diagram of the principle behind the random number generator. The x-axis indicates the time measure in milliseconds. Above this, we have the toggle flip-flop, which changes" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.15: An illustrative diagram of the principle behind the random number generator. The x-axis indicates the time measure in milliseconds. Above this, we have the toggle flip-flop, which changes state every millisecond, then an illustrative waveform shown in blue. If the event triggered the detector while in the even state of the flip flop, we assign it a one, otherwise, we assign it a zero. This is shown in the red box at the top of the diagram.</figcaption>
 
@@ -26,7 +26,7 @@ We can convert the time stamp of a radioactive decay trigger into a "1" or a "0"
 For this measurement, we use data taken from a 20-day background lab measurement. A single detector was used. After triggering on a total of t events, we can build t/N N-bit random numbers. To illustrate this, if we choose to generate 8-bit random numbers (from 0 to 255), we can plot the number of each occurrence. This is shown in Fig. 2.16.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-23-p23.webp" width="967" height="258" alt="Figure 2.16: The number of occurrences of the generated numbers from 0-255. The reduced 𝜒2 p-value assuming that the distribution should be randomly distributed about the average number of occurrences" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-23-p23.webp" width="1450" height="386" alt="Figure 2.16: The number of occurrences of the generated numbers from 0-255. The reduced 𝜒2 p-value assuming that the distribution should be randomly distributed about the average number of occurrences" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.16: The number of occurrences of the generated numbers from 0-255. The reduced 𝜒<sup>2</sup> p-value assuming that the distribution should be randomly distributed about the average number of occurrences is given at the top right of the figure.</figcaption>
 
@@ -39,7 +39,7 @@ In your case, you may consider collecting data from a natural radioactive source
 There are several factors that can introduce bias into the random number generator. Let’s consider extreme scenarios. Imagine a scenario where the trigger rate is approximately 1 Hz, and the flip-flop state changes only every 10 seconds. In this case, the first ten triggers would yield all ones, followed by the next ten triggers giving all zeroes. This would result in biased high values for the initial numbers and biased low values for the subsequent ones. This example highlights the need for the toggle flip-flop to change states at a much higher rate than the trigger rate.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/example-measurements/fig-24-p23.webp" width="503" height="249" alt="Figure 2.17: Background rate measurement with (left) and without (right) an 11 oz con- tainer of potassium chloride. The rates are mea- sured as 7.2±0.1 Hz and 3.94±0.08 Hz, respec- tively." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-24-p23.webp" width="1005" height="497" alt="Figure 2.17: Background rate measurement with (left) and without (right) an 11 oz con- tainer of potassium chloride. The rates are mea- sured as 7.2±0.1 Hz and 3.94±0.08 Hz, respec- tively." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.17: Background rate measurement with (left) and without (right) an 11 oz container of potassium chloride. The rates are measured as 7.2±0.1 Hz and 3.94±0.08 Hz, respectively.</figcaption>
 
@@ -48,7 +48,7 @@ There are several factors that can introduce bias into the random number generat
 Another potential source of bias arises if the microcontroller fails to produce an equal number of even and odd timestamps due to internal configuration issues. For instance, when using the microseconds() function in Teensy/Arduino, the reported timestamp may only be accurate to the nearest even microsecond. It is crucial to thoroughly study and quantify the randomness of the data collected.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-25-p24.webp" width="974" height="394" alt="Figure 2.18: The distribution of number of events per unit time. Each cell represents a different amount of time in which the data is binned (labelled on the top right of each cell). The red line is t" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-25-p24.webp" width="1461" height="591" alt="Figure 2.18: The distribution of number of events per unit time. Each cell represents a different amount of time in which the data is binned (labelled on the top right of each cell). The red line is t" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.18: The distribution of number of events per unit time. Each cell represents a different amount of time in which the data is binned (labelled on the top right of each cell). The red line is the expected Poissonian distribution from Eq. ??.</figcaption>
 

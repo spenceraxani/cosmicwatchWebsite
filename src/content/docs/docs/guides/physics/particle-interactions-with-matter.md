@@ -19,7 +19,7 @@ The following explanation proves valuable when considering any charged particles
 The rate of energy loss, often denoted as stopping power (-dE/dx), quantifies the amount of energy lost per unit distance traveled. It is commonly measured in units of MeV cm<sup>2</sup>/g, known as _mass stopping power_. To obtain the energy lost per centimeter, one simply multiplies this value by the density (in g/cm<sup>3</sup>) of the material being traversed. To facilitate comparisons, we express the energy loss rate in terms of water (𝜌= 1.0 𝑔/𝑐𝑚<sup>3</sup>), which conveniently shares a similar density with plastic scintillator. As a particle moves through a substance, its energy loss can be categorized into three mass-dependent ranges:
 
 <figure class="cw-guide-fig">
-  <img src="/guides/physics/fig-05-p15.webp" width="755" height="443" alt="Figure 3.1: The kinetic energy loss per centimeter traveled, of a muon traveling through H2O (𝜌= 1.0𝑔/𝑐𝑚3). Modified from Ref. [35]. The blue dot represents the mean energy of the cosmic- ray muons at" loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-05-p15.webp" width="1132" height="663" alt="Figure 3.1: The kinetic energy loss per centimeter traveled, of a muon traveling through H2O (𝜌= 1.0𝑔/𝑐𝑚3). Modified from Ref. [35]. The blue dot represents the mean energy of the cosmic- ray muons at" loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.1: The kinetic energy loss per centimeter traveled, of a muon traveling through H<sub>2</sub> O (𝜌= 1.0𝑔/𝑐𝑚<sup>3</sup>). Modified from Ref. \[35\]. The blue dot represents the mean energy of the cosmicray muons at sea level (4 GeV), and the red star represents where the particle is minimally ionizing.</figcaption>
 
@@ -52,7 +52,7 @@ energy electrons, with the understanding that the explanation is equally applica
 A bremsstrahlung photon with sufficient energy can undergo pair production, yielding an electron and positron, which subsequently emit additional bremsstrahlung photons, initiating a cascade of electrons, positrons, and photons. This process governs the energy loss of the electron until its energy drops below a few tens of MeV, commonly referred to as the critical energy. Remarkably, the radiation energy loss rate scales with energy. In the region above the critical energy, the rate of energy loss (dE/dx) is proportional to the energy. Consequently, a 20GeV electron, for instance, initially loses energy per centimeter traveled at a rate 1000 times greater than a 20MeV electron, predominantly through bremsstrahlung radiation. This leads to a rapid decrease in the energy of high-energy particles as a function of distance traveled.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/physics/fig-06-p17.webp" width="406" height="303" alt="Figure 3.2: The Heitler Model for elec- tromagnetic cascades." loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-06-p17.webp" width="811" height="605" alt="Figure 3.2: The Heitler Model for elec- tromagnetic cascades." loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.2: The Heitler Model for electromagnetic cascades.</figcaption>
 
@@ -69,7 +69,7 @@ A valuable list of radiation lengths for various materials is provided in Table 
 Electrons and positrons, being the lightest charged particles, exhibit qualitative behavior in electron scattering distinct from that of high-energy particles in two ways. Firstly, the energy loss by electrons fluctuates significantly more than that of heavy particles. For instance, the maximum transferable kinetic energy of a 4 GeV electron is the full 4 GeV (given their equal masses), whereas a muon with the same energy has a maximum transferable energy of approximately 1 GeV. Secondly, due to their small mass, electrons are particularly prone to experiencing large-angle deflections when scattering off a nucleus. This susceptibility is so pronounced that multiply scattered electrons may undergo a complete reversal in direction, a phenomenon defined as _backscattering_. The probability of backscattering is higher at lower energies, and if backscattered, electrons do not deposit all their energy in the absorbing medium. For instance, a 1 MeV electron has approximately a 10% chance of backscattering off a thick slab of aluminum, and a 50% chance of backscattering off a slab of gold. \[37\].
 
 <figure class="cw-guide-fig cw-guide-table">
-  <img src="/guides/physics/table-07-p18.webp" width="836" height="195" alt="Table 3.1: A table of materials that are mentioned in this document and their corresponding radiation length. *STP indicates that the air is at the standard temperature and pressure: 20∘C and 101.325 kPa. The data was collected from Ref. [1,7]. Material Density [g/cm3] Radiation length [cm] Critical Energy [MeV] Water (H2O) 1.00 36.1 92 Lead (Pb) 11.35 0.56 9.51 Concrete 2.5 10.7 Air at STP* 1.293" loading="lazy" decoding="async" />
+  <img src="/guides/physics/table-07-p18.webp" width="1306" height="298" alt="Table 3.1: A table of materials that are mentioned in this document and their corresponding radiation length. *STP indicates that the air is at the standard temperature and pressure: 20∘C and 101.325 kPa. The data was collected from Ref. [1,7]. Material Density [g/cm3] Radiation length [cm] Critical Energy [MeV] Water (H2O) 1.00 36.1 92 Lead (Pb) 11.35 0.56 9.51 Concrete 2.5 10.7 Air at STP* 1.293" loading="lazy" decoding="async" />
 
   <figcaption>Table 3.1: A table of materials that are mentioned in this document and their corresponding radiation length. <sup>\*</sup> STP indicates that the air is at the standard temperature and pressure: 20<sup>∘</sup> C and 101.325 kPa. The data was collected from Ref. \[1,7\].</figcaption>
 
@@ -86,7 +86,7 @@ An atomic electron can fully absorb the energy of a gamma ray<sup>2</sup>, resul
 <sup>2</sup>In order to conserve momentum, the photoelectric effect cannot occur on a free electron; it requires a nucleus to absorb part of the recoil.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/physics/fig-08-p19.webp" width="892" height="200" alt="Figure 3.3: Modified from Ref. [32]" loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-08-p19.webp" width="1783" height="399" alt="Figure 3.3: Modified from Ref. [32]" loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.3: Modified from Ref. \[32\]</figcaption>
 
@@ -95,7 +95,7 @@ An atomic electron can fully absorb the energy of a gamma ray<sup>2</sup>, resul
 _Compton scattering_ involves the partial transfer of energy from the incident gamma-ray to an atomic electron, leading to the electron’s elevation to a higher energy level or ionization. The gamma-ray may alter its direction, exiting the material containing the electron, or it might undergo further scattering with another electron. Compton scattering prevails at low energy for materials with very low atomic numbers (Z), and the likelihood of scattering is directly proportional to the electron density, and thus, to the proton number of the material.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/physics/fig-09-p19.webp" width="485" height="314" alt="Figure 3.4: Dominant region for the three gamma ray interactions as a function of the photon energy and the target charge number Z. Modified from Ref. [8]" loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-09-p19.webp" width="970" height="626" alt="Figure 3.4: Dominant region for the three gamma ray interactions as a function of the photon energy and the target charge number Z. Modified from Ref. [8]" loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.4: Dominant region for the three gamma ray interactions as a function of the photon energy and the target charge number Z. Modified from Ref. \[8\]</figcaption>
 

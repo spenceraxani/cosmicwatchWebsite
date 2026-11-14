@@ -1,5 +1,8 @@
-// The current team only (Prof. Axani: list active people so visitors know who to
-// contact). No photos yet, so cards show initials. Confirm the list with him.
+// People actively working on CosmicWatch, shown on the Contact page between the
+// form and the FAQ. Prof. Axani asked for active people only, each with what
+// they contributed. Photos: add a file to src/images/people/ and set `photo`
+// (import it at the top) only for people happy to have their face on the site;
+// everyone else shows initials.
 import type { ImageMetadata } from 'astro';
 
 export interface Person {
@@ -13,28 +16,23 @@ export interface Person {
 export const team: Person[] = [
   {
     name: 'Spencer N. G. Axani',
-    role: 'Assistant Professor, Physics and Astronomy, University of Delaware',
-    note: 'Created CosmicWatch and leads the program.',
+    role: 'Assistant Professor, Physics & Astronomy, University of Delaware',
     email: 'saxani@udel.edu',
   },
   {
     name: 'Masooma Sarfraz',
     role: 'PhD student, University of Delaware',
-    note: 'Lead author of the v3X paper.',
   },
   {
     name: 'Miles Garcia',
-    role: 'University of Delaware',
-    note: 'Co-author of the v3X paper.',
+    role: 'PhD student, University of Delaware',
   },
   {
     name: 'Collin Owens',
     role: 'University of Delaware',
-    note: 'Co-author of the v3X paper.',
   },
   {
     name: 'Anvay Ajmera',
-    role: 'Research intern',
-    note: 'Spaceflight adaptation of the v3X and this website.',
+    role: 'Research intern, University of Delaware',
   },
 ];

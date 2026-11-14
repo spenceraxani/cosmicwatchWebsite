@@ -1,12 +1,11 @@
 ---
-// The site is light-only. Replaces Starlight's theme provider, which follows the
-// system setting or a saved choice, and always uses the light theme.
+// Replaces Starlight's theme provider. Light by default; the moon/sun button in
+// the header (ThemeToggle.astro) switches to dark and remembers the choice. The
+// same choice applies on the main pages (src/utils/theme.ts).
+import { themeScript } from '@utils/theme';
 ---
 
+<script is:inline set:html={themeScript} />
 <script is:inline>
-  document.documentElement.dataset.theme = 'light';
-  try {
-    localStorage.removeItem('starlight-theme');
-  } catch {}
   window.StarlightThemeProvider = { updatePickers() {} };
 </script>

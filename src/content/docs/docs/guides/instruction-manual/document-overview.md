@@ -23,7 +23,7 @@ Version v3X represents a significant advancement over the previous v2 detector. 
 Components of this instructions manual has been lightly adapted from MIT’s Junior Lab Manual, which was based off of Prof. Spencer Axani’s Masters Thesis, accessible directly at `<https://arxiv.org/abs/1908.00146`>. However, this is a new detector, specifically designed to increase the CosmicWatch’s physics, education, and industrial reach, as well as providing the backbone for a future citizen science project.
 
 <figure class="cw-guide-fig cw-guide-table">
-  <img src="/guides/instruction-manual/table-01-p5.webp" width="663" height="585" alt="Table 1.1: Specification comparison between CosmicWatch v2 and v3X detectors. Bold entries indicate the specification with superior performance. CosmicWatch v2 Specification CosmicWatch v3X ATmega328P Processor Cortex-M0+ Single Core Number of cores Dual Core 16 MHz Clock frequency 133 MHz 32 KB Flash memory 2 MB 2 KB RAM 264 KB 0.27 W Power consumption 0.5 W <8-bit ADC resolution 12-bit 15 Hz Max" loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/table-01-p5.webp" width="1031" height="903" alt="Table 1.1: Specification comparison between CosmicWatch v2 and v3X detectors. Bold entries indicate the specification with superior performance. CosmicWatch v2 Specification CosmicWatch v3X ATmega328P Processor Cortex-M0+ Single Core Number of cores Dual Core 16 MHz Clock frequency 133 MHz 32 KB Flash memory 2 MB 2 KB RAM 264 KB 0.27 W Power consumption 0.5 W <8-bit ADC resolution 12-bit 15 Hz Max" loading="lazy" decoding="async" />
 
   <figcaption>Table 1.1: Specification comparison between CosmicWatch v2 and v3X detectors. Bold entries indicate the specification with superior performance.</figcaption>
 

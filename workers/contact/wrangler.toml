@@ -1,0 +1,22 @@
+# Contact form relay for the CosmicWatch website (see src/index.js).
+# Deploy:  cd workers/contact && npx wrangler deploy
+# Secret:  npx wrangler secret put TURNSTILE_SECRET
+name = "cosmicwatch-contact"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[vars]
+TO_EMAIL = "saxani@udel.edu"
+# Every address the site is served from (add the final domain when it moves).
+ALLOWED_ORIGINS = "http://localhost:4321,https://cosmicwatchv3x.vercel.app"
+SITE_URL = "https://cosmicwatchv3x.vercel.app"
+
+# At most 3 messages per visitor IP per minute.
+[[ratelimits]]
+name = "LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 3
+  period = 60

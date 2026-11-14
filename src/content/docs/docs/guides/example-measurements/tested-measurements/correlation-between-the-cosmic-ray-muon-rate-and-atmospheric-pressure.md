@@ -17,7 +17,7 @@ A correlation exists between the atmospheric pressure and the cosmic-ray muon ra
 where 𝐼 represents cosmic-ray muon intensity, ∆𝑃 is the measured atmospheric pressure compared to the average pressure, and 𝛽 is the barometric coefficient \[13\]. This correlation is actually the result of several processes outlined in Sec. ??. The barometric coefficient represents the percent change in detector count rate per hPa change in atmospheric pressure.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-20-p20.webp" width="984" height="319" alt="Figure 2.14: Left: The correlation between the atmospheric pressure and the detector count rate. Right: The detector count rate in blue and the atmospheric pressure in red as a function of modified Ju" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-20-p20.webp" width="1476" height="479" alt="Figure 2.14: Left: The correlation between the atmospheric pressure and the detector count rate. Right: The detector count rate in blue and the atmospheric pressure in red as a function of modified Ju" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.14: Left: The correlation between the atmospheric pressure and the detector count rate. Right: The detector count rate in blue and the atmospheric pressure in red as a function of modified Julian date (MJD). Both plots show the data binned with a bin size of two hours.</figcaption>
 

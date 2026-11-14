@@ -13,7 +13,7 @@ editUrl: false
 We’ve explored in Sec. ?? that at sea level, there exists a flux of electrons and positrons showering down on the Earth. The majority of this flux possesses energies less than 100 MeV, with a minimal contribution above 1 GeV. Subsequently, in Sec. ??, we delved into the fact that this electromagnetic component is not particularly penetrating and can be significantly attenuated with a few tens of centimeters of concrete (the radiation length in concrete, as found in Table ??, is 10.7 cm). To test this assertion, we can measure the coincidence rate on top of a building and then again several floors lower.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/example-measurements/fig-18-p17.webp" width="397" height="291" alt="Figure 2.12: The calculated SiPM peak voltage on the roof of the WiPAC building compared to on the 5th floor." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-18-p17.webp" width="792" height="581" alt="Figure 2.12: The calculated SiPM peak voltage on the roof of the WiPAC building compared to on the 5th floor." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.12: The calculated SiPM peak voltage on the roof of the WiPAC building compared to on the 5<sup>th</sup> floor.</figcaption>
 

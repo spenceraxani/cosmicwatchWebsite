@@ -66,13 +66,49 @@ DOCS_DIR = ROOT / 'src/content/docs/docs/guides'
 IMG_DIR = ROOT / 'public/guides'
 MANIFEST = ROOT / 'src/data_files/guides.json'
 
-ZOOM = 2.0  # render scale for figures (2x = ~1220 px wide for a full-width figure)
+ZOOM = 3.0  # render scale for figures (3x = ~1830 px wide for a full-width figure, sharp on high-DPI screens)
+ZOOM_NARROW = 4.0  # figures that sit beside text in the PDF are small, so render them larger
 TEXT_X0, TEXT_X1 = 60, 552  # LaTeX text block on US letter, with a little slack
 MATH_FONTS = ('CMMI', 'CMSY', 'CMEX', 'CMR', 'MSBM', 'MSAM')
 BODY_MIN_SIZE = 11.0
 
 
 # ---------------------------------------------------------------- helpers
+
+
+def ruled_table(drawings, cap, gap: float = 320, reach: float = 60):
+    """The box spanned by a LaTeX (booktabs) table's horizontal rules next to
+    its caption, or None. Looks just above the caption first (these manuals put
+    captions under tables), then just below. Rules belong to the same table
+    while the gap to the next one is under `gap` points."""
+    rules = sorted(
+        (r for r in drawings if r.height < 2 and r.width > 60), key=lambda r: r.y0
+    )
+    above = [r for r in rules if r.y1 <= cap.y0 + 2 and cap.y0 - r.y1 < reach]
+    below = [r for r in rules if r.y0 >= cap.y1 - 2 and r.y0 - cap.y1 < reach]
+    if above:
+        group = [above[-1]]
+        for r in reversed([r for r in rules if r.y1 < group[0].y0]):
+            if group[-1].y0 - r.y1 > gap:
+                break
+            group.append(r)
+    elif below:
+        group = [below[0]]
+        for r in [r for r in rules if r.y0 > group[0].y1]:
+            if r.y0 - group[-1].y1 > gap:
+                break
+            group.append(r)
+    else:
+        return None
+    if len(group) < 2:
+        return None
+    # Rules are zero-height lines, which Rect union ignores, so take the extremes.
+    return pymupdf.Rect(
+        min(r.x0 for r in group),
+        min(r.y0 for r in group),
+        max(r.x1 for r in group),
+        max(r.y1 for r in group),
+    )
 
 
 def slugify(text: str) -> str:
@@ -325,7 +361,7 @@ class Guide:
                 continue
             self.fig_count += 1
             name = f'fig-{self.fig_count:02d}-p{pno + 1}.webp'
-            w, h = save_clip(page, region, self.img_dir / name)
+            w, h = save_clip(page, region, self.img_dir / name, zoom=ZOOM_NARROW if wrap else ZOOM)
             out.append((region.y0, {
                 'type': 'figure', 'src': name, 'w': w, 'h': h, 'wrap': wrap, 'rect': region,
                 'caption': paragraph_markdown(tb['b']), 'alt': tb['t'][:200], 'page': pno + 1,
@@ -337,11 +373,16 @@ class Guide:
                 continue
             cap = tb['r']
             near = [t for t in tables if abs(t.y1 - cap.y0) < 60 or abs(t.y0 - cap.y1) < 60]
+            ruled = ruled_table(drawings, cap)
             if near:
                 region = pymupdf.Rect(near[0])
                 for r in drawings:
                     if r.height < 2 and r.y0 >= region.y0 - 6 and r.y1 <= region.y1 + 6:
                         region |= r
+            elif ruled is not None:
+                # find_tables() missed it (its results change between PyMuPDF
+                # versions), but the table's horizontal rules are there.
+                region = ruled
             else:
                 below = [o['r'].y0 for o in text_blocks if o['r'].y0 > cap.y1 + 4 and o['body'] and len(o['b']['lines']) >= 2]
                 region = pymupdf.Rect(TEXT_X0, cap.y1 + 2, TEXT_X1, (min(below) - 2) if below else cap.y1 + 200)

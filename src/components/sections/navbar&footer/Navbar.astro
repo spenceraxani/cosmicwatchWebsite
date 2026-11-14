@@ -2,6 +2,7 @@
 import NavLink from '@components/ui/links/NavLink.astro';
 import BrandLogo from '@components/BrandLogo.astro';
 import NavbarToggle from '@components/ui/buttons/NavbarToggle.astro';
+import ThemeToggle from '@components/ThemeToggle.astro';
 import Icon from '@components/ui/icons/Icon.astro';
 import { navLinks, socialLinks } from '@data/navigation';
 import { localePath } from '@utils/locale';
@@ -25,7 +26,10 @@ const { locale, copy: t } = Astro.locals;
       >
         <BrandLogo class="h-8 w-auto" />
       </a>
-      <NavbarToggle target="navbar-collapse-with-animation" />
+      <div class="flex items-center gap-x-2 lg:hidden">
+        <ThemeToggle />
+        <NavbarToggle target="navbar-collapse-with-animation" />
+      </div>
     </div>
     <div
       id="navbar-collapse-with-animation"
@@ -47,6 +51,9 @@ const { locale, copy: t } = Astro.locals;
           <Icon name="githubMark" class="h-4 w-4 shrink-0" />
           <span class="lg:sr-only">GitHub</span>
         </a>
+        <span class="hidden lg:inline-flex">
+          <ThemeToggle />
+        </span>
         <a
           href={localePath(locale, '/shop')}
           data-astro-prefetch
@@ -60,7 +67,7 @@ const { locale, copy: t } = Astro.locals;
 </header>
 <script is:inline>
   // Publish the header's height as --header-h so a full-screen hero can slide
-  // up underneath the floating nav (see HeroBackdrop.astro).
+  // up underneath the floating nav (see HeroPhoto.astro).
   (() => {
     const header = document.getElementById('site-header');
     if (!header) return;

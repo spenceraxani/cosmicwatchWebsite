@@ -36,6 +36,7 @@ export const footerSections: {
     id: 'program',
     links: [
       { id: 'about', path: '/#about' },
+      { id: 'people', path: '/contact#people' },
       { id: 'contact', path: '/contact' },
     ],
   },
@@ -71,11 +72,20 @@ export const footerSections: {
 
 export const CONTACT_EMAIL = 'saxani@udel.edu';
 
-// Contact form → UD's Forms Data Processor (FDP), run by UD Information
-// Technologies. FDP stores each message and emails it to the address set in FDP.
-// Set CONTACT_FDP_FORM_ID to the Form ID registered at https://www.udel.edu/fdp/
-// (see docs/contact-form-setup.md). While it is empty the form shows a note with
-// a pre-filled email to CONTACT_EMAIL instead of submitting.
+// Contact form. Three ways it can send, picked in this order:
+// 1. The contact Worker (workers/contact/): set PUBLIC_CONTACT_ENDPOINT to its
+//    URL and PUBLIC_TURNSTILE_SITE_KEY to the Turnstile site key. The Worker
+//    checks Cloudflare Turnstile and other spam signals server-side, then
+//    emails the message to Prof. Axani.
+// 2. UD's Forms Data Processor: set CONTACT_FDP_FORM_ID (docs/contact-form-setup.md).
+// 3. Neither set: pressing Send opens the visitor's email app with the message
+//    already written to CONTACT_EMAIL.
+// Both are public values (the Turnstile secret lives only in the Worker).
+export const CONTACT_ENDPOINT: string =
+  import.meta.env.PUBLIC_CONTACT_ENDPOINT ??
+  'https://cosmicwatch-contact.anvayajmera9.workers.dev';
+export const TURNSTILE_SITE_KEY: string =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '0x4AAAAAAGAM2BpQ5UssI6wl';
 export const FDP_ACTION = 'https://udapps.nss.udel.edu/formsPro/collect';
 export const CONTACT_FDP_FORM_ID = '';
 

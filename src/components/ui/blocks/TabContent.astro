@@ -2,7 +2,17 @@
 import { Image } from 'astro:assets';
 
 // Destructure the component properties from Astro.props
-const { id, aria, src, alt, first, second, number } = Astro.props;
+const { id, aria, src, alt, first, second, number, actions = [] } = Astro.props;
+
+export interface TabAction {
+  label: string;
+  url: string;
+  /** Secondary actions render as a text link. */
+  secondary?: boolean;
+  /** Zip the GUI folder from GitHub on click (see src/assets/scripts/guiDownload.ts). */
+  guiZip?: string;
+  note?: string;
+}
 
 interface Props {
   id: string;
@@ -13,6 +23,7 @@ interface Props {
   second?: boolean;
   /** Shown in a circle on the image, matching the numbered tab. */
   number?: number;
+  actions?: TabAction[];
 }
 // Set class based on 'first' property
 // If 'first' is present, show the tab content immediately
@@ -48,4 +59,30 @@ const secondClass = second
     format={'avif'}
     loading="lazy"
   />
+  {actions.length > 0 && (
+    <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
+      {actions.map(a =>
+        a.secondary ? (
+          <a
+            href={a.url}
+            class="font-medium text-orange-400 decoration-2 hover:underline dark:text-orange-300"
+          >
+            {a.label}
+          </a>
+        ) : (
+          <a
+            href={a.url}
+            data-gui-zip={a.guiZip ? '' : undefined}
+            data-repo={a.guiZip}
+            class="inline-flex items-center justify-center gap-x-2 rounded-lg bg-orange-400 px-4 py-3 text-sm font-bold text-neutral-50 ring-zinc-500 outline-hidden transition duration-300 hover:bg-orange-500 focus-visible:ring-3 2xl:text-base dark:bg-orange-300 dark:text-neutral-900 dark:ring-zinc-200 dark:hover:bg-orange-400"
+          >
+            <span data-label>{a.label}</span>
+            {a.note && (
+              <span class="text-xs font-medium opacity-80">{a.note}</span>
+            )}
+          </a>
+        )
+      )}
+    </div>
+  )}
 </div>

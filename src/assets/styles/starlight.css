@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-/* Light-only: dark: utilities never apply (nothing adds a .dark class). */
+/* Light by default; the header's moon/sun button adds .dark and data-theme='dark'. */
 @custom-variant dark (&:is(.dark *));
 @import '@fontsource-variable/ibm-plex-sans';
 @import '@fontsource/ibm-plex-sans-condensed/600.css';
@@ -12,10 +12,9 @@
   }
 }
 
-/* Colours. The site is light-only, so these apply whatever data-theme says. */
+/* Colours: light (default), then dark below. */
 :root,
-:root[data-theme='light'],
-:root[data-theme='dark'] {
+:root[data-theme='light'] {
   color-scheme: light;
   --border: hsla(var(--border-yellow), 0.4);
   --backdrop-color: #f8fafd99;
@@ -37,6 +36,29 @@
   --list-marker-color: #53a1d8;
   --border-yellow: 205, 60%, 85%;
 }
+/* Dark: the same navy as the main pages' dark mode (bg neutral-800/900). */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --border: hsla(var(--border-yellow), 0.25);
+  --backdrop-color: #13223199;
+  --sl-color-accent: #53a1d8;
+  --sl-color-accent-high: #b3d1ea;
+  --sl-color-accent-low: #183a56;
+  --sl-color-black: #132231;
+  --sl-color-gray-1: #eef3f8;
+  --sl-color-gray-2: #d6e0ea;
+  --sl-color-gray-3: #9aabbc;
+  --sl-color-gray-4: #6b7d8f;
+  --sl-color-gray-5: #34465a;
+  --sl-color-gray-6: #1b2c3d;
+  --sl-color-gray-7: #162636;
+  --sl-color-white: #ffffff;
+  --sl-color-bg: #1b2c3d;
+  --sl-color-bg-nav: transparent;
+  --sl-color-bg-sidebar: #1b2c3d;
+  --list-marker-color: #53a1d8;
+  --border-yellow: 205, 40%, 40%;
+}
 
 /* Header: the site's full-width nav bar (Header.astro), the same translucent
    white bar as on every other page. */
@@ -53,6 +75,13 @@ header.header {
   height: var(--sl-nav-height) !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+:root[data-theme='dark'] header.header {
+  background: rgb(19 34 49 / 0.8) !important;
+  border-bottom-color: rgb(52 70 90 / 0.6) !important;
+}
+:root[data-theme='dark'] button.sl-menu-button {
+  color: #d6e0ea !important;
 }
 /* The docs menu button sits at the right end of the bar on small screens. */
 button.sl-menu-button {
@@ -218,6 +247,10 @@ h1#_top {
 .cw-gs-status[data-state='stale'] {
   color: #8a5300;
   background: #fff3d6;
+}
+:root[data-theme='dark'] .cw-gs-status[data-state='stale'] {
+  color: #ffd98a;
+  background: #3d2c0b;
 }
 .cw-gs-status[data-state='stale']::before {
   background: #e19b1b;

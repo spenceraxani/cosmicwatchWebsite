@@ -1,0 +1,258 @@
+{
+  "1k resistor": {
+    "forPart": "311-1.00KCRCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-071KL/727444",
+      "partNumber": "311-1.00KCRCT-ND"
+    }
+  },
+  "1.3k resistor": {
+    "forPart": "RMCF0805FT1K30DKR-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/stackpole-electronics-inc/RMCF0805FT1K30/1760146",
+      "partNumber": "RMCF0805FT1K30CT-ND"
+    }
+  },
+  "100 ohm resistor": {
+    "forPart": "RMCF0805FT100RCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/stackpole-electronics-inc/RMCF0805FT100R/1760711",
+      "partNumber": "RMCF0805FT100RCT-ND"
+    }
+  },
+  "0 ohm resistor": {
+    "forPart": "4463-TFA0805WJUMPF-T5TR-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/thin-film-technology-corp/D1TFA0805WJUMPF-T5/23598486",
+      "partNumber": "4463-TFA0805WJUMPF-T5CT-ND"
+    }
+  },
+  "10k ohm resistor": {
+    "forPart": "RNCP0805FTD10K0DKR",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/stackpole-electronics-inc/RNCP0805FTD10K0/2240262",
+      "partNumber": "RNCP0805FTD10K0CT-ND"
+    }
+  },
+  "154k resistor": {
+    "forPart": "YAG1534CT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RT0603BRD07154KL/1072259",
+      "partNumber": "YAG1534CT-ND"
+    }
+  },
+  "6.65k resistor": {
+    "forPart": "P6.65KDBCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/panasonic-electronic-components/ERA-3AEB6651V/2026823",
+      "partNumber": "P6.65KDBCT-ND"
+    }
+  },
+  "100k resistor": {
+    "forPart": "311-100KCRCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-07100KL/727544",
+      "partNumber": "311-100KCRCT-ND"
+    }
+  },
+  "49.9 ohm resistor": {
+    "forPart": "311-49.9CRCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0749R9L/727984",
+      "partNumber": "311-49.9CRCT-ND"
+    }
+  },
+  "620 ohm resistor": {
+    "forPart": "311-620CRCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-07620RL/728083",
+      "partNumber": "311-620CRCT-ND"
+    }
+  },
+  "22.1k resistor": {
+    "forPart": "311-22.1KCRCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0722K1L/727738",
+      "partNumber": "311-22.1KCRCT-ND"
+    }
+  },
+  "10 ohm resistor": {
+    "forPart": "311-10.0CRCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/RC0805FR-0710RL/727534",
+      "partNumber": "311-10.0CRCT-ND"
+    }
+  },
+  "4.7 uf capacitor": {
+    "forPart": "490-10751-1-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/murata-electronics/GRM21BR61H475KE51L/4905540",
+      "partNumber": "490-10751-1-ND"
+    }
+  },
+  "1 uf capacitor": {
+    "forPart": "1276-2928-1-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B105KBFNFNE/3891014",
+      "partNumber": "1276-2928-1-ND"
+    }
+  },
+  "0.1 uf capacitor": {
+    "forPart": "1276-1003-1-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B104KBCNNNC/3886661",
+      "partNumber": "1276-1003-1-ND"
+    }
+  },
+  "200pf capacitor": {
+    "forPart": "399-C0805C201K5HACTUTR-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/kemet/C0805C201K5HACTU/7948822",
+      "partNumber": "399-C0805C201K5HACTUCT-ND"
+    }
+  },
+  "10pf capacitor": {
+    "forPart": "13-CC0805KRNPO9BN100CT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/yageo/CC0805KRNPO9BN100/11491833",
+      "partNumber": "13-CC0805KRNPO9BN100CT-ND"
+    }
+  },
+  "10nf capacitor": {
+    "forPart": "1276-1015-1-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B103KBANNNC/3886673",
+      "partNumber": "1276-1015-1-ND"
+    }
+  },
+  "ferrite bead": {
+    "forPart": "4713-FBU201209T-310Y-SCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/cal-chip-electronics-inc/FBU201209T-310Y-S/22479480",
+      "partNumber": "4713-FBU201209T-310Y-SCT-ND"
+    }
+  },
+  "lm4040 2.5v": {
+    "forPart": "LM4040C25FTA",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/diodes-incorporated/LM4040C25FTA/1557717",
+      "partNumber": "LM4040C25FCT-ND"
+    }
+  },
+  "rp pico": {
+    "forPart": "2648-SC0915TR-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/raspberry-pi/SC0915/13624793",
+      "partNumber": "2648-SC0915CT-ND"
+    }
+  },
+  "47uh inductor": {
+    "forPart": "587-2456-1-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/taiyo-yuden/CB2012T470K/2230241",
+      "partNumber": "587-2456-1-ND"
+    }
+  },
+  "2n7002 transistor": {
+    "forPart": "5399-2N7002CT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/shenzhen-slkormicro-semicon-co-ltd/2N7002/21853067",
+      "partNumber": "5399-2N7002CT-ND"
+    }
+  },
+  "tph2502 op amp": {
+    "forPart": "5503-TPH2502-SRCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/3peak/TPH2502-SR/22228733",
+      "partNumber": "5503-TPH2502-SRCT-ND"
+    }
+  },
+  "max5026 dc-dc booster": {
+    "forPart": "MAX5026EUT+TCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/analog-devices-inc-maxim-integrated/MAX5026EUT-T/1516355",
+      "partNumber": "MAX5026EUT+TCT-ND"
+    }
+  },
+  "bat54ws schottky diode": {
+    "forPart": "5272-BAT54WSCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/evvo/BAT54WS/21407178",
+      "partNumber": "5272-BAT54WSCT-ND"
+    }
+  },
+  "2.54mm 2x3 pin 6-pin connector": {
+    "forPart": "1212-1229-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/preci-dip/803-87-006-10-001101/3757479",
+      "partNumber": "1212-1229-ND"
+    }
+  },
+  "bat54s schottky diode": {
+    "forPart": "4878-BAT54SCT-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/diotec-semiconductor/BAT54S/13164121",
+      "partNumber": "4878-BAT54SCT-ND"
+    }
+  },
+  "bnc header + nut": {
+    "forPart": "WM5514-ND",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/adam-tech/RF1-01K-D-00-50-BK-HDW/9830586",
+      "partNumber": "WM5514-ND"
+    }
+  },
+  "reset button": {
+    "forPart": "https://www.digikey.com/en/products/detail/c-k/PTS645VH83-2-LFS/1146776?s=N4IgTCBcDaIAoBUDKA2ALAVgGoAkAcAzALRgAEAMgGJIgC6AvkA",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/c-k/PTS645VH83-2-LFS/1146776",
+      "partNumber": "CKN9121-ND"
+    }
+  },
+  "6 pin smt (on sipm board) 2x3 pins": {
+    "forPart": "https://www.digikey.com/en/products/detail/molex/0015910060/614773?s=N4IgTCBcDaIOoFkCMB2ALAVhQWgHIBEQBdAXyA",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/molex/0015910060/614773",
+      "partNumber": "WM17457-ND"
+    }
+  },
+  "sipm": {
+    "forPart": "https://www.digikey.com/en/products/detail/onsemi/MICROFC-60035-SMT-TR/9742618",
+    "digikey": {
+      "url": "https://www.digikey.com/en/products/detail/onsemi/MICROFC-60035-SMT-TR/9742618",
+      "partNumber": "5556-MICROFC-60035-SMT-TRCT-ND"
+    }
+  },
+  "rj45 coincidence connector": {
+    "forPart": "https://www.aliexpress.us/item/2255800047081475.html?spm=a2g0o.productlist.main.5.75041f08oHxKQj&algo_pvid=f5a390b0-14d5-48aa-8d78-c397a6a95e25&algo_exp_id=f5a390b0-14d5-48aa-8d78-c397a6a95e25-2&pdp_npi=4@dis!USD!1.86!1.86!!!1.86!1.86!@2103080e17246694755947771e7eb6!10000000946738865!sea!US!6040781666!X&curPageLogUid=AuMGfRufyP3g&utparam-url=scene:search%7Cquery_from:",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=RJ45%208P8C%20right%20angle%20THT%20jack"
+  },
+  "buzzer": {
+    "forPart": "https://www.amazon.com/Cylewet-Electronic-Magnetic-Continuous-Arduino/dp/B01N7NHSY6/ref=sr_1_3?crid=1MNYVMDNFEG3E&dib=eyJ2IjoiMSJ9.OyPyJJ4xtWru7f8xcsfDi8e4qjY9GGAhTKncBv3i2HdX6MDcc_WhKZdq7ahgIYUhKmLfsGVyf3I-vsAssihzpUcWaJiIX5gbA4AItcrNK7LowPi3mg4oIsQaiWEhRinMSsN5eMUNHLtiiEgH6x5uT_KSIfgea3YTN3SxXZy1nukWkFEV_bmoknKGc1dfM3E8rM0jEiIJZ2aqGXCxnRtBUBjffVhiofeTTyZutbFfT1A.dkBYlqof22OIS1K7N3muU6fY-olB7VYYAUiOiKpEmuk&dib_tag=se&keywords=arduino+buzzer&qid=1746097136&sprefix=arduino+buzze%2Caps%2C98&sr=8-3",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=magnetic%20buzzer%205V%20THT"
+  },
+  "led 3mm": {
+    "forPart": "https://www.amazon.com/Transparent-Lighting-Electronics-Components-Emitting/dp/B01BTYHOJ0/ref=sr_1_4?crid=3QS9US5QPXKBJ&dib=eyJ2IjoiMSJ9.4StSeUKQqoOTODhHN7I_YmebuQenDuJWzUGOGyI_pZCMSlQij3zJzNFaB2MGHScow6YliSkuO_h2OgmkEGcC1s2NCS3erw7o3WCRR9NROsB6DofeTy9N9ZN8kFqvlNPVDLoRvcPb0eRhx8prtfuVxZvojiZ_rMheShekL-Tb36IaZhlPuQwlXMkSzjfRqi7AfGru_rUPmlTBApS3pnA52dFAn_DApLf5p5x-kGdvjmc.IvKbsFNHslNR_f0vy3jiMwue0E7fAEUFP-8EmJJ8rtY&dib_tag=se&keywords=blue%2B3mm%2Bled&qid=1735827386&sprefix=blue%2Bmm%2Bled%2Caps%2C181&sr=8-4&th=1",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=3mm%20LED%20blue%20THT"
+  },
+  "led 5mm": {
+    "forPart": "https://www.amazon.com/Transparent-Intensity-Lighting-Electronics-Components/dp/B01AUI4VQU/ref=sr_1_3_pp?crid=3BWLD8K6RYN1J&dib=eyJ2IjoiMSJ9.DEoDH6fGAts6Er9N_7YOdQy3nyqyc32kjRyI-wnBA8WwzpxQGk38ThGkKKhFlgVBrDljy5PwZUESkA6HFTvAJP8wx8OpvZg0-F9vKaCV7XAgmuBc2m2zFYOHqO6ulBdxyrdJ6NkGjCKhw3Hau1fg4JTX58VS-PVtmlw_AtMd-14V-KDrP23-qf9c1bkYzRwiwkfTLfN9Sof3PNZ9IoGmo-nHbHNhcelKst5pddWsAp8.U0G1R5x2jG1QDWp4l903Jg2U8u08ZmS90QFt2UA2x6c&dib_tag=se&keywords=white%2B5mm%2Bled&qid=1735827351&sprefix=white%2B5mm%2Bled%2Caps%2C155&sr=8-3&th=1",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=5mm%20LED%20white%20THT"
+  },
+  "sd card socket": {
+    "forPart": "https://www.amazon.com/Uxcell-a14061000ux0287-Memory-Holder-Sockets/dp/B01AHYS7K8/ref=sr_1_1_pp?crid=34LACP2N6RNQ0&dib=eyJ2IjoiMSJ9.x94X55AoBN6klXn13s3gEECU9ngxp9Ixa2sv3I0jVd9jVKK0daLL3m8UxZZm0uib_nk2QVt-_-ru0DXMNAbQ7o8ie-czXoS7Nzo8uin0mAIK2RrKT9NXrP1a2himsmyLJirFsddpnKYkSSt2CJz4Wx6oW8zbAXKwSlyX3JLh2vG4Fhs0XVSWv5f1uR_eT_9l2t-rgzL5HwmWdIGttYB4qsuIr55OWLlwu5zI0XEUQgk.PNXZFjxyGdP6hBnsgMJqRs5KqZwOkqvaAJax7Vg7Who&dib_tag=se&keywords=sd+card+socket&qid=1746097997&sprefix=sd+card+socket%2Caps%2C101&sr=8-1",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=microSD%20card%20socket"
+  },
+  "microsd card": {
+    "forPart": "https://www.amazon.com/EASTBULL-4GB-Full-Video-Surveillance/dp/B0C39YHGC3/ref=sr_1_1?dib=eyJ2IjoiMSJ9.sAlKXbutqga0Xw4SHbAQgGXLJG5i50U81J1SxIQZNecmani74K4CvBbp0WngBmFY_6dUY1gUl_W1JU7sWcRUt-zecg60PF4NSP9VfwxJmzTpQWSXJlSEVMLiy1JSTMgYUc9vKmlFgNJQ8LddKmTUdOenLYc79HxAm_h_bhBE3GV9UdWy6QoM4P4AJryAJIZWH1Wy3iQPekqIyuoZGTDlSg8Pavk2Q8lRxGiefbLOWeA.ZK9EJLA31WcUoI9JS50-7N9OogisIeDaybxDi_lFb1c&dib_tag=se&keywords=4gb%2Bmicro%2Bsd%2Bcard&qid=1749637941&sr=8-1&th=1",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=microSD%20card%204GB"
+  },
+  "coincidence cable (cat5/6)": {
+    "forPart": "https://www.amazon.com/Metbxton-Ethernet-Network-Connectors-Internet/dp/B0CMQFHNPM/ref=sr_1_19?crid=1LMFDFTAID37I&dib=eyJ2IjoiMSJ9.3Mt4pznVsYP82NNpq5NqRh28I32ZeNm4aVolluCbc5lQMxBhwPRv9dM7PtnrRoKogLdzPNWKwyHaANuUZl5DO2LMtpPVrJYrsW24KKfzpRJVzq0NDBcgIfIdYXxA",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=CAT6%20patch%20cable%200.5%20ft"
+  },
+  "bnc cable for testing": {
+    "forPart": "https://www.amazon.com/Monoprice-Viper-HD-SDI-RG6-Cable/dp/B01LYOSYOA/ref=sr_1_8?crid=D0YP3QV8Y59W&dib=eyJ2IjoiMSJ9.ouVMlXtW52xcQCNVfWhdMHtWze7aPQGA57QfMcnibn2Fp_zEIPZbB-CYSkktuk-58ZNGVwM9jBUV3PdTJJ19jSjF9Yq3ZNLEqDZG5mCFOACkVjpLGSLZSNOKofcjhKaH1AXli7hhgHccFD7xq5wm5UznqXsbSxDvQpfcv3GTCW8N29P5q4sDC-wUFiokqC92v4rTFOcjse6sWY-rexljwke2k3gowVvTNrtCrLhqTbI.cBa7HpzQ2Q4vtAqxxz0G3ohUmivEOZNBlIvOpHOaRy0&dib_tag=se&keywords=bnc+cable&qid=1746125810&sprefix=bnc+cabl%2Caps%2C128&sr=8-8",
+    "digikeySearch": "https://www.digikey.com/en/products/result?keywords=BNC%20cable%20male%20male%201%20ft"
+  }
+}

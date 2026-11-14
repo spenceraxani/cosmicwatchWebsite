@@ -4,8 +4,7 @@
 // screens the links move into the docs menu (MobileMenuFooter.astro).
 import { navLinks, socialLinks } from '@data/navigation';
 import { getCopy } from '@/copy';
-import DesignToggles from '@components/DesignToggles.astro';
-import { TOGGLES_ON } from '@utils/designToggles';
+import ThemeToggle from '@components/ThemeToggle.astro';
 
 const t = getCopy('en');
 const here = Astro.url.pathname;
@@ -16,7 +15,15 @@ const isActive = (path: string) =>
 <div class="cw-docs-nav">
   <a class="cw-logo" href="/" aria-label="CosmicWatch home">
     <img
+      class="cw-logo-light"
       src="/brand/logo-darkblue.png"
+      alt="CosmicWatch"
+      width="1400"
+      height="528"
+    />
+    <img
+      class="cw-logo-dark"
+      src="/brand/logo-lightblue.png"
       alt="CosmicWatch"
       width="1400"
       height="528"
@@ -48,12 +55,15 @@ const isActive = (path: string) =>
         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
       </svg>
     </a>
+    <ThemeToggle />
     <a class="cw-shop" href="/shop">
       {t.nav.buy}
     </a>
   </nav>
+  <span class="cw-theme-mobile">
+    <ThemeToggle />
+  </span>
 </div>
-{TOGGLES_ON && <DesignToggles />}
 
 <style>
   .cw-docs-nav {
@@ -78,6 +88,17 @@ const isActive = (path: string) =>
     height: 2rem;
     width: auto;
   }
+  .cw-logo-dark,
+  :global(.dark) .cw-logo-light {
+    display: none;
+  }
+  :global(.dark) .cw-logo-dark {
+    display: block;
+  }
+  .cw-theme-mobile {
+    display: inline-flex;
+    margin-inline-start: auto;
+  }
   .cw-links {
     display: none;
     align-items: center;
@@ -98,6 +119,15 @@ const isActive = (path: string) =>
     color: #2a618f;
     font-weight: 600;
   }
+  :global(.dark) .cw-links a {
+    color: #9aabbc;
+  }
+  :global(.dark) .cw-links a:hover {
+    color: #6b7d8f;
+  }
+  :global(.dark) .cw-links a[aria-current='page'] {
+    color: #53a1d8;
+  }
   .cw-icon {
     display: inline-flex;
   }
@@ -116,12 +146,22 @@ const isActive = (path: string) =>
     background: #22527a;
     color: #fff;
   }
+  :global(.dark) .cw-links a.cw-shop {
+    background: #53a1d8;
+    color: #0b1520;
+  }
+  :global(.dark) .cw-links a.cw-shop:hover {
+    background: #8cc2e8;
+  }
   @media (min-width: 64rem) {
     .cw-docs-nav {
       padding-inline: 2rem;
     }
     .cw-links {
       display: flex;
+    }
+    .cw-theme-mobile {
+      display: none;
     }
   }
   @media (min-width: 80rem) {

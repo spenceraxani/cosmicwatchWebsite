@@ -25,7 +25,7 @@ To compare our measured velocity distribution with expectations from first princ
 The mean energy of the downgoign muons is 2GeV, which would have a velocity of 0.998c. I wonder if Agnieska or steph could give us a down-going muon energy spectrum, wich we could convert to a velocity spectrum and put in this curve.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-16-p16.webp" width="988" height="272" alt="Figure 2.10: Left: An example waveforms and fitted pulses for top (red) and bottom (orange) detectors. Vertical dashed lines mark estimated muon arrival times. The inset image shows the rising edge of" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-16-p16.webp" width="1482" height="408" alt="Figure 2.10: Left: An example waveforms and fitted pulses for top (red) and bottom (orange) detectors. Vertical dashed lines mark estimated muon arrival times. The inset image shows the rising edge of" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.10: Left: An example waveforms and fitted pulses for top (red) and bottom (orange) detectors. Vertical dashed lines mark estimated muon arrival times. The inset image shows the rising edge of each pulse along with the fit. Right: The distribution of muon velocities, along with a fitted Gaussian in red.</figcaption>
 

@@ -17,7 +17,7 @@ The CosmicWatch Desktop Muon Detector (v3X) comprises a 5×5×1 cm<sup>3</sup> s
 The SiPM signal (a pulse of current) is directed through a custom-designed printed circuit board (PCB), which amplifies and shapes the signal to make it suitable for measurement by an inexpensive micro-controller (MCU), a Raspberry Pi Pico (RPi). For each event, the RPi logs the event number, event time in seconds relative to the detector start time, whether or not the event was flagged as coincident with another detector (binary flag 1 or 0 respectively), the measured 12-bit ADC value of peak detector waveform, calculated SiPM pulse height in millivolts, the cumulative detector dead time in seconds, temperature in Celsius, pressure in Pascals, the x-y-z linear acceleration, and the x-y-z angular velocity. If data is recorded via the provided software, three additional entries per event are also provided, including the detector name (modifiable), the Network Time Protocol (NTP) time stamp date stamp from the host machine.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/instruction-manual/fig-02-p7.webp" width="989" height="459" alt="Figure 2.1: An array of the Desktop Muon Detectors." loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-02-p7.webp" width="1977" height="919" alt="Figure 2.1: An array of the Desktop Muon Detectors." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.1: An array of the Desktop Muon Detectors.</figcaption>
 
@@ -30,7 +30,7 @@ The backside of the detector features a micro USB port on the RPi for powering t
 A single detector was measured to consume 0.5 W and can be powered through any USB connection supplying 1.8 V to 5.5 V. This could be a USB port on a computer, USB power bank, power outlet USB, or even a cell phone. The total mass of the detector, excluding the optional aluminum enclosure and end-plates, the detector has a mass of 83 g, whose measurements are illustrated in Fig. 2.2. Including the aluminum case, the mass is 110 g, and the case outer dimensions are 66.4 mm×70.0 mm×39.9 mm.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/instruction-manual/fig-03-p8.webp" width="794" height="174" alt="Figure 2.2: A rendering of the physical v3X detector." loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-03-p8.webp" width="1588" height="348" alt="Figure 2.2: A rendering of the physical v3X detector." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.2: A rendering of the physical v3X detector.</figcaption>
 
@@ -50,7 +50,7 @@ Below about 5 km, coincident events are overwhelmingly likely to be due to a cos
 - Beta particles (electrons and positrons) can be significantly attenuated by the aluminum case, and have a significant chance of scattering, thus losing energy. It’s unlikely that the beta particle will be able to deposit sufficient energy within the scintillator (making it paste the black tape and aluminum foil) in one of the detector, exit, then depositing sufficient energy in the second detector. However, there exists a rather substantial sub GeV electron/positron flux that develops in cosmic ray showers that has sufficient energy
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/fig-04-p9.webp" width="989" height="446" alt="Figure 2.3: Two detectors booting into coincidence mode. In coincidence mode, every time a detector triggers on an event, it sends a digital pulse to the other detector. If the other detector also tri" loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-04-p9.webp" width="1483" height="669" alt="Figure 2.3: Two detectors booting into coincidence mode. In coincidence mode, every time a detector triggers on an event, it sends a digital pulse to the other detector. If the other detector also tri" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.3: Two detectors booting into *coincidence mode*. In coincidence mode, every time a detector triggers on an event, it sends a digital pulse to the other detector. If the other detector also triggers on a pulse during at the same time, the event is flagged as coincident and is very likely to have been caused by a cosmic-ray muon. Coincident events flash the coincidence LED (blue LED on the front plate).</figcaption>
 
@@ -63,7 +63,7 @@ to trigger two detectors. This can be substantially attenuated by going inside a
 - A typical minimum ionizing muon passing through the 1 cm slab of scintillator will typically deposit more than 1.5-2 MeV of energy in the scintillator, without being deflected. This is a rather large amount of energy compared to the common energies of radiogenic backgrounds (sub MeV-scale). If the muon passes through both scintillators, it will likely trigger both
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/fig-05-p10.webp" width="781" height="575" alt="Figure 2.4: A histogram of the SiPM pulse height, of the full dataset from a single detector. The bump in the coincidence events, shown at roughly 20 mV, would correspond to the average minimium ioniz" loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-05-p10.webp" width="1171" height="862" alt="Figure 2.4: A histogram of the SiPM pulse height, of the full dataset from a single detector. The bump in the coincidence events, shown at roughly 20 mV, would correspond to the average minimium ioniz" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.4: A histogram of the SiPM pulse height, of the full dataset from a single detector. The bump in the coincidence events, shown at roughly 20 mV, would correspond to the average minimium ionizing muons, or an energy deposition of 1.5-2Mev.</figcaption>
 
@@ -90,7 +90,7 @@ Data can be collected from the Desktop Muon Detector in many ways:
 6. **The Website**: We also have a website, that lets’ you record data. It also plots the data in realtime.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/instruction-manual/fig-06-p12.webp" width="988" height="747" alt="Figure 2.5: The CosmicWatch Graphical User Insterface." loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-06-p12.webp" width="1976" height="1492" alt="Figure 2.5: The CosmicWatch Graphical User Insterface." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.5: The CosmicWatch Graphical User Insterface.</figcaption>
 
@@ -99,7 +99,7 @@ Data can be collected from the Desktop Muon Detector in many ways:
 The data on the microSD card or through the import_data.py script is saved in a simple to use .TXT file, in an easy-to-read format. Comments are always indicated with the "#" marker for ease of parsing. Each row is a different event, and each column represents some different property of the measurement. The columns are tab-delimited, to also make parsing easier. When the detector boots up, it first prints a set of diagnostics, measuring the voltage going to the SiPM, baseline, trigger thresholds and checking with peripherals. I’ll expand on these diagnostics in the Troubleshooting Document. An example of the data is shown in Fig. 2.6. Each event is approximately 48 to 100 Bytes in size (depending on if you took the data on the microSD card or with the import_data.py script, respectively).
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/fig-07-p13.webp" width="989" height="376" alt="Figure 2.6: Example data from a file AxLab_C_002.txt microSD card. This was the second file (&quot;002&quot;) recorded in coincidence mode (&quot;C&quot;) on the the detector named &quot;AxLab.&quot; The definitions of the columns" loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-07-p13.webp" width="1483" height="563" alt="Figure 2.6: Example data from a file AxLab_C_002.txt microSD card. This was the second file (&quot;002&quot;) recorded in coincidence mode (&quot;C&quot;) on the the detector named &quot;AxLab.&quot; The definitions of the columns" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.6: Example data from a file AxLab_C_002.txt microSD card. This was the second file ("002") recorded in coincidence mode ("C") on the the detector named "AxLab." The definitions of the columns are listed in the header. Event 3 and 11 were identified as coincident events. Looks like the temperature where the data was taken was 23.8<sup>∘</sup> C with a room pressure of 102 kPa. The last column shows the orientation of the detector. Looks like the z-direction linear acceleration was roughly 1.1 g, indicating that the detector was positioned upright.</figcaption>
 
@@ -125,7 +125,7 @@ If you record the data through the import_data.py script located in the Data dir
 - **Date**: The global date from the computer.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/fig-08-p14.webp" width="988" height="311" alt="Figure 2.7: Example data taken from the import_data.py script. The three additional columns are highlighted in blue. They represent the detector name, the timestamp and data taken from the computer th" loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-08-p14.webp" width="1482" height="466" alt="Figure 2.7: Example data taken from the import_data.py script. The three additional columns are highlighted in blue. They represent the detector name, the timestamp and data taken from the computer th" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.7: Example data taken from the import_data.py script. The three additional columns are highlighted in blue. They represent the detector name, the timestamp and data taken from the computer that is running the script.</figcaption>
 

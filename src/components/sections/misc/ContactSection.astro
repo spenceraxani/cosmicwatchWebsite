@@ -8,16 +8,27 @@ import AuthBtn from '@components/ui/buttons/AuthBtn.astro';
 import CwIcon from '@components/ui/icons/CwIcon.astro';
 import {
   CONTACT_EMAIL,
+  CONTACT_ENDPOINT,
+  TURNSTILE_SITE_KEY,
   CONTACT_FDP_FORM_ID,
   FDP_ACTION,
 } from '@data/navigation';
 
-// The form posts straight to UD's Forms Data Processor, which emails the message
-// to Prof. Axani and keeps a copy in a UD system, then sends the visitor to
-// /contact/thanks/. Until the form is registered in FDP (CONTACT_FDP_FORM_ID is
-// empty) it shows a note with a pre-filled email instead of submitting.
+// How the form sends (see src/data_files/navigation.ts):
+// - 'service': the contact Worker (workers/contact/) checks Cloudflare
+//   Turnstile and other spam signals, then emails Prof. Axani; the page posts
+//   in the background, then shows /contact/thanks/.
+// - 'fdp': UD's Forms Data Processor; the browser posts and FDP redirects.
+// - 'email': nothing set up yet; Send opens the visitor's email app with the
+//   message already written.
 const copy = Astro.locals.copy.contact;
-const live = CONTACT_FDP_FORM_ID !== '';
+const mode =
+  CONTACT_ENDPOINT && TURNSTILE_SITE_KEY
+    ? 'service'
+    : CONTACT_FDP_FORM_ID
+      ? 'fdp'
+      : 'email';
+const live = mode === 'fdp';
 const blockIconClass =
   'mt-1.5 h-6 w-6 shrink-0 text-neutral-600 dark:text-neutral-400';
 ---
@@ -53,13 +64,18 @@ const blockIconClass =
           method="post"
           action={live ? FDP_ACTION : undefined}
           novalidate
-          data-live={live ? 'true' : 'false'}
+          data-mode={mode}
+          data-endpoint={CONTACT_ENDPOINT || undefined}
           data-to={CONTACT_EMAIL}
           data-sending={copy.sending}
           data-missing={copy.missing}
+          data-captcha={copy.captcha}
         >
           {live && (
             <input type="hidden" name="formId" value={CONTACT_FDP_FORM_ID} />
+          )}
+          {mode === 'service' && (
+            <input type="hidden" name="started" value="" />
           )}
           <div class="grid gap-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -86,6 +102,15 @@ const blockIconClass =
               aria-hidden="true"
             />
           </div>
+          {mode === 'service' && (
+            <div
+              class="cf-turnstile mt-4"
+              data-sitekey={TURNSTILE_SITE_KEY}
+              data-action="contact"
+              data-theme="auto"
+              data-size="flexible"
+            ></div>
+          )}
           <div class="mt-4 grid">
             <AuthBtn title={copy.send} />
           </div>
@@ -157,9 +182,16 @@ const blockIconClass =
   </div>
 </section>
 
+{mode === 'service' && (
+  <script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+)}
 <script>
-  // Checks the fields, then lets the browser post the form to UD's Forms Data
-  // Processor, which redirects to /contact/thanks/. Nothing is sent from script.
+  // Checks the fields, then sends the message the way data-mode says.
   const form = document.getElementById(
     'contact-form'
   ) as HTMLFormElement | null;
@@ -172,9 +204,19 @@ const blockIconClass =
     const button = form.querySelector(
       'button[type="submit"]'
     ) as HTMLButtonElement;
-    const { to, sending, missing, live } = form.dataset;
-
-    form.addEventListener('submit', e => {
+    const {
+      to,
+      sending,
+      missing,
+      mode,
+      endpoint,
+      captcha: captchaMsg,
+    } = form.dataset;
+    const started = form.elements.namedItem(
+      'started'
+    ) as HTMLInputElement | null;
+    if (started) started.value = String(Date.now());
+    form.addEventListener('submit', async e => {
       failed.hidden = true;
       const data = new FormData(form);
       const get = (k: string) => String(data.get(k) ?? '').trim();
@@ -193,19 +235,46 @@ const blockIconClass =
         e.preventDefault(); // spam trap ticked: a bot, not a person
         return;
       }
-      if (live !== 'true') {
-        // Not registered in FDP yet: offer the message as a filled-in email.
-        e.preventDefault();
+      const subject = `CosmicWatch question${name ? ` from ${name}` : ''}`;
+      const body = `${message}\n\n${name}${email ? ` <${email}>` : ''}`;
+      fallback.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      if (mode === 'fdp') {
+        status.textContent = sending!;
+        button.disabled = true;
+        return; // let the browser post the form to FDP
+      }
+      e.preventDefault();
+      if (mode === 'email') {
+        // No form service yet: hand the message to the visitor's email app.
         status.textContent = '';
-        const subject = `CosmicWatch question${name ? ` from ${name}` : ''}`;
-        const body = `${message}\n\n${name}${email ? ` <${email}>` : ''}`;
-        fallback.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         failed.hidden = false;
+        window.location.href = fallback.href;
+        return;
+      }
+      if (!String(data.get('cf-turnstile-response') ?? '')) {
+        status.textContent = captchaMsg!; // the check has not finished yet
         return;
       }
       status.textContent = sending!;
       button.disabled = true;
-      // let the browser submit normally
+      try {
+        const r = await fetch(endpoint!, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        const res = await r.json().catch(() => ({}));
+        if (!r.ok || !res.ok) throw new Error(res.error || String(r.status));
+        window.location.href = '/contact/thanks/';
+      } catch (err) {
+        status.textContent = String(err).includes('captcha') ? captchaMsg! : '';
+        failed.hidden = false;
+        button.disabled = false;
+        (
+          window as Window & { turnstile?: { reset(): void } }
+        ).turnstile?.reset();
+      }
     });
   }
 </script>

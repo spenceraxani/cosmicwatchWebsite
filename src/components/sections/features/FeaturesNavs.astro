@@ -1,7 +1,9 @@
 ---
 import { reveal, revealImage, delay } from '@utils/motion';
 import TabNav from '@components/ui/blocks/TabNav.astro';
-import TabContent from '@components/ui/blocks/TabContent.astro';
+import TabContent, {
+  type TabAction,
+} from '@components/ui/blocks/TabContent.astro';
 import type { IconName } from '@components/ui/icons/icons';
 
 const { title, tabs } = Astro.props;
@@ -14,6 +16,7 @@ interface Tab {
   alt: string;
   first?: boolean;
   second?: boolean;
+  actions?: TabAction[];
 }
 
 interface Props {
@@ -69,6 +72,7 @@ interface Props {
                 first={tab.first}
                 second={tab.second}
                 number={index + 1}
+                actions={tab.actions}
               />
             ))}
           </div>
@@ -81,3 +85,6 @@ interface Props {
     </div>
   </div>
 </section>
+<script>
+  import '@scripts/guiDownload';
+</script>

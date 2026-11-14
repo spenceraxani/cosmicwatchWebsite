@@ -19,7 +19,7 @@ Fig. B.1 displays the printed circuit boards (PCBs) utilized in the v3 detector.
 The last figure in this section, Fig. B.2, presents a vector image of the complete circuit. If you have any questions, please feel free to reach out to Spencer at saxani@udel.edu, as we will forgo a detailed description here.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/img-14-p29.webp" width="973" height="558" alt="Image from the PDF" loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/img-14-p29.webp" width="1459" height="836" alt="Image from the PDF" loading="lazy" decoding="async" />
 
 </figure>
 

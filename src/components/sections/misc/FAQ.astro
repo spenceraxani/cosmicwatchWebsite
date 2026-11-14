@@ -4,6 +4,7 @@ import AccordionItem from '@components/ui/blocks/AccordionItem.astro';
 import { Image } from 'astro:assets';
 import stack from '@images/cw/detector-stack-cutout.png';
 import type { CwIconName } from '@components/ui/icons/CwIcon.astro';
+import { CONTACT_EMAIL } from '@data/navigation';
 
 const { title, faqs } = Astro.props;
 
@@ -32,9 +33,25 @@ const makeId = (base: any, index: any) => `${base}${index + 1}`;
         <h2 class="text-2xl font-bold text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">
           <Fragment set:html={title} />
         </h2>
-        <p class="mt-1 hidden text-neutral-600 md:block dark:text-neutral-400">
+        <p class="mt-1 text-neutral-600 dark:text-neutral-400">
           {faqs.subTitle}
         </p>
+        {/* The "still stuck" line leads straight to the form or an email. */}
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a
+            href="/contact#contact-form"
+            data-focus-form
+            class="inline-flex items-center justify-center rounded-lg bg-orange-400 px-4 py-2.5 text-sm font-bold text-neutral-50 ring-zinc-500 outline-hidden transition duration-300 hover:bg-orange-500 focus-visible:ring-3 dark:bg-orange-300 dark:text-neutral-900 dark:ring-zinc-200 dark:hover:bg-orange-400"
+          >
+            Send a Message
+          </a>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            class="inline-flex items-center justify-center rounded-lg border border-neutral-300 bg-neutral-50 px-4 py-2.5 text-sm font-bold text-neutral-700 ring-zinc-500 outline-hidden transition duration-300 hover:bg-neutral-100 focus-visible:ring-3 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-200 dark:ring-zinc-200 dark:hover:bg-neutral-700"
+          >
+            Email Us
+          </a>
+        </div>
       </div>
       {/* Small illustration: the detectors on a soft disc, with question badges */}
       <div
@@ -94,6 +111,25 @@ const makeId = (base: any, index: any) => `${base}${index + 1}`;
     </div>
   </div>
 </section>
+
+<script>
+  // On the Contact page, "Send a Message" scrolls up to the form and puts the
+  // cursor in its first field.
+  for (const a of document.querySelectorAll<HTMLAnchorElement>(
+    'a[data-focus-form]'
+  )) {
+    a.addEventListener('click', e => {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+      e.preventDefault();
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      form.querySelector<HTMLInputElement>('input, textarea')?.focus({
+        preventScroll: true,
+      });
+      history.replaceState(null, '', '#contact-form');
+    });
+  }
+</script>
 
 <style>
   .cw-faq-bubble {

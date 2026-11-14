@@ -25,7 +25,7 @@ As a photon travels through the depletion region and imparts sufficient energy t
 The Desktop Muon Detector utilizes a single OnSemiconductor MicroFC 60035 C-Series SiPM, measuring 7.0 mm by 7.0 mm \[39\] (6 mm by 6 mm sensitive area). These SiPMs are most sensitive in the 420 nm range \[40\], corresponding to deep blue to purple light. I note that if the wavelength of a photon exceeds 1000 nm, the absorption length in silicon becomes too large, leading to the SiPM’s size becoming impractical. On the other hand, if the photon wavelength is too short, it won’t penetrate into the sensitive region of the SiPM, essential for effective detection.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/physics/fig-10-p22.webp" width="989" height="224" alt="Figure 4.1: An image of an OnSemiconductor SiPM [39]. Data sheets found in the datasheet folder. The SiPM has a length and width of 7.0±0.05 mm and a thickness of 0.65±0.05 mm. Each one of the tiled s" loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-10-p22.webp" width="1483" height="336" alt="Figure 4.1: An image of an OnSemiconductor SiPM [39]. Data sheets found in the datasheet folder. The SiPM has a length and width of 7.0±0.05 mm and a thickness of 0.65±0.05 mm. Each one of the tiled s" loading="lazy" decoding="async" />
 
   <figcaption>Figure 4.1: An image of an OnSemiconductor SiPM \[39\]. Data sheets found in the datasheet folder. The SiPM has a length and width of 7.0±0.05 mm and a thickness of 0.65±0.05 mm. Each one of the tiled squares represents a single microcell, each of which operate independently in Geiger mode.</figcaption>
 
@@ -46,7 +46,7 @@ Scintillators are highly valuable materials as they emit light in proportion to 
 The CosmicWatch Desktop Muon Detector was designed using an organic plastic scintillator, comprising a polystyrene base (essentially an inexpensive transparent plastic) mixed with a primary dopant of 1% by weight of POP (2,5-diphenyloxazole) and 0.03% secondary dopant
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/physics/fig-11-p24.webp" width="988" height="269" alt="Figure 4.3: The components of the Desktop Muon Detector." loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-11-p24.webp" width="1976" height="538" alt="Figure 4.3: The components of the Desktop Muon Detector." loading="lazy" decoding="async" />
 
   <figcaption>Figure 4.3: The components of the Desktop Muon Detector.</figcaption>
 
@@ -57,7 +57,7 @@ POPOP (1,4-bis\[2-(5-phenyloxazolyl)\]benzene) \[44\]<sup>1</sup>. This plastic 
 The plastic scintillator consists of three essential components:
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/physics/fig-12-p24.webp" width="308" height="421" alt="Figure 4.2: A UV flash light illuminating scintillator." loading="lazy" decoding="async" />
+  <img src="/guides/physics/fig-12-p24.webp" width="616" height="840" alt="Figure 4.2: A UV flash light illuminating scintillator." loading="lazy" decoding="async" />
 
   <figcaption>Figure 4.2: A UV flash light illuminating scintillator.</figcaption>
 

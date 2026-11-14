@@ -17,7 +17,7 @@ The muon attenuation was found to be surprisingly pronounced, as shown in Fig. 2
 There are likely other underground areas in your area from which this measurement can be made. While the cosmic ray muon flux per unit solid angle is from directly above, the largest flux, per unit zenith angle, is actually near 70 degrees. To get a good measurement, you must not only consider the vertical overburden but also the overburden away from vertical.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/example-measurements/fig-17-p17.webp" width="989" height="382" alt="Figure 2.11: Subway in Japan." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-17-p17.webp" width="1977" height="763" alt="Figure 2.11: Subway in Japan." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.11: Subway in Japan.</figcaption>
 

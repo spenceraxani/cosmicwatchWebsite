@@ -11,7 +11,7 @@ editUrl: false
 <div class="cw-guide-source not-content" data-repo="spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X" data-branch="main" data-path="The Example Measurements.pdf" data-sha="f643047747bd56962428f35a5a5e83166c7e0c29" data-date="2025-08-20T16:43:03-04:00"><span class="cw-gs-doc">From <a href="/pdf/example-measurements/#page=29" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 29–31</span><span class="cw-gs-status" data-state="idle">Synced with the PDF from 2025-08-20</span><span class="cw-gs-note" hidden></span></div>
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-31-p29.webp" width="989" height="465" alt="Figure 2.24: Dr. Katarzyna Frankiewicz floating in the inner detector of Super-Kamiokande during the Gadolinium upgrade 2018." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-31-p29.webp" width="1483" height="697" alt="Figure 2.24: Dr. Katarzyna Frankiewicz floating in the inner detector of Super-Kamiokande during the Gadolinium upgrade 2018." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.24: Dr. Katarzyna Frankiewicz floating in the inner detector of Super-Kamiokande during the Gadolinium upgrade 2018.</figcaption>
 
@@ -24,7 +24,7 @@ The total number of measured coincident events inside the Super-Kamiokande contr
 The average rock density in the mine was measured to be 2.7 g/cm<sup>3</sup>, corresponding to approximately 2,700 m.w.e. (meter-water equivalent) of overburden \[18\]. Based on this, we expect the cosmic-ray muon rate to be attenuated by a factor of 10<sup>5</sup> compared to a ground-level measurement. With this assumption, we only expect approximately 0.04 cosmic-ray muon events over the 8-hour measurement in the Super-Kamiokande control room.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-32-p30.webp" width="671" height="378" alt="Figure 2.25: The measured coincidence rate at three locations. Data from Ref. [17]." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-32-p30.webp" width="1005" height="566" alt="Figure 2.25: The measured coincidence rate at three locations. Data from Ref. [17]." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.25: The measured coincidence rate at three locations. Data from Ref. \[17\].</figcaption>
 

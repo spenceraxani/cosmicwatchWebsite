@@ -25,7 +25,7 @@ You’ll also have to purchase the printed circuit boards. In the PCB folder, th
 Likely the most difficult thing to find is the plastic scintillator. but the purhcasing list links to someone on ebay that sells them.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/fig-09-p16.webp" width="988" height="503" alt="Figure 3.1: A unpopulated rendering of the Main printed circuit boards. Left: Top view. Right: Bottom." loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-09-p16.webp" width="1482" height="754" alt="Figure 3.1: A unpopulated rendering of the Main printed circuit boards. Left: Top view. Right: Bottom." loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.1: A unpopulated rendering of the Main printed circuit boards. Left: Top view. Right: Bottom.</figcaption>
 
@@ -40,7 +40,7 @@ Here is a step-by-step description of how to populate the Main and SiPM PCBs (la
 The identifier, reference value, and a description of each component can be found in the component_placement_sheet.pdf document, located in the GitHub PCB directory. This sheet shows you the preferred order in populating the Main and SiPM PCB. It starts with some of the the easier components first for practice, and build the boards in stages which enables testing throughout the build.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/fig-10-p17.webp" width="989" height="382" alt="Figure 3.2: A 3D rendering of the Main printed circuit boards. Left: Top view. Right: Bottom." loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/fig-10-p17.webp" width="1483" height="572" alt="Figure 3.2: A 3D rendering of the Main printed circuit boards. Left: Top view. Right: Bottom." loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.2: A 3D rendering of the Main printed circuit boards. Left: Top view. Right: Bottom.</figcaption>
 

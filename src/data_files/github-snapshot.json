@@ -1,5 +1,5 @@
 {
-  "takenAt": "2026-11-06T01:36:21.406Z",
+  "takenAt": "2026-11-13T23:44:38.012Z",
   "firmware": "1.1.52",
   "lastUpdate": "2026-07-20T15:42:37-04:00",
   "commitCount": 47,
@@ -348,5 +348,15 @@
       "name": "The Troubleshooting Document.pdf",
       "type": "file"
     }
-  ]
+  ],
+  "links": {
+    "firmware": "Firmware/CosmicWatch_v3X.1.1.52.uf2",
+    "gerbers": "PCB/PCB_Gerber_Files_v28.zip",
+    "purchasingList": "Purchasing_List_v3X_sa.xlsx",
+    "placementSheet": "Component_Placement_Sheet.xlsx",
+    "enclosure": "Enclosure",
+    "gui": "GUI",
+    "importData": "Data/import_data.py",
+    "plot": "Data/plot.py"
+  }
 }

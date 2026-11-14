@@ -1,7 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import HeroSectionAlt from '@components/sections/landing/HeroSectionAlt.astro';
-import HeroBackdrop from '@components/sections/landing/HeroBackdrop.astro';
 import HeroPhoto from '@components/sections/landing/HeroPhoto.astro';
 import { heroPhoto } from '@data/heroPhotos';
 import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
@@ -9,16 +8,14 @@ import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
 import MeasurementsSection from '@components/sections/cosmicwatch/MeasurementsSection.astro';
 import MuonPipeline from '@components/sections/cosmicwatch/MuonPipeline.astro';
 import AboutBrief from '@components/sections/cosmicwatch/AboutBrief.astro';
-import heroImage from '@images/cw/detector-array.jpg';
 import featureImage from '@images/cw/exploded-labeled-cutout.png';
-import pcbImage from '@images/cw/render-main-pcb.png';
+import sdImage from '@images/cw/render-bottom-sd.png';
 import guiImage from '@images/cw/gui-screenshot.jpg';
-import pairImage from '@images/cw/photo-coincidence.jpg';
+import webImage from '@images/cw/measure-page.png';
 import { featuredMeasurements } from '@data/measurements';
-import { REPO_URL } from '@data/navigation';
+import { REPO, REPO_URL } from '@data/navigation';
 import { getCopy } from '@/copy';
 import { localePath, type MarketingLocale } from '@utils/locale';
-import { TOGGLES_ON } from '@utils/designToggles';
 
 interface Props {
   locale: MarketingLocale;
@@ -28,9 +25,6 @@ const { locale } = Astro.props;
 const t = getCopy(locale);
 const copy = t.home;
 
-// On the dev server both heroes are on the page and the bottom-left switch
-// (DesignToggles) picks one. A build ships the photo hero only.
-const toggles = TOGGLES_ON;
 const heroProps = {
   eyebrow: copy.hero.eyebrow,
   title: copy.hero.title,
@@ -45,24 +39,8 @@ const heroProps = {
 };
 ---
 
-<MainLayout designToggles="all">
-  {toggles ? (
-    <>
-      <div data-hero-variant="photo" class="contents">
-        <HeroPhoto photo={heroPhoto} {...heroProps} />
-      </div>
-      <div data-hero-variant="original" class="contents">
-        <HeroBackdrop
-          variant="tracks"
-          {...heroProps}
-          src={heroImage}
-          alt={copy.hero.imageAlt}
-        />
-      </div>
-    </>
-  ) : (
-    <HeroPhoto photo={heroPhoto} {...heroProps} />
-  )}
+<MainLayout>
+  <HeroPhoto photo={heroPhoto} {...heroProps} />
 
   <AboutBrief
     title={t.about.title}
@@ -85,22 +63,41 @@ const heroProps = {
     title={copy.featuresNavs.title}
     tabs={[
       {
-        ...copy.featuresNavs.tabs.sd,
-        svg: 'dashboard',
-        src: pcbImage,
-        first: true,
-        second: true,
-      },
-      {
         ...copy.featuresNavs.tabs.gui,
         svg: 'frame',
         src: guiImage,
+        first: true,
         second: true,
+        actions: [
+          {
+            label: copy.featuresNavs.tabs.gui.link,
+            note: copy.featuresNavs.tabs.gui.linkNote,
+            url: `${REPO_URL}/tree/main/GUI`,
+            guiZip: REPO,
+          },
+          {
+            label: copy.featuresNavs.tabs.gui.install,
+            url: localePath(locale, '/github#gui'),
+            secondary: true,
+          },
+        ],
       },
       {
-        ...copy.featuresNavs.tabs.coincidence,
-        svg: 'groups',
-        src: pairImage,
+        ...copy.featuresNavs.tabs.web,
+        svg: 'frame',
+        src: webImage,
+        second: true,
+        actions: [
+          {
+            label: copy.featuresNavs.tabs.web.link,
+            url: localePath(locale, '/measure'),
+          },
+        ],
+      },
+      {
+        ...copy.featuresNavs.tabs.sd,
+        svg: 'dashboard',
+        src: sdImage,
         second: true,
       },
     ]}

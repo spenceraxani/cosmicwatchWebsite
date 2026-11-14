@@ -11,7 +11,7 @@ editUrl: false
 <div class="cw-guide-source not-content" data-repo="spenceraxani/CosmicWatch-Desktop-Muon-Detector-v3X" data-branch="main" data-path="The Example Measurements.pdf" data-sha="f643047747bd56962428f35a5a5e83166c7e0c29" data-date="2025-08-20T16:43:03-04:00"><span class="cw-gs-doc">From <a href="/pdf/example-measurements/#page=27" target="_blank" rel="noopener" title="Opens the latest PDF from GitHub in a new tab">The Example Measurements.pdf</a>, pages 27–29</span><span class="cw-gs-status" data-state="idle">Synced with the PDF from 2025-08-20</span><span class="cw-gs-note" hidden></span></div>
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-28-p27.webp" width="989" height="378" alt="Figure 2.21: An image from the high-altitude balloon flight at 107,000 ft. Photo from Daniel Kaczmara - DNF Systems." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-28-p27.webp" width="1483" height="566" alt="Figure 2.21: An image from the high-altitude balloon flight at 107,000 ft. Photo from Daniel Kaczmara - DNF Systems." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.21: An image from the high-altitude balloon flight at 107,000 ft. Photo from *Daniel* *Kaczmara - DNF Systems*.</figcaption>
 
@@ -20,7 +20,7 @@ editUrl: false
 As mentioned in Sec. ??, primary cosmic rays interacting in the upper atmosphere produce showers of particles, some of which decay to muons. Muons are typically produced near an altitude of 15 km. At higher altitudes, there is an increase in the contribution from other ionizing particles, primarily from electrons/positrons and protons.
 
 <figure class="cw-guide-fig cw-guide-narrow">
-  <img src="/guides/example-measurements/fig-29-p27.webp" width="454" height="349" alt="Figure 2.22: The two detectors flown in the HAB flight. The scintillators were taped together in order to preserve the detector orientation relative to each other." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-29-p27.webp" width="908" height="698" alt="Figure 2.22: The two detectors flown in the HAB flight. The scintillators were taped together in order to preserve the detector orientation relative to each other." loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.22: The two detectors flown in the HAB flight. The scintillators were taped together in order to preserve the detector orientation relative to each other.</figcaption>
 
@@ -33,7 +33,7 @@ The temperature during the ascent was expected to reach -60<sup>∘</sup> C, req
 The HAB was launched on September 22<sup>nd</sup>, 2018, at 12:53 pm. DFN System recorded the balloon altitude and location using on-board GPS, and they mounted a camera to the balloon that looked down at the payloads. An image near the maximum altitude of the flight is shown in Fig. 2.21. The master (orange) and coincident (green) detector count rate, binned into 60-second intervals, is shown in Fig. 2.23, along with the altitude data from the GPS (black).
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-30-p28.webp" width="978" height="345" alt="Figure 2.23: (Left) The measured trigger rate for the master (orange) and coincident (green) detector during the high-altitude balloon flight. Take-off occurred 30 minutes after powering on the detect" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-30-p28.webp" width="1467" height="518" alt="Figure 2.23: (Left) The measured trigger rate for the master (orange) and coincident (green) detector during the high-altitude balloon flight. Take-off occurred 30 minutes after powering on the detect" loading="lazy" decoding="async" />
 
   <figcaption>Figure 2.23: (Left) The measured trigger rate for the master (orange) and coincident (green) detector during the high-altitude balloon flight. Take-off occurred 30 minutes after powering on the detectors. The black data points correspond to the altitude as measured through the on-board GPS. (Right) The GPS altitude as a function of trigger rate. The uncertainty in both these plots are statistical.</figcaption>
 

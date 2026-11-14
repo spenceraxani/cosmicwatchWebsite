@@ -23,7 +23,7 @@ Let’s break these down.
 The SiPM signal is AC coupled to the input of a non-inverting single supply amplifier. After AC coupling with C21, we add a 25 mV voltage bias to the SiPM waveform, to move the waveform away from ground. This is because amplifiers often have trouble amplifying small signals near their power rails. For our amplifier of choice, the TPH2502, the rails are set to V- = GND and V+ = VCC (4.5V). The biased SiPM waveform is sent to the non-inverting input of the first op amp in the TPH2502. The amplification is set through the feedback and gain resistors R5 and
 
 <figure class="cw-guide-fig">
-  <img src="/guides/instruction-manual/img-13-p24.webp" width="973" height="548" alt="Image from the PDF" loading="lazy" decoding="async" />
+  <img src="/guides/instruction-manual/img-13-p24.webp" width="1459" height="822" alt="Image from the PDF" loading="lazy" decoding="async" />
 
 </figure>
 

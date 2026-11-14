@@ -13,7 +13,7 @@ editUrl: false
 This section outlines a selection of measurements that we aspire to include in the curriculum in the near future. Opting for one of these measurements means venturing into relatively unexplored territories. We highlight the challenges associated with these measurements, and in the case of the solar flare measurement, success depends on fortuitous timing! Therefore, exercise caution. Nonetheless, if you successfully conduct any of these measurements, they could potentially become part of next year’s curriculum! Best of luck!
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-34-p33.webp" width="746" height="491" alt="Figure 3.1: Measuring the muon rate as a function of depth underwater should be able to give you the muon rate." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-34-p33.webp" width="1119" height="736" alt="Figure 3.1: Measuring the muon rate as a function of depth underwater should be able to give you the muon rate." loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.1: Measuring the muon rate as a function of depth underwater should be able to give you the muon rate.</figcaption>
 
@@ -26,7 +26,7 @@ Physicists typically report the equivalent overburden in terms of how much water
 It’s neat actually. If you could measure how the rate decreases with depth, you should be able to extract the muon energy spectrum. That is, if muons had extremely high energies, they would penetrate deeper into the water. This would be a tricky bit of unfolding, but extremely cool.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-35-p34.webp" width="746" height="281" alt="Figure 3.2: (a) A muon passes through the top and middle detector. (b) It hangs out for a bit. (c) the second or third detector observe something 100s of ns to a few microseconds later, as the muon de" loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-35-p34.webp" width="1118" height="421" alt="Figure 3.2: (a) A muon passes through the top and middle detector. (b) It hangs out for a bit. (c) the second or third detector observe something 100s of ns to a few microseconds later, as the muon de" loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.2: (a) A muon passes through the top and middle detector. (b) It hangs out for a bit. (c) the second or third detector observe something 100s of ns to a few microseconds later, as the muon decays to a Michelle electron.</figcaption>
 
@@ -51,7 +51,7 @@ Roughly one day after a solar eruption, the Earth undergoes a solar storm. A bri
 Given the crucial role of Earth’s magnetic field in shielding us from cosmic radiation, this effect should also be observable. As illustrated in Fig. 3.3, the change in rate is at the percent level. Changes at the percent level should be detectable over the course of a day using configuration (d) of Fig. ??. However, it’s important to note that atmospheric conditions may also influence the measurement, so considering barometric pressure measurements could be beneficial.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-36-p36.webp" width="988" height="584" alt="Figure 3.3: The Forbush decrease (left) and solar maximum/minimum cosmic-ray flux (right). This figure comes from Ref. [3]." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-36-p36.webp" width="1482" height="875" alt="Figure 3.3: The Forbush decrease (left) and solar maximum/minimum cosmic-ray flux (right). This figure comes from Ref. [3]." loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.3: The Forbush decrease (left) and solar maximum/minimum cosmic-ray flux (right). This figure comes from Ref. \[3\].</figcaption>
 
@@ -64,7 +64,7 @@ Air showers were first discovered using coincidence counters, a concept very sim
 The objective of this measurement is to investigate coincident events between two sets of coincidence detectors based on the lateral distance between the two sets. The challenge lies in the potential requirement for 3 to 4 detectors, as illustrated in Fig. 3.4. Two sets of coincidence detectors (totaling 4 detectors) would yield a lower accidental coincidence rate compared to using 3 detectors (excluding detector C). While the detectors are not configured to record triple coincidences via the microSD card, connecting all detectors to a single computer (via a USB hub) allows the data from each detector to be saved in a unified file using the import_data.py script. The timestamps from the computer data can then be analyzed to identify coincidence events.
 
 <figure class="cw-guide-fig">
-  <img src="/guides/example-measurements/fig-37-p37.webp" width="503" height="286" alt="Figure 3.4: Recommended configuration for measuring air shower size. Data from Ref. [3]." loading="lazy" decoding="async" />
+  <img src="/guides/example-measurements/fig-37-p37.webp" width="754" height="429" alt="Figure 3.4: Recommended configuration for measuring air shower size. Data from Ref. [3]." loading="lazy" decoding="async" />
 
   <figcaption>Figure 3.4: Recommended configuration for measuring air shower size. Data from Ref. \[3\].</figcaption>
 
